@@ -1,20 +1,20 @@
 # TEDx app: sequential build prompts
 
-Prepared October 24, 2026. This pack contains **64 implementation prompts, P00–P63**, plus a continuation prompt. It prepares the work; no application code has been built by preparing this pack.
+Prepared October 24, 2026. This pack contains **65 implementation prompts: P00–P63 plus P16A**, and a continuation prompt. Current implementation status is recorded in docs/build/STATE.md.
 
 ## Start here
 
 1. Use this TEDx workspace. Open P00 below, select the listed model/effort, and paste its text block into the project chat. Alternatively send: `Execute build-prompts/00-foundation.md and follow build-prompts/BUILD-CONTRACT.md.`
 2. Run one numbered step at a time. Continue a partial step with [CONTINUE.md](CONTINUE.md) before moving on. Later steps reuse the code/contracts already built.
 3. P00–P50 build and verify the core pilot/v1. P51–P61 cover all planned optional modules/integrations. P62 is required turnover functionality and P63 is the final audit/release/handover, even if optional modules are deferred.
-4. To build the complete planned feature set, run all 64, subject to actual provider and privacy prerequisites. To protect April 17, ship core first, choose optional scope, then always return to P62/P63. Required launch gates cannot be waived by skipping a prompt.
+4. To build the complete planned feature set, run all 65, subject to actual provider and privacy prerequisites. Run P16A after P16 and before P17; later IDs and P17's code prerequisites are unchanged. To protect April 17, ship core first, choose optional scope, then always return to P62/P63. Required launch gates cannot be waived by skipping a prompt.
 5. Keep the current chat while context remains focused. A fresh chat can resume in the same workspace by reading STATE and the numbered prompt; do not repaste the whole specification or create a new worktree by default. Never run concurrent prompts against the same migrations/state.
 
 **First prompt:** `Execute build-prompts/00-foundation.md. Use the build contract, implement the bounded step, verify it, and leave the checkpoint.`
 
 ## Budget and model guidance
 
-The target is a best-effort ceiling near **40 percentage points of the total five-hour allowance per execution**, not two hours of runtime or 40% of remaining allowance. The prompts wind down five points before their effective ceiling and leave a checkpoint. A step may take more than one execution; this is not a promise of exactly 64 runs or a measured quota forecast. Finish early when done. Account usage is shared, so observed deltas are approximate. Full protocol: [BUILD-CONTRACT.md](BUILD-CONTRACT.md).
+The target is a best-effort ceiling near **40 percentage points of the total five-hour allowance per execution**, not two hours of runtime or 40% of remaining allowance. The prompts wind down five points before their effective ceiling and leave a checkpoint. A step may take more than one execution; this is not a promise of exactly 65 runs or a measured quota forecast. Finish early when done. Account usage is shared, so observed deltas are approximate. Full protocol: [BUILD-CONTRACT.md](BUILD-CONTRACT.md).
 
 Official OpenAI documentation says model, context, reasoning, tools, retrieval and caching affect usage, and similar tasks can consume different amounts; prompt length is not a dependable quota estimate. [Usage documentation](https://learn.chatgpt.com/docs/pricing)
 
@@ -47,6 +47,7 @@ The table is the execution order; optional modules have explicit prerequisites i
 | [P14](14-synergy-domain.md) | Implement versioned committee synergy agreements | GPT-6.1 Sol | High | Core |
 | [P15](15-synergy-interface.md) | Build Working Together and negotiation screens | GPT-6.1 Sol | Medium | Core |
 | [P16](16-dependencies.md) | Enforce task dependencies and meaningful blocked states | GPT-6.1 Sol | High | Core |
+| [P16A](16A-committee-gantt.md) | Build the permitted committee Gantt timeline | GPT-6.1 Sol | High | Core |
 | [P17](17-handoff-domain.md) | Implement immutable handoff packages and acceptance | GPT-6.1 Sol | High | Core |
 | [P18](18-handoff-interface.md) | Build incoming and outgoing handoff actions | GPT-6.1 Sol | Medium | Core |
 | [P19](19-request-definitions.md) | Create versioned request types and initial service catalog | GPT-6.1 Sol | High | Core |
@@ -101,9 +102,9 @@ The table is the execution order; optional modules have explicit prerequisites i
 | --- | --- |
 | F01 — Login and guests | [P02](02-identity-schema.md), [P03](03-authorization-foundation.md), [P04](04-google-login.md), [P05](05-guest-invitations.md), [P34](34-permission-admin.md), [P55](55-email-and-nongoogle-guests.md) |
 | F02 — Personal overview | [P13](13-personal-overview.md), [P18](18-handoff-interface.md), [P23](23-review-inboxes.md), [P30](30-notifications-inapp.md), [P40](40-dashboard-layouts.md) |
-| F03 — Core Deliverables | [P08](08-deliverables-reading.md), [P09](09-deliverable-authoring.md), [P16](16-dependencies.md), [P29](29-readiness-gates.md) |
-| F04 — Committee synergies | [P14](14-synergy-domain.md), [P15](15-synergy-interface.md) |
-| F05 — Cross-committee tasks/dependencies | [P10](10-tasks.md), [P14](14-synergy-domain.md), [P15](15-synergy-interface.md), [P16](16-dependencies.md) |
+| F03 — Core Deliverables | [P08](08-deliverables-reading.md), [P09](09-deliverable-authoring.md), [P16](16-dependencies.md), [P16A](16A-committee-gantt.md), [P29](29-readiness-gates.md) |
+| F04 — Committee synergies | [P14](14-synergy-domain.md), [P15](15-synergy-interface.md), [P16A](16A-committee-gantt.md) |
+| F05 — Cross-committee tasks/dependencies | [P10](10-tasks.md), [P14](14-synergy-domain.md), [P15](15-synergy-interface.md), [P16](16-dependencies.md), [P16A](16A-committee-gantt.md) |
 | F06 — Handoffs | [P17](17-handoff-domain.md), [P18](18-handoff-interface.md) |
 | F07 — Tasks/comments/files | [P10](10-tasks.md), [P11](11-comments.md), [P12](12-private-files.md) |
 | F08 — Tracked requests | [P19](19-request-definitions.md), [P20](20-form-renderer.md), [P21](21-request-submission.md), [P22](22-workflow-engine.md), [P23](23-review-inboxes.md) |
@@ -123,7 +124,7 @@ The table is the execution order; optional modules have explicit prerequisites i
 | F22 — Admin configurability | [P19](19-request-definitions.md), [P20](20-form-renderer.md), [P33](33-organization-admin.md), [P34](34-permission-admin.md), [P35](35-config-publication.md), [P36](36-form-builder.md), [P37](37-workflow-builder.md), [P38](38-statuses-phases-services.md), [P39](39-site-edit-branding.md), [P40](40-dashboard-layouts.md), [P41](41-notification-rules.md) |
 | F23 — Drive/Sheets/Canva | [P12](12-private-files.md), [P45](45-csv-interoperability.md), [P51](51-drive-picker.md), [P52](52-drive-approved-exports.md) |
 | F24 — Turnover/archive | [P46](46-privacy-controls.md), [P47](47-backup-recovery.md), [P62](62-turnover-archive.md), [P63](63-final-audit-release-handover.md) |
-| F25 — Mobile/accessibility/PWA | [P01](01-accessible-shell.md), [P20](20-form-renderer.md), [P39](39-site-edit-branding.md), [P40](40-dashboard-layouts.md), [P48](48-mobile-pwa-accessibility.md) |
+| F25 — Mobile/accessibility/PWA | [P01](01-accessible-shell.md), [P16A](16A-committee-gantt.md), [P20](20-form-renderer.md), [P39](39-site-edit-branding.md), [P40](40-dashboard-layouts.md), [P48](48-mobile-pwa-accessibility.md) |
 | F26 — Operations/recovery | [P00](00-foundation.md), [P03](03-authorization-foundation.md), [P34](34-permission-admin.md), [P47](47-backup-recovery.md), [P49](49-deployment-candidate.md), [P50](50-pilot-uat.md), [P62](62-turnover-archive.md), [P63](63-final-audit-release-handover.md) |
 
 
@@ -141,4 +142,4 @@ Prompt P49 prepares deployment and an identified synthetic preview. P50 records 
 - [Complete prompt book](../docs/superpowers/plans/2026-10-24-tedx-build-prompts.md): same sequence in one document, with shared constraints rather than duplicated specification text.
 - `_source/*.json` and `_source/generate.py`: editable authoring source. Regeneration overwrites generated numbered files, this README and the complete book; edit the source catalog if changes should persist.
 
-The pack was checked for 64 unique ordered IDs, earlier-only dependencies, model/effort on every step, three bounded actions and three acceptance checks per prompt, and coverage of all 26 feature IDs. This validates the prompt pack, not an application that has yet to be built.
+The pack was checked for 65 unique ordered IDs (including P16A between P16/P17), earlier-only dependencies, model/effort on every step, three bounded actions and three acceptance checks per prompt, and coverage of all 26 feature IDs. This validates prompt structure, not application acceptance. P16A's approved scope addendum is docs/committee-timeline-spec.md.
