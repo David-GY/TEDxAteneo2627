@@ -22,9 +22,9 @@ These use isolated PGlite PostgreSQL 18.6/auth-shaped subjects and local browser
 
 ## Preview / custody
 
-Live dev http://127.0.0.1:5173/preview and /guest/redeem, original session70434. Browser open requested (host queued); screenshots provide actual renders. Stop temporary production4173 after checks. Sponsor screenshots explicitly label simulated gateway/fictional identity; no fixture endpoint ships.
+Live dev http://127.0.0.1:5173/preview and /guest/redeem, original session70434. Browser open requested (host queued); screenshots provide actual renders. Temporary production4173 stopped after checks. Sponsor screenshots explicitly label simulated gateway/fictional identity; no fixture endpoint ships.
 
-User explicitly authorized GitHub backups. Existing public David-GY/TEDxAteneo2627 branch codex/core-build-checkpoints is configured as origin/upstream. P00–P04 commit0605c0f verified exact local/remote tree. P05 checkpoint/evidence prepared for next verified snapshot on same branch. Signed-out gh CLI replaced by connected GitHub Git-data API. No PR/main merge, website/provider deployment or messages/invitations. Env/runtime/dependency/dist artifacts ignored.
+User explicitly authorized GitHub backups. Existing public David-GY/TEDxAteneo2627 branch codex/core-build-checkpoints is configured as origin/upstream. P00–P04 commit0605c0f verified exact local/remote tree. P05 snapshot 8970e065f92eb22f4e17338f39a252a93bbe62a4 published on that branch; fetched remote tree 4612298a9d93181b3f24ae1eaed4f939ae0ec656 exactly equals local committed tree. Local branch aligned/tracking remote with a clean worktree. Signed-out gh CLI replaced by connected GitHub Git-data API. No PR/main merge, website/provider deployment or messages/invitations. Env/runtime/dependency/dist artifacts ignored.
 
 ## Next smallest action
 
