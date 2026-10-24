@@ -17,12 +17,15 @@ const { chromium } = require(process.env.TEDX_PLAYWRIGHT_PATH || 'C:/Users/david
       import {createMemoryRouter,RouterProvider} from '/node_modules/.vite/deps/react-router.js${suffix}';
       import {createAppRoutes} from '/src/app/router.tsx';
       import '/src/styles/tokens.css';import '/src/styles/global.css';import '/node_modules/@fontsource-variable/karla/index.css';
-      const people={read:async()=>({people:[{id:'m',name:'Fictional member with a deliberately long name',contact:'fictional@student.ateneo.edu',units:['Fictional event production and logistics','Fictional speaker support'],roles:['Fictional reader'],course:null,year:null,phone:null,externalContact:null}],processes:[{id:'u',name:'Fictional event production and logistics',primary:[{id:'m',name:'Fictional member with a deliberately long name'}],backup:[]}]})};
-      const context={state:'authorized',memberId:'m',displayName:'Fictional local reader',organizationId:'o',termId:'t',termMembershipId:'tm',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['directory.read']};
-      let profileRow={memberId:'m',displayName:'Fictional local reader',version:0,course:null,yearLevel:null,phone:null,externalContact:null,shareCourse:false,shareYearLevel:false,sharePhone:false,shareExternalContact:false};
+      const people={read:async()=>({people:[{id:'m',name:'Fictional member with a deliberately long name',contact:'fictional@student.ateneo.edu',units:['Fictional event production and logistics','Fictional speaker support'],roles:['Fictional reader'],course:null,year:null,phone:null,externalContact:null,skills:null,pronunciation:null,affiliation:null}],processes:[{id:'u',name:'Fictional event production and logistics',primary:[{id:'m',name:'Fictional member with a deliberately long name'}],backup:[]}]})};
+      const guestMode=location.pathname.endsWith('_guest_fixture');
+      const context=guestMode?{state:'authorized',audience:'guest',guestAccessId:'fixture-guest',displayName:'Fictional guest',organizationId:'o',termId:'t',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:[]}:{state:'authorized',memberId:'m',displayName:'Fictional local reader',organizationId:'o',termId:'t',termMembershipId:'tm',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['directory.read']};
+      let profileRow={memberId:'m',displayName:'Fictional local reader',version:0,course:null,yearLevel:null,phone:null,externalContact:null,skills:null,pronunciation:null,affiliation:null,shareCourse:false,shareYearLevel:false,sharePhone:false,shareExternalContact:false,shareSkills:false,sharePronunciation:false,shareAffiliation:false};
       const profile={read:async()=>profileRow,save:async(t,values)=>{profileRow={...profileRow,...values,version:profileRow.version+1};return profileRow},share:async(t,values)=>{profileRow={...profileRow,...values,version:profileRow.version+1};return profileRow}};
-      const gateway={people,profile,readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
-      ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createMemoryRouter(createAppRoutes({state:'not_configured',issues:[]},gateway),{initialEntries:['/people']})}));
+      let guestOwn={displayName:'Fictional guest',verifiedEmail:'fictional-guest@example.invalid',contactRoute:null,version:0};
+      const guestContacts={read:async()=>({own:guestOwn,sharedContacts:[],scopeMode:'awaiting_record_attachment'}),save:async(t,values)=>{guestOwn={...guestOwn,...values,version:guestOwn.version+1};return{own:guestOwn,sharedContacts:[],scopeMode:'awaiting_record_attachment'}}};
+      const gateway={people,profile,guestContacts,readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createMemoryRouter(createAppRoutes({state:'not_configured',issues:[]},gateway),{initialEntries:[guestMode?'/account':'/people']})}));
       </script></body></html>`
     await page.route('**/__p06_fixture', route => route.fulfill({ contentType: 'text/html', body: html }))
     await page.goto('http://127.0.0.1:5173/__p06_fixture')
@@ -43,6 +46,8 @@ const { chromium } = require(process.env.TEDX_PLAYWRIGHT_PATH || 'C:/Users/david
     await page.locator('header').getByRole('link', { name: 'Account', exact: true }).click()
     await page.getByLabel('Course', { exact: true }).waitFor()
     await page.getByLabel('Course', { exact: true }).fill('Fictional private course')
+    await page.getByLabel('Skills', { exact: true }).fill('Fictional sound editing')
+    assert.equal(await page.getByLabel('Affiliation', { exact: true }).inputValue(), '')
     await page.getByRole('button', { name: 'Save private details', exact: true }).click()
     await page.getByText('Private details saved. Your sharing choices were kept.', { exact: true }).waitFor()
     assert(!await page.getByLabel('Share course', { exact: true }).isChecked())
@@ -55,8 +60,21 @@ const { chromium } = require(process.env.TEDX_PLAYWRIGHT_PATH || 'C:/Users/david
     await page.screenshot({ path: 'docs/build/evidence/P06-profile-mobile-fixture.png', fullPage: true })
     await page.setViewportSize({ width:1280,height:1000 })
     await page.screenshot({ path: 'docs/build/evidence/P06-profile-fixture.png', fullPage: true })
+    await page.route('**/__p06_guest_fixture', route => route.fulfill({ contentType:'text/html',body:html }))
+    await page.goto('http://127.0.0.1:5173/__p06_guest_fixture')
+    await page.getByLabel('Preferred contact route', { exact:true }).waitFor()
+    assert.equal(await page.getByRole('link', { name:'People',exact:true }).count(),0)
+    assert.equal(await page.getByLabel('Course',{exact:true}).count(),0)
+    await page.getByLabel('Preferred contact route',{exact:true}).fill('Fictional guest contact')
+    await page.getByRole('button',{name:'Save my contact details',exact:true}).click()
+    await page.getByText('Your contact details were saved. They have not been shared with other people.',{exact:true}).waitFor()
+    await page.screenshot({path:'docs/build/evidence/P06-guest-contacts-fixture.png',fullPage:true})
+    await page.setViewportSize({width:320,height:740})
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),320)
+    assert.equal(await page.evaluate(()=>localStorage.length+sessionStorage.length),0)
+    await page.screenshot({path:'docs/build/evidence/P06-guest-contacts-mobile-fixture.png',fullPage:true})
     assert.deepEqual(errors, [])
-    fs.writeFileSync('docs/build/evidence/P06-browser.json', JSON.stringify({ target: 'test-only simulated gateway; fictional data, no fixture endpoint ships', checks: ['P06_A3: one person across two units, missing backup, 320px reflow', 'Name/unit/role search and empty result; help persists independently', 'Profile editor separate saves, opt-in checkbox, 320px and desktop; no private browser storage', 'No browser runtime errors'], errors }, null, 2) + '\n')
+    fs.writeFileSync('docs/build/evidence/P06-browser.json', JSON.stringify({ target: 'test-only simulated gateway; fictional data, no fixture endpoint ships', checks: ['P06_A3: one person across two units, missing backup, 320px reflow', 'Name/unit/role search and empty result; help persists independently', 'Profile editor separate saves, opt-in checkbox, optional skills/blank affiliation, 320px and desktop; no private browser storage', 'Guest own contacts/save, empty shared contacts, no core directory/profile controls, desktop/320px and no private storage', 'No browser runtime errors'], errors }, null, 2) + '\n')
     console.log('PASS P06 desktop/mobile directory fixture and search')
   } finally { await browser.close() }
 })().catch(error => { console.error(error.message); process.exitCode = 1 })

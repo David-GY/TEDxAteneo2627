@@ -4,6 +4,7 @@ import { callbackUrl, safeReturnPath } from './redirects'
 import { createGuestGateway, type GuestGateway } from '../guests/gateway'
 import { createPeopleGateway, type PeopleGateway } from '../people/gateway'
 import { createProfileGateway, type ProfileGateway } from '../account/gateway'
+import { createGuestContactGateway, type GuestContactGateway } from '../account/guestContacts'
 
 export type MemberContext = {
   state: 'authorized'; memberId: string; displayName: string; organizationId: string
@@ -17,6 +18,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  guestContacts?: GuestContactGateway
   profile?: ProfileGateway
   people?: PeopleGateway
   guests?: GuestGateway
@@ -49,6 +51,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    guestContacts: createGuestContactGateway(clientReady),
     profile: createProfileGateway(clientReady),
     people: createPeopleGateway(clientReady),
     guests: createGuestGateway(clientReady),

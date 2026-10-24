@@ -44,6 +44,8 @@ export function PeoplePage({ api, termId }: { api: PeopleGateway; termId: string
           {person.contact ? <a className="button button--secondary" href={`mailto:${person.contact}`}>Email {person.name}</a> : <p>Organization contact not available</p>}
           {person.course ? <p>Course: {person.course}</p> : null}{person.year ? <p>Year: {person.year}</p> : null}
           {person.phone ? <p>Shared phone: {person.phone}</p> : null}{person.externalContact ? <p>Shared contact: {person.externalContact}</p> : null}
+          {person.skills ? <p>Skills: {person.skills}</p> : null}{person.pronunciation ? <p>Name pronunciation: {person.pronunciation}</p> : null}
+          {person.affiliation ? <p>Affiliation: {person.affiliation}</p> : null}
         </li>)}</ul> : <EmptyState title="No people found" description="Try another name, unit or role. Only permitted active members appear here." />}
       </Panel>
     </>}

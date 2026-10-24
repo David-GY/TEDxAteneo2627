@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useLoaderData, useLocation, useNavigate, useRevalidator, useRouteLoaderData } from 'react-router'
 import { ProfileEditor } from '../account/ProfileEditor'
+import { GuestContactEditor } from '../account/GuestContactEditor'
 import { LoadingState } from '../../components/FeedbackState'
 import { AppShell } from '../../app/AppShell'
 import type { NavigationCapability } from '../../app/navigation'
@@ -86,9 +87,10 @@ export function AccountPage({ gateway }: { gateway: AuthGateway }) {
     try { await gateway.signOut(); if (switchAccount) await gateway.beginGoogle('/'); else await navigate('/login', { replace: true }) }
     catch (cause) { setError(cause instanceof Error ? cause.message : 'Sign-out could not be confirmed.'); setBusy(false) }
   }
-  return <><h1>Your account</h1><p>Access follows your current roster membership and scoped grants.</p><div className="auth-actions">
+  return <><h1>Your account</h1><p>{context && isGuest(context) ? 'Access follows your current invitation and its expiry.' : 'Access follows your current roster membership and scoped grants.'}</p><div className="auth-actions">
     <button className="button" disabled={busy} onClick={() => void leave(false)}>Sign out of this browser</button>
     <button className="button button--secondary" disabled={busy} onClick={() => void leave(true)}>Switch Google account</button>
   </div>{error ? <p role="alert">{error}</p> : null}
-  {context && !isGuest(context) && gateway.profile ? <ProfileEditor key={context.memberId + context.termId} api={gateway.profile} termId={context.termId} /> : null}</>
+  {context && !isGuest(context) && gateway.profile ? <ProfileEditor key={context.memberId + context.termId} api={gateway.profile} termId={context.termId} /> : null}
+  {context && isGuest(context) && gateway.guestContacts ? <GuestContactEditor key={context.guestAccessId} api={gateway.guestContacts} termId={context.termId} /> : null}</>
 }

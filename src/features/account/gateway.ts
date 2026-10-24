@@ -1,6 +1,6 @@
 import type { createSupabaseClient } from '../../lib/supabase'
-export type ProfileValues = { course: string | null; yearLevel: string | null; phone: string | null; externalContact: string | null }
-export type ProfileVisibility = { shareCourse: boolean; shareYearLevel: boolean; sharePhone: boolean; shareExternalContact: boolean }
+export type ProfileValues = { course: string | null; yearLevel: string | null; phone: string | null; externalContact: string | null; skills: string | null; pronunciation: string | null; affiliation: string | null }
+export type ProfileVisibility = { shareCourse: boolean; shareYearLevel: boolean; sharePhone: boolean; shareExternalContact: boolean; shareSkills: boolean; sharePronunciation: boolean; shareAffiliation: boolean }
 export type OwnProfile = ProfileValues & ProfileVisibility & { memberId: string; displayName: string; version: number }
 export interface ProfileGateway {
   read(termId: string): Promise<OwnProfile>
@@ -11,8 +11,8 @@ function profile(data: unknown): OwnProfile {
   if (!data || typeof data !== 'object') throw new Error('Your profile could not be loaded. Check access and try again.')
   const value = data as Record<string, unknown>
   if (typeof value.memberId !== 'string' || typeof value.displayName !== 'string' || !Number.isInteger(value.version) || (value.version as number) < 0
-    || !['course','yearLevel','phone','externalContact'].every(key => value[key] === null || typeof value[key] === 'string')
-    || !['shareCourse','shareYearLevel','sharePhone','shareExternalContact'].every(key => typeof value[key] === 'boolean')) throw new Error('Your profile could not be loaded. Check access and try again.')
+    || !['course','yearLevel','phone','externalContact','skills','pronunciation','affiliation'].every(key => value[key] === null || typeof value[key] === 'string')
+    || !['shareCourse','shareYearLevel','sharePhone','shareExternalContact','shareSkills','sharePronunciation','shareAffiliation'].every(key => typeof value[key] === 'boolean')) throw new Error('Your profile could not be loaded. Check access and try again.')
   return value as OwnProfile
 }
 export function createProfileGateway(ready: ReturnType<typeof createSupabaseClient>): ProfileGateway {

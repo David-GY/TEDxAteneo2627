@@ -5,6 +5,40 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      guest_contact_profiles: {
+        Row: {
+          user_id: string
+          display_name: string | null
+          contact_route: string | null
+          version: number
+          created_at: string
+          created_by: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          user_id: string
+          display_name?: string | null
+          contact_route?: string | null
+          version?: number
+          created_at?: string
+          created_by?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          user_id?: string
+          display_name?: string | null
+          contact_route?: string | null
+          version?: number
+          created_at?: string
+          created_by?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+        ]
+      }
       guest_invitation_events: {
         Row: {
           id: string
@@ -106,6 +140,41 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "term_memberships"
             referencedColumns: ["id","organization_id","term_id"]
+          },
+        ]
+      }
+      guest_profile_commands: {
+        Row: {
+          user_id: string
+          request_id: string
+          invitation_id: string
+          fingerprint: string
+          result_version: number
+          occurred_at: string
+        }
+        Insert: {
+          user_id: string
+          request_id: string
+          invitation_id: string
+          fingerprint: string
+          result_version: number
+          occurred_at?: string
+        }
+        Update: {
+          user_id?: string
+          request_id?: string
+          invitation_id?: string
+          fingerprint?: string
+          result_version?: number
+          occurred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_profile_commands_invitation_id_fkey"
+            columns: ["invitation_id"]
+            isOneToOne: false
+            referencedRelation: "guest_invitations"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -272,6 +341,11 @@ export type Database = {
           updated_at: string
           updated_by: string | null
           version: number
+          skills: string | null
+          pronunciation: string | null
+          share_skills: boolean
+          share_pronunciation: boolean
+          share_affiliation: boolean
         }
         Insert: {
           member_id: string
@@ -289,6 +363,11 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          skills?: string | null
+          pronunciation?: string | null
+          share_skills?: boolean
+          share_pronunciation?: boolean
+          share_affiliation?: boolean
         }
         Update: {
           member_id?: string
@@ -306,6 +385,11 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          skills?: string | null
+          pronunciation?: string | null
+          share_skills?: boolean
+          share_pronunciation?: boolean
+          share_affiliation?: boolean
         }
         Relationships: [
           {
@@ -326,6 +410,7 @@ export type Database = {
           fingerprint: string
           result_version: number
           occurred_at: string
+          actor_display_name: string | null
         }
         Insert: {
           member_id: string
@@ -335,6 +420,7 @@ export type Database = {
           fingerprint: string
           result_version: number
           occurred_at?: string
+          actor_display_name?: string | null
         }
         Update: {
           member_id?: string
@@ -344,6 +430,7 @@ export type Database = {
           fingerprint?: string
           result_version?: number
           occurred_at?: string
+          actor_display_name?: string | null
         }
         Relationships: [
           {
@@ -807,6 +894,12 @@ export type Database = {
           display_name: string
         }[]
       }
+      read_guest_contacts: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_own_profile: {
         Args: {
           p_term_id: string
@@ -838,6 +931,15 @@ export type Database = {
       revoke_guest_access: {
         Args: {
           p_invitation_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_guest_contact_profile: {
+        Args: {
+          p_term_id: string
+          p_values: Json
           p_expected_version: number
           p_request_id: string
         }

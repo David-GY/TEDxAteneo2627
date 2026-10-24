@@ -4,8 +4,14 @@
   "tap": [
     "1..3",
     "ok 1 - P06_A1: raw profile isolation, head override denied, consent and withdrawal enforced",
-    "ok 2 - P06_A2: directory access independent of blank affiliation (task/onboarding integration pending)",
+    "ok 2 - P06_A2: directory access independent of blank affiliation; persistent help/work links checked in UI",
     "ok 3 - P06_A3: unique people with multiple units, missing backup and former/guest isolation; mobile checked separately"
+  ],
+  "guestTap": [
+    "1..3",
+    "ok 1 - P06_G1: guest own-only read/edit, verified email, zero shared contacts, version/retry/validation isolation",
+    "ok 2 - P06_G2: no sponsor/other-guest enumeration; sponsor loss, expiry and revoke deny old subject reads/writes",
+    "ok 3 - P06_G3: anonymous RPC/table access denied"
   ],
   "hashes": {
     "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
@@ -15,7 +21,10 @@
     "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
     "supabase/migrations/20261024000600_own_profile_read.sql": "ec0413dc375eed003118a73f5dda22d30091533ae7b6c5a2f8065092238cb33a",
     "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
-    "supabase/tests/directory.test.sql": "86a8dc9805d6bbcda89be1a4d9feee2ce56f2e9c019a1b6423b35ed2cd9045fd"
+    "supabase/migrations/20261024000800_profile_disclosure.sql": "9ead57280792bfbc16b5449d0293eaaeabfd23429cf556a02b1c90930b8adedf",
+    "supabase/migrations/20261024000900_guest_contacts.sql": "fa4afc25152a46f3170b45897c36360dcb88e8e2a5e9c9bf8a8196a584c12142",
+    "supabase/tests/directory.test.sql": "3e2369e1ffebc72468d2fadec2dd38633d81e8ece1a237d8e2274395b4215d2e",
+    "supabase/tests/guest_contacts.test.sql": "2c4ae9ac8f83c7fbbd5738bab0dc2456334b483cd25857a6f6b8815194eb8223"
   },
-  "remaining": "P06 optional skills/pronunciation/affiliation disclosure, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers"
+  "remaining": "Real Supabase17/JWT/PostgREST/Google and human verification; all P02–P05 external blockers. Shared contact attachment awaits real P07 record scopes."
 }

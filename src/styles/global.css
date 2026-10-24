@@ -69,6 +69,7 @@ ul { padding-left: 24px; }
 .guest-form { display: grid; gap: 24px; max-width: 64ch; margin-bottom: 24px; }
 .guest-form .button { justify-self: start; }
 .profile-fields { display: grid; gap: 16px; border: 0; padding: 0; margin: 24px 0; max-width: 64ch; min-width: 0; }
+.auth-actions + .panel { margin-top: 24px; }
 .profile-fields legend { font-weight: 600; padding: 0; margin-bottom: 16px; }
 .profile-fields .button { justify-self: start; }
 .profile-sharing label { display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; }

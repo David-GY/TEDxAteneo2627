@@ -37,15 +37,15 @@ This explains current recorded grants, not approval eligibility for a future cas
 | organizations / terms | Safe context columns for caller's eligible terms/organization |
 | members | Own id/organization/display_name/version only; UPDATE own display_name only |
 | directory helper | Eligible core IDs/names only; no raw member SELECT for a directory join |
-| term_memberships | Own eligible membership metadata; UPDATE own affiliation_tag only |
-| private_profiles | SELECT own row; INSERT own optional profile fields/sharing flags; UPDATE own optional fields/sharing flags only |
+| term_memberships | Own eligible metadata; P06 revokes direct affiliation UPDATE in favor of audited owner commands |
+| private_profiles | SELECT own row; P06 revokes direct INSERT/UPDATE including column grants; separate audited owner value/visibility RPCs |
 | org_units | Ordinary active unit metadata with workspace.read, or only explicitly authorized unit metadata for scoped capabilities |
 | unit_memberships / role_assignments | Own membership's grant/deployment metadata; may include own historical assignment rows, which are not proof of current authority |
 | roles / role_permissions | Metadata for caller's currently dated assignments only; no mutations |
 
 No client grant allows roster insertion, auth/email linkage edits, membership expiry/status/organization edits, deployment or role/permission/assignment writes, deletion, or private-profile key reassignment. PM/admin.configure does not bypass these restrictions or reveal other private profiles. Grant management remains closed pending separately authorized, audited server commands with delegation ceilings. No fake successful grant RPC exists.
 
-Own profile edits are a built-in membership right, not a workspace-role escalation. Frozen terms allow reads but reject these profile/affiliation writes unless the member has another eligible active term. Allowed updates return real changed rows and advance server actor/version stamps; a zero-row update is not success. Denied SELECT can return zero rows under RLS; revoked column/table operations raise 42501. Clients must request explicit permitted member columns; `select('*')` on raw members fails because identity fields are excluded. Sharing flags are stored choices; P03's directory never publishes private fields, even when a flag is true.
+Own profile edits are a built-in membership right, not a workspace-role escalation. Frozen terms allow reads but reject these profile/affiliation writes unless the member has another eligible active term. Allowed updates return real changed rows and advance server actor/version stamps; a zero-row update is not success. Denied SELECT can return zero rows under RLS; revoked column/table operations raise 42501. Clients must request explicit permitted member columns; `select('*')` on raw members fails because identity fields are excluded. Sharing flags are stored choices. P03 initially returned names only; P06 adds a separate projection that independently filters every optional field by its owner-controlled flag.
 
 ## Evidence and limits
 
@@ -58,3 +58,8 @@ Generated types now include five catalog-introspected helper signatures. Scalar 
 To finish full-stack verification, start a verified local Supabase project, apply/reset only that local synthetic target, run `pnpm exec supabase test db --local supabase/tests/authorization.test.sql`, then use locally issued authenticated-user JWTs for REST/RPC negative and allowed-write checks. Never substitute a service key as the principal being tested. Do not run the historical zero-policy P02 SQL against the post-P03 schema; validate that boundary in an isolated P02-only migration set. No actual HTTP/JWT/OAuth result is claimed by the embedded harness.
 
 Project/database owners and sufficiently privileged infrastructure roles can bypass RLS, alter helpers and access data. Fixed search paths and end-user policies do not remove that infrastructure power. Keep console/credential custody separate, with the planned review/audit/backup controls. No production activation is authorized by local SQL success. Official references: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [function security](https://supabase.com/docs/guides/database/functions), [PostgreSQL column grants](https://www.postgresql.org/docs/17/sql-grant.html).
+
+
+## P06 current profile/contact boundary
+
+See people.md. Core optional private values and disclosure are separate authenticated owner-only RPCs, with current authority, expected version, persistent idempotency and redacted transactional audit; heads cannot supply another actor/member ID or override disclosure. Affiliation is descriptive, term-specific and audited, never a privilege input. New events retain safe actor-name attribution; no private historical-profile lookup granted. Guest contact tables forceRLS/no direct API grants; read/edit derives verified invitation subject and rechecks sponsor/expiry/revoke. Guest own contact data does not share with sponsors/other guests. sharedContacts remains empty until P07 supplies real scope attachment. No broader raw member/profile grants.

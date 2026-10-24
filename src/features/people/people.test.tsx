@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { PeoplePage } from './pages'
 import type { PeopleGateway } from './gateway'
 
-const api: PeopleGateway = { read: async () => ({ people: [{ id: 'one', name: 'Fictional member', contact: null, units: ['Fictional delivery', 'Fictional support'], roles: [], course: null, year: null, phone: null, externalContact: null }], processes: [{ id: 'service', name: 'Fictional support', primary: [{ id: 'one', name: 'Fictional member' }], backup: [] }] }) }
+const api: PeopleGateway = { read: async () => ({ people: [{ id: 'one', name: 'Fictional member', contact: null, units: ['Fictional delivery', 'Fictional support'], roles: [], course: null, year: null, phone: null, externalContact: null, skills: null, pronunciation: null, affiliation: null }], processes: [{ id: 'service', name: 'Fictional support', primary: [{ id: 'one', name: 'Fictional member' }], backup: [] }] }) }
 describe('P06 directory', () => {
   it('P06_A2/A3: keeps help links with blank affiliation and one person across multiple units; searches and names missing backup', async () => {
     render(<MemoryRouter><PeoplePage api={api} termId="fictional" /></MemoryRouter>)

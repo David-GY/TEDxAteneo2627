@@ -9,10 +9,14 @@ const { createIdentityDatabase } = require('./identity-db.cjs')
     const tap = output.flatMap(r => r.rows.map(row => row.tap).filter(Boolean))
     assert.equal(tap.length, 4)
     for (let i = 1; i <= 3; i++) assert(tap[i].startsWith(`ok ${i} - P06_A${i}`))
-    const files = [...migrations.map(m => 'supabase/migrations/' + m), 'supabase/tests/directory.test.sql']
-    const evidence = { target: 'isolated PGlite/auth-shaped subjects; no real JWT/PostgREST', engine: (await db.query('select version()')).rows[0].version, tap,
+    const guestOutput = await db.exec(await fs.readFile('supabase/tests/guest_contacts.test.sql', 'utf8'))
+    const guestTap = guestOutput.flatMap(r => r.rows.map(row => row.tap).filter(Boolean))
+    assert.equal(guestTap.length, 4)
+    for (let i = 1; i <= 3; i++) assert(guestTap[i].startsWith(`ok ${i} - P06_G${i}`))
+    const files = [...migrations.map(m => 'supabase/migrations/' + m), 'supabase/tests/directory.test.sql', 'supabase/tests/guest_contacts.test.sql']
+    const evidence = { target: 'isolated PGlite/auth-shaped subjects; no real JWT/PostgREST', engine: (await db.query('select version()')).rows[0].version, tap, guestTap,
       hashes: Object.fromEntries(await Promise.all(files.map(async f => [f, createHash('sha256').update(await fs.readFile(f)).digest('hex')]))),
-      remaining: 'P06 optional skills/pronunciation/affiliation disclosure, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers' }
+      remaining: 'Real Supabase17/JWT/PostgREST/Google and human verification; all P02–P05 external blockers. Shared contact attachment awaits real P07 record scopes.' }
     await fs.writeFile('docs/build/evidence/P06-directory.json', JSON.stringify(evidence, null, 2) + '\n')
     console.log(JSON.stringify(evidence, null, 2))
   } finally { await db.close() }
