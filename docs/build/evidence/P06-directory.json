@@ -25,6 +25,7 @@
     "supabase/migrations/20261024000900_guest_contacts.sql": "fa4afc25152a46f3170b45897c36360dcb88e8e2a5e9c9bf8a8196a584c12142",
     "supabase/migrations/20261024001000_work_items.sql": "4cd73e1184a2737b7f39a24ccf345917b3b421935c19979b5acde382dabd2f4c",
     "supabase/migrations/20261024001100_deliverables.sql": "669fe8e7e8f4ec7f75d0219ab421b0640dfc06870d90d6f98dd1bfe59bf5be4a",
+    "supabase/migrations/20261024001200_deliverable_commands.sql": "4e629f781a997189cf7891665f7e049fd9183bfeb85d9817f92dc6fb37e4ec99",
     "supabase/tests/directory.test.sql": "3e2369e1ffebc72468d2fadec2dd38633d81e8ece1a237d8e2274395b4215d2e",
     "supabase/tests/guest_contacts.test.sql": "2c4ae9ac8f83c7fbbd5738bab0dc2456334b483cd25857a6f6b8815194eb8223"
   },

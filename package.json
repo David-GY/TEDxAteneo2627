@@ -21,6 +21,7 @@
     "test:directory": "node scripts/test-directory.cjs",
     "test:work-access": "node scripts/test-work-access.cjs",
     "test:deliverables": "node scripts/test-deliverables.cjs",
+    "test:deliverable-authoring": "node scripts/test-deliverable-authoring.cjs",
     "db:types": "node scripts/generate-identity-types.cjs",
     "db:types:check": "node scripts/generate-identity-types.cjs --check",
     "build": "vite build"

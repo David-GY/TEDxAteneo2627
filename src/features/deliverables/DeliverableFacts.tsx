@@ -6,6 +6,7 @@ export function dateLabel(at: string | null, on: string | null): string {
 }
 export function DeliverableFacts({ item }: { item: Deliverable }) {
   return <dl className="deliverable-facts">
+    {item.workflowState?<div><dt>Workflow state</dt><dd>{item.workflowState.replaceAll('_',' ')}</dd></div>:null}
     <div><dt>Accountable owner</dt><dd>{item.owner.name}{!item.owner.active ? <span className="muted"> · Reassignment needed</span> : null}</dd></div>
     <div><dt>Lead committee</dt><dd>{item.leadUnit?.name ?? 'Not set'}</dd></div>
     <div><dt>Contributing committees · planning</dt><dd>{item.supportingUnits.map(u=>u.name).join(' · ') || 'None recorded'}</dd></div>

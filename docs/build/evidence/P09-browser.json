@@ -1,0 +1,11 @@
+{
+  "target": "isolated actual PostgreSQL RPCs with simulated school sign-in; not real Supabase/JWT",
+  "checks": [
+    "real UI create/edit/reassign",
+    "original deadline and immutable attributed criteria revision",
+    "owner submit; manager acceptance blocked by unresolved gates; return to draft",
+    "departed owner appears in scoped queue",
+    "desktop/320px,44px controls,Karla,no browser storage/runtime errors"
+  ],
+  "errors": []
+}

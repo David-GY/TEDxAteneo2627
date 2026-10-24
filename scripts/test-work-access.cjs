@@ -3,7 +3,7 @@ const fs=require('node:fs/promises')
 const {createHash}=require('node:crypto')
 const {createIdentityDatabase}=require('./identity-db.cjs')
 ;(async()=>{
-  const {db,migrations}=await createIdentityDatabase()
+  const {db,migrations}=await createIdentityDatabase({through:'20261024001000_work_items.sql'})
   try{
     const output=await db.exec(await fs.readFile('supabase/tests/work_access.test.sql','utf8'))
     const tap=output.flatMap(r=>r.rows.map(row=>row.tap).filter(Boolean))

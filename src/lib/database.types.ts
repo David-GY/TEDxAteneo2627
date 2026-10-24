@@ -102,6 +102,123 @@ export type Database = {
           },
         ]
       }
+      deliverable_gate_assessments: {
+        Row: {
+          work_item_id: string
+          work_version: number
+          gate: string
+          disposition: string
+          reason: string
+          assessed_by: string
+          assessed_at: string
+        }
+        Insert: {
+          work_item_id: string
+          work_version: number
+          gate: string
+          disposition: string
+          reason: string
+          assessed_by: string
+          assessed_at?: string
+        }
+        Update: {
+          work_item_id?: string
+          work_version?: number
+          gate?: string
+          disposition?: string
+          reason?: string
+          assessed_by?: string
+          assessed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_gate_assessments_assessed_by_fkey"
+            columns: ["assessed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_gate_assessments_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      deliverable_revisions: {
+        Row: {
+          id: string
+          work_item_id: string
+          work_version: number
+          criteria_revision: number
+          workflow_state: string
+          title: string
+          outcome: string
+          acceptance_criteria: string
+          owner_member_id: string
+          due_on: string | null
+          due_at: string | null
+          reason: string
+          final_evidence: string | null
+          review_evidence: string | null
+          actor_id: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          work_item_id: string
+          work_version: number
+          criteria_revision: number
+          workflow_state: string
+          title: string
+          outcome: string
+          acceptance_criteria: string
+          owner_member_id: string
+          due_on?: string | null
+          due_at?: string | null
+          reason: string
+          final_evidence?: string | null
+          review_evidence?: string | null
+          actor_id: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          work_item_id?: string
+          work_version?: number
+          criteria_revision?: number
+          workflow_state?: string
+          title?: string
+          outcome?: string
+          acceptance_criteria?: string
+          owner_member_id?: string
+          due_on?: string | null
+          due_at?: string | null
+          reason?: string
+          final_evidence?: string | null
+          review_evidence?: string | null
+          actor_id?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_revisions_owner_member_id_fkey"
+            columns: ["owner_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_revisions_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       deliverable_units: {
         Row: {
           organization_id: string
@@ -155,6 +272,9 @@ export type Database = {
           acceptance_criteria: string | null
           is_blocked: boolean
           safe_blocker_summary: string | null
+          workflow_state: string
+          criteria_revision: number
+          final_evidence: string | null
         }
         Insert: {
           work_item_id: string
@@ -172,6 +292,9 @@ export type Database = {
           acceptance_criteria?: string | null
           is_blocked?: boolean
           safe_blocker_summary?: string | null
+          workflow_state?: string
+          criteria_revision?: number
+          final_evidence?: string | null
         }
         Update: {
           work_item_id?: string
@@ -189,6 +312,9 @@ export type Database = {
           acceptance_criteria?: string | null
           is_blocked?: boolean
           safe_blocker_summary?: string | null
+          workflow_state?: string
+          criteria_revision?: number
+          final_evidence?: string | null
         }
         Relationships: [
           {
@@ -1520,6 +1646,15 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      create_deliverable: {
+        Args: {
+          p_term_id: string
+          p_data: Json
+          p_propose: boolean
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       create_guest_invitation: {
         Args: {
           p_term_id: string
@@ -1620,6 +1755,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_deliverable_authoring: {
+        Args: {
+          p_term_id: string
+          p_work_item_id?: string | null
+        }
+        Returns: Json | null
+      }
       read_directory: {
         Args: {
           p_term_id: string
@@ -1707,6 +1849,27 @@ export type Database = {
         Args: {
           p_term_id: string
           p_visibility: Json
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      transition_deliverable: {
+        Args: {
+          p_work_item_id: string
+          p_action: string
+          p_reason: string
+          p_evidence: string
+          p_expected_version: number
+          p_request_id: string
+          p_criteria_revision?: number | null
+        }
+        Returns: Json | null
+      }
+      update_deliverable: {
+        Args: {
+          p_work_item_id: string
+          p_data: Json
           p_expected_version: number
           p_request_id: string
         }

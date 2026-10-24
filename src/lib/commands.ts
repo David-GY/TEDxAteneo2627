@@ -40,7 +40,7 @@ export function mapCommandError(error: unknown): CommandError {
   else if (value.message === 'command_quota_limit') kind = 'quota_limit'
   else if (['42501','PGRST301','PGRST302'].includes(code)) kind = 'permission_denied'
   else if (code === '40001') kind = 'stale_version'
-  else if (['22023','22P02','23503','23514','23502'].includes(code)) kind = 'validation_failed'
+  else if (['22023','22007','22008','22P02','23503','23514','23502'].includes(code)) kind = 'validation_failed'
   else if (code === '55000') kind = 'dependency_blocked'
   else if (['23505','40P01','55P03'].includes(code)) kind = 'conflict'
   else if (!code || ['COMMAND_UNAVAILABLE','ECONNRESET','ETIMEDOUT'].includes(code)) kind = 'unavailable'

@@ -6,6 +6,7 @@ import { createPeopleGateway, type PeopleGateway } from '../people/gateway'
 import { createProfileGateway, type ProfileGateway } from '../account/gateway'
 import { createGuestContactGateway, type GuestContactGateway } from '../account/guestContacts'
 import { createDeliverablesApi, type DeliverablesApi } from '../deliverables/api'
+import { createDeliverableCommands, type DeliverableCommands } from '../deliverables/commands'
 
 export type MemberContext = {
   state: 'authorized'; memberId: string; displayName: string; organizationId: string
@@ -20,6 +21,7 @@ export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audi
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
   deliverables?: DeliverablesApi
+  deliverableCommands?: DeliverableCommands
   guestContacts?: GuestContactGateway
   profile?: ProfileGateway
   people?: PeopleGateway
@@ -54,6 +56,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangePromise: Promise<void> | undefined
   return {
     deliverables: createDeliverablesApi(clientReady),
+    deliverableCommands: createDeliverableCommands(clientReady),
     guestContacts: createGuestContactGateway(clientReady),
     profile: createProfileGateway(clientReady),
     people: createPeopleGateway(clientReady),
