@@ -1,0 +1,12 @@
+{
+  "target": "actual isolated SQL plus production file handler/validator with isolated in-memory bytes and simulated sign-in; not real Supabase Storage/JWT",
+  "checks": [
+    "working URL canonicalization/access notes/version",
+    "lost validated upload reply retries same key, one immutable random object reservation",
+    "audited authorized stream downloads correct SHA-256",
+    "finalize manifest then source replacement leaves captured version/hash unchanged",
+    "actual PDF, native-encoded JPEG and CRC/decompressed PNG uploads; disguised HTML rejected before SQL reservation",
+    "refresh/320px/44px/Karla/no browser storage/runtime errors"
+  ],
+  "errors": []
+}

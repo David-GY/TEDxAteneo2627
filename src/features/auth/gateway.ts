@@ -1,3 +1,4 @@
+import {createFilesApi,type FilesApi} from '../files/api'
 import {createCommentsApi,type CommentsApi} from '../comments/api'
 import type { ClientEnvironment } from '../../lib/env'
 import { createSupabaseClient } from '../../lib/supabase'
@@ -23,6 +24,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  files?: FilesApi
   comments?: CommentsApi
   tasks?: TasksApi
   deliverables?: DeliverablesApi
@@ -60,6 +62,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    files: createFilesApi(clientReady),
     comments: createCommentsApi(clientReady),
     tasks: createTasksApi(clientReady),
     deliverables: createDeliverablesApi(clientReady),

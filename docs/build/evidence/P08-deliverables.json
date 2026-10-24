@@ -22,7 +22,8 @@
     "supabase/migrations/20261024001300_task_reading.sql": "66774c6593baa2b2f6308df19dc57a25e2e1c4a788d3d5e289f0803e905db8ab",
     "supabase/migrations/20261024001400_tasks.sql": "c23e48318724e88d21bef2d3af5756cc8e9601a1b5afe9387843e81e687d28e8",
     "supabase/migrations/20261024001500_task_queries.sql": "fc99eb3c0752388806ccb08d5d45473ccaa9a9171fd4167b6da05195b60ed45b",
-    "supabase/migrations/20261024001600_comments.sql": "946bf98e28efb1a64344e4429695d0bf5fca071f5f9a8998db611b07d129a70a",
+    "supabase/migrations/20261024001600_comments.sql": "e1973aef014af9f26b4edb4f0aec9f92046ac2650345de11dc1239ad0b7d399d",
+    "supabase/migrations/20261024001700_assets.sql": "d67d77c1221374dfbaa0ce0c980a2a5f66c977cbeb4f04244be8bd06ebb56d6b",
     "supabase/seed.sql": "26a6c2f8309eed229a5d395bcbf456d8e107dbb1295997908f9cc407be473979",
     "scripts/deliverables-db.cjs": "cc3a5aabdcb01ebc067b69b2c5bc56043a1aa93a3a950a148138b9c9f7343f0d",
     "supabase/tests/deliverables.test.sql": "b224b0d79a488b7067b1edbb67bc3f2c2ed09dea6a03ac590b5508c68f93e615"

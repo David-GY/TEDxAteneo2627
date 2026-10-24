@@ -52,6 +52,187 @@ export type Database = {
           },
         ]
       }
+      asset_links: {
+        Row: {
+          asset_id: string
+          work_item_id: string
+          created_by: string
+          created_at: string
+        }
+        Insert: {
+          asset_id: string
+          work_item_id: string
+          created_by: string
+          created_at?: string
+        }
+        Update: {
+          asset_id?: string
+          work_item_id?: string
+          created_by?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asset_links_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asset_links_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      asset_manifest_items: {
+        Row: {
+          manifest_id: string
+          asset_id: string
+        }
+        Insert: {
+          manifest_id: string
+          asset_id: string
+        }
+        Update: {
+          manifest_id?: string
+          asset_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asset_manifest_items_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asset_manifest_items_manifest_id_fkey"
+            columns: ["manifest_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      asset_manifests: {
+        Row: {
+          id: string
+          work_item_id: string
+          work_version: number
+          entries: Json
+          sha256: string
+          size_bytes: number
+          created_by: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          work_item_id: string
+          work_version: number
+          entries: Json
+          sha256: string
+          size_bytes: number
+          created_by: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          work_item_id?: string
+          work_version?: number
+          entries?: Json
+          sha256?: string
+          size_bytes?: number
+          created_by?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asset_manifests_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assets: {
+        Row: {
+          id: string
+          origin_work_item_id: string
+          kind: string
+          classification: string
+          filename: string
+          mime_type: string | null
+          size_bytes: number | null
+          sha256: string | null
+          object_path: string | null
+          source_url: string | null
+          access_notes: string | null
+          source_label: string | null
+          source_snapshot: Json | null
+          state: string
+          version: number
+          created_by: string
+          created_at: string
+          updated_at: string
+          expires_at: string | null
+        }
+        Insert: {
+          id?: string
+          origin_work_item_id: string
+          kind: string
+          classification: string
+          filename: string
+          mime_type?: string | null
+          size_bytes?: number | null
+          sha256?: string | null
+          object_path?: string | null
+          source_url?: string | null
+          access_notes?: string | null
+          source_label?: string | null
+          source_snapshot?: Json | null
+          state: string
+          version?: number
+          created_by: string
+          created_at?: string
+          updated_at?: string
+          expires_at?: string | null
+        }
+        Update: {
+          id?: string
+          origin_work_item_id?: string
+          kind?: string
+          classification?: string
+          filename?: string
+          mime_type?: string | null
+          size_bytes?: number | null
+          sha256?: string | null
+          object_path?: string | null
+          source_url?: string | null
+          access_notes?: string | null
+          source_label?: string | null
+          source_snapshot?: Json | null
+          state?: string
+          version?: number
+          created_by?: string
+          created_at?: string
+          updated_at?: string
+          expires_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assets_origin_work_item_id_fkey"
+            columns: ["origin_work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_events: {
         Row: {
           id: string
@@ -1953,6 +2134,23 @@ export type Database = {
         }
         Returns: Json | null
       }
+      attach_asset: {
+        Args: {
+          p_work_item_id: string
+          p_asset_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      authorize_asset_download: {
+        Args: {
+          p_work_item_id: string
+          p_asset_id: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       can_access_work: {
         Args: {
           p_work_item_id: string
@@ -1963,6 +2161,12 @@ export type Database = {
       can_read_comment: {
         Args: {
           p_comment_id: string
+        }
+        Returns: boolean | null
+      }
+      can_read_manifest: {
+        Args: {
+          p_id: string
         }
         Returns: boolean | null
       }
@@ -2024,6 +2228,15 @@ export type Database = {
       explain_access: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      finalize_upload: {
+        Args: {
+          p_work_item_id: string
+          p_asset_ids: string[]
+          p_expected_version: number
+          p_request_id: string
         }
         Returns: Json | null
       }
@@ -2125,6 +2338,12 @@ export type Database = {
           display_name: string
         }[]
       }
+      read_files: {
+        Args: {
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
       read_guest_contacts: {
         Args: {
           p_term_id: string
@@ -2182,6 +2401,20 @@ export type Database = {
         }
         Returns: Json | null
       }
+      reserve_upload: {
+        Args: {
+          p_work_item_id: string
+          p_name: string
+          p_mime: string
+          p_size: number
+          p_sha256: string
+          p_source_id: string
+          p_source_version: number
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       resolve_auth_context: {
         Args: Record<string, never>
         Returns: Json | null
@@ -2229,6 +2462,28 @@ export type Database = {
           p_values: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_working_link: {
+        Args: {
+          p_work_item_id: string
+          p_asset_id: string
+          p_url: string
+          p_name: string
+          p_notes: string
+          p_label: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      seal_upload: {
+        Args: {
+          p_asset_id: string
+          p_sha256: string
+          p_size: number
+          p_mime: string
         }
         Returns: Json | null
       }

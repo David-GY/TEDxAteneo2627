@@ -12,6 +12,13 @@ async function createIdentityDatabase({ through } = {}) {
       create role authenticated nologin;
       create role service_role nologin bypassrls;
       create schema auth;
+      -- Storage catalog shape only; this is not the Supabase Storage service or JWT/RLS API.
+      create schema storage;
+      create table storage.buckets(id text primary key,name text not null,public boolean not null default false,file_size_limit bigint,allowed_mime_types text[]);
+      create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text references storage.buckets(id),name text not null,metadata jsonb,unique(bucket_id,name));
+      alter table storage.objects enable row level security;
+      grant usage on schema storage to anon,authenticated,service_role;
+      grant select,insert,update,delete on storage.objects to anon,authenticated,service_role;
       create table auth.users(id uuid primary key, email text, email_confirmed_at timestamptz);
       create table auth.identities(id uuid primary key default gen_random_uuid(), provider_id text not null, user_id uuid references auth.users(id), provider text not null, identity_data jsonb not null, unique(provider,provider_id));
       create function auth.uid() returns uuid language sql stable as

@@ -1,3 +1,5 @@
+import {Files} from '../files/Files'
+import type {FilesApi} from '../files/api'
 import {Comments} from '../comments/Comments'
 import type {CommentsApi} from '../comments/api'
 import { useEffect, useState } from 'react'
@@ -9,7 +11,7 @@ import { filterSearch, parseFilters, type DeliverablesApi, type DeliverableDetai
 import { dateLabel, DeliverableFacts } from './DeliverableFacts'
 import { DeliverableEditor } from './DeliverableEditor'
 import type { DeliverableCommands } from './commands'
-export function DeliverablePage({ api, commands, comments }: { api: DeliverablesApi; commands?: DeliverableCommands; comments?:CommentsApi }) {
+export function DeliverablePage({ api, commands, comments, files }: { api: DeliverablesApi; commands?: DeliverableCommands; comments?:CommentsApi; files?:FilesApi }) {
   const {deliverableId=''}=useParams(); const location=useLocation()
   const context=useRouteLoaderData('workspace') as WorkspaceContext|undefined
   const [reload,setReload]=useState(0);const key=deliverableId+':'+reload
@@ -28,7 +30,7 @@ export function DeliverablePage({ api, commands, comments }: { api: Deliverables
       <Panel title="Deliverable overview"><p>Phase: {item.phase??'Not set'}</p><p>{item.summary}</p><DeliverableFacts item={item}/><p className="muted">Original target: {dateLabel(item.originalDueAt,item.originalDueOn)}</p><p className="muted">Supporting committees are planning involvement; accepted contributions are not recorded here.</p></Panel>
       <Panel title="Outcome and acceptance criteria">{item.details?<><h3>Outcome</h3><p className="record-text">{item.details.outcome??'Not recorded'}</p><h3>Acceptance criteria</h3><p className="record-text">{item.details.acceptanceCriteria??'Not recorded'}</p><h3>Working notes</h3><p className="record-text">{item.details.body||'None recorded'}</p></>:<p>Summary access only. Participant details are not shared with your account.</p>}</Panel>
       {commands&&context&&!guest?<DeliverableEditor key={context.termId+deliverableId} api={commands} termId={context.termId} id={deliverableId} onSaved={()=>setReload(reload+1)} onReload={()=>setReload(reload+1)}/>:null}
-      {comments?<Comments api={comments} workId={deliverableId}/>:null}
+      {files?<Files api={files} workId={deliverableId}/>:null}{comments?<Comments api={comments} workId={deliverableId}/>:null}
     </>}
   </>
 }

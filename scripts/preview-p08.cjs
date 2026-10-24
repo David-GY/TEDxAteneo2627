@@ -4,24 +4,26 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
   const {db,ids}=await (authoring?require('./deliverable-authoring-db.cjs').createAuthoringDatabase():createDeliverablesDatabase())
   try{
     if(tasks)await db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer]);await tx.query(`select public.create_task($1,$2,gen_random_uuid())`,[ids.term,{title:'Fictional owned task draft',summary:'Synthetic local task example',body:'Fictional task notes',classification:'restricted',taskType:'ordinary',leadUnitId:null,assigneeId:ids.viewer,assignedUnitId:null,collaborators:[],checklist:[],dueOn:'2027-04-10',dueAt:null,parentId:null,reason:'Fictional task seed'}])})
+    const filePreview=await require('./files-preview.cjs').createFilePreview(db,ids)
     const main=await(await fetch('http://127.0.0.1:5173/src/main.tsx')).text()
     const suffix=main.match(/react-router[.]js(\?v=[^"]+)/)[1]
     const vite='http://127.0.0.1:5173'
-    const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${tasks?'P11':authoring?'P09':'P08'} synthetic database preview</title><script type="module">
+    const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${tasks?'P12':authoring?'P09':'P08'} synthetic database preview</title><script type="module">
       import RefreshRuntime from '${vite}/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;
-      </script></head><body><p style="margin:0;padding:12px 20px;background:#252624;color:white">Local synthetic PostgreSQL preview · simulated sign-in · no real records or provider connection</p><div id="root"></div><script type="module">
+      </script></head><body><p style="margin:0;padding:12px 20px;background:#252624;color:white">Local synthetic PostgreSQL + isolated file bytes · simulated sign-in · no real Supabase Storage/Auth</p><div id="root"></div><script type="module">
       import React from '${vite}/node_modules/.vite/deps/react.js${suffix}';
       import ReactDOMClient from '${vite}/node_modules/.vite/deps/react-dom_client.js${suffix}';
       import {createBrowserRouter,RouterProvider} from '${vite}/node_modules/.vite/deps/react-router.js${suffix}';
       import {createAppRoutes} from '${vite}/src/app/router.tsx';
       import {createDeliverablesApi} from '${vite}/src/features/deliverables/api.ts';
       import {createDeliverableCommands} from '${vite}/src/features/deliverables/commands.ts';
+      import {createFilesApi} from '${vite}/src/features/files/api.ts';
       import {createCommentsApi} from '${vite}/src/features/comments/api.ts';
       import {createTasksApi} from '${vite}/src/features/tasks/api.ts';
       import '${vite}/src/styles/tokens.css';import '${vite}/src/styles/global.css';import '${vite}/node_modules/@fontsource-variable/karla/index.css';
-      const ready=Promise.resolve({rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,args})}).then(r=>r.json())});
+      const ready=Promise.resolve({functions:{invoke:async(name,{body})=>{const response=await fetch('/__files',{method:'POST',headers:body instanceof FormData?{}:{'content-type':'application/json'},body:body instanceof FormData?body:JSON.stringify(body)});return response.ok?{data:response.headers.get('content-type').includes('application/octet-stream')?await response.blob():await response.json(),error:null}:{data:null,error:{context:response}}}},rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,args})}).then(r=>r.json())});
       const context={state:'authorized',memberId:'${ids.viewer}',displayName:'Fictional River · local preview',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
-      const gateway={comments:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      const gateway={files:createFilesApi(ready),comments:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
       ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createBrowserRouter(createAppRoutes({state:'not_configured',issues:[]},gateway))}));
       </script></body></html>`
     const server=http.createServer(async(req,res)=>{
@@ -31,6 +33,11 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
         try{const font=await fetch(vite+req.url);res.writeHead(font.status,{'content-type':font.headers.get('content-type')||'font/woff2'});res.end(Buffer.from(await font.arrayBuffer()));return}
         catch{res.writeHead(502);res.end();return}
       }
+      if(req.url==='/__files'&&req.method==='POST'){
+        try{const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>5308416)throw new Error('too_large');chunks.push(chunk)}
+        const response=await filePreview.handler(new Request('http://127.0.0.1/__files',{method:'POST',headers:{'content-type':req.headers['content-type']||'','authorization':'Bearer local-synthetic'},body:Buffer.concat(chunks)}));res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));return
+        }catch{res.writeHead(400,{'content-type':'application/json'});res.end('{"error":{"code":"22023"}}');return}
+      }
       if(req.url==='/__rpc'&&req.method==='POST'){
         try{
           let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>100000)throw new Error('too_large')}
@@ -39,6 +46,9 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
             await tx.exec('set local role authenticated')
             await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer])
             if(name==='list_deliverables')return tx.query('select public.list_deliverables($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) as value',[a.p_term_id,a.p_phase,a.p_unit_id,a.p_owner_id,a.p_blocked,a.p_overdue,a.p_involves_my_unit,a.p_review_pending,a.p_page,a.p_page_size])
+            if(name==='read_files')return tx.query('select public.read_files($1) as value',[a.p_work_item_id])
+            if(name==='finalize_upload')return tx.query('select public.finalize_upload($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_asset_ids,a.p_expected_version,a.p_request_id])
+            if(name==='save_working_link')return tx.query('select public.save_working_link($1,$2,$3,$4,$5,$6,$7,$8) as value',[a.p_work_item_id,a.p_asset_id,a.p_url,a.p_name,a.p_notes,a.p_label,a.p_expected_version,a.p_request_id])
             if(name==='read_comments')return tx.query('select public.read_comments($1,$2) as value',[a.p_work_item_id,a.p_page])
             if(name==='read_comment_history')return tx.query('select public.read_comment_history($1) as value',[a.p_comment_id])
             if(name==='mention_candidates')return tx.query('select public.mention_candidates($1,$2) as value',[a.p_work_item_id,a.p_search])

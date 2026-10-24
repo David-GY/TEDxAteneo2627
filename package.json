@@ -10,6 +10,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "typecheck:files": "tsc --noEmit -p tsconfig.files.json",
+    "test:files": "node scripts/test-files.cjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test": "vitest run",
