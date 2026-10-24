@@ -32,3 +32,5 @@ Shared five-hour usage80 →83 →84%, reset1792816155; starting allowance10 poi
 ## Next smallest action
 
 Resume **P06 using build-prompts/CONTINUE.md**: implement own profile editor and separate audited version/retry-safe private-values/visibility commands. Finish optional fields, guest own/shared contacts without invented P07 scope, and historical-attribution boundary. Then run security/UI checks. After approved local container/provider setup, verify loopback target and rerun P02–P06 on real Supabase17/JWT/Google before live activation. Do not erase older blockers.
+
+Final custody: P06 snapshot3c18874 pushed/fetched; local/remote tree3fa4f7bbb1dce466cfd00ba6963ba5584384b5c8 matched exactly. Final shared usage87% (same window; below90% ceiling). This documentation-only custody update is also backed up and verified before finish.
