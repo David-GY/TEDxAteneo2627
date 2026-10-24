@@ -1,0 +1,12 @@
+{
+  "target": "routed React/actual isolated SQL with synthetic subjects; no real Supabase/JWT/concurrent-session proof",
+  "checks": [
+    "required gate denies actual progress",
+    "restricted receiver sees neutral blocker without private title/ID/count",
+    "informational add loses committed reply; exact retry one edge",
+    "actual competing command produces stale scope exception; safe reason retained across refresh",
+    "explicit scope exception releases dependency only; canonical contribution next-step text",
+    "320px reflow,44px select, keyboard Tab, no runtime errors/private browser storage"
+  ],
+  "errors": []
+}

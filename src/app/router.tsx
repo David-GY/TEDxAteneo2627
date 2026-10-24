@@ -91,7 +91,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       }, shouldRevalidate: () => true, children: [
       { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
       {path:'working-together/:agreementId',element:gateway.synergies?<AgreementPage api={gateway.synergies}/>:<EmptyState title="Agreement unavailable" description="The connection is unavailable."/>},
-      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail api={gateway.tasks} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
+      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail dependencies={gateway.dependencies} api={gateway.tasks} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
       {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage api={gateway.deliverables} commands={gateway.deliverableCommands} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),

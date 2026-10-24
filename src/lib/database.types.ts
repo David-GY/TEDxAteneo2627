@@ -2016,6 +2016,109 @@ export type Database = {
           },
         ]
       }
+      task_dependencies: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          predecessor_task_id: string
+          successor_task_id: string
+          dependency_type: string
+          required: boolean
+          created_by: string
+          created_at: string
+          removed_at: string | null
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          predecessor_task_id: string
+          successor_task_id: string
+          dependency_type: string
+          required: boolean
+          created_by: string
+          created_at?: string
+          removed_at?: string | null
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          predecessor_task_id?: string
+          successor_task_id?: string
+          dependency_type?: string
+          required?: boolean
+          created_by?: string
+          created_at?: string
+          removed_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_dependencies_organization_id_term_id_predecessor_task_fkey"
+            columns: ["organization_id","term_id","predecessor_task_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "task_dependencies_organization_id_term_id_successor_task_i_fkey"
+            columns: ["organization_id","term_id","successor_task_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "task_dependencies_predecessor_task_id_fkey"
+            columns: ["predecessor_task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "task_dependencies_successor_task_id_fkey"
+            columns: ["successor_task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      task_dependency_events: {
+        Row: {
+          id: string
+          dependency_id: string
+          operation: string
+          reason: string
+          actor_id: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          dependency_id: string
+          operation: string
+          reason: string
+          actor_id: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          dependency_id?: string
+          operation?: string
+          reason?: string
+          actor_id?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_dependency_events_dependency_id_fkey"
+            columns: ["dependency_id"]
+            isOneToOne: false
+            referencedRelation: "task_dependencies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       task_revisions: {
         Row: {
           work_item_id: string
@@ -2502,6 +2605,19 @@ export type Database = {
         }
         Returns: Json | null
       }
+      add_task_dependency: {
+        Args: {
+          p_predecessor_id: string
+          p_successor_id: string
+          p_type: string
+          p_required: boolean
+          p_expected_predecessor_version: number
+          p_expected_successor_version: number
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       assign_task: {
         Args: {
           p_work_item_id: string
@@ -2797,6 +2913,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_task_dependencies: {
+        Args: {
+          p_successor_id: string
+          p_search?: string | null
+        }
+        Returns: Json | null
+      }
       read_tasks: {
         Args: {
           p_term_id: string
@@ -2814,6 +2937,17 @@ export type Database = {
       redeem_guest_invitation: {
         Args: {
           p_token: string
+        }
+        Returns: Json | null
+      }
+      remove_task_dependency: {
+        Args: {
+          p_dependency_id: string
+          p_expected_predecessor_version: number
+          p_expected_successor_version: number
+          p_reason: string
+          p_scope_exception: boolean
+          p_request_id: string
         }
         Returns: Json | null
       }

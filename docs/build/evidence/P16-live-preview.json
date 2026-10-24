@@ -1,0 +1,7 @@
+{
+  "url": "http://127.0.0.1:5178/tasks/eebd3307-988b-4517-b3bf-f8a60deac170",
+  "target": "owned local synthetic SQL, not real Supabase/Auth/JWT",
+  "bothBlocked": true,
+  "receiverRestricted": true,
+  "receiverVisibleEdges": 0
+}

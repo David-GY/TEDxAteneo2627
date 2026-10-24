@@ -1,0 +1,8 @@
+PASS P16_A1-A3 local routed SQL browser checks (parallel-provider checks remain unverified)
+EXIT 0
+PASS P15_A1–A3 routed actual-SQL browser, desktop/mobile/keyboard checks
+P15 REGRESSION EXIT 0
+PASS P16_A1-A3 local routed SQL browser checks (parallel-provider checks remain unverified)
+EXIT 0
+PASS P16_A1-A3 local routed SQL browser checks (parallel-provider checks remain unverified)
+Final browser EXIT 0

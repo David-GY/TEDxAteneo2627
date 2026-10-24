@@ -1,0 +1,123 @@
+P16 current SQL regressions; synthetic isolated databases
+COMMAND pnpm test:dependencies
+$ node scripts/test-dependencies.cjs
+1..3
+ok 1 - P16_A1: self/cyclic/inverse edges rejected; exact retry retains one edge; transaction graph advisory lock held (actual parallel sessions unverified)
+ok 2 - P16_A2: unfinished and cancelled predecessors block start/completion; informational does not; explicit reasoned managerial exception removes only dependency gate
+ok 3 - P16_A3: restricted predecessor exposes only neutral association/readiness; no ID/title/count/history or raw table leakage; both-record edit authorization required
+EXIT 0
+COMMAND pnpm test:synergy-interface
+$ node scripts/test-synergy-interface.cjs
+ok 1 - P15_A1: both scoped heads discover one agreement with correct actions; exact counter confirmation; one task in contributions/My Tasks/Overview; pending amendment preserves active deadline/history
+ok 2 - P15_A2: independent parent/sibling/edit/options/count boundaries; unrelated and revoked heads fail closed; anon denied; no finance authority added
+EXIT 0
+COMMAND pnpm test:synergy
+$ node scripts/test-synergy.cjs
+1..3
+ok 1 - P14_A1: counter stays inactive; explicit requester confirmation activates one revision-bound canonical contribution; parent gate evidence invalidated
+ok 2 - P14_A2: unrelated/expired heads denied, unknown or undeployed owner/cross-term unit rejected, safe preview and accepted task never grant private parent access
+ok 3 - P14_A3: exact/stale competing accepts retain one canonical contribution, one audit/outbox per winning key, immutable revisions/original date and fail-closed task/parent guards (real concurrent sessions pending)
+EXIT 0
+COMMAND pnpm test:tasks
+$ node scripts/test-tasks.cjs && node scripts/test-task-commands.cjs
+PASS P10_R0 owned task reading foundation
+1..3
+ok 1 - P10_A1: duplicate retry returns one task, payload conflict/stale edit and unauthorized assignment/direct generic bypass denied
+ok 2 - P10_A2: sender cannot impose cross-unit work; current receiving head with exact task edit scope explicitly accepts
+ok 3 - P10_A3: assignee progress/checklist/blocked/evidence completion, metadata scope, original date and redacted attributed history
+EXIT 0
+COMMAND pnpm test:deliverable-authoring
+$ node scripts/test-deliverable-authoring.cjs
+{
+  "target": "isolated PostgreSQL18.6/PGlite with verified-shaped synthetic subjects; no real Supabase/JWT/parallel sessions",
+  "tap": [
+    "1..3",
+    "ok 1 - P09_A1: current scoped authority, active same-term owner/unit, self-proposal only, generic bypass denied and reassignment queue",
+    "ok 2 - P09_A2: original deadline, reasoned actor snapshot, criteria revisions, retry deduplication and stale conflict",
+    "ok 3 - P09_A3: direct completion denied, evidence/current gates required, stale assessments rejected, independent clean acceptance atomic"
+  ],
+  "hashes": {
+    "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
+    "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
+    "supabase/migrations/20261024000300_google_auth.sql": "0b9f860315d9cb67088a6e7ac8d006154716587442457f09692ed344d70616a8",
+    "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
+    "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
+    "supabase/migrations/20261024000600_own_profile_read.sql": "ec0413dc375eed003118a73f5dda22d30091533ae7b6c5a2f8065092238cb33a",
+    "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
+    "supabase/migrations/20261024000800_profile_disclosure.sql": "9ead57280792bfbc16b5449d0293eaaeabfd23429cf556a02b1c90930b8adedf",
+    "supabase/migrations/20261024000900_guest_contacts.sql": "fa4afc25152a46f3170b45897c36360dcb88e8e2a5e9c9bf8a8196a584c12142",
+    "supabase/migrations/20261024001000_work_items.sql": "4cd73e1184a2737b7f39a24ccf345917b3b421935c19979b5acde382dabd2f4c",
+    "supabase/migrations/20261024001100_deliverables.sql": "669fe8e7e8f4ec7f75d0219ab421b0640dfc06870d90d6f98dd1bfe59bf5be4a",
+    "supabase/migrations/20261024001200_deliverable_commands.sql": "4e629f781a997189cf7891665f7e049fd9183bfeb85d9817f92dc6fb37e4ec99",
+    "supabase/migrations/20261024001300_task_reading.sql": "66774c6593baa2b2f6308df19dc57a25e2e1c4a788d3d5e289f0803e905db8ab",
+    "supabase/migrations/20261024001400_tasks.sql": "c23e48318724e88d21bef2d3af5756cc8e9601a1b5afe9387843e81e687d28e8",
+    "supabase/migrations/20261024001500_task_queries.sql": "fc99eb3c0752388806ccb08d5d45473ccaa9a9171fd4167b6da05195b60ed45b",
+    "supabase/migrations/20261024001600_comments.sql": "e1973aef014af9f26b4edb4f0aec9f92046ac2650345de11dc1239ad0b7d399d",
+    "supabase/migrations/20261024001700_assets.sql": "96b414cf70818b53dff9d8de08690ecc7dbaaa2e0770f3062f35b00bc93fd0cc",
+    "supabase/migrations/20261024001800_overview_queries.sql": "a0e648123eab0f5316bdb8026dcef90dc4c6fe819913feb286b8155b472fc302",
+    "supabase/migrations/20261024001900_synergy.sql": "402bba80e7fa9b36061a02c48dbae04f593e0dbd0567aa2d1956d703ea9b7e0d",
+    "supabase/migrations/20261024002000_synergy_interface.sql": "6c80d42ce58cd66bd27b311e0beb6c4a3649e47ffdef84a263373c705ba0b618",
+    "supabase/migrations/20261025002100_dependencies.sql": "074630ac3580a1724d78e71f185028a7489b73d29d07eea26fe33440d857a610",
+    "scripts/deliverable-authoring-db.cjs": "b7b4f11e8edaca7716703572db1b5daec413147815e984d911dfa0a872592468",
+    "supabase/tests/deliverable_commands.test.sql": "e0bd4f5012a58b92643feeba4bda737b44de7a818a1399999af63e9d8e221a39"
+  },
+  "blocked": "P02–P08 provider/human/privacy gates retained. Clean acceptance uses trusted-only synthetic non-applicability assessments, no client waiver or P29 approval."
+}
+EXIT 0
+COMMAND pnpm test:deliverables
+$ node scripts/test-deliverables.cjs
+{
+  "target": "isolated PostgreSQL18.6/PGlite, verified-shaped synthetic subjects; not Supabase17/JWT/PostgREST",
+  "tap": [
+    "1..3",
+    "ok 1 - P08_A1: authorized rows/count/options only, restricted deep link hidden, private details separately gated",
+    "ok 2 - P08_A2: canonical shared output across lead/support/multiple own units and pages",
+    "ok 3 - P08_A3: real DB updates, honest pending gates, empty and denied state, Manila date boundary"
+  ],
+  "hashes": {
+    "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
+    "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
+    "supabase/migrations/20261024000300_google_auth.sql": "0b9f860315d9cb67088a6e7ac8d006154716587442457f09692ed344d70616a8",
+    "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
+    "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
+    "supabase/migrations/20261024000600_own_profile_read.sql": "ec0413dc375eed003118a73f5dda22d30091533ae7b6c5a2f8065092238cb33a",
+    "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
+    "supabase/migrations/20261024000800_profile_disclosure.sql": "9ead57280792bfbc16b5449d0293eaaeabfd23429cf556a02b1c90930b8adedf",
+    "supabase/migrations/20261024000900_guest_contacts.sql": "fa4afc25152a46f3170b45897c36360dcb88e8e2a5e9c9bf8a8196a584c12142",
+    "supabase/migrations/20261024001000_work_items.sql": "4cd73e1184a2737b7f39a24ccf345917b3b421935c19979b5acde382dabd2f4c",
+    "supabase/migrations/20261024001100_deliverables.sql": "669fe8e7e8f4ec7f75d0219ab421b0640dfc06870d90d6f98dd1bfe59bf5be4a",
+    "supabase/migrations/20261024001200_deliverable_commands.sql": "4e629f781a997189cf7891665f7e049fd9183bfeb85d9817f92dc6fb37e4ec99",
+    "supabase/migrations/20261024001300_task_reading.sql": "66774c6593baa2b2f6308df19dc57a25e2e1c4a788d3d5e289f0803e905db8ab",
+    "supabase/migrations/20261024001400_tasks.sql": "c23e48318724e88d21bef2d3af5756cc8e9601a1b5afe9387843e81e687d28e8",
+    "supabase/migrations/20261024001500_task_queries.sql": "fc99eb3c0752388806ccb08d5d45473ccaa9a9171fd4167b6da05195b60ed45b",
+    "supabase/migrations/20261024001600_comments.sql": "e1973aef014af9f26b4edb4f0aec9f92046ac2650345de11dc1239ad0b7d399d",
+    "supabase/migrations/20261024001700_assets.sql": "96b414cf70818b53dff9d8de08690ecc7dbaaa2e0770f3062f35b00bc93fd0cc",
+    "supabase/migrations/20261024001800_overview_queries.sql": "a0e648123eab0f5316bdb8026dcef90dc4c6fe819913feb286b8155b472fc302",
+    "supabase/migrations/20261024001900_synergy.sql": "402bba80e7fa9b36061a02c48dbae04f593e0dbd0567aa2d1956d703ea9b7e0d",
+    "supabase/migrations/20261024002000_synergy_interface.sql": "6c80d42ce58cd66bd27b311e0beb6c4a3649e47ffdef84a263373c705ba0b618",
+    "supabase/migrations/20261025002100_dependencies.sql": "074630ac3580a1724d78e71f185028a7489b73d29d07eea26fe33440d857a610",
+    "supabase/seed.sql": "26a6c2f8309eed229a5d395bcbf456d8e107dbb1295997908f9cc407be473979",
+    "scripts/deliverables-db.cjs": "cc3a5aabdcb01ebc067b69b2c5bc56043a1aa93a3a950a148138b9c9f7343f0d",
+    "supabase/tests/deliverables.test.sql": "b224b0d79a488b7067b1edbb67bc3f2c2ed09dea6a03ac590b5508c68f93e615"
+  },
+  "blocked": "P02–P07 provider, official types, real JWT/PostgREST/Google/parallel sessions and human/privacy gates retained"
+}
+EXIT 0
+COMMAND pnpm test:files
+$ node scripts/test-files.cjs
+1..2
+ok 1 - P12_A1: anonymous/unrelated/revoked/direct Storage reads denied; receipt retries reauthorize; extra links never widen origin access (real signing API remains external)
+ok 2 - P12_A3: source replacement cannot rewrite finalized asset/manifest or captured source version; hashes, exact retry and redacted audit stable
+EXIT 0
+COMMAND pnpm test:comments
+$ node scripts/test-comments.cjs
+1..3
+ok 1 - P11_A1: SQL preserves literal unsafe text; exact retries, immutable originals and stale-version rejection (execution checked in UI/browser)
+ok 2 - P11_A2: unrelated and expired subjects cannot enumerate comments/revisions/candidates; private drafts, writes, mentions and redacted outbox enforced
+ok 3 - P11_A3: decision FK pins original revision; amendment and reason are retained, referenced deletion blocked, reasoned redaction withholds bodies without erasing evidence
+EXIT 0
+1..3
+ok 1 - P16_A1: self/cyclic/inverse edges rejected; exact retry retains one edge; transaction graph advisory lock held (actual parallel sessions unverified)
+ok 2 - P16_A2: unfinished and cancelled predecessors block start/completion; informational does not; explicit reasoned managerial exception removes only dependency gate
+ok 3 - P16_A3: restricted predecessor exposes only neutral association/readiness; no ID/title/count/history or raw table leakage; both-record edit authorization required
+Final dependencies EXIT 0

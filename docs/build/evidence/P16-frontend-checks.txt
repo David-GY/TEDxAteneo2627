@@ -1,0 +1,65 @@
+P16 frontend/Edge/build/catalog checks
+COMMAND pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  24 passed (24)
+      Tests  103 passed (103)
+   Start at  00:17:13
+   Duration  14.83s (environment 66%, setup 14%, tests 11%, import 7%, transform 2%)
+
+Environment  jsdom was created 24 times · 81.55s total, 66% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+COMMAND pnpm typecheck
+$ tsc --noEmit
+EXIT 0
+COMMAND pnpm typecheck:files
+$ tsc --noEmit -p tsconfig.files.json
+EXIT 0
+COMMAND pnpm lint
+$ eslint . --max-warnings 0
+EXIT 0
+COMMAND pnpm build
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 182 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-D_X9yr6Y.css                           11.69 kB │ gzip:   3.10 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-54PjYUq6.js                           464.66 kB │ gzip: 137.13 kB
+
+✓ built in 336ms
+EXIT 0
+COMMAND pnpm db:types:check
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 44 tables (494 columns) and 63 functions.
+EXIT 0
+$ tsc --noEmit
+Final typecheck EXIT 0
+$ eslint . --max-warnings 0
+Final lint EXIT 0
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 182 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-D_X9yr6Y.css                           11.69 kB │ gzip:   3.10 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-_5S8tFjM.js                           464.73 kB │ gzip: 137.16 kB
+
+✓ built in 239ms
+Final build EXIT 0
