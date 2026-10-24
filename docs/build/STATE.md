@@ -2,10 +2,9 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- Current step **P16 - blocked_external**. Independent dependency implementation delivered. P16_A1 sequential inverse/lock/snapshot-isolation local PASS; actual independent parallel sessions unverified. P16_A2/A3 local PASS. P00/P01 complete; P02-P15 implementations retain external ledgers. P16A/P17 not executed.
-- Schema44tables/494columns/63public functions, migrations001-021. Two forced-RLS dependency/event tables; scoped graph commands and reads; term-serialized graph/task/synergy-response changes. READ COMMITTED required; snapshot isolation rejected. Original deadlines and all FIN/MCD/acceptance gates preserved.
-- Required unfinished/cancelled/archived predecessors block start/review/completion; informational links do not. Self/cyclic edges rejected. Required removal needs an explicit reasoned currently authorized scope exception. Both records, retries, search, incoming/outgoing links and history independently scoped; hidden IDs/titles/counts absent. Task/contribution blocker and next-step UI plus exact retry/stale draft retention delivered. Docs/dependencies.md owns contract; DESIGN.md retained.
-- Actual checks: named P16 SQL3 plus four UI/adapter cases; 24files/103frontend tests; relevant P08-P15 SQL regressions and P15/P16 actual-SQL browser PASS; frontend/Edge typechecks, lint/build182modules(app464.73kB/gzip137.16kB), types/drift44/494/63; 320px,44px,keyboard, no runtime errors/private browser storage; detector[]. Evidence/failures/corrections docs/build/steps/P16.md and evidence/P16-* ledgers. No actual Auth/JWT/concurrent-session or human proof claimed.
+- Current step **P16A - in_progress**. Partial date foundation delivered/tested; full timeline NOT implemented. P16A_A1 pending; A2 pure-date subset PASS, server/command cases pending; A3 UI/browser pending. P00/P01 complete; P02-P16 implementations retain external ledgers. P17 not executed.
+- Schema44tables/494columns/63functions, migrations001-021 unchanged. Added only unconnected src/features/timeline/dates.ts and five tests: calendar validation/arithmetic, Manila timestamp end dates, null/start-only unscheduled, end-only markers, inclusive/equal/reversed ranges, week/month windows and event marker. No schedule mutation/projection/UI or fabricated rows.
+- Actual checks: targeted Vitest1file/5tests, typecheck/lint/build PASS; app unchanged464.73kB/gzip137.16kB,182modules. No P16A SQL/browser/full acceptance claimed. Details/remaining plan docs/build/steps/P16A.md and docs/superpowers/plans/2026-10-25-p16a-committee-timeline.md. Existing P16 implementation evidence retained in P16.md.
 
 ## External blockers retained
 
@@ -17,10 +16,12 @@ P15 actual authenticated two-head UI acceptance, expired/revoked JWT scope and n
 
 P16 actual concurrent inverse graph edits and graph/state/synergy-amendment races on independent real Supabase17/Auth/JWT connections; institutional approval of scope-exception authority, privacy review and human dependency/mobile/keyboard UAT remain unverified. Local graph locking and sequential checks are not actual concurrent-session proof.
 
+P16A actual provider/session/privacy/human gates also remain; date-helper tests discharge none of them.
+
 ## Next action / custody
 
-After approved provider/authority/privacy setup, compare official types and run real P16 parallel inverse-edge/readiness/synergy-amendment/revocation sessions plus human UAT and inherited gates. CONTINUE resumes external P16 verification. Next independently code-eligible P16A build-prompts/16A-committee-gantt.md requires a separate request; do not auto-run it or P17.
+Resume P16A with build-prompts/CONTINUE.md at3:52AM Manila October25 via active one-occurrence thread heartbeat continue-p16a-at-3-52-am. Begin with fresh observed usage/Git baseline, then planned_start_on/scheduling authority and existing deadline guards with named changed-row SQL tests; retain passing date helpers. Finish the approved projection/forms/timeline/A1-A3 in order. Do not run P17.
 
-Live Vite5173 and visible explicitly synthetic SQL http://127.0.0.1:5178/ retained; owned command node scripts/preview-p16.cjs, accepted contribution with actual dependency and script-only receiver simulation. Started clean atf2575bd96dc0237b1fbf9b102d2965e5980fb382 on codex/core-build-checkpoints; fetched commit/tree matched. Existing92f77ed timeline roadmap preserved. No agents/chats/worktrees/dependencies/provider changes/deployments/remote resets/external messages. Authorized reviewed checkpoint uses this branch; final chat receipt records remote commit/tree and clean-worktree verification.
+Existing visible owned P16 synthetic SQL5178 and Vite5173 retained; no fake timeline screen. Started clean atf1e50c1154d1de6853c27ec5e338e5f060acfcbe, fetched commit/tree matched. No agents/chats/worktrees/dependencies/provider changes/deployments/remote resets/external messages. Authorized reviewed partial commit/push uses codex/core-build-checkpoints; final chat records remote commit/tree and clean-worktree verification.
 
-Fresh P16 shared usage69 ->74 ->77 ->79 ->81 ->83%, reset1792871469 unchanged; effective21points/wind-down85used/ceiling90used. Weekly54 ->56% observed. No reset/cap increase/purchase/wait. Credits did not run out, so conditional3:52AM continuation was unnecessary. See P16.md for actual evidence and limitations.
+Fresh P16A shared usage85 ->87%, reset1792871469 unchanged; effective5point budget/immediate wind-down/ceiling90used under BUILD-CONTRACT. Weekly57%. No reset credit/purchase/cap change/wait. Partial checkpoint is due to build budget/account headroom, not a claim of actual quota exhaustion. Requested3:52AM continuation is scheduled; execution remains future/unverified.
