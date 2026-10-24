@@ -37,6 +37,17 @@ values(pg_temp.fid('org'),pg_temp.fid('term'),pg_temp.fid('tm-head'),pg_temp.fid
 set local role authenticated;
 select set_config('request.jwt.claim.sub',pg_temp.fid('head')::text,true);
 select pg_temp.require(public.has_capability(pg_temp.fid('term'),'committee.manage',pg_temp.fid('ONE')),'test caller actually has head management capability');
+select pg_temp.require(public.read_own_profile(pg_temp.fid('term'))->>'memberId'=pg_temp.fid('head')::text
+  and (public.read_own_profile(pg_temp.fid('term'))->>'version')::integer=0
+  and public.read_own_profile(pg_temp.fid('term'))->>'course' is null,'head reads only self, absent profile has version zero');
+select set_config('request.jwt.claim.sub',pg_temp.fid('member')::text,true);
+select pg_temp.require(not public.has_capability(pg_temp.fid('term'),'directory.read')
+  and public.read_own_profile(pg_temp.fid('term'))->>'course'='Private course'
+  and public.read_own_profile(pg_temp.fid('term'))->>'phone'='Private phone'
+  and (public.read_own_profile(pg_temp.fid('term'))->>'shareCourse')::boolean=false
+  and (public.read_own_profile(pg_temp.fid('term'))->>'version')::integer=1,'owner can read unshared values and version without directory capability');
+select pg_temp.require(public.read_own_profile(pg_temp.fid('other-term')) is null,'wrong term cannot reveal own profile');
+select set_config('request.jwt.claim.sub',pg_temp.fid('head')::text,true);
 select pg_temp.require((select count(*)=0 from public.private_profiles),'head cannot read another raw profile');
 update public.private_profiles set share_course=true where member_id=pg_temp.fid('member');
 select pg_temp.require((select value->>'course' is null and value->>'phone' is null from jsonb_array_elements(public.read_people_directory(pg_temp.fid('term'))) where value->>'id'=pg_temp.fid('member')::text),'head cannot override or see unshared fields');
@@ -55,9 +66,12 @@ select pg_temp.require((select jsonb_array_length(value->'units')=2 from jsonb_a
 select pg_temp.require((select bool_and(jsonb_array_length(value->'primary')=1 and value->'backup'='[]'::jsonb) from jsonb_array_elements(public.read_process_contacts(pg_temp.fid('term')))),'primary and missing backup explicit');
 select set_config('request.jwt.claim.sub',pg_temp.fid('guest')::text,true);
 select pg_temp.require(public.read_people_directory(pg_temp.fid('term'))='[]'::jsonb and public.read_process_contacts(pg_temp.fid('term'))='[]'::jsonb,'no guest-wide directory');
+select pg_temp.require(public.read_own_profile(pg_temp.fid('term')) is null,'external guest cannot read a core private profile');
 reset role;
 update public.members set account_state='suspended' where id=pg_temp.fid('member');
 set local role authenticated;
+select set_config('request.jwt.claim.sub',pg_temp.fid('member')::text,true);
+select pg_temp.require(public.read_own_profile(pg_temp.fid('term')) is null,'suspension denies own profile with same subject');
 select set_config('request.jwt.claim.sub',pg_temp.fid('head')::text,true);
 select pg_temp.require(jsonb_array_length(public.read_people_directory(pg_temp.fid('term')))=1,'former member profile absent');
 select 'ok 3 - P06_A3: unique people with multiple units, missing backup and former/guest isolation; mobile checked separately' as tap;

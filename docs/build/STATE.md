@@ -9,7 +9,7 @@ Updated October 24, 2026 (Asia/Manila).
 
 ## Delivered interfaces
 
-12 public tables/154 columns/12 functions. P02 identity/P03 authority/P04 verified exact school roster/P05 invitations unchanged. P06 migration20261024000500_directory.sql adds read_people_directory and read_process_contacts: capability-gated read-only projections, no raw grant expansion. One person across current units/roles; exact school organization contact; course/year/phone/external contact independently null unless shared. Effective primary/backup contacts per active unit, missing assignments explicit. Guests receive no broad directory; their own/shared contact UI is pending.
+12 public tables/154 columns/13 functions. P02 identity/P03 authority/P04 verified exact school roster/P05 invitations unchanged. P06 migration20261024000500_directory.sql adds read_people_directory and read_process_contacts: capability-gated read-only projections, no raw grant expansion. One person across current units/roles; exact school organization contact; course/year/phone/external contact independently null unless shared. Effective primary/backup contacts per active unit, missing assignments explicit. Guests receive no broad directory; their own/shared contact UI is pending.
 
 /people uses real parallel RPCs and existing shell/components: name/unit/role search, plain process names, persistent help/task links, loading/empty/retry. No profile save controls until real commands exist. P05 guest core/admin isolation, bearer scrubbing, zero-record sharing, current sponsor/expiry/revoke checks remain. No production fixture/preview bypass, real records or invented work IDs. Former current profiles excluded; historical work-record attribution remains pending.
 
@@ -31,6 +31,9 @@ Shared five-hour usage80 →83 →84%, reset1792816155; starting allowance10 poi
 
 ## Next smallest action
 
-Resume **P06 using build-prompts/CONTINUE.md**: implement own profile editor and separate audited version/retry-safe private-values/visibility commands. Finish optional fields, guest own/shared contacts without invented P07 scope, and historical-attribution boundary. Then run security/UI checks. After approved local container/provider setup, verify loopback target and rerun P02–P06 on real Supabase17/JWT/Google before live activation. Do not erase older blockers.
+Resume **P06 using build-prompts/CONTINUE.md**: implement separate audited version/retry-safe private-values/visibility commands, then wire the own editor to the verified read_own_profile RPC. Finish optional fields, guest own/shared contacts without invented P07 scope, and historical-attribution boundary. Then run security/UI checks. After approved local container/provider setup, verify loopback target and rerun P02–P06 on real Supabase17/JWT/Google before live activation. Do not erase older blockers.
 
 Final custody: P06 snapshot3c18874 pushed/fetched; local/remote tree3fa4f7bbb1dce466cfd00ba6963ba5584384b5c8 matched exactly. Final shared usage87% (same window; below90% ceiling). This documentation-only custody update is also backed up and verified before finish.
+
+
+Latest continuation: migration20261024000600_own_profile_read.sql adds authenticated core-owner read_own_profile, deriving identity from session/current membership, returning private values/sharing/version without directory capability; no writes. P06 SQL extended and PASS (head/self, missing profile, wrong term, guest/suspension denial), type generation/check12/154/13, typecheck/lint/build PASS. Existing frontend/browser checks not rerun for this backend-only change. Preview5173 retained. Shared baseline87 →88%, reset1792816155, effective allowance3 points; small verified checkpoint per contract. All P02–P05 blockers and unfinished P06 scope above persist. This continuation commit is pushed/fetched and remote tree verified before finish.

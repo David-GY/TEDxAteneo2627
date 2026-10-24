@@ -769,6 +769,12 @@ export type Database = {
           display_name: string
         }[]
       }
+      read_own_profile: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_people_directory: {
         Args: {
           p_term_id: string
