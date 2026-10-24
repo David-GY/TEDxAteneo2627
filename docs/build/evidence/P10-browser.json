@@ -1,0 +1,10 @@
+{
+  "target": "partial read-only P10 on isolated actual SQL/simulated sign-in",
+  "checks": [
+    "real owned row",
+    "archive reload gives honest empty state",
+    "desktop/320px no overflow/runtime errors/private browser storage"
+  ],
+  "pending": "P10_A1–A3 full task commands and editor",
+  "errors": []
+}

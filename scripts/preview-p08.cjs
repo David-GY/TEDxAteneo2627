@@ -1,8 +1,9 @@
 const http=require('node:http')
 const {createDeliverablesDatabase}=require('./deliverables-db.cjs')
-async function createPreview({port=5174,authoring=false}={}){
+async function createPreview({port=5174,authoring=false,tasks=false}={}){
   const {db,ids}=await (authoring?require('./deliverable-authoring-db.cjs').createAuthoringDatabase():createDeliverablesDatabase())
   try{
+    if(tasks)await db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer]);await tx.query(`select public.create_work_item($1,'task','Fictional owned task draft','Synthetic local task reading example','','restricted',p_request_id=>gen_random_uuid())`,[ids.term])})
     const main=await(await fetch('http://127.0.0.1:5173/src/main.tsx')).text()
     const suffix=main.match(/react-router[.]js(\?v=[^"]+)/)[1]
     const vite='http://127.0.0.1:5173'
@@ -15,10 +16,11 @@ async function createPreview({port=5174,authoring=false}={}){
       import {createAppRoutes} from '${vite}/src/app/router.tsx';
       import {createDeliverablesApi} from '${vite}/src/features/deliverables/api.ts';
       import {createDeliverableCommands} from '${vite}/src/features/deliverables/commands.ts';
+      import {createTasksApi} from '${vite}/src/features/tasks/api.ts';
       import '${vite}/src/styles/tokens.css';import '${vite}/src/styles/global.css';import '${vite}/node_modules/@fontsource-variable/karla/index.css';
       const ready=Promise.resolve({rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,args})}).then(r=>r.json())});
       const context={state:'authorized',memberId:'${ids.viewer}',displayName:'Fictional River · local preview',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
-      const gateway={deliverables:createDeliverablesApi(ready),${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      const gateway={deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
       ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createBrowserRouter(createAppRoutes({state:'not_configured',issues:[]},gateway))}));
       </script></body></html>`
     const server=http.createServer(async(req,res)=>{
@@ -37,6 +39,7 @@ async function createPreview({port=5174,authoring=false}={}){
             await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer])
             if(name==='list_deliverables')return tx.query('select public.list_deliverables($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) as value',[a.p_term_id,a.p_phase,a.p_unit_id,a.p_owner_id,a.p_blocked,a.p_overdue,a.p_involves_my_unit,a.p_review_pending,a.p_page,a.p_page_size])
             if(name==='read_deliverable')return tx.query('select public.read_deliverable($1) as value',[a.p_work_item_id])
+            if(tasks&&name==='read_owned_tasks')return tx.query('select public.read_owned_tasks($1,$2) as value',[a.p_term_id,a.p_page])
             if(authoring&&name==='read_deliverable_authoring')return tx.query('select public.read_deliverable_authoring($1,$2) as value',[a.p_term_id,a.p_work_item_id])
             if(authoring&&name==='create_deliverable')return tx.query('select public.create_deliverable($1,$2,$3,$4) as value',[a.p_term_id,a.p_data,a.p_propose,a.p_request_id])
             if(authoring&&name==='update_deliverable')return tx.query('select public.update_deliverable($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_data,a.p_expected_version,a.p_request_id])

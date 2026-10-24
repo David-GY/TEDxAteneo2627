@@ -1783,6 +1783,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_owned_tasks: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       read_people_directory: {
         Args: {
           p_term_id: string

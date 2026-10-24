@@ -8,6 +8,8 @@ import { createGuestContactGateway, type GuestContactGateway } from '../account/
 import { createDeliverablesApi, type DeliverablesApi } from '../deliverables/api'
 import { createDeliverableCommands, type DeliverableCommands } from '../deliverables/commands'
 
+import { createTasksApi, type TasksApi } from '../tasks/api'
+
 export type MemberContext = {
   state: 'authorized'; memberId: string; displayName: string; organizationId: string
   termId: string; termMembershipId: string; expiresAt: string; capabilities: string[]
@@ -20,6 +22,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  tasks?: TasksApi
   deliverables?: DeliverablesApi
   deliverableCommands?: DeliverableCommands
   guestContacts?: GuestContactGateway
@@ -55,6 +58,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    tasks: createTasksApi(clientReady),
     deliverables: createDeliverablesApi(clientReady),
     deliverableCommands: createDeliverableCommands(clientReady),
     guestContacts: createGuestContactGateway(clientReady),
