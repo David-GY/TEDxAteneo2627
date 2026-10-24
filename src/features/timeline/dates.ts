@@ -37,7 +37,7 @@ export function schedule(startOn:string|null,dueOn:string|null,dueAt:string|null
 }
 export function windowFor(anchor:string,scale:Scale):{start:string;end:string}{
  calendarDay(anchor)
- if(scale==='week'){const weekday=new Date(epoch(anchor)).getUTCDay(),start=addDays(anchor,-((weekday+6)%7));return{start,end:addDays(start,6)}}
+ if(scale==='week'){const weekday=new Date(epoch(anchor)).getUTCDay(),start=addDays(anchor,-((weekday+6)%7));let end:string;try{end=addDays(start,6)}catch{end='9999-12-31'}return{start,end}}
  if(scale!=='month')throw new RangeError('Choose week or month.')
  const start=anchor.slice(0,7)+'-01',date=new Date(epoch(start));date.setUTCMonth(date.getUTCMonth()+1)
  if(date.getUTCFullYear()>9999)return{start,end:'9999-12-31'}

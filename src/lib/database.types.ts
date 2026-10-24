@@ -3284,6 +3284,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_work_schedule: {
+        Args: {
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
       redeem_guest_invitation: {
         Args: {
           p_token: string

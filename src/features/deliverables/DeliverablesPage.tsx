@@ -29,7 +29,7 @@ export function DeliverablesPage({ api, commands, termId }: { api: DeliverablesA
   return <>
     <PageHeading title="Core deliverables" description="Find shared event outputs, accountable owners and the next action." />
     <p className="muted">Gate readiness is provisional until required reviews and acceptance are verified. Dates use Manila time; date-only deadlines end at 23:59.</p>
-    <div className="auth-actions"><button className="button button--secondary" onClick={()=>setReload(reload+1)}>Reload deliverables</button><Link className="button button--secondary" to="/people">Find a process contact</Link></div>
+    <div className="auth-actions"><Link className="button button--secondary" to="/working-together/timeline">Committee timeline</Link><button className="button button--secondary" onClick={()=>setReload(reload+1)}>Reload deliverables</button><Link className="button button--secondary" to="/people">Find a process contact</Link></div>
     {commands?<DeliverableEditor api={commands} termId={termId} onSaved={id=>void navigate('/deliverables/'+id)}/>:null}
     {!loaded ? <LoadingState title="Loading deliverables" /> : state.error ? <ErrorState title="Deliverables unavailable" description="Check access or connection, then reload. No cached records are shown." action={<button className="button" onClick={()=>setReload(reload+1)}>Try again</button>} /> : data ? <>
       <Panel title="Filter deliverables">

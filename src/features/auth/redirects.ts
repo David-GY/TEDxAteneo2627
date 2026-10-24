@@ -1,3 +1,4 @@
+import {parseTimelineQuery,timelineSearch} from '../timeline/filters'
 import { navigationItems } from '../../app/navigation'
 
 export const authOrigins = ['http://127.0.0.1:5173', 'http://127.0.0.1:4173'] as const
@@ -10,6 +11,8 @@ export function callbackUrl(origin: string): string | null {
 }
 
 export function safeReturnPath(value: string | null): string {
+  if(value?.startsWith('/working-together/timeline?')&&!/[\\#]/.test(value)&&!hasControl(value))return '/working-together/timeline'+timelineSearch(parseTimelineQuery(value.slice(value.indexOf('?'))))
+  if(value==='/working-together/timeline')return value
   if (!value?.startsWith('/') || value.startsWith('//') || /[\\%]/.test(value) || hasControl(value)) return '/'
   const path = value.split(/[?#]/, 1)[0]
   return path === '/guest/redeem' || isDeliverablePath(path) || isTaskPath(path) || isAgreementPath(path) || navigationItems.some((item) => item.href === path) ? path : '/'

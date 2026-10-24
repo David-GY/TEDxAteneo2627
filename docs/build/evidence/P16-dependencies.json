@@ -31,6 +31,7 @@
     "supabase/migrations/20261025002200_handoffs.sql": "19027fa8bdcd135739625153d58c07420579386204bcf6e9bbb0417ed49ee4c5",
     "supabase/migrations/20261025002300_work_schedule.sql": "8ffc6180e03596140c55fe2aaa6a88200a5c7d913b7f88b4c28aea60186cfcfa",
     "supabase/migrations/20261025002400_committee_timeline.sql": "7bedc942b757a809d228b3c9ab62a1db77abbbf2688cb78a3009cee84bd35377",
+    "supabase/migrations/20261025002500_schedule_context.sql": "34afeba9ab10a4f12f1537476913220694e6925dd5029cd1baf2822924093fdc",
     "supabase/tests/dependencies.test.sql": "e0091944f8e49e55d8bde5362cbbd335dbde8554df43f58b0f68653b9f028465"
   },
   "remaining": "Actual parallel inverse edges and state changes under independent provider sessions; inherited authority/privacy/human gates"

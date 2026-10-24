@@ -13,6 +13,8 @@ do $$begin
  or has_column_privilege('authenticated','public.work_items','planned_start_on','UPDATE')
  or has_function_privilege('anon','public.update_work_schedule(uuid,date,integer,uuid)','EXECUTE')
  or has_function_privilege('service_role','public.update_work_schedule(uuid,date,integer,uuid)','EXECUTE')
+ or has_function_privilege('anon','public.read_work_schedule(uuid)','EXECUTE')
+ or has_function_privilege('service_role','public.read_work_schedule(uuid)','EXECUTE')
  or not has_function_privilege('authenticated','public.update_work_schedule(uuid,date,integer,uuid)','EXECUTE')
  or not exists(select 1 from pg_proc where oid='public.update_work_schedule(uuid,date,integer,uuid)'::regprocedure and prosecdef and proconfig @> array['search_path=""'])
  then raise exception 'P16A_A2 schema/authority assertion failed';end if;

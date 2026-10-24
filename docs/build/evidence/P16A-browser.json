@@ -1,0 +1,9 @@
+{
+  "target": "Compiled real React/SDK adapters and actual isolated SQL; fictional subjects, not Supabase/Auth/JWT/concurrent-session/human proof",
+  "checks": [
+    "P16A_A1 SQL revocation clears rows/choices immediately on focus revalidation and shows denied state; canonical shared contribution once",
+    "P16A_A2 actual stale task schedule retains date and other form notes; explicit refresh; lost committed reply exact key retry one changed row/audit, including a routine auth-remount with narrow identity-bound date/key memory; deliverable schedule preserves other unsaved fields; accepted contribution locked",
+    "P16A_A3 week/month/previous/next/today, event/deadline/range/unscheduled, all filters incl earlier overdue, chart/list state and paging, real detail and entry links, required/informational descriptions, error/retry/empty,320px and640CSSpx/DPR2 reflow,44px controls,keyboard Tab,no chart mutations/private storage/runtime errors"
+  ],
+  "errors": []
+}

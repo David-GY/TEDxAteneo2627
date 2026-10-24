@@ -1,0 +1,36 @@
+.timeline-controls { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-4); margin-block: var(--space-5); }
+.timeline-controls label { display: grid; align-content: start; gap: var(--space-2); min-width: 0; font-weight: 600; }
+.timeline-controls input, .timeline-controls select, .schedule-editor input { min-width: 0; width: 100%; min-height: var(--control-min-size); padding: var(--space-2); background: var(--color-surface); color: var(--color-ink); border: 1px solid var(--color-muted); border-radius: var(--radius-control); }
+.timeline-controls option { padding: var(--space-3); }
+.timeline-filter-panel { border-block: 1px solid var(--color-line); padding-block: var(--space-4); }
+.timeline-filter-panel summary { min-height: var(--control-min-size); cursor: pointer; font-weight: 600; }
+.timeline-checks { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-4); }
+.timeline-checks label { display: flex; align-items: center; gap: var(--space-2); min-height: var(--control-min-size); }
+.timeline-checks input { width: 24px; height: 24px; accent-color: var(--color-accent); }
+.timeline-list { list-style: none; padding: 0; margin: 0; }
+.timeline-list > li { border-top: 1px solid var(--color-line); padding-block: var(--space-4); overflow-wrap: anywhere; }
+.timeline-list h3 { margin-top: 0; }
+.timeline-list h3 a { display: inline-flex; align-items: center; min-height: var(--control-min-size); }
+.timeline-list p { margin-block: var(--space-2); }
+.timeline-scroll { overflow: auto; max-width: 100%; border: 1px solid var(--color-line); scrollbar-color: var(--color-muted) var(--color-background); }
+.timeline-canvas { position: relative; font-variant-numeric: tabular-nums; }
+.timeline-axis { display: grid; min-height: 44px; align-items: center; background: var(--color-background); }
+.timeline-axis > * { padding-inline: var(--space-2); }
+.timeline-axis span { border-left: 1px solid var(--color-line); padding-inline: 0; text-align: center; white-space: nowrap; }
+.timeline-chart-body { position: relative; min-height: 44px; }
+.timeline-chart-row { position: absolute; left: 0; right: 0; height: 88px; display: flex; border-top: 1px solid var(--color-line); }
+.timeline-row-name { flex: 0 0 260px; display: grid; align-content: center; padding: var(--space-2); gap: 4px; line-height: 1.1; overflow: auto; }
+.timeline-row-name span { color: var(--color-muted); font-size: .875rem; }
+.timeline-row-name a { min-height: var(--control-min-size); display: flex; align-items: center; }
+.timeline-track { position: relative; }
+.timeline-bar { position: absolute; top: 30px; min-width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--color-accent-soft); color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-control); z-index: 2; }
+.timeline-deadline { min-width: 44px; font-size: 1.25rem; }
+.timeline-edges { position: absolute; top: 0; left: 260px; pointer-events: none; z-index: 1; }
+.timeline-edge-required { stroke: var(--color-accent); stroke-width: 2; }
+.timeline-edge-info { stroke: var(--color-muted); stroke-width: 2; stroke-dasharray: 5 4; }
+.timeline-marker { position: absolute; top: 0; border-left: 2px solid var(--color-ink); pointer-events: none; z-index: 3; }
+.timeline-marker span { position: absolute; top: 2px; left: 3px; background: var(--color-surface); font-weight: 600; font-size: .75rem; white-space: nowrap; }
+.schedule-editor { border-top: 1px solid var(--color-line); margin-top: var(--space-6); padding-top: var(--space-4); }
+.schedule-editor fieldset { display: grid; gap: var(--space-4); border: 0; padding: 0; margin: 0; min-width: 0; }
+.schedule-editor .button { margin-block: var(--space-2); justify-self: start; }
+@media (max-width: 45rem) { .timeline-controls { grid-template-columns: minmax(0,1fr); } }

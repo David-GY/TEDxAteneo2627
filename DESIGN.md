@@ -28,6 +28,8 @@ The first keyboard target skips to the main landmark. More moves focus to Close 
 
 `navigation.ts` accepts an audience plus explicit capabilities for presentation filtering. This is **not authorization**. Future routes, APIs, RLS and file access must enforce actual permissions independently. Placeholder routes expose no records, including when opened directly. Guest navigation starts with Shared with me. MEAn affiliation is absent from the navigation API. Optional modules remain absent until implemented and enabled.
 
+P16A extends this system with a native read-only calendar region and a chronological list. Calendar scrolling stays inside its named keyboard-focusable region; date bars/markers open existing records. Native labeled filters,44px controls, text statuses/required-versus-informational descriptions and visible focus remain authoritative at320px and zoom reflow. Missing dates never become invented bars or progress; planned-start edits live in existing record forms. Timeline CSS consumes the existing tokens, with no new visual system or chart dependency.
+
 An approved logo is still needed. Until then, ordinary text identifies the workspace and explicitly labels the pending logo. No member/person fixtures, metrics, fake success buttons, or fabricated committees are included in application routes. The shell says “Workspace preview” and explains its unconnected state. Fictional long labels are injected only by the browser test into its local DOM; they are never compiled into the app.
 
 ## Verification

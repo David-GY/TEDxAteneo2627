@@ -1,0 +1,18 @@
+COMMAND node scripts/verify-p16a.cjs
+PASS P16A_A1-A3 local actual-SQL/compiled-UI browser checks; external provider/human gates remain
+EXIT 0
+COMMAND node scripts/verify-p16.cjs
+PASS P16_A1-A3 local routed SQL browser checks (parallel-provider checks remain unverified)
+EXIT 0
+COMMAND node scripts/verify-p17.cjs
+PASS P17 actual-SQL/compiled-adapter/isolated-byte browser verification
+EXIT 0
+FINAL node scripts/verify-p16a.cjs
+PASS P16A_A1-A3 local actual-SQL/compiled-UI browser checks; external provider/human gates remain
+EXIT 0
+FINAL node scripts/verify-p16.cjs
+PASS P16_A1-A3 local routed SQL browser checks (parallel-provider checks remain unverified)
+EXIT 0
+FINAL node scripts/verify-p17.cjs
+PASS P17 actual-SQL/compiled-adapter/isolated-byte browser verification
+EXIT 0

@@ -1,0 +1,22 @@
+import {useEffect,useRef,useState,type FormEvent} from 'react'
+import {LoadingState} from '../../components/FeedbackState'
+import {displayEndDay} from './dates'
+import type {TimelineApi,ScheduleContext} from './api'
+import './timeline.css'
+import {useScheduleDrafts} from './ScheduleDrafts'
+export function ScheduleEditor({api,id,disabled=false,onPendingChange}:{api:TimelineApi;id:string;disabled?:boolean;onPendingChange?:(pending:boolean)=>void}){
+ const[context,setContext]=useState<ScheduleContext|null>(),[draft,setDraft]=useState(''),[error,setError]=useState(''),[notice,setNotice]=useState(''),[reload,setReload]=useState(0),[busy,setBusy]=useState(false),[uncertain,setUncertain]=useState(false)
+ const drafts=useScheduleDrafts(),initialized=useRef(false),pending=useRef<{start:string|null;version:number;key:string}|null>(null)
+ useEffect(()=>{onPendingChange?.(busy||uncertain);return()=>onPendingChange?.(false)},[busy,uncertain,onPendingChange])
+ useEffect(()=>{let live=true;void api.context(id).then(c=>{if(live){setContext(c);if(c&&!initialized.current){const saved=drafts?.get(id);setDraft(saved?.value??c.plannedStartOn??'');if(saved){setContext({...c,version:saved.base.version,plannedStartOn:saved.base.plannedStartOn});pending.current=saved.pending;setUncertain(saved.pending!==null)}initialized.current=true}else if(c){drafts?.set(id,{value:draft,base:c,pending:pending.current})}if(!c){setDraft('');pending.current=null;setUncertain(false);drafts?.delete(id)}}}).catch(()=>{if(live){setContext(undefined);setError('Schedule access could not load. Refresh the schedule to retry; your input is retained.')}});return()=>{live=false}},[api,id,reload,drafts])
+ async function save(event?:FormEvent){event?.preventDefault();if(!context||disabled)return;const p=pending.current??{start:draft||null,version:context.version,key:crypto.randomUUID()};pending.current=p;drafts?.set(id,{value:draft,base:context,pending:p});setBusy(true);setError('');setNotice('');const r=await api.save(id,p.start,p.version,p.key);setBusy(false)
+ if(!r.ok){setError(r.error.message);setUncertain(r.error.retryable);if(!r.error.retryable){pending.current=null;drafts?.set(id,{value:draft,base:context,pending:null})}if(r.error.kind==='permission_denied'){setContext(null);drafts?.delete(id)}return}
+ const saved={...context,version:r.value.version,plannedStartOn:p.start};pending.current=null;drafts?.set(id,{value:draft,base:saved,pending:null});setUncertain(false);setContext(saved);setNotice('Planned start saved. Other entered edits are retained. Reload the record when ready to use the new version in other forms.')}
+ function refresh(){drafts?.delete(id);setContext(undefined);setError('');setNotice('');setReload(n=>n+1)}
+ function change(value:string){setDraft(value);if(context)drafts?.set(id,{value,base:context,pending:pending.current})}
+ return <section className="schedule-editor" aria-label="Planned start schedule"><h3>Planned start</h3><p>A Manila calendar day. Due dates and original targets keep their existing rules. Agreed contribution dates require the committee agreement flow.</p>
+ {error?<p role="alert">{error}</p>:null}{notice?<p role="status">{notice}</p>:null}
+ {context===undefined?!error?<LoadingState title="Checking schedule access"/>:null:context===null?<p>Schedule unavailable or access changed.</p>:<><p>Saved start: {context.plannedStartOn??'Not set'} · Schedule version {context.version}</p>{context.canSchedule?<form onSubmit={save}><fieldset disabled={disabled||busy||uncertain}><div className="form-field"><label htmlFor={'start-'+id}>Planned start date · Manila</label><input id={'start-'+id} type="date" min="0001-01-01" max={displayEndDay(context.dueOn,context.dueAt)??'9999-12-31'} value={draft} onChange={e=>change(e.target.value)}/><p className="field-hint">Optional. A start without an end stays unscheduled. Save this separately from other edits.</p></div><button className="button" disabled={draft===(context.plannedStartOn??'')} type="submit">{busy?'Saving start…':'Save planned start'}</button></fieldset></form>:<p>Start-date editing is unavailable under the current scheduling authority or work state.</p>}</>}
+ {uncertain?<button className="button" disabled={!context||busy||disabled} onClick={()=>void save()}>Retry same schedule request</button>:null}
+ <button type="button" className="button button--secondary" disabled={busy||uncertain||disabled} onClick={refresh}>Refresh schedule version (keep input)</button></section>
+}

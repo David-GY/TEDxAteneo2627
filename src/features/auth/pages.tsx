@@ -8,10 +8,13 @@ import type { NavigationCapability } from '../../app/navigation'
 import type { AuthGateway, AuthResult, WorkspaceContext } from './gateway'
 import { consumeReturnPath, isGuest } from './gateway'
 import { readCallback, safeReturnPath } from './redirects'
+import {ScheduleDrafts} from '../timeline/ScheduleDrafts'
 
 export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
   const { revalidate, state } = useRevalidator()
   const location = useLocation()
+  const workspace=useRouteLoaderData('workspace') as WorkspaceContext|undefined
+  const draftIdentity=workspace?workspace.termId+':'+(isGuest(workspace)?'guest:'+workspace.guestAccessId:'core:'+workspace.memberId):'signed-out'
   useEffect(() => {
     const refresh = () => { if (document.visibilityState === 'visible' && window.location.pathname !== '/auth/callback') void revalidate() }
     const stop = gateway.onChange(refresh)
@@ -20,7 +23,7 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
     const timer = window.setInterval(refresh, 30_000)
     return () => { stop(); clearInterval(timer); window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [gateway, revalidate])
-  return state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />
+  return <ScheduleDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</ScheduleDrafts>
 }
 
 export function ProtectedShell() {

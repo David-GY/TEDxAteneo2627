@@ -7,7 +7,7 @@
   ],
   "actualCommandAssertions": "A2 row/version/audit/outbox exactly once; retry/conflict/stale; null/start-only/equal/reversed; Manila timestamp boundary; existing task and deliverable deadline guards; assignee progress without scheduling; terminal/hidden/contribution/guest/expired/archived/frozen rejection; original deadlines and deliverable approval fields unchanged",
   "actualReadAssertions": "A1 core head/member/cross-unit/nonmember/guest/expired/revoked; private summary/details/IDs/options/totals/edges excluded; one canonical contribution under multi-unit filters; deterministic paging and cap; only loaded permitted required/informational endpoints; date/unscheduled filters; current authorization after revocation; malformed filters rejected",
-  "remaining": "A1 deep-link/UI revalidation, A2 form integration, A3 timeline/browser; inherited real provider/concurrency/privacy/human checks",
+  "remaining": "Actual Supabase17/Auth/JWT independent sessions, institutional schedule authority/privacy review and human mobile/keyboard/assistive-technology acceptance. Local routed integration evidence: P16A-browser.json",
   "hashes": {
     "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
     "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
@@ -33,7 +33,8 @@
     "supabase/migrations/20261025002200_handoffs.sql": "19027fa8bdcd135739625153d58c07420579386204bcf6e9bbb0417ed49ee4c5",
     "supabase/migrations/20261025002300_work_schedule.sql": "8ffc6180e03596140c55fe2aaa6a88200a5c7d913b7f88b4c28aea60186cfcfa",
     "supabase/migrations/20261025002400_committee_timeline.sql": "7bedc942b757a809d228b3c9ab62a1db77abbbf2688cb78a3009cee84bd35377",
-    "supabase/tests/committee_timeline.test.sql": "acf85014445058233b0cb59e66ca335599c2b0193f92a29c1d263784315df09f",
-    "scripts\\test-committee-timeline.cjs": "5bb46af5fe76cdea5f89584a95fa583a7908f45aff347ccf117599a3a632fae3"
+    "supabase/migrations/20261025002500_schedule_context.sql": "34afeba9ab10a4f12f1537476913220694e6925dd5029cd1baf2822924093fdc",
+    "supabase/tests/committee_timeline.test.sql": "4cd25962c045aecd00cce9421f2387fb4aa2199fa5cff8790fe87a979188615e",
+    "scripts\\test-committee-timeline.cjs": "382b14d10f7fd6ea0aee3c530494dcdf6df8b169bbf657f1d60d6726d54f5e47"
   }
 }

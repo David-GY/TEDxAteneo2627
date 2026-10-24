@@ -1,3 +1,4 @@
+import {TimelinePage} from '../features/timeline/TimelinePage'
 import {WorkingTogetherPage} from '../features/synergies/WorkingTogetherPage'
 import {AgreementPage} from '../features/synergies/AgreementPage'
 import {Overview} from '../features/overview/Overview'
@@ -87,12 +88,14 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
           return result
         }
         const url = new URL(request.url)
-        return redirect(`/login?reason=${result.state === 'denied' ? 'denied' : 'check'}&returnTo=${encodeURIComponent(safeReturnPath(url.pathname))}`)
-      }, shouldRevalidate: () => true, children: [
+        return redirect(`/login?reason=${result.state === 'denied' ? 'denied' : 'check'}&returnTo=${encodeURIComponent(safeReturnPath(url.pathname+url.search))}`)
+      // Timeline filter RPCs recheck scope themselves. Explicit focus/expiry checks still revalidate.
+      }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
       { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
+      {path:'working-together/timeline',element:gateway.timeline?<TimelinePage api={gateway.timeline}/>:<EmptyState title="Timeline unavailable" description="The connection is unavailable."/>},
       {path:'working-together/:agreementId',element:gateway.synergies?<AgreementPage api={gateway.synergies}/>:<EmptyState title="Agreement unavailable" description="The connection is unavailable."/>},
-      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail dependencies={gateway.dependencies} api={gateway.tasks} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
-      {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage api={gateway.deliverables} commands={gateway.deliverableCommands} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
+      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail timeline={gateway.timeline} dependencies={gateway.dependencies} api={gateway.tasks} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
+      {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage timeline={gateway.timeline} api={gateway.deliverables} commands={gateway.deliverableCommands} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),
         element: item.href === '/working-together' && gateway.synergies ? <WorkingTogetherPage api={gateway.synergies}/> : item.id === 'tasks' && gateway.tasks ? <TasksPage api={gateway.tasks} /> : item.id === 'deliverables' && gateway.deliverables ? <DeliverablesRoute api={gateway.deliverables} commands={gateway.deliverableCommands} /> : item.id === 'people' && gateway.people ? <DirectoryPage api={gateway.people} /> : item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,

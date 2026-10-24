@@ -1,3 +1,5 @@
+import {ScheduleEditor} from '../timeline/ScheduleEditor'
+import type {TimelineApi} from '../timeline/api'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import { Panel } from '../../components/Page'
@@ -5,12 +7,14 @@ import { LoadingState } from '../../components/FeedbackState'
 import { TextField } from '../../components/TextField'
 import type { AuthoringCommand, AuthoringContext, DeliverableAction, DeliverableCommands, DeliverableData } from './commands'
 const labels:Record<DeliverableAction,string>={approve_proposal:'Approve proposed commitment',start:'Start work',submit:'Submit for acceptance',accept:'Accept deliverable',revise:'Return to draft',cancel:'Cancel deliverable'}
-export function DeliverableEditor({api,termId,id,onSaved,onReload}:{api:DeliverableCommands;termId:string;id?:string;onSaved:(id:string)=>void;onReload?:()=>void}){
+export function DeliverableEditor({api,termId,id,onSaved,onReload,timeline,onPendingChange}:{timeline?:TimelineApi;onPendingChange?:(pending:boolean)=>void;api:DeliverableCommands;termId:string;id?:string;onSaved:(id:string)=>void;onReload?:()=>void}){
   const [context,setContext]=useState<AuthoringContext|null|undefined>(undefined)
   const [error,setError]=useState('');const [busy,setBusy]=useState(false);const [uncertain,setUncertain]=useState(false)
   const [reload,setReload]=useState(0);const [notice,setNotice]=useState('')
   const [lead,setLead]=useState('');const [propose,setPropose]=useState(true)
   const [action,setAction]=useState<DeliverableAction|'none'>('none')
+  const[schedulePending,setSchedulePending]=useState(false)
+  useEffect(()=>{onPendingChange?.(schedulePending)},[schedulePending,onPendingChange])
   const pending=useRef<{input:AuthoringCommand;key:string}|null>(null)
   useEffect(()=>{let active=true;void api.read(termId,id).then(c=>{if(active){setContext(c);setLead(c?.data?.leadUnitId??c?.units[0]?.id??'');setPropose(!c?.units[0]?.canManage);setError('')}}).catch(()=>{if(active){setError('Authoring access could not load. Reload to check access.');setContext(undefined)}});return()=>{active=false}},[api,termId,id,reload])
   function refresh(reloadOverview=true){setContext(undefined);pending.current=null;setUncertain(false);setAction('none');setError('');setReload(reload+1);if(reloadOverview)onReload?.()}
@@ -33,13 +37,13 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload}:{api:Delivera
   const d=context?.data;const canManage=context?.units.find(u=>u.id===lead)?.canManage
   const content=<>
     {error?<p role="alert">{error}</p>:null}{notice?<p role="status">{notice}</p>:null}
-    <button className="button button--secondary" disabled={busy} onClick={()=>refresh()}>Reload latest (discard unsaved edits)</button>
-    {uncertain?<button className="button" disabled={busy} onClick={()=>pending.current&&void run(pending.current.input)}>Retry same request</button>:null}
+    <button className="button button--secondary" disabled={busy||schedulePending} onClick={()=>refresh()}>Reload latest (discard unsaved edits)</button>
+    {uncertain?<button className="button" disabled={busy||schedulePending} onClick={()=>pending.current&&void run(pending.current.input)}>Retry same request</button>:null}
     {context===undefined?!error?<LoadingState title="Checking authoring access"/>:null:<>
       {context.queue.length?<div><h3>Owners needing reassignment</h3><ul>{context.queue.map(q=><li key={q.id}><Link to={'/deliverables/'+q.id}>{q.title}</Link></li>)}</ul></div>:null}
       {id?<p>Workflow: {context.state?.replaceAll('_',' ')} · Version {context.version}. Readiness remains provisional.</p>:<p>Members propose themselves as owners. A configured committee manager must approve the event commitment.</p>}
       {!id||context.editable?<form key={reload+':'+context.version} onSubmit={save} className="deliverable-editor">
-        <fieldset disabled={busy||uncertain}>
+        <fieldset disabled={busy||uncertain||schedulePending}>
           <TextField id="deliverable-title" name="title" label="Title" required maxLength={240} defaultValue={d?.title}/>
           <TextField id="deliverable-summary" name="summary" label="Safe summary" maxLength={2000} defaultValue={d?.summary} hint="Visible to everyone permitted to read this summary."/>
           <div className="form-field"><label htmlFor="deliverable-lead">Lead committee (required)</label><select id="deliverable-lead" name="leadUnitId" required value={lead} disabled={!!id&&!context.manager} onChange={e=>setLead(e.target.value)}>{context.units.map(u=><option key={u.id} value={u.id}>{u.name}</option>)}</select></div>
@@ -53,10 +57,10 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload}:{api:Delivera
           <div className="form-field"><label htmlFor="deliverable-body">Working notes</label><textarea id="deliverable-body" name="body" maxLength={20000} defaultValue={d?.body}/></div>
           {!id?<div className="form-field"><label htmlFor="deliverable-visibility">Visibility (required)</label><select id="deliverable-visibility" name="classification" defaultValue="restricted"><option value="restricted">Restricted to participants</option><option value="ordinary">Ordinary core summary</option></select></div>:<p>Visibility: {d?.classification}. Retained for this record.</p>}
           {id?<TextField id="deliverable-reason" name="reason" label="Reason for this change" required maxLength={2000} hint="Required for deadline, ownership and criteria changes."/>:null}
-          <button className="button" disabled={busy||uncertain} type="submit">{busy?'Saving…':id?'Save deliverable':canManage&&!propose?'Create deliverable':'Propose commitment'}</button>
+          <button className="button" disabled={busy||uncertain||schedulePending} type="submit">{busy?'Saving…':id?'Save deliverable':canManage&&!propose?'Create deliverable':'Propose commitment'}</button>
         </fieldset>
       </form>:null}
-      {id&&context.actions.length?<form onSubmit={transition} className="deliverable-editor"><fieldset disabled={busy||uncertain}>
+      {id&&context.actions.length?<form onSubmit={transition} className="deliverable-editor"><fieldset disabled={busy||uncertain||schedulePending}>
         <h3>Workflow action</h3><p>Acceptance checks current evidence and mandatory gates on the server. Unresolved gates block acceptance.</p>
         <div className="form-field"><label htmlFor="deliverable-action">Action</label><select id="deliverable-action" name="action" value={action==='none'?context.actions[0]:action} onChange={e=>setAction(e.target.value as DeliverableAction)}>{context.actions.map(a=><option key={a} value={a}>{labels[a]}</option>)}</select></div>
         <TextField id="transition-reason" name="reason" label="Action reason" required maxLength={2000}/>
@@ -66,6 +70,7 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload}:{api:Delivera
         <button className="button" type="submit">{busy?'Applying…':'Apply workflow action'}</button>
       </fieldset></form>:null}
     </>}
+    {id&&timeline?<ScheduleEditor key={id} api={timeline} id={id} disabled={busy||uncertain} onPendingChange={setSchedulePending}/>:null}
   </>
   return id?<Panel title="Manage deliverable">{content}</Panel>:<details className="panel"><summary>Create or propose a deliverable{context?.queue.length?` · ${context.queue.length} awaiting owner reassignment`:''}</summary>{content}</details>
 }

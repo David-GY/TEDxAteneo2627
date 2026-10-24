@@ -32,7 +32,7 @@ export const navigationItems: readonly NavigationItem[] = [
   { id: 'deliverables', label: 'Core deliverables', href: '/deliverables', description: 'Event outputs, accountable owners and required contributions.', group: 'workspace', audiences: ['setup', 'core'] },
   { id: 'shared', label: 'Shared with me', href: '/shared', description: 'Work explicitly shared with your guest account.', group: 'workspace', audiences: ['guest'] },
   { id: 'tasks', label: 'My tasks', href: '/tasks', description: 'Your assignments, deadlines and progress.', group: 'workspace', audiences: ['setup', 'core', 'guest'] },
-  { id: 'working', label: 'Working together', href: '/working-together', description: 'Committee contributions, shared work and accepted handoffs.', group: 'workspace', audiences: ['setup', 'core'] },
+  { id: 'working', label: 'Working together', href: '/working-together', description: 'Committee contributions, shared work, handoffs and timeline.', group: 'workspace', audiences: ['setup', 'core'] },
   { id: 'requests', label: 'Department requests', href: '/requests', description: 'Find the right support and track the next action on a request.', group: 'workspace', audiences: ['setup', 'core'] },
   { id: 'calendar', label: 'Calendar', href: '/calendar', description: 'Dates and events you are permitted to see.', group: 'workspace', audiences: ['setup', 'core', 'guest'] },
   { id: 'resources', label: 'Resources & Start Here', href: '/resources', description: 'Process guides, shared resources and who to ask.', group: 'workspace', audiences: ['setup', 'core', 'guest'] },

@@ -1,0 +1,90 @@
+COMMAND pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  29 passed (29)
+      Tests  122 passed (122)
+   Start at  06:11:17
+   Duration  16.62s (environment 66%, setup 13%, tests 12%, import 7%, transform 2%)
+
+Environment  jsdom was created 29 times · 94.11s total, 66% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+COMMAND pnpm typecheck
+$ tsc --noEmit
+EXIT 0
+COMMAND pnpm typecheck:files
+$ tsc --noEmit -p tsconfig.files.json
+EXIT 0
+COMMAND pnpm lint
+$ eslint . --max-warnings 0
+EXIT 0
+COMMAND pnpm build
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 189 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-KhOYLUFy.css                           15.17 kB │ gzip:   3.71 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-DkKVH6hL.js                           490.82 kB │ gzip: 143.41 kB
+
+✓ built in 360ms
+EXIT 0
+COMMAND pnpm db:types:check
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 48 tables (547 columns) and 70 functions.
+EXIT 0
+FINAL pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  29 passed (29)
+      Tests  123 passed (123)
+   Start at  06:22:00
+   Duration  14.37s (environment 65%, setup 15%, tests 13%, import 6%, transform 1%)
+
+Environment  jsdom was created 29 times · 80.61s total, 65% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+FINAL pnpm typecheck
+$ tsc --noEmit
+EXIT 0
+FINAL pnpm typecheck:files
+$ tsc --noEmit -p tsconfig.files.json
+EXIT 0
+FINAL pnpm lint
+$ eslint . --max-warnings 0
+EXIT 0
+FINAL pnpm build
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 190 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-KhOYLUFy.css                           15.17 kB │ gzip:   3.71 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-BGiHFjTa.js                           491.71 kB │ gzip: 143.72 kB
+
+✓ built in 250ms
+EXIT 0
+FINAL pnpm db:types:check
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 48 tables (547 columns) and 70 functions.
+EXIT 0

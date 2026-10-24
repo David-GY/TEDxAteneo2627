@@ -30,5 +30,6 @@ describe('P16A_A2 date foundation (server/command acceptance remains pending)',(
   expect(windowFor('2027-01-01','week')).toEqual({start:'2026-12-28',end:'2027-01-03'})
   expect(windowFor('2028-02-29','month')).toEqual({start:'2028-02-01',end:'2028-02-29'})
   expect(windowFor('2026-12-31','month')).toEqual({start:'2026-12-01',end:'2026-12-31'})
+  expect(windowFor('9999-12-31','week').end).toBe('9999-12-31')
  })
 })

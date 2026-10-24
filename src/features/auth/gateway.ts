@@ -1,3 +1,4 @@
+import {createTimelineApi,type TimelineApi} from '../timeline/api'
 import {createHandoffsApi,type HandoffsApi} from '../handoffs/api'
 import {createDependenciesApi,type DependenciesApi} from '../tasks/dependenciesApi'
 import {createSynergiesApi,type SynergiesApi} from '../synergies/api'
@@ -28,6 +29,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  timeline?: TimelineApi
   handoffs?: HandoffsApi
   dependencies?: DependenciesApi
   synergies?: SynergiesApi
@@ -70,6 +72,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    timeline: createTimelineApi(clientReady),
     handoffs: createHandoffsApi(clientReady),
     dependencies: createDependenciesApi(clientReady),
     synergies: createSynergiesApi(clientReady),
