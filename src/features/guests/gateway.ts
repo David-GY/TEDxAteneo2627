@@ -2,7 +2,7 @@ import type { createSupabaseClient } from '../../lib/supabase'
 
 export type GuestInvitation = {
   id: string; email: string; expiresAt: string; redeemedAt: string | null
-  revokedAt: string | null; version: number; scopeMode: 'awaiting_record_attachment'
+  revokedAt: string | null; version: number; scopeMode: 'awaiting_record_attachment' | 'explicit_records'; sharedRecordCount?: number
 }
 export type InvitationLink = { id: string; token: string | null; reused: boolean }
 export interface GuestGateway {

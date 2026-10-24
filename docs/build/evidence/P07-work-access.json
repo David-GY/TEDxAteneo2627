@@ -1,0 +1,24 @@
+{
+  "target": "isolated PGlite/auth-shaped subjects; two actors observe same version then attempt guarded updates, not true parallel Supabase sessions",
+  "engine": "PostgreSQL 18.6 (PGlite 0.5.11) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "tap": [
+    "1..3",
+    "ok 1 - P07_A1: exact child/grant/unit/work-role/guest scope; summary/detail separation; no parent/sibling/direct mutation; same-term/type/history invariants",
+    "ok 2 - P07_A2: exact earlier create/update result; changed reused-key payload rejected; one business/audit/outbox result",
+    "ok 3 - P07_A3: two-actor stale update rejected; denied/failed outbox leaves no successful effects; current revoke/unit/role gates and retained attribution"
+  ],
+  "hashes": {
+    "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
+    "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
+    "supabase/migrations/20261024000300_google_auth.sql": "0b9f860315d9cb67088a6e7ac8d006154716587442457f09692ed344d70616a8",
+    "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
+    "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
+    "supabase/migrations/20261024000600_own_profile_read.sql": "ec0413dc375eed003118a73f5dda22d30091533ae7b6c5a2f8065092238cb33a",
+    "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
+    "supabase/migrations/20261024000800_profile_disclosure.sql": "9ead57280792bfbc16b5449d0293eaaeabfd23429cf556a02b1c90930b8adedf",
+    "supabase/migrations/20261024000900_guest_contacts.sql": "fa4afc25152a46f3170b45897c36360dcb88e8e2a5e9c9bf8a8196a584c12142",
+    "supabase/migrations/20261024001000_work_items.sql": "4cd73e1184a2737b7f39a24ccf345917b3b421935c19979b5acde382dabd2f4c",
+    "supabase/tests/work_access.test.sql": "1675a2117fc781105c0dff90b61e2cf9cdea70179ef67cf62030d169479e79b6"
+  },
+  "blocked": "Supabase PostgreSQL17/Docker, real validated JWT/PostgREST, actual parallel-session locking and human/provider gates carried from P02–P06"
+}

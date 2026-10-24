@@ -1,6 +1,7 @@
 import type { createSupabaseClient } from '../../lib/supabase'
 export type GuestContact = { displayName: string; verifiedEmail: string; contactRoute: string | null; version: number }
-export type GuestContactView = { own: GuestContact; sharedContacts: []; scopeMode: 'awaiting_record_attachment' }
+export type SharedContact = { id: string; name: string; organizationContact: string | null }
+export type GuestContactView = { own: GuestContact; sharedContacts: SharedContact[]; scopeMode: 'awaiting_record_attachment' | 'explicit_records' }
 export interface GuestContactGateway {
   read(termId: string): Promise<GuestContactView>
   save(termId: string, values: { displayName: string | null; contactRoute: string | null }, version: number, requestId: string): Promise<GuestContactView>
@@ -10,7 +11,11 @@ function parse(data: unknown): GuestContactView {
   const value = data as Record<string, unknown>
   const own = value.own as Record<string, unknown> | undefined
   if (!own || typeof own.displayName !== 'string' || typeof own.verifiedEmail !== 'string' || !Number.isInteger(own.version) || (own.version as number) < 0
-    || (own.contactRoute !== null && typeof own.contactRoute !== 'string') || !Array.isArray(value.sharedContacts) || value.sharedContacts.length !== 0 || value.scopeMode !== 'awaiting_record_attachment') {
+    || (own.contactRoute !== null && typeof own.contactRoute !== 'string') || !Array.isArray(value.sharedContacts)
+    || !['awaiting_record_attachment','explicit_records'].includes(value.scopeMode as string)
+    || (value.scopeMode === 'awaiting_record_attachment' && value.sharedContacts.length !== 0)
+    || !value.sharedContacts.every(contact => contact && typeof contact === 'object' && typeof contact.id === 'string' && typeof contact.name === 'string'
+      && (contact.organizationContact === null || typeof contact.organizationContact === 'string'))) {
     throw new Error('Your contacts are unavailable. Check your invitation access and reload.')
   }
   return value as GuestContactView

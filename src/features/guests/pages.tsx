@@ -43,7 +43,7 @@ export function SponsorPage({api}:{api:GuestGateway}) {
   return <>
     <PageHeading title="Guest invitations" description="Manage only the invitations you sponsor. Access requires your current term access-administrator grant." />
     <Panel title="Invite a guest">
-      <p><strong>Scope preview: zero shared records.</strong> Record sharing is not connected yet. This invitation grants no member directory, committee or organization-wide access.</p>
+      <p><strong>Scope preview: zero shared records.</strong> New invitations begin with no records. Each work record needs a separate sharing action. This invitation grants no full member directory, committee or organization-wide access.</p>
       <form className="guest-form" onSubmit={event=>void create(event)}>
         <TextField id="guest-email" label="Guest Google email" type="email" required value={email} autoComplete="off" onChange={event=>setEmail(event.target.value)} hint="Use the exact email the guest will sign in with. External Google accounts are supported." />
         <TextField id="guest-days" label="Access duration in days" type="number" min="1" max="14" required value={days} onChange={event=>setDays(event.target.value)} hint="Default 14 days; renewal replaces the old link and requires redemption again." />
@@ -57,7 +57,7 @@ export function SponsorPage({api}:{api:GuestGateway}) {
     <Panel title="Your invitations">
       {loading?<p role="status">Loading invitations…</p>:items.length===0?<p>No invitations are available.</p>:<ul className="guest-list">{items.map(item=><li key={item.id}>
         <h3>{item.email}</h3><p>{item.revokedAt?'Revoked':Date.parse(item.expiresAt)<=Date.now()?'Expired':item.redeemedAt?'Redeemed':'Awaiting redemption'} · Ends {new Date(item.expiresAt).toLocaleString('en-PH',{timeZone:'Asia/Manila'})} (Manila)</p>
-        <p className="muted">Zero shared records; no directory access.</p>
+        <p className="muted">{item.scopeMode === 'explicit_records' ? `${item.sharedRecordCount === undefined ? 'Explicitly shared' : item.sharedRecordCount + ' explicitly shared'} work records; no full directory access.` : 'Zero shared records; no directory access.'}</p>
         {!item.revokedAt?<div className="auth-actions"><button className="button button--secondary" disabled={busy} onClick={()=>void create(undefined,item)}>Renew invitation for {item.email}</button><button className="button button--secondary" disabled={busy} onClick={()=>void mutate(async()=>{await api.revoke(item,crypto.randomUUID());setNotice('Guest access revoked. Current sessions can no longer use this invitation.')} )}>Revoke access for {item.email}</button></div>:null}
       </li>)}</ul>}
     </Panel>

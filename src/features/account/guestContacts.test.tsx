@@ -44,3 +44,22 @@ it('guest gateway rejects denied or unexpectedly broad contacts and sanitizes tr
   await gateway.save('term',{displayName:null,contactRoute:null},0,'request')
   expect(rpc).toHaveBeenLastCalledWith('save_guest_contact_profile',{p_term_id:'term',p_values:{displayName:null,contactRoute:null},p_expected_version:0,p_request_id:'request'})
 })
+it('P07_A1: only validated explicit-record contacts render, and reload removes withdrawn scope',async()=>{
+  const scoped:GuestContactView={...own,scopeMode:'explicit_records',sharedContacts:[{id:'owner',name:'Fictional work owner',organizationContact:'fictional+work@student.ateneo.edu'}]}
+  const read=vi.fn().mockResolvedValueOnce(scoped).mockResolvedValueOnce(own)
+  const api:GuestContactGateway={read,save:async()=>own}
+  render(<MemoryRouter><GuestContactEditor api={api} termId="term" /></MemoryRouter>)
+  const email=await screen.findByRole('link',{name:'Email Fictional work owner'})
+  expect(email.getAttribute('href')).toBe('mailto:fictional%2Bwork%40student.ateneo.edu')
+  expect(screen.queryByRole('link',{name:'People'})).toBeNull()
+  fireEvent.click(screen.getByRole('button',{name:'Reload contacts and discard unsaved edits'}))
+  await screen.findByText(/No other contacts are shared/)
+  expect(screen.queryByRole('link',{name:'Email Fictional work owner'})).toBeNull()
+})
+it('P07_A1: guest parser accepts explicit safe contacts but rejects malformed shared fields',async()=>{
+  const scoped:GuestContactView={...own,scopeMode:'explicit_records',sharedContacts:[{id:'owner',name:'Fictional work owner',organizationContact:null}]}
+  const rpc=vi.fn().mockResolvedValueOnce({data:scoped,error:null}).mockResolvedValueOnce({data:{...scoped,sharedContacts:[{id:'owner',name:'Fictional',organizationContact:{phone:'private'}}]},error:null})
+  const gateway=createGuestContactGateway(Promise.resolve({rpc}) as unknown as ReturnType<typeof createSupabaseClient>)
+  expect(await gateway.read('term')).toEqual(scoped)
+  await expect(gateway.read('term')).rejects.toThrow('contacts are unavailable')
+})

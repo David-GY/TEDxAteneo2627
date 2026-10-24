@@ -31,3 +31,7 @@ The empty shared list follows P05's actual zero-record scope. P07 must supply re
 Migrations005–009, SQL tests directory.test.sql/guest_contacts.test.sql, account/people frontend tests and verify-p06.cjs cover the current boundaries. Types:15 tables/181 columns/17 public functions. Test-only fictional browser interception is explicitly labeled and never ships as a fixture endpoint.
 
 PGlite18.6/auth-shaped subjects and simulated UI are local evidence only. Supabase17/Docker, official types, real Google/validated JWT/PostgREST, old guest-JWT calls, deployed request/body-log redaction, concurrency under real sessions, approved roster/contact/privacy authority and human UAT remain outstanding. All P02–P05 blockers persist. No provider configuration, production deployment, real records, messages or invitations were sent.
+
+## P07 guest contact extension
+
+P07 supersedes the empty-shared-list-only boundary above when real record_grants exist. read_guest_contacts returns scopeMode awaiting_record_attachment or explicit_records and validated shared contacts {id,name,organizationContact} from current active work owners on exact invitation-linked records. No parent/sibling inheritance, directory fallback or private phone/course/other profile field. Empty untouched invitations still return[]. GuestContactEditor displays only this safe organization route; reload removes withdrawn scope. Actor name snapshots in work_items/audit provide new work attribution without old profile lookups. See work-items.md; P06 external blockers remain unchanged.

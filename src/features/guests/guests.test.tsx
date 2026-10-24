@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 import { beforeEach, expect, it, vi } from 'vitest'
 import { createAppRoutes } from '../../app/router'
@@ -53,6 +53,7 @@ it('P05_A3: sponsor link follows confirmed RPC only, with explicit zero-record p
   Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:vi.fn(async()=>{throw new Error('blocked')})}})
   render(<RouterProvider router={createMemoryRouter(createAppRoutes(environment,auth(core,guests)),{initialEntries:['/guests']})}/> )
   await screen.findByRole('heading',{name:'Guest invitations'})
+  await waitFor(()=>expect((screen.getByRole('button',{name:'Create invitation link'}) as HTMLButtonElement).disabled).toBe(false))
   expect(screen.getByText(/Scope preview: zero shared records/)).toBeTruthy()
   fireEvent.change(screen.getByLabelText('Guest Google email (required)'),{target:{value:'visitor@example.invalid'}})
   await act(async()=>{fireEvent.click(screen.getByRole('button',{name:'Create invitation link'}))})
@@ -71,4 +72,10 @@ it('P05_A3: failed RPC never returns a token or echoes raw diagnostics',async()=
   expect(readInvitationFragment('#'+token)).toBe(token)
   expect(readInvitationFragment('#token='+token)).toBeNull()
   expect(readInvitationFragment('#<script>')).toBeNull()
+})
+it('P07: sponsor list reports explicit record count without implying directory access',async()=>{
+  const guests=api()
+  guests.list=vi.fn(async()=>[{id:'invitation',email:'fictional@example.invalid',expiresAt:core.expiresAt,redeemedAt:null,revokedAt:null,version:1,scopeMode:'explicit_records' as const,sharedRecordCount:2}])
+  render(<RouterProvider router={createMemoryRouter(createAppRoutes(environment,auth(core,guests)),{initialEntries:['/guests']})}/> )
+  expect(await screen.findByText('2 explicitly shared work records; no full directory access.')).toBeTruthy()
 })

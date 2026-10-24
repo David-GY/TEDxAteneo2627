@@ -6,7 +6,7 @@
     "ok 2 - P05_A2: guest context grants no membership, directory, units, invitation enumeration or self-grants",
     "ok 3 - P05_A3: unchanged subject revocation, renewal invalidation, sponsor loss, hashed-only storage/audit and deny-default tables; real JWT transport BLOCKED"
   ],
-  "coreRegression": "P04 Google identity assertions also passed against full P05 schema",
+  "coreRegression": "P04 Google identity assertions also passed against the full migrated schema",
   "engine": "PostgreSQL 18.6 (PGlite 0.5.11) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
   "hashes": {
     "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
@@ -18,6 +18,7 @@
     "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
     "supabase/migrations/20261024000800_profile_disclosure.sql": "9ead57280792bfbc16b5449d0293eaaeabfd23429cf556a02b1c90930b8adedf",
     "supabase/migrations/20261024000900_guest_contacts.sql": "fa4afc25152a46f3170b45897c36360dcb88e8e2a5e9c9bf8a8196a584c12142",
+    "supabase/migrations/20261024001000_work_items.sql": "4cd73e1184a2737b7f39a24ccf345917b3b421935c19979b5acde382dabd2f4c",
     "supabase/tests/guests.test.sql": "bfc9b417dcce47a0c8ead624ed00599703bae49c40d24044708e4878b88e8832",
     "supabase/tests/google_auth.test.sql": "cbe33f57956e1b9b20af7462d0afe063d0f201f43ffce537c548634c98b806b7"
   },

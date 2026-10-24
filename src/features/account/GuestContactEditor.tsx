@@ -53,7 +53,9 @@ export function GuestContactEditor({ api, termId }: { api: GuestContactGateway; 
         </fieldset>
       </form>
       <h3>Shared contacts</h3>
-      <p>No other contacts are shared with this invitation. Ask the person who gave you the link for help.</p>
+      {data.sharedContacts.length ? <ul className="guest-list shared-contact-list">{data.sharedContacts.map(person => <li key={person.id}>
+        <h4>{person.name}</h4>{person.organizationContact ? <a className="button button--secondary" href={`mailto:${encodeURIComponent(person.organizationContact)}`}>Email {person.name}</a> : <p>Organization contact not available</p>}
+      </li>)}</ul> : <p>No other contacts are shared with this invitation. Ask the person who gave you the link for help.</p>}
     </> : null}
     <button className="button button--secondary" type="button" disabled={busy} onClick={() => { setData(null); setError(''); setNotice(''); setAttempt(attempt + 1) }}>Reload contacts and discard unsaved edits</button>
   </Panel>

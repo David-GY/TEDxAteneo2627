@@ -1,0 +1,8 @@
+{
+  "target": "test-only fictional simulated exact-record contact; not backend/JWT transport evidence",
+  "checks": [
+    "Explicit record-owner contact, safe encoded mail route, no core directory/profile controls",
+    "320px reflow; contact disappears after scope reload; no browser storage/runtime errors"
+  ],
+  "errors": []
+}
