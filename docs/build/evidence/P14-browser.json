@@ -6,7 +6,7 @@
     "counter remains inactive and revision history parses",
     "requester confirms exact revision; one canonical task/contribution; exact acceptance replay",
     "canonical contribution task locks title/date/assignment in existing editor; actual progress save and320px reflow work",
-    "existing overview remains functional; no later synergy UI introduced",
+    "existing overview remains functional alongside the P15 interface",
     "no runtime errors or private browser storage"
   ],
   "errors": []

@@ -1,0 +1,4 @@
+PASS P15_A1–A3 routed actual-SQL browser, desktop/mobile/keyboard checks
+EXIT 0
+PASS P15_A1–A3 routed actual-SQL browser, desktop/mobile/keyboard checks
+EXIT 0

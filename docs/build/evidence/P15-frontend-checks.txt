@@ -1,0 +1,139 @@
+P15 frontend and generated catalog checks
+COMMAND pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  23 passed (23)
+      Tests  99 passed (99)
+   Start at  23:56:28
+   Duration  13.50s (environment 66%, setup 15%, tests 10%, import 6%, transform 2%)
+
+Environment  jsdom was created 23 times · 81.57s total, 66% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+COMMAND pnpm typecheck
+$ tsc --noEmit
+EXIT 0
+COMMAND pnpm typecheck:files
+$ tsc --noEmit -p tsconfig.files.json
+EXIT 0
+COMMAND pnpm lint
+$ eslint . --max-warnings 0
+EXIT 0
+COMMAND pnpm build
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 172 modules transformed.
+✗ Build failed in 680ms
+error during build:
+Build failed with 3 errors:
+
+[UNLOADABLE_DEPENDENCY] Could not load src/features/tasks/TaskDetail.tsx
+   ╭─[ src/app/router.tsx:9:28 ]
+   │
+ 9 │ import { TaskDetail } from "../features/tasks/TaskDetail";
+   │                            ───────────────┬──────────────
+   │                                           ╰──────────────── stream did not contain valid UTF-8
+───╯
+
+[UNLOADABLE_DEPENDENCY] Could not load src/features/deliverables/DeliverablePage.tsx
+    ╭─[ src/app/router.tsx:17:33 ]
+    │
+ 17 │ import { DeliverablePage } from "../features/deliverables/DeliverablePage";
+    │                                 ─────────────────────┬────────────────────
+    │                                                      ╰────────────────────── stream did not contain valid UTF-8
+────╯
+
+[UNLOADABLE_DEPENDENCY] Could not load src/features/overview/Overview.tsx
+   ╭─[ src/app/router.tsx:3:26 ]
+   │
+ 3 │ import { Overview } from "../features/overview/Overview";
+   │                          ───────────────┬───────────────
+   │                                         ╰───────────────── stream did not contain valid UTF-8
+───╯
+
+    at aggregateBindingErrorsIntoJsError (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/rolldown@1.2.15/node_modules/rolldown/dist/shared/error-D0SD8_tL.mjs:49:18)
+    at unwrapBindingResult (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/rolldown@1.2.15/node_modules/rolldown/dist/shared/error-D0SD8_tL.mjs:19:128)
+    at #build (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/rolldown@1.2.15/node_modules/rolldown/dist/shared/rolldown-CMhwwZPA.mjs:145:34)
+    at async buildEnvironment (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/vite@8.3.5_@types+node@24.19.2/node_modules/vite/dist/node/chunks/node.js:34849:66)
+    at async Object.build (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/vite@8.3.5_@types+node@24.19.2/node_modules/vite/dist/node/chunks/node.js:35270:19)
+    at async Object.buildApp (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/vite@8.3.5_@types+node@24.19.2/node_modules/vite/dist/node/chunks/node.js:35267:153)
+    at async CAC.<anonymous> (file:///C:/Users/david/OneDrive/Documents/ChatGPT/TEDx/node_modules/.pnpm/vite@8.3.5_@types+node@24.19.2/node_modules/vite/dist/node/cli.js:790:3) {
+  errors: [Getter/Setter]
+}
+[ELIFECYCLE] Command failed with exit code 1.
+EXIT 1
+COMMAND pnpm db:types:check
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 42 tables (478 columns) and 60 functions.
+EXIT 0
+CORRECTION: normalize three newly inserted cp1252 characters to UTF-8; rerun required checks
+COMMAND pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  23 passed (23)
+      Tests  99 passed (99)
+   Start at  23:58:02
+   Duration  11.55s (environment 67%, setup 13%, tests 12%, import 5%, transform 2%)
+
+Environment  jsdom was created 23 times · 73.29s total, 67% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+COMMAND pnpm typecheck
+$ tsc --noEmit
+EXIT 0
+COMMAND pnpm typecheck:files
+$ tsc --noEmit -p tsconfig.files.json
+EXIT 0
+COMMAND pnpm lint
+$ eslint . --max-warnings 0
+EXIT 0
+COMMAND pnpm build
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 180 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-DjjdaFFb.css                           11.67 kB │ gzip:   3.09 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-b_q6bvad.js                           454.96 kB │ gzip: 135.20 kB
+
+✓ built in 712ms
+EXIT 0
+COMMAND pnpm db:types:check
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 42 tables (478 columns) and 60 functions.
+EXIT 0
+$ tsc --noEmit
+EXIT 0
+$ eslint . --max-warnings 0
+EXIT 0
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 180 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-D_X9yr6Y.css                           11.69 kB │ gzip:   3.10 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-CGBhXXxf.js                           455.11 kB │ gzip: 135.22 kB
+
+✓ built in 297ms
+EXIT 0

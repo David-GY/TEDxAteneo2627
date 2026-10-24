@@ -2666,6 +2666,15 @@ export type Database = {
         }
         Returns: Json | null
       }
+      list_synergies: {
+        Args: {
+          p_term_id: string
+          p_view?: string | null
+          p_parent_id?: string | null
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       mention_candidates: {
         Args: {
           p_work_item_id: string
@@ -2913,6 +2922,13 @@ export type Database = {
           p_visibility: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      synergy_options: {
+        Args: {
+          p_term_id: string
+          p_parent_id: string
         }
         Returns: Json | null
       }

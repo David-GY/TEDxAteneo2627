@@ -1,14 +1,15 @@
 const http=require('node:http')
 const {createDeliverablesDatabase}=require('./deliverables-db.cjs')
-async function createPreview({port=5174,authoring=false,tasks=false}={}){
+async function createPreview({port=5174,authoring=false,tasks=false,synergies=false}={}){
   const {db,ids}=await (authoring?require('./deliverable-authoring-db.cjs').createAuthoringDatabase():createDeliverablesDatabase())
   try{
     if(tasks)await db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer]);await tx.query(`select public.create_task($1,$2,gen_random_uuid())`,[ids.term,{title:'Fictional owned task draft',summary:'Synthetic local task example',body:'Fictional task notes',classification:'restricted',taskType:'ordinary',leadUnitId:null,assigneeId:ids.viewer,assignedUnitId:null,collaborators:[],checklist:[],dueOn:'2027-04-10',dueAt:null,parentId:null,reason:'Fictional task seed'}])})
+    const synergyFixture=synergies?await require('./synergy-interface-fixtures.cjs').setupSynergyInterface(db,ids):null
     const filePreview=await require('./files-preview.cjs').createFilePreview(db,ids)
     const main=await(await fetch('http://127.0.0.1:5173/src/main.tsx')).text()
     const suffix=main.match(/react-router[.]js(\?v=[^"]+)/)[1]
     const vite='http://127.0.0.1:5173'
-    const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${tasks?'P14':authoring?'P09':'P08'} synthetic database preview</title><script type="module">
+    const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${synergies?'P15':tasks?'P14':authoring?'P09':'P08'} synthetic database preview</title><script type="module">
       import RefreshRuntime from '${vite}/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;
       </script></head><body><p style="margin:0;padding:12px 20px;background:#252624;color:white">Local synthetic PostgreSQL + isolated file bytes · simulated sign-in · no real Supabase Storage/Auth</p><div id="root"></div><script type="module">
       import React from '${vite}/node_modules/.vite/deps/react.js${suffix}';
@@ -23,9 +24,10 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
       import {createCommentsApi} from '${vite}/src/features/comments/api.ts';
       import {createTasksApi} from '${vite}/src/features/tasks/api.ts';
       import '${vite}/src/styles/tokens.css';import '${vite}/src/styles/global.css';import '${vite}/node_modules/@fontsource-variable/karla/index.css';
-      const ready=Promise.resolve({functions:{invoke:async(name,{body})=>{const response=await fetch('/__files',{method:'POST',headers:body instanceof FormData?{}:{'content-type':'application/json'},body:body instanceof FormData?body:JSON.stringify(body)});return response.ok?{data:response.headers.get('content-type').includes('application/octet-stream')?await response.blob():await response.json(),error:null}:{data:null,error:{context:response}}}},rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,args})}).then(r=>r.json())});
-      const context={state:'authorized',memberId:'${ids.viewer}',displayName:'Fictional River · local preview',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
-      const gateway={synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:createFilesApi(ready),comments:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      const previewReceiver=${synergies?'true':'false'}&&new URL(location.href).searchParams.get('synthetic')==='receiver';
+      const ready=Promise.resolve({functions:{invoke:async(name,{body})=>{const response=await fetch('/__files',{method:'POST',headers:body instanceof FormData?{}:{'content-type':'application/json'},body:body instanceof FormData?body:JSON.stringify(body)});return response.ok?{data:response.headers.get('content-type').includes('application/octet-stream')?await response.blob():await response.json(),error:null}:{data:null,error:{context:response}}}},rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json','x-preview-subject':previewReceiver?'receiver':'requester'},body:JSON.stringify({name,args})}).then(r=>r.json())});
+      const context={state:'authorized',memberId:previewReceiver?'${ids.owner}':'${ids.viewer}',displayName:previewReceiver?'Fictional Alex (synthetic receiving head)':'Fictional River (synthetic requesting head)',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:previewReceiver?'66666666-6666-4666-8666-666666666661':'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
+      const gateway={synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:previewReceiver?undefined:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
       ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createBrowserRouter(createAppRoutes({state:'not_configured',issues:[]},gateway))}));
       </script></body></html>`
     const server=http.createServer(async(req,res)=>{
@@ -46,8 +48,10 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
           const {name,args:a}=JSON.parse(raw)
           const result=await db.transaction(async tx=>{
             await tx.exec('set local role authenticated')
-            await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer])
+            await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[synergies&&req.headers['x-preview-subject']==='receiver'?ids.owner:ids.viewer])
             if(name==='list_deliverables')return tx.query('select public.list_deliverables($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) as value',[a.p_term_id,a.p_phase,a.p_unit_id,a.p_owner_id,a.p_blocked,a.p_overdue,a.p_involves_my_unit,a.p_review_pending,a.p_page,a.p_page_size])
+            if(name==='list_synergies')return tx.query('select public.list_synergies($1,$2,$3,$4) as value',[a.p_term_id,a.p_view,a.p_parent_id,a.p_page])
+            if(name==='synergy_options')return tx.query('select public.synergy_options($1,$2) as value',[a.p_term_id,a.p_parent_id])
             if(name==='read_synergy')return tx.query('select public.read_synergy($1) as value',[a.p_agreement_id])
             if(name==='read_contribution')return tx.query('select public.read_contribution($1) as value',[a.p_work_item_id])
             if(name==='propose_synergy')return tx.query('select public.propose_synergy($1,$2,$3,$4,$5,$6,$7) as value',[a.p_parent_id,a.p_receiver_unit_id,a.p_terms,a.p_expected_parent_version,a.p_request_id,a.p_agreement_id??null,a.p_expected_agreement_version??null])
@@ -81,7 +85,7 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
       res.setHeader('content-type','text/html; charset=utf-8');res.end(html)
     })
     await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve)})
-    return{db,ids,url:`http://127.0.0.1:${port}`,close:async()=>{await new Promise(resolve=>server.close(resolve));await db.close()}}
+    return{db,ids,synergyFixture,url:`http://127.0.0.1:${port}`,close:async()=>{await new Promise(resolve=>server.close(resolve));await db.close()}}
   }catch(error){await db.close();throw error}
 }
 module.exports={createPreview}

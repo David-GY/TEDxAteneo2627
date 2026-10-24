@@ -1,0 +1,12 @@
+{
+  "url": "http://127.0.0.1:5178/working-together/23656b85-cd2b-4c3e-b03a-dec1d517b1d7",
+  "target": "owned synthetic P15 preview on5178; real isolated SQL; not Auth/JWT proof",
+  "sameAgreement": true,
+  "requesterActions": [],
+  "receiverActions": [
+    "accept",
+    "decline",
+    "counter"
+  ],
+  "receiverParent": null
+}

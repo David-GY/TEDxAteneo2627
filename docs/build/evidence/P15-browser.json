@@ -1,0 +1,10 @@
+{
+  "target": "actual routed React/compiled adapters + isolated SQL, two synthetic subject contexts; not real Supabase/Auth/JWT or simultaneous-session proof",
+  "checks": [
+    "P15_A1 one agreement in requester/receiver routes; correct counter and explicit confirmation; canonical work in contribution/My Tasks/Overview",
+    "P15_A2 no private parent link/content; direct parent/sibling denied; no parent editor exposed",
+    "P15_A3 committed proposal reply lost, same-key UI retry creates one agreement; real competing proposal produces stale counter and preserves draft on refresh",
+    "accepted history and proposed/agreed dates; 320px and640px reflow; keyboard Tab reaches criteria; material task fields locked; no private browser storage"
+  ],
+  "errors": []
+}

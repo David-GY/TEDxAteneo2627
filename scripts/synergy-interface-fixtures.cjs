@@ -1,0 +1,12 @@
+const {randomUUID}=require('node:crypto')
+async function setupSynergyInterface(db,ids){
+ // This preview's receiver has only receiving-unit deployment, unlike the broad historical fixture.
+ await db.query(`update public.unit_memberships set effective_from=statement_timestamp()-interval'2 days',effective_to=statement_timestamp()-interval'1 day' where term_membership_id='66666666-6666-4666-8666-666666666661' and unit_id=$1`,[ids.lead])
+ await db.query(`insert into public.unit_memberships(organization_id,term_id,term_membership_id,unit_id,deployment_type,effective_from,effective_to,approved_by)values($1,$2,'66666666-6666-4666-8666-666666666661',$3,'head',statement_timestamp()-interval'1 day',statement_timestamp()+interval'1 day',$4)`,[ids.org,ids.term,ids.support,ids.viewerMembership])
+ await db.query(`insert into public.role_assignments(organization_id,term_id,term_membership_id,role_id,scope_type,unit_id,effective_from,effective_to,granted_by)values($1,$2,'66666666-6666-4666-8666-666666666661','55555555-5555-4555-8555-555555555559','unit',$3,statement_timestamp()-interval'1 day',statement_timestamp()+interval'1 day',$4)`,[ids.org,ids.term,ids.support,ids.viewerMembership])
+ const parent=await asSubject(db,ids.viewer,tx=>tx.query('select public.create_deliverable($1,$2,false,$3)as value',[ids.term,{title:'PRIVATE P15 source deliverable',summary:'Private source summary',body:'PRIVATE P15 source body',ownerId:ids.viewer,leadUnitId:ids.lead,phase:'Preparation',outcome:'Synthetic parent outcome',criteria:'Explicit parent criteria',dueOn:'2027-04-10',dueAt:null,classification:'restricted',reason:'Synthetic P15 parent'},randomUUID()]).then(r=>r.rows[0].value.workItemId))
+ const sibling=await asSubject(db,ids.viewer,tx=>tx.query('select public.create_deliverable($1,$2,false,$3)as value',[ids.term,{title:'PRIVATE P15 sibling',summary:'Private sibling',body:'PRIVATE sibling body',ownerId:ids.viewer,leadUnitId:ids.lead,phase:'Preparation',outcome:'Private sibling output',criteria:'Private criteria',dueOn:'2027-04-10',dueAt:null,classification:'restricted',reason:'Synthetic isolation check'},randomUUID()]).then(r=>r.rows[0].value.workItemId))
+ return {parent,sibling}
+}
+async function asSubject(db,subject,run){return db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[subject]);return run(tx)})}
+module.exports={setupSynergyInterface,asSubject}
