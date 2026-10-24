@@ -1,0 +1,13 @@
+{
+  "target": "actual isolated PostgreSQL task commands with simulated sign-in; no Supabase/JWT/true concurrent sessions",
+  "checks": [
+    "create reply lost after DB commit; exact retry yields one task",
+    "unauthorized assignment denied without side effects",
+    "checklist/progress/blocked/evidence gates",
+    "original date survives extension",
+    "Done persists and terminal edits disabled; no formal approval",
+    "created/shared/assigned URL views and21-row pagination refresh",
+    "stable refresh/deep-link denied state,320px/44px,Karla,no browser storage/runtime errors"
+  ],
+  "errors": []
+}

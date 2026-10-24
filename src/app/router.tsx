@@ -3,12 +3,13 @@ import { readClientEnvironment, type ClientEnvironment } from '../lib/env'
 import { PageHeading, Panel } from '../components/Page'
 import { EmptyState, ErrorState } from '../components/FeedbackState'
 import { AppShell } from './AppShell'
+import { TaskDetail } from '../features/tasks/TaskDetail'
 import { TasksPage } from '../features/tasks/TasksPage'
 import { navigationItems } from './navigation'
 import { createAuthGateway, isGuest, type AuthGateway } from '../features/auth/gateway'
 import { RedeemPage, SponsorPage } from '../features/guests/pages'
 import { AccountPage, AuthRevalidator, CallbackPage, LoginPage, ProtectedShell } from '../features/auth/pages'
-import { safeReturnPath, isDeliverablePath } from '../features/auth/redirects'
+import { safeReturnPath, isDeliverablePath, isTaskPath } from '../features/auth/redirects'
 import { DeliverablesRoute } from '../features/deliverables/DeliverablesPage'
 import { DeliverablePage } from '../features/deliverables/DeliverablePage'
 import { LoadingState } from '../components/FeedbackState'
@@ -69,7 +70,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       { path: '/login', loader: async ({ request }) => {
         const result = await gateway.readContext(request.signal)
         const returnTo=safeReturnPath(new URL(request.url).searchParams.get('returnTo'))
-        return result.state === 'authorized' ? redirect(isGuest(result)&&!isDeliverablePath(returnTo)?'/shared':returnTo) : result
+        return result.state === 'authorized' ? redirect(isGuest(result)&&!isDeliverablePath(returnTo)&&!isTaskPath(returnTo)?'/shared':returnTo) : result
       }, element: <LoginPage gateway={gateway} /> },
       { path: '/auth/callback', element: <CallbackPage gateway={gateway} /> },
       { path: '/guest/redeem', loader:({request})=>gateway.readContext(request.signal), element: <RedeemPage gateway={gateway} /> },
@@ -78,7 +79,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         const result = await gateway.readContext(request.signal)
         if (result.state === 'authorized') {
           const path=new URL(request.url).pathname
-          if(isGuest(result) && !isDeliverablePath(path) && !navigationItems.some(item=>item.href===path && item.audiences.includes('guest')))return redirect('/shared')
+          if(isGuest(result) && !isDeliverablePath(path) && !isTaskPath(path) && !navigationItems.some(item=>item.href===path && item.audiences.includes('guest')))return redirect('/shared')
           if(path==='/guests' && !result.capabilities.includes('roles.manage'))return redirect(isGuest(result)?'/shared':'/')
           return result
         }
@@ -86,6 +87,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         return redirect(`/login?reason=${result.state === 'denied' ? 'denied' : 'check'}&returnTo=${encodeURIComponent(safeReturnPath(url.pathname))}`)
       }, shouldRevalidate: () => true, children: [
       { index: true, element: <><PageHeading title="Overview" description="Your current core membership has been verified." /><EmptyState title="Your workspace is ready for its next step" description="Work modules will appear here as they are connected. No sample tasks or metrics are shown." /></> },
+      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail api={gateway.tasks}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
       {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage api={gateway.deliverables} commands={gateway.deliverableCommands}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),

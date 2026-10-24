@@ -2,27 +2,38 @@
 
 Updated October24,2026 (Asia/Manila).
 
-- Active step: **P10 — in_progress (partial)**. Read-only owned-task foundation delivered. create_task/update_task/assign_task/transition_task, task detail/editor, assignee/collaborators/checklist/blocked/progress and cross-unit assignment gates remain pending.
-- **Resume build-prompts/CONTINUE.md for P10. Do not advance to P11.** Next smallest action: fixed task fields and authoritative command permissions, named P10_A1–A3 regressions, then editor/assignment controls.
-- P00/P01 complete; P02–P09 blocked_external with their exact ledgers preserved. P11–P63 not executed. P10_A1–A3 remain pending; the new P10_R0 read/date assertion is not full task acceptance.
-- Detailed current checkpoint: docs/build/steps/P10.md; contracts docs/build/CONTRACTS.md and prior deliverables/work/permissions/guest/profile docs. DESIGN.md remains visual authority.
+- Current step: **P10 — blocked_external**. Local task command/editor implementation and P10_A1–A3 delivered; actual provider, concurrent-session, authority/privacy and human UAT remain blocked.
+- P00/P01 complete; P02–P09 retain their blocked_external ledgers. P11–P63 not executed. Next separately code-dependency-eligible prompt: **P11 — build-prompts/11-comments.md**; do not auto-run.
+- Current contracts: docs/tasks.md, docs/build/CONTRACTS.md and prior deliverables/work/permissions/guest/profile contracts. Full current/historical P10 evidence: docs/build/steps/P10.md. DESIGN.md remains visual authority.
 
-## Delivered / verified
+## Delivered interfaces
 
-Schema28tables/341columns/32public functions, migrations001–013. New authenticated actor-derived read_owned_tasks reads existing own canonical task summaries, authorized rows/counts and deterministic pagination20. No private task body/parent data; server Manila date-only overdue cutoff. Actual /tasks SDK adapter and read-only page with honest loading/error/recovery/empty states. It identifies owned records, not assigned work or a completed authoring workflow. No new business mutation or assignment authorization.
+Schema **30tables/369columns/39public functions**, migrations001–015. P10 adds create_task/update_task/assign_task/transition_task, read_task/read_tasks/task_options, task_collaborators and immutable task_revisions. RLS before grants; no direct writes. Work owner and task assignee are one canonical member under deferred constraints; created_by remains immutable. Created by me follows creator, not the changing owner. Current source/receiving/exact-work managers, or self-created work still owned by its creator, manage metadata. Assignees/shared editors get bounded progress; receiving a task alone does not grant deadline/assignment management. Cross-unit/person assignment requires a current receiving head with exact task edit scope. No implicit parent/sibling access or invented agreement.
 
-PASS pnpm test:tasks P10_R0 (owned-only/count/body isolation, page2 and today/yesterday Manila boundary); PostgreSQL18.6/PGlite/auth-shaped subjects only. PASS frontend16files/66tests; typecheck/lint/build (165modules, app388.22kB/gzip118.91kB, CSS11.55kB/gzip3.06kB); generated/drift-check types28/341/32. Browser actual SQL row/archive-reload-empty, desktop/320px/no overflow/runtime errors/private storage; captures inspected/shown, detector[]. P10_A1/A2/A3 command/assignment/assignee progress checks unimplemented, not passed. Prior step checks are retained historical evidence, not claimed rerun on migration013.
+Typed task states, checklist, collaborators, active same-term assignment, dates/blocker/evidence, immutable reasoned revisions, expected-version locks and exact actor/key/payload retries with transactional redacted audit/outbox. Original deadline retained; Manila date-only cutoff; completed work leaves overdue. Ordinary Done needs all checks/evidence/no blocker; review-required Done needs independent scoped review; governed Done stays closed. Task completion never grants FIN/MCD/deliverable acceptance. Generic task create/edit bypasses closed.
 
-P09 scoped deliverable proposal/create/edit/reassignment/lifecycle/criteria/evidence/idempotency/audit/outbox remain. Accepted workflow does not imply release/finance/publicity readiness; unresolved governed gates fail closed until authoritative later interfaces. P08 permitted rows/counts/filter/deep links and P02–P07 identity/grant/privacy invariants remain. No real records or production fixture endpoint.
+Real My Tasks assigned/created/shared/overdue/managed URL views and pagination; UUID detail/editor/login/guest-read scope. Saved version/time from database. Stale drafts retained; uncertain replies freeze and retry the exact key/payload; workflow actions cannot discard unsaved edits. No browser draft storage. Editor changes date-only targets and preserves existing timestamps (RPC handles reasoned timestamp edits). Existing deliverable links work with independent access; optional contribution linkage awaits its real owning interface/FK and remains closed. Evidence notes do not verify files. Comments/private files remain later steps.
 
-## External blockers retained
+P09 deliverable command/gate invariants, P08 read boundaries and earlier identity/profile/guest rules remain. No production fixture endpoint or real records.
 
-P02–P09: Docker/Podman absent; .env.local/provider references unavailable; Google disabled; real Supabase17/Auth/PostgREST and official CLI types; school/external Google PKCE/consent/callback; old guest JWT revoke/renew/expiry/sponsor-loss; deployed token/body/parameter log redaction; actual concurrent request/version/idempotency sessions; human UAT. Approved roster/FIN/MCD/sponsor/manager/gate-assessor authority, privacy custodian/basis/retention, HTTPS origin and approved logo remain open. No remote reset/provider change/service-role substitute. Detailed older ledgers remain authoritative for their specific gates.
+## Actual verification
 
-## Preview / budget / custody
+PASS pnpm test:tasks: historical migration013 R0 plus current3 named P10 assertions; targeted test:task-commands verifies duplicate receipt, owner/assignee canonical constraint, unauthorized changes/generic bypass, current receiving-head acceptance, private-parent isolation, assignee progress vs protected metadata, original/date-only behavior, independent review and governed fail-closed. Embedded PostgreSQL18.6/PGlite0.5.11 with verified-shaped subjects only; **not actual Supabase/JWT or parallel-session proof**.
 
-Live http://127.0.0.1:5178/tasks visibly open/retained, labeled local synthetic PostgreSQL/simulated sign-in and explicitly read-only; owned synthetic draft uses existing P07 command. Disposable browser database5179 closes after checks. Existing Vite5173/P08/P09 previews retained. No agents/chats/worktrees/dependencies, deployment, PR/main merge or messages/invitations.
+PASS full-schema P09 authoring3/P08 deliverables3/P05 guests3 plus Google3/P06 directory3 plus guest-contact3. Older P02/P03/P07 boundary results retained, not claimed rerun. PASS17files/74frontend tests, typecheck/lint/build167modules (app403.53kB/gzip122.47kB, CSS11.55kB/gzip3.06kB), generated/drift-check types30/369/39. Exact commands/exits in P10-checks.txt; source hashes/TAP P10-commands.json.
 
-Shared usage84 →87%, reset1792834180; effective allowance6points, wind-down85used, ceiling90used. BUILD-CONTRACT requires the smallest verifiable checkpoint below10points. No complex task mutation migration opened, reset/purchase/wait or fresh allocation. Shared observations, not exact attribution.
+PASS actual-SQL browser create with reply lost after commit and same-key retry (one task), assignment denial, checklist/blocker/evidence gates, original date extension, terminal state/refresh, shared/created/assigned views,21-row page2 refresh, empty/denied recovery,320px/44px/Karla/no private browser storage/runtime errors. Captures inspected/shown; detector[]. Initial query syntax typo and shared-view browser assertion failure corrected/rerun, retained in P10 ledger/log/debug capture. No failure erased or external proof fabricated.
 
-User authorizes reviewed checkpoint commit/push to existing codex/core-build-checkpoints on David-GY/TEDxAteneo2627. Started clean at44e623c0a0f95997a82524dc8bd5d58b4bcaca4b; final pushed/fetched commit/tree and clean worktree verified after this ledger, identity reported in chat. Backup does not mark P10 complete.
+## External blockers / next smallest action
+
+P02–P09 gates carried forward: Docker/Podman absent; .env.local/provider references unavailable; Google disabled; real Supabase17/Auth/PostgREST/official CLI types; school/external Google PKCE/consent/callback; old guest JWT revoke/renew/expiry/sponsor-loss; deployed token/body/parameter log redaction; true concurrent request/version/idempotency sessions; human UAT. Approved roster/FIN/MCD/sponsor/manager/gate-assessor authority, privacy custodian/basis/retention, HTTPS origin and logo remain open. No remote reset/provider change/service-role substitute.
+
+After approved runtime/provider setup, verify loopback Supabase17, migrate/seed synthetic records, compare official types and run P10_A1–A3 through actual authenticated API subjects/concurrent connections; record human task/mobile/conflict acceptance. Contribution FK integration waits for its actual owning interface. Resume external verification with CONTINUE; P11 comments is separately code-eligible only.
+
+## Preview / custody / usage
+
+Live Vite5173 and **http://127.0.0.1:5178/tasks** retained/visible, labeled synthetic PostgreSQL/simulated sign-in; final workflow against current source/schema. Disposable5180 verifier closes. Obsolete owned synthetic P08/P09 servers5174/5176 stopped. No agents/chats/worktrees/dependencies, deployment, PR/main merge or messages/invitations.
+
+Resumed clean at dd948ca705ca0683f09adbc118ce80da9d4c45cf on existing codex/core-build-checkpoints. User authorizes reviewed commit/push; final fetched local/remote commit/tree and clean worktree checked after this ledger and identity reported in chat.
+
+Shared usage89% at reset1792834180, then natural rollover6 →17 →27% at reset1792852230. Original allowance1point; latest keep-going-until-finished instruction treated as overriding checkpoint-only stop, as announced. No fresh40point allocation, reset credit, purchase or wait. Cross-window/account-wide observations are not exact attribution. Scope stayed P10.

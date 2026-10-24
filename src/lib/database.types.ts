@@ -1274,6 +1274,128 @@ export type Database = {
           },
         ]
       }
+      task_collaborators: {
+        Row: {
+          organization_id: string
+          term_id: string
+          work_item_id: string
+          member_id: string
+        }
+        Insert: {
+          organization_id: string
+          term_id: string
+          work_item_id: string
+          member_id: string
+        }
+        Update: {
+          organization_id?: string
+          term_id?: string
+          work_item_id?: string
+          member_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_collaborators_organization_id_term_id_member_id_fkey"
+            columns: ["organization_id","term_id","member_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","member_id"]
+          },
+          {
+            foreignKeyName: "task_collaborators_organization_id_term_id_work_item_id_fkey"
+            columns: ["organization_id","term_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "task_collaborators_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      task_revisions: {
+        Row: {
+          work_item_id: string
+          work_version: number
+          state: string
+          assignee_id: string | null
+          assignee_name: string | null
+          assigned_unit_id: string | null
+          collaborators: Json
+          title: string
+          due_on: string | null
+          due_at: string | null
+          body: string
+          checklist: Json
+          evidence: string | null
+          reason: string
+          actor_id: string
+          recorded_at: string
+        }
+        Insert: {
+          work_item_id: string
+          work_version: number
+          state: string
+          assignee_id?: string | null
+          assignee_name?: string | null
+          assigned_unit_id?: string | null
+          collaborators: Json
+          title: string
+          due_on?: string | null
+          due_at?: string | null
+          body: string
+          checklist: Json
+          evidence?: string | null
+          reason: string
+          actor_id: string
+          recorded_at?: string
+        }
+        Update: {
+          work_item_id?: string
+          work_version?: number
+          state?: string
+          assignee_id?: string | null
+          assignee_name?: string | null
+          assigned_unit_id?: string | null
+          collaborators?: Json
+          title?: string
+          due_on?: string | null
+          due_at?: string | null
+          body?: string
+          checklist?: Json
+          evidence?: string | null
+          reason?: string
+          actor_id?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_revisions_assigned_unit_id_fkey"
+            columns: ["assigned_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_revisions_assignee_id_fkey"
+            columns: ["assignee_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_revisions_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           work_item_id: string
@@ -1286,6 +1408,14 @@ export type Database = {
           updated_at: string
           updated_by: string | null
           version: number
+          assignee_id: string | null
+          assigned_unit_id: string | null
+          workflow_state: string
+          checklist: Json
+          task_type: string
+          blocked_reason: string | null
+          completion_evidence: string | null
+          assignee_name: string | null
         }
         Insert: {
           work_item_id: string
@@ -1298,6 +1428,14 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          assignee_id?: string | null
+          assigned_unit_id?: string | null
+          workflow_state?: string
+          checklist?: Json
+          task_type?: string
+          blocked_reason?: string | null
+          completion_evidence?: string | null
+          assignee_name?: string | null
         }
         Update: {
           work_item_id?: string
@@ -1310,8 +1448,30 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          assignee_id?: string | null
+          assigned_unit_id?: string | null
+          workflow_state?: string
+          checklist?: Json
+          task_type?: string
+          blocked_reason?: string | null
+          completion_evidence?: string | null
+          assignee_name?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "task_assignee_term"
+            columns: ["organization_id","term_id","assignee_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","member_id"]
+          },
+          {
+            foreignKeyName: "task_unit_term"
+            columns: ["organization_id","term_id","assigned_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
           {
             foreignKeyName: "tasks_organization_id_term_id_work_item_id_kind_fkey"
             columns: ["organization_id","term_id","work_item_id","kind"]
@@ -1633,6 +1793,15 @@ export type Database = {
     }
     Views: { [_ in never]: never }
     Functions: {
+      assign_task: {
+        Args: {
+          p_work_item_id: string
+          p_data: Json
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       can_access_work: {
         Args: {
           p_work_item_id: string
@@ -1663,6 +1832,14 @@ export type Database = {
           p_expires_at?: string | null
           p_replaces_id?: string | null
           p_expected_version?: number | null
+        }
+        Returns: Json | null
+      }
+      create_task: {
+        Args: {
+          p_term_id: string
+          p_data: Json
+          p_request_id: string
         }
         Returns: Json | null
       }
@@ -1802,6 +1979,20 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_task: {
+        Args: {
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
+      read_tasks: {
+        Args: {
+          p_term_id: string
+          p_view?: string | null
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       read_work_parent: {
         Args: {
           p_work_item_id: string
@@ -1861,6 +2052,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      task_options: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       transition_deliverable: {
         Args: {
           p_work_item_id: string
@@ -1873,7 +2070,25 @@ export type Database = {
         }
         Returns: Json | null
       }
+      transition_task: {
+        Args: {
+          p_work_item_id: string
+          p_data: Json
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       update_deliverable: {
+        Args: {
+          p_work_item_id: string
+          p_data: Json
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      update_task: {
         Args: {
           p_work_item_id: string
           p_data: Json

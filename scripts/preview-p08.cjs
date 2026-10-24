@@ -3,11 +3,11 @@ const {createDeliverablesDatabase}=require('./deliverables-db.cjs')
 async function createPreview({port=5174,authoring=false,tasks=false}={}){
   const {db,ids}=await (authoring?require('./deliverable-authoring-db.cjs').createAuthoringDatabase():createDeliverablesDatabase())
   try{
-    if(tasks)await db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer]);await tx.query(`select public.create_work_item($1,'task','Fictional owned task draft','Synthetic local task reading example','','restricted',p_request_id=>gen_random_uuid())`,[ids.term])})
+    if(tasks)await db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer]);await tx.query(`select public.create_task($1,$2,gen_random_uuid())`,[ids.term,{title:'Fictional owned task draft',summary:'Synthetic local task example',body:'Fictional task notes',classification:'restricted',taskType:'ordinary',leadUnitId:null,assigneeId:ids.viewer,assignedUnitId:null,collaborators:[],checklist:[],dueOn:'2027-04-10',dueAt:null,parentId:null,reason:'Fictional task seed'}])})
     const main=await(await fetch('http://127.0.0.1:5173/src/main.tsx')).text()
     const suffix=main.match(/react-router[.]js(\?v=[^"]+)/)[1]
     const vite='http://127.0.0.1:5173'
-    const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${authoring?'P09':'P08'} synthetic database preview</title><script type="module">
+    const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${tasks?'P10':authoring?'P09':'P08'} synthetic database preview</title><script type="module">
       import RefreshRuntime from '${vite}/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;
       </script></head><body><p style="margin:0;padding:12px 20px;background:#252624;color:white">Local synthetic PostgreSQL preview · simulated sign-in · no real records or provider connection</p><div id="root"></div><script type="module">
       import React from '${vite}/node_modules/.vite/deps/react.js${suffix}';
@@ -32,7 +32,7 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
       }
       if(req.url==='/__rpc'&&req.method==='POST'){
         try{
-          let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>10000)throw new Error('too_large')}
+          let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>100000)throw new Error('too_large')}
           const {name,args:a}=JSON.parse(raw)
           const result=await db.transaction(async tx=>{
             await tx.exec('set local role authenticated')
@@ -40,6 +40,11 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
             if(name==='list_deliverables')return tx.query('select public.list_deliverables($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) as value',[a.p_term_id,a.p_phase,a.p_unit_id,a.p_owner_id,a.p_blocked,a.p_overdue,a.p_involves_my_unit,a.p_review_pending,a.p_page,a.p_page_size])
             if(name==='read_deliverable')return tx.query('select public.read_deliverable($1) as value',[a.p_work_item_id])
             if(tasks&&name==='read_owned_tasks')return tx.query('select public.read_owned_tasks($1,$2) as value',[a.p_term_id,a.p_page])
+            if(tasks&&name==='read_tasks')return tx.query('select public.read_tasks($1,$2,$3) as value',[a.p_term_id,a.p_view,a.p_page])
+            if(tasks&&name==='read_task')return tx.query('select public.read_task($1) as value',[a.p_work_item_id])
+            if(tasks&&name==='task_options')return tx.query('select public.task_options($1) as value',[a.p_term_id])
+            if(tasks&&name==='create_task')return tx.query('select public.create_task($1,$2,$3) as value',[a.p_term_id,a.p_data,a.p_request_id])
+            if(tasks&&['update_task','assign_task','transition_task'].includes(name))return tx.query(`select public.${name}($1,$2,$3,$4) as value`,[a.p_work_item_id,a.p_data,a.p_expected_version,a.p_request_id])
             if(authoring&&name==='read_deliverable_authoring')return tx.query('select public.read_deliverable_authoring($1,$2) as value',[a.p_term_id,a.p_work_item_id])
             if(authoring&&name==='create_deliverable')return tx.query('select public.create_deliverable($1,$2,$3,$4) as value',[a.p_term_id,a.p_data,a.p_propose,a.p_request_id])
             if(authoring&&name==='update_deliverable')return tx.query('select public.update_deliverable($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_data,a.p_expected_version,a.p_request_id])
@@ -47,7 +52,7 @@ async function createPreview({port=5174,authoring=false,tasks=false}={}){
             throw new Error('unsupported_rpc')
           })
           res.setHeader('content-type','application/json');res.end(JSON.stringify({data:result.rows[0].value,error:null}));return
-        }catch(error){res.setHeader('content-type','application/json');res.end(JSON.stringify({data:null,error:{code:authoring&&/^command_/.test(error.message)?error.code:'COMMAND_UNAVAILABLE',message:authoring&&/^command_/.test(error.message)?error.message:'preview_query_failed'}}));return}
+        }catch(error){res.setHeader('content-type','application/json');res.end(JSON.stringify({data:null,error:{code:(authoring||tasks)&&/^command_/.test(error.message)?error.code:'COMMAND_UNAVAILABLE',message:(authoring||tasks)&&/^command_/.test(error.message)?error.message:'preview_query_failed'}}));return}
       }
       if(req.method!=='GET'){res.writeHead(405);res.end();return}
       res.setHeader('content-type','text/html; charset=utf-8');res.end(html)

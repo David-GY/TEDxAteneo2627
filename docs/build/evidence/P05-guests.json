@@ -21,6 +21,9 @@
     "supabase/migrations/20261024001000_work_items.sql": "4cd73e1184a2737b7f39a24ccf345917b3b421935c19979b5acde382dabd2f4c",
     "supabase/migrations/20261024001100_deliverables.sql": "669fe8e7e8f4ec7f75d0219ab421b0640dfc06870d90d6f98dd1bfe59bf5be4a",
     "supabase/migrations/20261024001200_deliverable_commands.sql": "4e629f781a997189cf7891665f7e049fd9183bfeb85d9817f92dc6fb37e4ec99",
+    "supabase/migrations/20261024001300_task_reading.sql": "66774c6593baa2b2f6308df19dc57a25e2e1c4a788d3d5e289f0803e905db8ab",
+    "supabase/migrations/20261024001400_tasks.sql": "c23e48318724e88d21bef2d3af5756cc8e9601a1b5afe9387843e81e687d28e8",
+    "supabase/migrations/20261024001500_task_queries.sql": "fc99eb3c0752388806ccb08d5d45473ccaa9a9171fd4167b6da05195b60ed45b",
     "supabase/tests/guests.test.sql": "bfc9b417dcce47a0c8ead624ed00599703bae49c40d24044708e4878b88e8832",
     "supabase/tests/google_auth.test.sql": "cbe33f57956e1b9b20af7462d0afe063d0f201f43ffce537c548634c98b806b7"
   },

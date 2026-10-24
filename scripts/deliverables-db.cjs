@@ -2,8 +2,8 @@ const fs=require('node:fs/promises')
 const {createIdentityDatabase}=require('./identity-db.cjs')
 const ids={org:'11111111-1111-4111-8111-111111111111',term:'22222222-2222-4222-8222-222222222221',owner:'33333333-3333-4333-8333-333333333331',viewer:'33333333-3333-4333-8333-333333333332',outsider:'33333333-3333-4333-8333-333333333333',item:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8',hidden:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa9',lead:'44444444-4444-4444-8444-444444444441',support:'44444444-4444-4444-8444-444444444442',privateUnit:'44444444-4444-4444-8444-444444444443',viewerMembership:'66666666-6666-4666-8666-666666666662'}
 // No URL/path argument: these identities and data can only exist in an isolated memory database.
-async function createDeliverablesDatabase(){
-  const {db,migrations}=await createIdentityDatabase()
+async function createDeliverablesDatabase(options){
+  const {db,migrations}=await createIdentityDatabase(options)
   try{
     await db.exec(await fs.readFile('supabase/seed.sql','utf8'))
     await db.query(`insert into auth.users(id,email,email_confirmed_at) values($1,'fictional.alex@student.ateneo.edu',statement_timestamp()),($2,'fictional.river@student.ateneo.edu',statement_timestamp()),($3,'fictional.observer@student.ateneo.edu',statement_timestamp())`,[ids.owner,ids.viewer,ids.outsider])
