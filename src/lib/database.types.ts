@@ -769,6 +769,18 @@ export type Database = {
           display_name: string
         }[]
       }
+      read_people_directory: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_process_contacts: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       redeem_guest_invitation: {
         Args: {
           p_token: string

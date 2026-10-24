@@ -85,3 +85,7 @@ P05 supersedes earlier guest-closed notes; see docs/guests.md. Two forced-RLS, d
 `docs/build/STATE.md` is the concise latest handoff; `docs/build/steps/PXX.md` holds per-step evidence. Status: not_started / in_progress / blocked_external / ready_for_review / complete. Passing local interfaces may support independent later coding while an external check remains blocked, but live activation/release cannot bypass the missing evidence.
 
 Record exact checks/results, unavailable prerequisites and next smallest action. Resume a partial step using `build-prompts/CONTINUE.md`. Do not auto-execute successors, commit/push, deploy, send invitations, or reset remote data. Keep a live local preview visible while working, per the user's preference.
+
+## P06 partial directory projection
+
+See docs/people.md and docs/build/steps/P06.md. Migration20261024000500_directory.sql adds authenticated read_people_directory/read_process_contacts RPCs, both fixed-search-path, capability-gated, current-membership reads over existing P03/P04 authority. No raw profile grants broadened. Consent-filtered optional values, unique people/current units/roles and primary/backup assignments. Types now12 tables/154 columns/12 public functions. /people uses real RPCs. Guest-wide directory denied; own/shared contact support pending. P06 remains in_progress: profile editor/private-value and visibility commands/audit still required. P02–P05 external verification blockers persist.

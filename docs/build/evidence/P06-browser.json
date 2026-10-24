@@ -1,0 +1,9 @@
+{
+  "target": "test-only simulated gateway; fictional data, no fixture endpoint ships",
+  "checks": [
+    "P06_A3: one person across two units, missing backup, 320px reflow",
+    "Name/unit/role search and empty result; help persists independently",
+    "No browser runtime errors"
+  ],
+  "errors": []
+}

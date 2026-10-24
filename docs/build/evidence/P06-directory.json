@@ -1,0 +1,19 @@
+{
+  "target": "isolated PGlite/auth-shaped subjects; no real JWT/PostgREST",
+  "engine": "PostgreSQL 18.6 (PGlite 0.5.11) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "tap": [
+    "1..3",
+    "ok 1 - P06_A1: raw profile isolation, head override denied, consent and withdrawal enforced",
+    "ok 2 - P06_A2: directory access independent of blank affiliation (task/onboarding integration pending)",
+    "ok 3 - P06_A3: unique people with multiple units, missing backup and former/guest isolation; mobile checked separately"
+  ],
+  "hashes": {
+    "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
+    "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
+    "supabase/migrations/20261024000300_google_auth.sql": "0b9f860315d9cb67088a6e7ac8d006154716587442457f09692ed344d70616a8",
+    "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
+    "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
+    "supabase/tests/directory.test.sql": "b52efda9ba0819ccd259a747a02402f1fccc7bf1e8f9a08748d385adf636a4f7"
+  },
+  "remaining": "P06 profile editor, skills/affiliation sharing commands, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers"
+}

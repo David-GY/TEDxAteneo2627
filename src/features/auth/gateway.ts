@@ -2,6 +2,7 @@ import type { ClientEnvironment } from '../../lib/env'
 import { createSupabaseClient } from '../../lib/supabase'
 import { callbackUrl, safeReturnPath } from './redirects'
 import { createGuestGateway, type GuestGateway } from '../guests/gateway'
+import { createPeopleGateway, type PeopleGateway } from '../people/gateway'
 
 export type MemberContext = {
   state: 'authorized'; memberId: string; displayName: string; organizationId: string
@@ -15,6 +16,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  people?: PeopleGateway
   guests?: GuestGateway
   readContext: (signal?: AbortSignal) => Promise<AuthResult>
   beginGoogle: (returnTo: string) => Promise<void>
@@ -45,6 +47,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    people: createPeopleGateway(clientReady),
     guests: createGuestGateway(clientReady),
     async readContext(signal) {
       const client = await clientReady

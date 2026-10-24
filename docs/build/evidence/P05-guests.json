@@ -13,6 +13,7 @@
     "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
     "supabase/migrations/20261024000300_google_auth.sql": "0b9f860315d9cb67088a6e7ac8d006154716587442457f09692ed344d70616a8",
     "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
+    "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
     "supabase/tests/guests.test.sql": "bfc9b417dcce47a0c8ead624ed00599703bae49c40d24044708e4878b88e8832",
     "supabase/tests/google_auth.test.sql": "cbe33f57956e1b9b20af7462d0afe063d0f201f43ffce537c548634c98b806b7"
   },

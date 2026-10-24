@@ -9,6 +9,7 @@ import { RedeemPage, SponsorPage } from '../features/guests/pages'
 import { AccountPage, AuthRevalidator, CallbackPage, LoginPage, ProtectedShell } from '../features/auth/pages'
 import { safeReturnPath } from '../features/auth/redirects'
 import { LoadingState } from '../components/FeedbackState'
+import { DirectoryPage } from '../features/people/pages'
 
 function FoundationPage({ environment }: { environment: ClientEnvironment }) {
   return (
@@ -83,7 +84,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       { index: true, element: <><PageHeading title="Overview" description="Your current core membership has been verified." /><EmptyState title="Your workspace is ready for its next step" description="Work modules will appear here as they are connected. No sample tasks or metrics are shown." /></> },
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),
-        element: item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,
+        element: item.id === 'people' && gateway.people ? <DirectoryPage api={gateway.people} /> : item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,
         errorElement: <ErrorState title="This page could not open" description="Return to the overview and try again. If it keeps happening, contact the workspace maintainer." action={<Link className="button" to="/">Return to overview</Link>} />,
       })),
       ] },

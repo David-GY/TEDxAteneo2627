@@ -2,36 +2,33 @@
 
 Updated October 24, 2026 (Asia/Manila).
 
-- Current resumable step: **P05 — blocked_external**. Local invitation/schema/UI/security checks delivered; full Supabase/real Google/JWT verification pending. Resume with build-prompts/CONTINUE.md.
-- Completed P00/P01. P02–P04 retain Docker/Supabase PostgreSQL 17, JWT/PostgREST, official-type and live Google blockers. P06–P63 not executed; P07 record scopes intentionally absent.
-- Detailed checkpoint docs/build/steps/P05.md. Contracts docs/guests.md, docs/permissions.md, docs/integrations.md, docs/build/CONTRACTS.md, supabase/README.md; DESIGN.md remains visual authority.
+- Current resumable step: **P06 — in_progress**, verified read-only directory/process-contact slice. Resume **build-prompts/CONTINUE.md** for P06; do not advance to P07.
+- Complete: P00/P01. P02–P05 remain **blocked_external**; their checkpoint ledgers remain authoritative. P07–P63 not executed.
+- P06 still requires own profile editor, separate protected private-value/sharing commands (version/idempotency/audit), optional skills/pronunciation/affiliation disclosure, guest own/shared contacts and historical attribution integration. This partial checkpoint does not claim P06 completion.
+- Detail: docs/build/steps/P06.md, docs/people.md, docs/build/CONTRACTS.md. DESIGN.md remains visual authority.
 
 ## Delivered interfaces
 
-12 public tables/154 columns/10 functions. P02 identity/P03 policies/P04 exact school roster admission remain. P05 adds guest_invitations and guest_invitation_events with forced RLS/no direct API grants. create_guest_invitation, redeem_guest_invitation, revoke_guest_access, list_guest_invitations derive actor/sponsor; hashed one-use tokens, exact verified email, default/max 14 days, version/retry safety, sponsor-only metadata and redacted transactional audit. Renewal invalidates old access.
+12 public tables/154 columns/12 functions. P02 identity/P03 authority/P04 verified exact school roster/P05 invitations unchanged. P06 migration20261024000500_directory.sql adds read_people_directory and read_process_contacts: capability-gated read-only projections, no raw grant expansion. One person across current units/roles; exact school organization contact; course/year/phone/external contact independently null unless shared. Effective primary/backup contacts per active unit, missing assignments explicit. Guests receive no broad directory; their own/shared contact UI is pending.
 
-resolve_auth_context wraps unchanged private core resolver with separate minimal guest context, no core membership/capabilities. Current sponsor authority, verified email, expiry/revocation rechecked. No guest member/term membership/role created. Invitations share **zero records** until P07 creates real scope FKs. No invented work IDs, full-directory fallback, email sending or OTP.
-
-Sponsor /guests uses real RPCs, scope preview, copy/select fallback, renew/revoke. Public /guest/redeem removes fragment bearer; memory only, never browser storage/return path. Sign in via Google then reopen original invitation link. Guest core/admin direct links redirect to /shared; DB remains authoritative. Auth/navigation/focus/poll/expiry checks remain. No production fixture/preview bypass.
+/people uses real parallel RPCs and existing shell/components: name/unit/role search, plain process names, persistent help/task links, loading/empty/retry. No profile save controls until real commands exist. P05 guest core/admin isolation, bearer scrubbing, zero-record sharing, current sponsor/expiry/revoke checks remain. No production fixture/preview bypass, real records or invented work IDs. Former current profiles excluded; historical work-record attribution remains pending.
 
 ## Actual verification / blockers
 
-Passed pnpm test:guests (three named assertions plus P04 on full P05); historical test:identity/test:authorization/test:google-auth; db:types/db:types:check; typecheck/lint/36 frontend tests/build. Browser verify-p05.cjs passed production unconfigured redemption (fragment removal, no request-URL bearer/storage, disabled setup actions, 320px) and labeled test-only simulated sponsor component (create/link/revoke, long email, 44px). verify-p04.cjs regression passed protected routing/callback/production preview exclusion. Evidence/screenshots docs/build/evidence/P05-*; P04 login captures refreshed.
+P06 SQL PASS three named assertions under authenticated subject fixtures, including an actual unit head capability. Frontend typecheck/lint/38 tests/build PASS. Catalog type generation/check PASS12/154/12. Browser verify-p06.cjs PASS labeled simulated gateway desktop/320px, one person/two units, missing backup, search/empty/help and zero runtime errors; captures inspected. Existing identity/authorization/google-auth/guests SQL regressions PASS, P05/P04 rerun on full P06. Evidence docs/build/evidence/P06-*; exact commands/failures in P06 ledger.
 
-These use isolated PGlite PostgreSQL 18.6/auth-shaped subjects and local browser checks, not Supabase PostgreSQL 17, real validated JWT/PostgREST or Google callback proof. Docker/Podman absent, .env.local/provider references unavailable and Google disabled (prior P04 observations carried forward). Official CLI types, real old-JWT revoke/expiry/sponsor-loss calls, external-account callback/consent, deployed log redaction and human UAT remain blocked. No remote reset or real records.
+All P02–P05 external blockers carried forward: no Docker/Podman/Supabase PostgreSQL17 environment, real validated JWT/PostgREST, official CLI-type comparison, real school/external Google PKCE/consent/callback, old guest-JWT revoke/renew/expiry/sponsor-loss API checks, deployed token/body logging verification and human UAT. Prior .env.local/provider references unavailable and Google disabled; no provider setup changed. Local PGlite18.6/auth-shaped subjects and simulated UI do not replace these checks. No remote reset or service-role substitute.
 
-## Preview / custody
+Real roster, FIN/MCD authority, sponsor policy, privacy custodian/basis/retention, production HTTPS origin, approved logo and human UAT remain open.
 
-Live dev http://127.0.0.1:5173/preview and /guest/redeem, original session70434. Browser open requested (host queued); screenshots provide actual renders. Temporary production4173 stopped after checks. Sponsor screenshots explicitly label simulated gateway/fictional identity; no fixture endpoint ships.
+## Preview / custody / usage
 
-User explicitly authorized GitHub backups. Existing public David-GY/TEDxAteneo2627 branch codex/core-build-checkpoints is configured as origin/upstream. P00–P04 commit0605c0f verified exact local/remote tree. P05 snapshot 8970e065f92eb22f4e17338f39a252a93bbe62a4 published on that branch; fetched remote tree 4612298a9d93181b3f24ae1eaed4f939ae0ec656 exactly equals local committed tree. Local branch aligned/tracking remote with a clean worktree. Signed-out gh CLI replaced by connected GitHub Git-data API. No PR/main merge, website/provider deployment or messages/invitations. Env/runtime/dependency/dist artifacts ignored.
+Existing dev http://127.0.0.1:5173/preview retained; Codex browser open requested (host queued). P06 actual UI shown through labeled browser-test fixture screenshots, no fixture endpoint ships. No public website/provider deployment/messages/invitations.
+
+User authorized reviewed commits/pushes to existing public David-GY/TEDxAteneo2627 branch codex/core-build-checkpoints only. Start d3e74d757d980901ed064c3feb806e04fedf4922 verified against git ls-remote. Prior P05 snapshot8970e06 and tree4612298a9d93181b3f24ae1eaed4f939ae0ec656 retained. Current P06 commit and fetched remote-tree comparison are checked after this ledger is written and reported in final chat. No PR/main merge.
+
+Shared five-hour usage80 →83 →84%, reset1792816155; starting allowance10 points, wind-down85, ceiling90. Partial checkpoint near wind-down before privacy mutation work. Account-wide observations, not exact attribution. No reset/credit purchase/wait, agents, extra chats/worktrees or dependency changes.
 
 ## Next smallest action
 
-Resume P05 with build-prompts/CONTINUE.md after local container runtime and approved Google/Supabase setup. Verify loopback target, migrate/seed synthetic DB, run guests/google SQL on Supabase17, compare official types, then real external PKCE and old guest-JWT requests before/after revoke/renew/expiry/sponsor suspension. Verify no raw-token request/DB logging. Carry P02–P04 gates forward. P06 only next separately requestable code-dependency-eligible prompt; do not auto-run or add P07 scopes here.
-
-Real roster/FIN/MCD authority, guest sponsor policy, privacy custodian/basis/retention, production HTTPS origin, approved logo and human UAT remain open.
-
-## Usage
-
-P05 shared-account observations 56 → 64 → 66 → 71 → 74 usedPercent, reset1792816155. Effective allowance34 points, wind down85 usedPercent. Includes GitHub preservation/rechecks/shared activity, not exact attribution. No reset/credit purchase/waiting, agents, extra chats/worktrees. Node24.22.1/pnpm11.25.0; existing versions/lockfile preserved.
+Resume **P06 using build-prompts/CONTINUE.md**: implement own profile editor and separate audited version/retry-safe private-values/visibility commands. Finish optional fields, guest own/shared contacts without invented P07 scope, and historical-attribution boundary. Then run security/UI checks. After approved local container/provider setup, verify loopback target and rerun P02–P06 on real Supabase17/JWT/Google before live activation. Do not erase older blockers.
