@@ -1,3 +1,4 @@
+import {createSynergiesApi,type SynergiesApi} from '../synergies/api'
 import {createOverviewApi,type OverviewApi} from '../overview/api'
 import {createFilesApi,type FilesApi} from '../files/api'
 import {createCommentsApi,type CommentsApi} from '../comments/api'
@@ -25,6 +26,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  synergies?: SynergiesApi
   overview?: OverviewApi
   files?: FilesApi
   comments?: CommentsApi
@@ -64,6 +66,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    synergies: createSynergiesApi(clientReady),
     overview: createOverviewApi(clientReady),
     files: createFilesApi(clientReady),
     comments: createCommentsApi(clientReady),

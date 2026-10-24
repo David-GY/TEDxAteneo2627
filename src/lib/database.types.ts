@@ -5,6 +5,173 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      agreement_confirmations: {
+        Row: {
+          id: string
+          agreement_id: string
+          revision: number
+          agreement_version: number
+          side: string
+          decision: string
+          member_id: string
+          actor_id: string
+          selected_owner_id: string | null
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          agreement_id: string
+          revision: number
+          agreement_version: number
+          side: string
+          decision: string
+          member_id: string
+          actor_id: string
+          selected_owner_id?: string | null
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          agreement_id?: string
+          revision?: number
+          agreement_version?: number
+          side?: string
+          decision?: string
+          member_id?: string
+          actor_id?: string
+          selected_owner_id?: string | null
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agreement_confirmations_agreement_id_revision_fkey"
+            columns: ["agreement_id","revision"]
+            isOneToOne: false
+            referencedRelation: "agreement_revisions"
+            referencedColumns: ["agreement_id","revision"]
+          },
+          {
+            foreignKeyName: "agreement_confirmations_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agreement_confirmations_selected_owner_id_fkey"
+            columns: ["selected_owner_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agreement_revision_sources: {
+        Row: {
+          agreement_id: string
+          revision: number
+          manifest_id: string
+        }
+        Insert: {
+          agreement_id: string
+          revision: number
+          manifest_id: string
+        }
+        Update: {
+          agreement_id?: string
+          revision?: number
+          manifest_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agreement_revision_sources_agreement_id_revision_fkey"
+            columns: ["agreement_id","revision"]
+            isOneToOne: false
+            referencedRelation: "agreement_revisions"
+            referencedColumns: ["agreement_id","revision"]
+          },
+          {
+            foreignKeyName: "agreement_revision_sources_manifest_id_fkey"
+            columns: ["manifest_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agreement_revisions: {
+        Row: {
+          agreement_id: string
+          revision: number
+          parent_version: number
+          output: string
+          criteria: string
+          effort_band: string
+          due_on: string
+          owner_candidate_id: string | null
+          proposer_side: string
+          proposer_member_id: string
+          actor_id: string
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          agreement_id: string
+          revision: number
+          parent_version: number
+          output: string
+          criteria: string
+          effort_band: string
+          due_on: string
+          owner_candidate_id?: string | null
+          proposer_side: string
+          proposer_member_id: string
+          actor_id: string
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          agreement_id?: string
+          revision?: number
+          parent_version?: number
+          output?: string
+          criteria?: string
+          effort_band?: string
+          due_on?: string
+          owner_candidate_id?: string | null
+          proposer_side?: string
+          proposer_member_id?: string
+          actor_id?: string
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agreement_revisions_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "synergy_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agreement_revisions_owner_candidate_id_fkey"
+            columns: ["owner_candidate_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agreement_revisions_proposer_member_id_fkey"
+            columns: ["proposer_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       announcements: {
         Row: {
           work_item_id: string
@@ -421,6 +588,115 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "work_items"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      contributions: {
+        Row: {
+          work_item_id: string
+          organization_id: string
+          term_id: string
+          agreement_id: string
+          active_revision: number
+          parent_work_item_id: string
+          requester_unit_id: string
+          receiver_unit_id: string
+          owner_member_id: string
+          owner_name: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          work_item_id: string
+          organization_id: string
+          term_id: string
+          agreement_id: string
+          active_revision: number
+          parent_work_item_id: string
+          requester_unit_id: string
+          receiver_unit_id: string
+          owner_member_id: string
+          owner_name: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          work_item_id?: string
+          organization_id?: string
+          term_id?: string
+          agreement_id?: string
+          active_revision?: number
+          parent_work_item_id?: string
+          requester_unit_id?: string
+          receiver_unit_id?: string
+          owner_member_id?: string
+          owner_name?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contributions_agreement_id_active_revision_fkey"
+            columns: ["agreement_id","active_revision"]
+            isOneToOne: true
+            referencedRelation: "agreement_revisions"
+            referencedColumns: ["agreement_id","revision"]
+          },
+          {
+            foreignKeyName: "contributions_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: true
+            referencedRelation: "synergy_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contributions_organization_id_term_id_owner_member_id_fkey"
+            columns: ["organization_id","term_id","owner_member_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","member_id"]
+          },
+          {
+            foreignKeyName: "contributions_organization_id_term_id_parent_work_item_id_fkey"
+            columns: ["organization_id","term_id","parent_work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "contributions_organization_id_term_id_receiver_unit_id_fkey"
+            columns: ["organization_id","term_id","receiver_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "contributions_organization_id_term_id_requester_unit_id_fkey"
+            columns: ["organization_id","term_id","requester_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "contributions_organization_id_term_id_work_item_id_fkey"
+            columns: ["organization_id","term_id","work_item_id"]
+            isOneToOne: true
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "contributions_parent_work_item_id_fkey"
+            columns: ["parent_work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "contributions_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
           },
         ]
       }
@@ -1596,6 +1872,107 @@ export type Database = {
           },
         ]
       }
+      synergy_agreements: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          parent_work_item_id: string
+          requester_unit_id: string
+          receiver_unit_id: string
+          requester_member_id: string
+          version: number
+          current_revision: number
+          active_revision: number | null
+          state: string
+          created_by: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          parent_work_item_id: string
+          requester_unit_id: string
+          receiver_unit_id: string
+          requester_member_id: string
+          version?: number
+          current_revision?: number
+          active_revision?: number | null
+          state?: string
+          created_by: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          parent_work_item_id?: string
+          requester_unit_id?: string
+          receiver_unit_id?: string
+          requester_member_id?: string
+          version?: number
+          current_revision?: number
+          active_revision?: number | null
+          state?: string
+          created_by?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "synergy_active_revision"
+            columns: ["id","active_revision"]
+            isOneToOne: true
+            referencedRelation: "agreement_revisions"
+            referencedColumns: ["agreement_id","revision"]
+          },
+          {
+            foreignKeyName: "synergy_agreements_organization_id_term_id_parent_work_ite_fkey"
+            columns: ["organization_id","term_id","parent_work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "synergy_agreements_organization_id_term_id_receiver_unit_i_fkey"
+            columns: ["organization_id","term_id","receiver_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "synergy_agreements_organization_id_term_id_requester_membe_fkey"
+            columns: ["organization_id","term_id","requester_member_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","member_id"]
+          },
+          {
+            foreignKeyName: "synergy_agreements_organization_id_term_id_requester_unit__fkey"
+            columns: ["organization_id","term_id","requester_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "synergy_agreements_parent_work_item_id_fkey"
+            columns: ["parent_work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "synergy_current_revision"
+            columns: ["id","current_revision"]
+            isOneToOne: true
+            referencedRelation: "agreement_revisions"
+            referencedColumns: ["agreement_id","revision"]
+          },
+        ]
+      }
       task_collaborators: {
         Row: {
           organization_id: string
@@ -2303,6 +2680,18 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      propose_synergy: {
+        Args: {
+          p_parent_id: string
+          p_receiver_unit_id: string
+          p_terms: Json
+          p_expected_parent_version: number
+          p_request_id: string
+          p_agreement_id?: string | null
+          p_expected_agreement_version?: number | null
+        }
+        Returns: Json | null
+      }
       read_comment_history: {
         Args: {
           p_comment_id: string
@@ -2313,6 +2702,12 @@ export type Database = {
         Args: {
           p_work_item_id: string
           p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_contribution: {
+        Args: {
+          p_work_item_id: string
         }
         Returns: Json | null
       }
@@ -2381,6 +2776,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_synergy: {
+        Args: {
+          p_agreement_id: string
+        }
+        Returns: Json | null
+      }
       read_task: {
         Args: {
           p_work_item_id: string
@@ -2423,6 +2824,19 @@ export type Database = {
       }
       resolve_auth_context: {
         Args: Record<string, never>
+        Returns: Json | null
+      }
+      respond_to_synergy: {
+        Args: {
+          p_agreement_id: string
+          p_action: string
+          p_expected_version: number
+          p_expected_revision: number
+          p_owner_id: string
+          p_terms: Json
+          p_reason: string
+          p_request_id: string
+        }
         Returns: Json | null
       }
       revise_comment: {

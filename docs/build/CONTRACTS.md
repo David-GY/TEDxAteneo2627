@@ -135,3 +135,7 @@ Current contract: docs/files.md. Migration017 adds assets/asset_links/asset_mani
 ## P13 personal overview
 
 Current contract docs/overview.md. Migration018 read_overview,37tables/425columns/54public functions; existing assigned tasks/owned deliverables only, current detail access,50-row cap and row-derived lane counts. Real refetch removes completed work; no invented later sources/authority. P13_A1–A3 local checks and87frontend tests pass. Existing external gates retained. P14 not executed.
+
+## P14 synergy domain
+
+Contract docs/synergies.md. Migration019,42tables/478columns/58functions. propose_synergy/respond_to_synergy: immutable revisions/confirmations, current two-head authority, expected parent/agreement/revision and exact retries; counters require requester confirmation. Acceptance creates canonical contribution/task/FKs/grants with independent parent/file scope. Material changes renegotiate, old accepted work survives. Safe read_synergy/read_contribution; no raw negotiation reads. Task editor locks agreed fields. Parent acceptance closed pending actual contribution acceptance; no FIN/MCD bypass. Local assertions/93frontend tests pass; real concurrency/JWT/authority/privacy/human gates remain. P15 not executed.

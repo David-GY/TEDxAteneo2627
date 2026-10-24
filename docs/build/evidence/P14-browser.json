@@ -1,0 +1,13 @@
+{
+  "target": "real compiled synergy adapter and loopback RPC against isolated SQL; simulated sign-in, not Supabase/JWT/true concurrent sessions",
+  "checks": [
+    "committed propose reply lost; exact caller-key retry returns one agreement",
+    "receiver safe preview hides parent ID/title/body",
+    "counter remains inactive and revision history parses",
+    "requester confirms exact revision; one canonical task/contribution; exact acceptance replay",
+    "canonical contribution task locks title/date/assignment in existing editor; actual progress save and320px reflow work",
+    "existing overview remains functional; no later synergy UI introduced",
+    "no runtime errors or private browser storage"
+  ],
+  "errors": []
+}
