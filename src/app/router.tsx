@@ -1,3 +1,4 @@
+import {HandoffPage,HandoffsPage} from '../features/handoffs/HandoffScreens'
 import {TimelinePage} from '../features/timeline/TimelinePage'
 import {WorkingTogetherPage} from '../features/synergies/WorkingTogetherPage'
 import {AgreementPage} from '../features/synergies/AgreementPage'
@@ -92,9 +93,11 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       // Timeline filter RPCs recheck scope themselves. Explicit focus/expiry checks still revalidate.
       }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
       { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
+      {path:'working-together/handoffs',element:gateway.handoffs?<HandoffsPage api={gateway.handoffs}/>:<EmptyState title="Handoffs unavailable" description="The connection is unavailable."/>},
+      {path:'working-together/handoffs/:handoffId',element:gateway.handoffs?<HandoffPage api={gateway.handoffs} files={gateway.files}/>:<EmptyState title="Handoff unavailable" description="The connection is unavailable."/>},
       {path:'working-together/timeline',element:gateway.timeline?<TimelinePage api={gateway.timeline}/>:<EmptyState title="Timeline unavailable" description="The connection is unavailable."/>},
       {path:'working-together/:agreementId',element:gateway.synergies?<AgreementPage api={gateway.synergies}/>:<EmptyState title="Agreement unavailable" description="The connection is unavailable."/>},
-      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail timeline={gateway.timeline} dependencies={gateway.dependencies} api={gateway.tasks} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
+      {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail handoffs={gateway.handoffs} timeline={gateway.timeline} dependencies={gateway.dependencies} api={gateway.tasks} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
       {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage timeline={gateway.timeline} api={gateway.deliverables} commands={gateway.deliverableCommands} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),

@@ -34,6 +34,7 @@
     "supabase/migrations/20261025002300_work_schedule.sql": "8ffc6180e03596140c55fe2aaa6a88200a5c7d913b7f88b4c28aea60186cfcfa",
     "supabase/migrations/20261025002400_committee_timeline.sql": "7bedc942b757a809d228b3c9ab62a1db77abbbf2688cb78a3009cee84bd35377",
     "supabase/migrations/20261025002500_schedule_context.sql": "34afeba9ab10a4f12f1537476913220694e6925dd5029cd1baf2822924093fdc",
+    "supabase/migrations/20261025002600_handoff_interface.sql": "3d69763f4ba35a6bc4bc43b72b0d370bb7544b7fa883a19d05748baaf93683ce",
     "supabase/tests/committee_timeline.test.sql": "4cd25962c045aecd00cce9421f2387fb4aa2199fa5cff8790fe87a979188615e",
     "scripts\\test-committee-timeline.cjs": "382b14d10f7fd6ea0aee3c530494dcdf6df8b169bbf657f1d60d6726d54f5e47"
   }

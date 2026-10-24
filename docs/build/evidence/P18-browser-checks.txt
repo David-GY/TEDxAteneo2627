@@ -1,0 +1,24 @@
+COMMAND node scripts/test-handoff-interface.cjs
+ok 1 - P18_A2: sender UI identity cannot forge either acceptance endpoint; discovery/options/history/links enforce independent scope
+ok 2 - P18_A3: one pending handoff replaces its canonical next-task action; revision feedback is current; exact acceptance retry resolves it and reveals one existing task in both committee views
+EXIT 0
+COMMAND node scripts/verify-p18.cjs
+PASS P18_A1-A3 local actual-SQL/UI/byte browser checks
+EXIT 0
+COMMAND node scripts/verify-p17.cjs
+PASS P17 actual-SQL/compiled-adapter/isolated-byte browser verification
+EXIT 0
+COMMAND node scripts/verify-p16a.cjs
+PASS P16A_A1-A3 local actual-SQL/compiled-UI browser checks; external provider/human gates remain
+EXIT 0
+FINAL node scripts/test-handoff-interface.cjs
+ok 1 - P18_A2: sender UI identity cannot forge either acceptance endpoint; discovery/options/history/links enforce independent scope
+ok 2 - P18_A3: one pending handoff replaces its canonical next-task action; revision feedback is current; exact acceptance retry resolves it and reveals one existing task in both committee views
+EXIT 0
+FINAL node scripts/verify-p18.cjs
+PASS P18_A1-A3 local actual-SQL/UI/byte browser checks
+EXIT 0
+FINAL node scripts/test-handoff-interface.cjs (read grant review)
+ok 1 - P18_A2: sender UI identity cannot forge either acceptance endpoint; discovery/options/history/links enforce independent scope
+ok 2 - P18_A3: one pending handoff replaces its canonical next-task action; revision feedback is current; exact acceptance retry resolves it and reveals one existing task in both committee views
+EXIT 0

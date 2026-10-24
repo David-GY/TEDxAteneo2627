@@ -1,0 +1,10 @@
+{
+  "target": "Actual compiled adapters/UI/isolated SQL and P12 byte handler; synthetic subjects, not real Supabase/JWT/parallel sessions/human acceptance",
+  "checks": [
+    "P18_A1 exact immutable package bytes/criteria, changes-requested versus accepted, history, revision,320/640CSSpx/44px/keyboard",
+    "P18_A2 sender has no accept control and direct forged acceptance endpoint is rejected",
+    "P18_A3 pending handoff replaces task action; resolved acceptance removes it after refresh and reveals one canonical task, same accepted link in both committee views",
+    "lost proposal/accept replies retry exact payload/key once; real stale response retains notes; current revocation clears overview"
+  ],
+  "errors": []
+}

@@ -3081,6 +3081,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      handoff_submission_options: {
+        Args: {
+          p_source_task_id: string
+          p_handoff_id?: string | null
+        }
+        Returns: Json | null
+      }
       has_capability: {
         Args: {
           p_term_id: string
@@ -3114,6 +3121,15 @@ export type Database = {
       list_guest_invitations: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      list_handoffs: {
+        Args: {
+          p_term_id: string
+          p_view?: string | null
+          p_work_item_id?: string | null
+          p_page?: number | null
         }
         Returns: Json | null
       }

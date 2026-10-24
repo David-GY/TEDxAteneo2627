@@ -2,10 +2,10 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- **P16A - blocked_external**: independent local committee timeline implementation delivered. Optional planned starts/guards/scoped commands and read model; typed API, existing schedule forms, week/month chart/chronological list, filters/pagination/markers/entry/deep links and permission revalidation. Named A1–A3 local SQL/UI/browser checks pass. Real provider/authority/privacy/human gates remain.
-- **P17 - blocked_external**: immutable handoff domain/API already delivered at dd018f8; unchanged implementation, current SQL and browser regressions passed after P16A. P18 not executed. P00/P01 complete; P02–P16 external ledgers retained.
-- Schema48tables/547columns/70public functions, migrations001–025. P16A uses canonical work and only both-permitted loaded dependency endpoints. Scoped scheduling cannot change due/original/accepted/approval fields. Missing dates stay missing; accepted contribution material dates remain governed. P17 narrow snapshot/receiver/file/activation contracts remain.
-- Actual final checks:29files/123frontend tests; named timeline/schedule SQL plus P09/P10/P14–P17 regressions; P16A/P16/P17 actual local browser checks; frontend/Edge typechecks/lint/build190modules(app491.71kB/gzip143.72kB; CSS15.17/gzip3.71); generated type drift48/547/70. Mechanical design detector[] and rendered desktop/mobile/zoom inspection. Evidence/failures/corrections: docs/build/steps/P16A.md. Synthetic SQL/subjects/bytes/delayed simulated sign-in are not real Supabase/JWT/parallel-session/human proof.
+- **P18 - blocked_external**: independent local handoff interface delivered: submission/file-criteria review, accept/changes/decline/withdraw/revision/history, task/Working together links, immutable receipts and canonical accepted next work. Overview substitutes current handoff actions for pending next-task rows and resolves them after acceptance/cancellation. Named P18_A1–A3 local checks pass; real provider/authority/privacy/human gates remain.
+- P16A and P17 remain blocked_external with independent implementations delivered. P00/P01 complete; P02–P17 external ledgers retained. No P19 implementation.
+- Migration026; schema48tables/547columns/72public functions. Scoped list/options/party-history metadata and neutral next-task waiting; original P17 mutations/P12 bytes own all state/access. No owner/deadline/FIN/MCD/deliverable-acceptance bypass.
+- Actual:30files/127frontend tests; P18 actual SQL/UI/byte A1–A3; P17/P16A browser regressions; handoffs/timeline/synergy-interface SQL regressions; frontend/Edge typechecks/lint/build193modules(app512.62kB/gzip148.42; CSS15.45/gzip3.77); generated types48/547/72; design detector[]. Vite warns initial app chunk exceeds500kB; build passed. Evidence/failures: docs/build/steps/P18.md. Synthetic subjects/bytes/delayed sign-in are not real Supabase/Auth/Storage/JWT, independent concurrency or human verification.
 
 ## External blockers retained
 
@@ -23,10 +23,12 @@ P17 actual concurrent accept/cancel/replay under real receiver JWTs, approved in
 
 P17 real concurrent accept/cancel/replay/activation, deployed old/current JWT exact package download/scope revocation and institutional receiver/privacy/human acceptance remain unverified; local proof does not discharge these gates.
 
+P18 real authenticated sender/receiver mobile/keyboard/assistive-technology review, current/old revoked JWT exact-package byte access, independent accept/withdraw/revision/assignment races and approved institutional authority/privacy/human handoff acceptance remain unverified. Local UI/SQL/bytes discharge none of these gates.
+
 ## Next action / custody
 
-P16A independent implementation is finished; build-prompts/CONTINUE.md resumes external acceptance once approved provider/authority/privacy/human inputs exist. Verify real Supabase17/Auth/JWT current/expired/revoked core versus guest scope, official types, independent concurrent schedule/deadline/retry sessions and institutional/mobile/keyboard/assistive-technology acceptance. P17 remains at its external gates. P18 is code-eligible but unrequested; do not run it automatically.
+P18 independent local implementation is finished. build-prompts/CONTINUE.md resumes external acceptance when approved provider/authority/privacy/human inputs exist. P19 is the next numbered prompt, not executed or automatically authorized.
 
-Owned visible preview: node scripts/preview-p16a.cjs on5178 with Vite5173, /working-together/timeline?date=2027-04-17&scale=month. Reused existing in-app tab11 and verified latest rendered state; no new tab/chat/agent/worktree. Started this continuation clean at84fb566708e9288a9dc3c83216fbe30bcab2eab5; fetched remote commit/tree matched. Reviewed checkpoint committed/pushed to codex/core-build-checkpoints; final receipt records live remote commit/tree and clean worktree. No deployment/provider/billing/cap changes/reset credits/messages/dependencies. Earlier one-time automation already removed.
+Owned visible preview: node scripts/preview-p18.cjs on5178 plus Vite5173. Reused existing in-app tab12 for the fictional receiver package; latest read/render checked, no new tab/agent/chat/worktree. Started clean at23a317354b50fd68c80c04443c917583c930502b; remote commit/tree082b62ca23ac01fc253229f49274a556f0b49df5 matched before editing. Reviewed checkpoint commit/push is authorized on codex/core-build-checkpoints; final receipt verifies remote commit/tree and clean worktree. No deployment/provider/cap/billing changes/reset credits/messages/dependencies/automation.
 
-Fresh continuation usage baseline31%, reset1792889538; effective40points, wind-down66used/ceiling71used. Observed31 ->37 ->45 ->49 ->54 ->57 ->61%, weekly63 ->68%; shared-account observations, not exact attribution. Earlier heartbeat1 ->30% is a separate execution preserved in P16A/P17 history. No purchase/reset/wait or automatic continuation.
+Fresh usage baseline64%, reset1792889538, effective26points, wind-down85used/ceiling90used. Observed64 ->75 ->78 ->82 ->84 ->88%; weekly68 ->72%. Shared observations, not exact attribution. No purchase/reset/wait or new budget after a reset.
