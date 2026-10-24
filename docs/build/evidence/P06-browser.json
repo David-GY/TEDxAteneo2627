@@ -3,6 +3,7 @@
   "checks": [
     "P06_A3: one person across two units, missing backup, 320px reflow",
     "Name/unit/role search and empty result; help persists independently",
+    "Profile editor separate saves, opt-in checkbox, 320px and desktop; no private browser storage",
     "No browser runtime errors"
   ],
   "errors": []

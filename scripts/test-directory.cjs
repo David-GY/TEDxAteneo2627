@@ -12,7 +12,7 @@ const { createIdentityDatabase } = require('./identity-db.cjs')
     const files = [...migrations.map(m => 'supabase/migrations/' + m), 'supabase/tests/directory.test.sql']
     const evidence = { target: 'isolated PGlite/auth-shaped subjects; no real JWT/PostgREST', engine: (await db.query('select version()')).rows[0].version, tap,
       hashes: Object.fromEntries(await Promise.all(files.map(async f => [f, createHash('sha256').update(await fs.readFile(f)).digest('hex')]))),
-      remaining: 'P06 profile editor, skills/affiliation sharing commands, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers' }
+      remaining: 'P06 optional skills/pronunciation/affiliation disclosure, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers' }
     await fs.writeFile('docs/build/evidence/P06-directory.json', JSON.stringify(evidence, null, 2) + '\n')
     console.log(JSON.stringify(evidence, null, 2))
   } finally { await db.close() }

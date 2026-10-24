@@ -317,6 +317,44 @@ export type Database = {
           },
         ]
       }
+      profile_commands: {
+        Row: {
+          member_id: string
+          request_id: string
+          actor_id: string
+          command: string
+          fingerprint: string
+          result_version: number
+          occurred_at: string
+        }
+        Insert: {
+          member_id: string
+          request_id: string
+          actor_id: string
+          command: string
+          fingerprint: string
+          result_version: number
+          occurred_at?: string
+        }
+        Update: {
+          member_id?: string
+          request_id?: string
+          actor_id?: string
+          command?: string
+          fingerprint?: string
+          result_version?: number
+          occurred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_commands_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       role_assignments: {
         Row: {
           id: string
@@ -800,6 +838,24 @@ export type Database = {
       revoke_guest_access: {
         Args: {
           p_invitation_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_private_profile: {
+        Args: {
+          p_term_id: string
+          p_values: Json
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      set_profile_visibility: {
+        Args: {
+          p_term_id: string
+          p_visibility: Json
           p_expected_version: number
           p_request_id: string
         }

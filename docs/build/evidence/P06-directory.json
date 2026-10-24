@@ -14,7 +14,8 @@
     "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
     "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
     "supabase/migrations/20261024000600_own_profile_read.sql": "ec0413dc375eed003118a73f5dda22d30091533ae7b6c5a2f8065092238cb33a",
-    "supabase/tests/directory.test.sql": "2e443953598dac5eabaa9ab0d439a098df352cf88a9284937e1927de3460a07d"
+    "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
+    "supabase/tests/directory.test.sql": "86a8dc9805d6bbcda89be1a4d9feee2ce56f2e9c019a1b6423b35ed2cd9045fd"
   },
-  "remaining": "P06 profile editor, skills/affiliation sharing commands, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers"
+  "remaining": "P06 optional skills/pronunciation/affiliation disclosure, guest own/shared contacts, historical attribution integration; all P02–P05 external blockers"
 }

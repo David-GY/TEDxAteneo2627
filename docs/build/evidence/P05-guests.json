@@ -14,6 +14,8 @@
     "supabase/migrations/20261024000300_google_auth.sql": "0b9f860315d9cb67088a6e7ac8d006154716587442457f09692ed344d70616a8",
     "supabase/migrations/20261024000400_guests.sql": "593994bb757a1e607ebd2cdb1dabb9a92693dbaff5bb4d6711b7701eec640bf7",
     "supabase/migrations/20261024000500_directory.sql": "36cdc1da2ab8d824851ce3ca81723b78eacc5b6b2f70322d837faf8067ad0a98",
+    "supabase/migrations/20261024000600_own_profile_read.sql": "ec0413dc375eed003118a73f5dda22d30091533ae7b6c5a2f8065092238cb33a",
+    "supabase/migrations/20261024000700_profile_commands.sql": "f3a2a1c21c6d4c2229384263b58c3fb123fd9549f893caba730801cc9cf0d39a",
     "supabase/tests/guests.test.sql": "bfc9b417dcce47a0c8ead624ed00599703bae49c40d24044708e4878b88e8832",
     "supabase/tests/google_auth.test.sql": "cbe33f57956e1b9b20af7462d0afe063d0f201f43ffce537c548634c98b806b7"
   },

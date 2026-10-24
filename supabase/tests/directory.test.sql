@@ -5,6 +5,11 @@ create function pg_temp.require(ok boolean,message text) returns void language p
   if ok is distinct from true then raise exception 'Assertion failed: %',message; end if;
 end; $$;
 grant execute on function pg_temp.fid(text),pg_temp.require(boolean,text) to authenticated;
+create function pg_temp.reject(command text,expected text) returns void language plpgsql as $$ begin
+  begin execute command; exception when others then if sqlstate=expected then return; end if; raise; end;
+  raise exception 'Expected rejection';
+end; $$;
+grant execute on function pg_temp.reject(text,text) to authenticated;
 insert into public.organizations(id,slug,name) values(pg_temp.fid('org'),'p06-fictional','Fictional directory');
 insert into public.terms(id,organization_id,label,event_date,starts_on,closes_on,state)
 values(pg_temp.fid('term'),pg_temp.fid('org'),'Fictional term',current_date,current_date-30,current_date+30,'active');
@@ -49,7 +54,7 @@ select pg_temp.require(not public.has_capability(pg_temp.fid('term'),'directory.
 select pg_temp.require(public.read_own_profile(pg_temp.fid('other-term')) is null,'wrong term cannot reveal own profile');
 select set_config('request.jwt.claim.sub',pg_temp.fid('head')::text,true);
 select pg_temp.require((select count(*)=0 from public.private_profiles),'head cannot read another raw profile');
-update public.private_profiles set share_course=true where member_id=pg_temp.fid('member');
+select pg_temp.reject($q$update public.private_profiles set share_course=true where member_id=pg_temp.fid('member')$q$,'42501');
 select pg_temp.require((select value->>'course' is null and value->>'phone' is null from jsonb_array_elements(public.read_people_directory(pg_temp.fid('term'))) where value->>'id'=pg_temp.fid('member')::text),'head cannot override or see unshared fields');
 reset role;
 update public.private_profiles set share_course=true where member_id=pg_temp.fid('member');
@@ -64,9 +69,38 @@ select pg_temp.require(jsonb_array_length(public.read_people_directory(pg_temp.f
 select 'ok 2 - P06_A2: directory access independent of blank affiliation (task/onboarding integration pending)' as tap;
 select pg_temp.require((select jsonb_array_length(value->'units')=2 from jsonb_array_elements(public.read_people_directory(pg_temp.fid('term'))) where value->>'id'=pg_temp.fid('member')::text),'two units in one person');
 select pg_temp.require((select bool_and(jsonb_array_length(value->'primary')=1 and value->'backup'='[]'::jsonb) from jsonb_array_elements(public.read_process_contacts(pg_temp.fid('term')))),'primary and missing backup explicit');
+select public.save_private_profile(pg_temp.fid('term'),'{"course":null}',0,pg_temp.fid('head-first-save'));
+select pg_temp.require((public.read_own_profile(pg_temp.fid('term'))->>'version')::integer=1,'first absent-profile save creates version one');
+select set_config('request.jwt.claim.sub',pg_temp.fid('member')::text,true);
+select public.save_private_profile(pg_temp.fid('term'),'{"course":"  Updated course  ","phone":null}',3,pg_temp.fid('save'));
+select pg_temp.require(public.read_own_profile(pg_temp.fid('term'))->>'course'='Updated course'
+  and public.read_own_profile(pg_temp.fid('term'))->>'phone' is null,'owner saves private values, trims and clears');
+select public.save_private_profile(pg_temp.fid('term'),'{"course":"  Updated course  ","phone":null}',3,pg_temp.fid('save'));
+select pg_temp.require((public.read_own_profile(pg_temp.fid('term'))->>'version')::integer=4,'retry performs no second write');
+select pg_temp.reject($q$select public.save_private_profile(pg_temp.fid('term'),'{"course":"Overwrite"}',3,pg_temp.fid('stale'))$q$,'40001');
+select pg_temp.reject($q$select public.save_private_profile(pg_temp.fid('term'),'{"course":"Changed payload"}',3,pg_temp.fid('save'))$q$,'22023');
+select pg_temp.reject($q$select public.save_private_profile(pg_temp.fid('term'),'{"shareCourse":true}',4,pg_temp.fid('bypass'))$q$,'22023');
+select pg_temp.reject($q$select public.set_profile_visibility(pg_temp.fid('term'),'{"shareCourse":"true"}',4,pg_temp.fid('badtype'))$q$,'22023');
+select public.set_profile_visibility(pg_temp.fid('term'),'{"shareCourse":true}',4,pg_temp.fid('share'));
+select set_config('request.jwt.claim.sub',pg_temp.fid('head')::text,true);
+select pg_temp.require((select value->>'course'='Updated course' from jsonb_array_elements(public.read_people_directory(pg_temp.fid('term'))) where value->>'id'=pg_temp.fid('member')::text),'separate visibility command exposes consented field');
+select set_config('request.jwt.claim.sub',pg_temp.fid('member')::text,true);
+select public.set_profile_visibility(pg_temp.fid('term'),'{"shareCourse":false}',5,pg_temp.fid('withdraw'));
+select public.save_private_profile(pg_temp.fid('term'),'{"course":"  Updated course  ","phone":null}',3,pg_temp.fid('save'));
+select pg_temp.require((public.read_own_profile(pg_temp.fid('term'))->>'version')::integer=6 and (public.read_own_profile(pg_temp.fid('term'))->>'shareCourse')::boolean=false,'delayed save retry cannot undo withdrawal');
+reset role;
+select pg_temp.require((select count(*)=3 from public.profile_commands where member_id=pg_temp.fid('member')),'one audit record per accepted command');
+select pg_temp.require(not exists(select 1 from public.profile_commands where row_to_json(profile_commands)::text like '%Updated course%'),'no private values in audit');
+update public.terms set state='frozen',frozen_at=statement_timestamp() where id=pg_temp.fid('term');
+set local role authenticated;
+select pg_temp.reject($q$select public.save_private_profile(pg_temp.fid('term'),'{"course":"Frozen"}',6,pg_temp.fid('frozen'))$q$,'42501');
+reset role;
+update public.terms set state='active' where id=pg_temp.fid('term');
+set local role authenticated;
 select set_config('request.jwt.claim.sub',pg_temp.fid('guest')::text,true);
 select pg_temp.require(public.read_people_directory(pg_temp.fid('term'))='[]'::jsonb and public.read_process_contacts(pg_temp.fid('term'))='[]'::jsonb,'no guest-wide directory');
 select pg_temp.require(public.read_own_profile(pg_temp.fid('term')) is null,'external guest cannot read a core private profile');
+select pg_temp.reject($q$select public.save_private_profile(pg_temp.fid('term'),'{"course":"Guest"}',0,pg_temp.fid('guest-save'))$q$,'42501');
 reset role;
 update public.members set account_state='suspended' where id=pg_temp.fid('member');
 set local role authenticated;
