@@ -12,6 +12,7 @@
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "typecheck:files": "tsc --noEmit -p tsconfig.files.json",
     "test:handoffs": "node scripts/test-handoffs.cjs",
+    "test:committee-timeline": "node scripts/test-committee-timeline.cjs",
     "test:dependencies": "node scripts/test-dependencies.cjs",
     "test:synergy-interface": "node scripts/test-synergy-interface.cjs",
     "test:synergy": "node scripts/test-synergy.cjs",

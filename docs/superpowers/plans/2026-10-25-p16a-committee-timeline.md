@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-Existing branch/checkout; live preview; no agents/chats/worktrees/provider changes/deployment/messages. Karla and existing design. Preserve inherited gates/original deadlines/FIN/MCD/accepted terms. No P17. Initial shared usage85%, effective5point budget; small verified checkpoint per BUILD-CONTRACT.
+Existing branch/checkout; live preview; no agents/chats/worktrees/provider changes/deployment/messages. Karla and existing design. Preserve inherited gates/original deadlines/FIN/MCD/accepted terms. Historical initial shared usage85%, effective5point budget produced the date foundation. The requested Oct25 heartbeat prioritized and completed P17's independent domain/API checkpoint, then resumed P16A serially under the same fresh1% baseline/40point execution budget. No P18.
 
 ## Review Focus
 
@@ -25,7 +25,9 @@ Existing branch/checkout; live preview; no agents/chats/worktrees/provider chang
 ## Tasks
 
 - [x] Add/test pure calendar-date foundation for nulls, markers, inclusive ranges, Manila boundaries and week/month windows.
-- [ ] Inspect current command authority and add nullable planned_start_on plus schedule-only RPC and deadline-changing command guards; named SQL A2 mutations/retries/authority tests; regenerate types.
-- [ ] Add permission-first canonical timeline projection with validated filters, deduplication, permitted options/edges and named SQL A1 cases.
+- [x] Inspect current command authority and add nullable planned_start_on plus schedule-only RPC and deadline-changing command guards; named SQL A2 mutations/retries/authority tests; regenerate types.
+- [x] Add permission-first canonical timeline projection with validated filters, deduplication, permitted options/edges and named SQL A1 cases.
 - [ ] Wire planned-start authorized forms and read-only week/month chart/chronological alternative, filters/navigation/markers/unscheduled/revalidation; named A3 browser checks.
 - [ ] Run required/relevant checks, review render/privacy/error paths, update contracts/STATE/P16A, commit/push and verify custody.
+
+Server checkpoint: required frontend/Edge typechecks/lint/build,112tests, type drift and relevant SQL regressions pass after023/024. Server review complete; no render acceptance claimed for the pending UI. Commit/push/custody is recorded in the P16A checkpoint and final receipt.

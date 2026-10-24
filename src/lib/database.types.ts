@@ -2827,6 +2827,7 @@ export type Database = {
           updated_at: string
           updated_by: string | null
           version: number
+          planned_start_on: string | null
         }
         Insert: {
           id?: string
@@ -2851,6 +2852,7 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          planned_start_on?: string | null
         }
         Update: {
           id?: string
@@ -2875,6 +2877,7 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          planned_start_on?: string | null
         }
         Relationships: [
           {
@@ -3159,6 +3162,15 @@ export type Database = {
         Args: {
           p_work_item_id: string
           p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_committee_timeline: {
+        Args: {
+          p_term_id: string
+          p_filters?: Json | null
+          p_page?: number | null
+          p_page_size?: number | null
         }
         Returns: Json | null
       }
@@ -3482,6 +3494,15 @@ export type Database = {
           p_title: string
           p_safe_summary: string
           p_body: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      update_work_schedule: {
+        Args: {
+          p_work_item_id: string
+          p_planned_start_on: string
           p_expected_version: number
           p_request_id: string
         }
