@@ -9,7 +9,7 @@ export function callbackUrl(origin: string): string | null {
 export function safeReturnPath(value: string | null): string {
   if (!value?.startsWith('/') || value.startsWith('//') || /[\\%]/.test(value) || hasControl(value)) return '/'
   const path = value.split(/[?#]/, 1)[0]
-  return navigationItems.some((item) => item.href === path && item.id !== 'shared') ? path : '/'
+  return path === '/guest/redeem' || navigationItems.some((item) => item.href === path) ? path : '/'
 }
 
 export function readCallback(search: string): string | null {

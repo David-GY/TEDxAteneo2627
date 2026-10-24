@@ -1,13 +1,21 @@
 import type { ClientEnvironment } from '../../lib/env'
 import { createSupabaseClient } from '../../lib/supabase'
 import { callbackUrl, safeReturnPath } from './redirects'
+import { createGuestGateway, type GuestGateway } from '../guests/gateway'
 
 export type MemberContext = {
   state: 'authorized'; memberId: string; displayName: string; organizationId: string
   termId: string; termMembershipId: string; expiresAt: string; capabilities: string[]
 }
-export type AuthResult = MemberContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
+export type GuestContext = {
+  state: 'authorized'; audience: 'guest'; guestAccessId: string; displayName: string
+  organizationId: string; termId: string; expiresAt: string; capabilities: string[]
+}
+export type WorkspaceContext = MemberContext | GuestContext
+export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
+export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  guests?: GuestGateway
   readContext: (signal?: AbortSignal) => Promise<AuthResult>
   beginGoogle: (returnTo: string) => Promise<void>
   exchange: (code: string) => Promise<void>
@@ -15,13 +23,15 @@ export interface AuthGateway {
   onChange: (listener: () => void) => () => void
 }
 
-export function parseContext(input: unknown): MemberContext | null {
+export function parseContext(input: unknown): WorkspaceContext | null {
   if (!input || typeof input !== 'object') return null
   const value = input as Record<string, unknown>
-  if (value.state !== 'authorized' || !['memberId','displayName','organizationId','termId','termMembershipId','expiresAt'].every((key) => typeof value[key] === 'string' && value[key] !== '')
+  const keys = value.audience === 'guest' ? ['guestAccessId','displayName','organizationId','termId','expiresAt'] : ['memberId','displayName','organizationId','termId','termMembershipId','expiresAt']
+  if (value.state !== 'authorized' || !keys.every((key) => typeof value[key] === 'string' && value[key] !== '')
     || !Array.isArray(value.capabilities) || !value.capabilities.every((entry) => typeof entry === 'string')
     || !Number.isFinite(Date.parse(value.expiresAt as string)) || Date.parse(value.expiresAt as string) <= Date.now()) return null
-  return value as MemberContext
+  if (value.audience === 'guest' && value.capabilities.length !== 0) return null
+  return value as WorkspaceContext
 }
 
 export const returnStorageKey = 'tedx.auth.return'
@@ -35,6 +45,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    guests: createGuestGateway(clientReady),
     async readContext(signal) {
       const client = await clientReady
       if (!client || !redirectTo) return { state: 'unavailable' }

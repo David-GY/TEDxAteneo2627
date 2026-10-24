@@ -3,7 +3,7 @@ const fs = require('node:fs/promises')
 const {createHash} = require('node:crypto')
 const {createIdentityDatabase} = require('./identity-db.cjs')
 ;(async()=>{
-  const {db,migrations}=await createIdentityDatabase()
+  const {db,migrations}=await createIdentityDatabase({through:'20261024000300_google_auth.sql'})
   try {
     await db.exec(await fs.readFile('supabase/seed.sql','utf8'))
     const result=await db.exec(await fs.readFile('supabase/tests/google_auth.test.sql','utf8'))

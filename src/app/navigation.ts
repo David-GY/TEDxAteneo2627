@@ -8,6 +8,7 @@ export type NavigationCapability =
   | 'mentoring.view'
   | 'reports.view'
   | 'admin.configure'
+  | 'roles.manage'
 
 export type NavigationContext = {
   audience: NavigationAudience
@@ -43,6 +44,7 @@ export const navigationItems: readonly NavigationItem[] = [
   { id: 'mentoring', label: 'Mentoring', href: '/mentoring', description: 'Goals and check-ins for assigned mentoring relationships.', group: 'role', audiences: ['core'], capability: 'mentoring.view' },
   { id: 'reports', label: 'Reports', href: '/reports', description: 'Operational reports within your permitted scope.', group: 'role', audiences: ['core'], capability: 'reports.view' },
   { id: 'admin', label: 'Administration', href: '/admin', description: 'Workspace configuration for authorized administrators.', group: 'role', audiences: ['core'], capability: 'admin.configure' },
+  { id: 'guests', label: 'Guest invitations', href: '/guests', description: 'Manage invitations you sponsor and their expiry.', group: 'role', audiences: ['core'], capability: 'roles.manage' },
   { id: 'notifications', label: 'Notifications', href: '/notifications', description: 'Updates that need your attention.', group: 'account', audiences: ['setup', 'core', 'guest'] },
   { id: 'account', label: 'Account', href: '/account', description: 'Your profile and account settings.', group: 'account', audiences: ['setup', 'core', 'guest'] },
 ]

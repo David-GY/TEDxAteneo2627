@@ -59,6 +59,8 @@ test:identity and test:authorization preserve P02/P03 historical migration bound
 
 ## Stable identifiers and database ownership (cross-feature conventions)
 
+P05 supersedes earlier guest-closed notes; see docs/guests.md. Two forced-RLS, direct-grant-denied tables and four authenticated invitation RPCs provide verified-email binding, hashed one-use tokens, expiry, sponsor-bound administration and redacted audit. resolve_auth_context wraps the unchanged private core resolver and may return minimal guest context without core membership/capabilities. Zero records shared until P07 supplies scope FKs. Types now cover 12 tables/154 columns/10 public functions. Historical P02/P03/P04 scripts preserve migration boundaries; test:guests also reruns P04 on full P05. User separately authorized GitHub checkpoint commits/pushes; app/provider deployment remains gated.
+
 - Business IDs: UUID strings. Database-generated IDs and canonical row relations, not display labels/array positions, identify records. Display tracking IDs are separate and term/namespace scoped.
 - Same-organization and same-term FK/command checks accompany membership/unit/work references. No inferred access inheritance from a linked parent or child.
 - PostgreSQL is authoritative for current membership, scoped grants, sensitive reads, workflow/state transitions, money, acceptance, immutable decisions, audit and idempotency. The browser is presentation, not an authorization boundary.

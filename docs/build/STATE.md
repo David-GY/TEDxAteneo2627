@@ -2,37 +2,36 @@
 
 Updated October 24, 2026 (Asia/Manila).
 
-- Last executed/current resumable step: **P04 — blocked_external**. Local Google PKCE/protected-route/trusted admission code and checks pass; real provider/full Supabase checks pending.
-- Completed: P00, P01. P02/P03 retain missing-runtime/PostgreSQL 17/JWT/PostgREST/official-type blockers. P05–P63 not executed.
-- Checkpoint docs/build/steps/P04.md; resume with build-prompts/CONTINUE.md. Prior checkpoints remain evidence for their historical boundaries.
-- Contracts: docs/integrations.md, docs/permissions.md, docs/build/CONTRACTS.md, supabase/README.md; DESIGN.md for shell.
+- Current resumable step: **P05 — blocked_external**. Local invitation/schema/UI/security checks delivered; full Supabase/real Google/JWT verification pending. Resume with build-prompts/CONTINUE.md.
+- Completed P00/P01. P02–P04 retain Docker/Supabase PostgreSQL 17, JWT/PostgREST, official-type and live Google blockers. P06–P63 not executed; P07 record scopes intentionally absent.
+- Detailed checkpoint docs/build/steps/P05.md. Contracts docs/guests.md, docs/permissions.md, docs/integrations.md, docs/build/CONTRACTS.md, supabase/README.md; DESIGN.md remains visual authority.
 
-## Current interfaces
+## Delivered interfaces
 
-Ten identity tables remain; P03 column/RLS restrictions and scoped helpers remain. P04 tightens current_term_membership to confirmed canonical school email, matching provider-managed verified Google identity, exact student.ateneo.edu domain and active current core roster. All inherited policies use that gate. Guests remain denied until explicit P05 invitation work; no guest creation or role self-grants.
+12 public tables/154 columns/10 functions. P02 identity/P03 policies/P04 exact school roster admission remain. P05 adds guest_invitations and guest_invitation_events with forced RLS/no direct API grants. create_guest_invitation, redeem_guest_invitation, revoke_guest_access, list_guest_invitations derive actor/sponsor; hashed one-use tokens, exact verified email, default/max 14 days, version/retry safety, sponsor-only metadata and redacted transactional audit. Renewal invalidates old access.
 
-Authenticated-only resolve_auth_context() derives auth.uid, locks/rechecks one preapproved roster row, links only unlinked/same-UID identity and activates invited account only with active core term membership. Returns safe denied or member/organization/term/membership/expiry/capabilities context. No actor/email inputs, metadata-based grants or automatic roster/role creation. Private school verifier is not exposed. Public catalog types cover six helpers, ten tables/133 columns.
+resolve_auth_context wraps unchanged private core resolver with separate minimal guest context, no core membership/capabilities. Current sponsor authority, verified email, expiry/revocation rechecked. No guest member/term membership/role created. Invitations share **zero records** until P07 creates real scope FKs. No invented work IDs, full-directory fallback, email sending or OTP.
 
-Frontend uses pinned Supabase JS 2.118.0, dynamically loaded for configured/approved origins; PKCE/manual callback exchange, getUser + database resolution, protected parent loader on navigation, auth/focus/visibility/poll/end-time revalidation, account switch and browser-local sign-out. Exact redirect/return allowlists; sanitized callback diagnostics, no-referrer. No business data or fake success actions. No config shows login Setup needed. Only development has /preview; production preview path is absent.
+Sponsor /guests uses real RPCs, scope preview, copy/select fallback, renew/revoke. Public /guest/redeem removes fragment bearer; memory only, never browser storage/return path. Sign in via Google then reopen original invitation link. Guest core/admin direct links redirect to /shared; DB remains authoritative. Auth/navigation/focus/poll/expiry checks remain. No production fixture/preview bypass.
 
-## Actual verification
+## Actual verification / blockers
 
-Passed test:google-auth (three named local SQL assertions), historical test:authorization/P03 and test:identity/P02, db:types / db:types:check, typecheck, lint, test (31 tests), build. Actual production browser smoke passed: protected deep-link redirect, no production preview bypass, rejected callback details removed/recovery, 320px reflow, zero runtime errors/external requests. JSON/hash/screenshot evidence under docs/build/evidence/P04-*.
+Passed pnpm test:guests (three named assertions plus P04 on full P05); historical test:identity/test:authorization/test:google-auth; db:types/db:types:check; typecheck/lint/36 frontend tests/build. Browser verify-p05.cjs passed production unconfigured redemption (fragment removal, no request-URL bearer/storage, disabled setup actions, 320px) and labeled test-only simulated sponsor component (create/link/revoke, long email, 44px). verify-p04.cjs regression passed protected routing/callback/production preview exclusion. Evidence/screenshots docs/build/evidence/P05-*; P04 login captures refreshed.
 
-No live provider proof: .env.local absent; expected Google client-ID/secret environment references false; Google disabled by default. Supabase status fails missing Docker/Podman; local P04 SQL command fails ECONNREFUSED 127.0.0.1:54322. Embedded PostgreSQL 18.6/PGlite uses minimal auth fixtures, not configured Supabase PostgreSQL 17 or real validated JWTs. No actual Google callback, full Supabase migration/API/official type result claimed. Historical P02/P03 SQL suites must not run unmodified against the tightened current schema; scripts preserve their migration boundaries.
+These use isolated PGlite PostgreSQL 18.6/auth-shaped subjects and local browser checks, not Supabase PostgreSQL 17, real validated JWT/PostgREST or Google callback proof. Docker/Podman absent, .env.local/provider references unavailable and Google disabled (prior P04 observations carried forward). Official CLI types, real old-JWT revoke/expiry/sponsor-loss calls, external-account callback/consent, deployed log redaction and human UAT remain blocked. No remote reset or real records.
 
-## Preview / connections
+## Preview / custody
 
-User preference: always show a preview while working. Live development shell http://127.0.0.1:5173/preview; login http://127.0.0.1:5173/login. Original dev session 70434 retained; restart pnpm dev if ended (strict port, avoid duplicates). Browser open requested, host queued; captured current login/mobile/shell previews. Production 4173 served temporarily for smoke and stopped afterward. P01 browser harness describes its older public-shell boundary; use verify-p04.cjs for current production routes.
+Live dev http://127.0.0.1:5173/preview and /guest/redeem, original session70434. Browser open requested (host queued); screenshots provide actual renders. Stop temporary production4173 after checks. Sponsor screenshots explicitly label simulated gateway/fictional identity; no fixture endpoint ships.
 
-No linked remote project, credentials, provider session/configuration changes, real records or external deployment. SQL checks use isolated in-memory DB; CLI test explicitly loopback only.
+User explicitly authorized GitHub backups. Existing public David-GY/TEDxAteneo2627 branch codex/core-build-checkpoints is configured as origin/upstream. P00–P04 commit0605c0f verified exact local/remote tree. P05 checkpoint/evidence prepared for next verified snapshot on same branch. Signed-out gh CLI replaced by connected GitHub Git-data API. No PR/main merge, website/provider deployment or messages/invitations. Env/runtime/dependency/dist artifacts ignored.
 
 ## Next smallest action
 
-Resume P04 with build-prompts/CONTINUE.md after local runtime and approved Google/Supabase setup. Follow docs/integrations.md for secret references, exact callback origins/URLs, provider enablement and verified local target. Run P04 SQL on Supabase 17, compare official types, then real school Google callback/PKCE/negative identities/old-token expiry-suspension/account switch/sign-out and JWT/REST checks. Never use remote reset or service-role principal as a substitute. P02/P03 blockers remain live activation gates.
+Resume P05 with build-prompts/CONTINUE.md after local container runtime and approved Google/Supabase setup. Verify loopback target, migrate/seed synthetic DB, run guests/google SQL on Supabase17, compare official types, then real external PKCE and old guest-JWT requests before/after revoke/renew/expiry/sponsor suspension. Verify no raw-token request/DB logging. Carry P02–P04 gates forward. P06 only next separately requestable code-dependency-eligible prompt; do not auto-run or add P07 scopes here.
 
-P05 is next code-dependency-eligible only if separately requested, carrying these exact blockers; do not auto-run. Production HTTPS origin still needs approval/configuration. Real roster/FIN/MCD authorities, school policy, privacy custodian/basis/retention, audit/privileged workflows, logo and human UAT remain future gates.
+Real roster/FIN/MCD authority, guest sponsor policy, privacy custodian/basis/retention, production HTTPS origin, approved logo and human UAT remain open.
 
-## Usage/custody
+## Usage
 
-P04 shared-account five-hour observations 45 → 49 → 53 usedPercent, reset 1792816155; observed +8 within 40-point soft allowance, not exact task attribution. P03 37 → 40 → 42; P02 29 → 33 → 35. No reset purchase/waiting. No agents/chats, branches/worktrees, messages/invitations, commits/push, provider changes or deployment. Node 24.22.1 / pnpm 11.25.0 / TS 6.0.3, one lockfile. Original plan/prompt pack preserved.
+P05 shared-account observations 56 → 64 → 66 → 71 → 74 usedPercent, reset1792816155. Effective allowance34 points, wind down85 usedPercent. Includes GitHub preservation/rechecks/shared activity, not exact attribution. No reset/credit purchase/waiting, agents, extra chats/worktrees. Node24.22.1/pnpm11.25.0; existing versions/lockfile preserved.

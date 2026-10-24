@@ -49,6 +49,8 @@ Own profile edits are a built-in membership right, not a workspace-role escalati
 
 ## Evidence and limits
 
+P05 adds a separate invitation boundary; see [guest contracts](guests.md). Core helpers still require school/core roster membership. Invitation RPCs require the current sponsor's term roles.manage grant; guests inherit no core grants. Minimal verified-Google guest context shares zero records before P07. Guest tables have no direct API grants; private resolver/verifiers remain inaccessible. Revocation, expiry or sponsor authority loss denies current context under an unchanged authenticated subject. Real previously issued JWT transport verification remains blocked. P03 details below describe its historical boundary.
+
 `pnpm test:authorization` applies both migrations and the fictional seed, creates rolled-back PM/head/member/associate/guest/nonmember/suspended/other-organization principals, then runs named P03 assertions. It checks direct SQL as the API roles, not service-role UI simulations. Fake administrative metadata cannot replace database grants. Positive writes assert changed-row count, values, actor and version. The P02 historical pre-policy suite remains available as `pnpm test:identity`; it applies only P02, since its zero-policy assertions intentionally precede this migration.
 
 Generated types now include five catalog-introspected helper signatures. Scalar returns are conservatively nullable. Future table/view/RPC types must extend the generator; full official CLI comparison remains pending.

@@ -5,6 +5,110 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      guest_invitation_events: {
+        Row: {
+          id: string
+          invitation_id: string
+          actor_id: string
+          event: string
+          occurred_at: string
+          request_id: string | null
+        }
+        Insert: {
+          id?: string
+          invitation_id: string
+          actor_id: string
+          event: string
+          occurred_at?: string
+          request_id?: string | null
+        }
+        Update: {
+          id?: string
+          invitation_id?: string
+          actor_id?: string
+          event?: string
+          occurred_at?: string
+          request_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_invitation_events_invitation_id_fkey"
+            columns: ["invitation_id"]
+            isOneToOne: false
+            referencedRelation: "guest_invitations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guest_invitations: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          sponsor_id: string
+          email: string
+          token_hash: string
+          scope_mode: string
+          created_at: string
+          expires_at: string
+          redeemed_by: string | null
+          redeemed_at: string | null
+          revoked_at: string | null
+          version: number
+          request_id: string
+          replaces_id: string | null
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          sponsor_id: string
+          email: string
+          token_hash: string
+          scope_mode?: string
+          created_at?: string
+          expires_at?: string
+          redeemed_by?: string | null
+          redeemed_at?: string | null
+          revoked_at?: string | null
+          version?: number
+          request_id: string
+          replaces_id?: string | null
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          sponsor_id?: string
+          email?: string
+          token_hash?: string
+          scope_mode?: string
+          created_at?: string
+          expires_at?: string
+          redeemed_by?: string | null
+          redeemed_at?: string | null
+          revoked_at?: string | null
+          version?: number
+          request_id?: string
+          replaces_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_invitations_replaces_id_fkey"
+            columns: ["replaces_id"]
+            isOneToOne: false
+            referencedRelation: "guest_invitations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "guest_invitations_sponsor_id_organization_id_term_id_fkey"
+            columns: ["sponsor_id","organization_id","term_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id","organization_id","term_id"]
+          },
+        ]
+      }
       members: {
         Row: {
           id: string
@@ -612,6 +716,17 @@ export type Database = {
     }
     Views: { [_ in never]: never }
     Functions: {
+      create_guest_invitation: {
+        Args: {
+          p_term_id: string
+          p_email: string
+          p_request_id: string
+          p_expires_at?: string | null
+          p_replaces_id?: string | null
+          p_expected_version?: number | null
+        }
+        Returns: Json | null
+      }
       current_term_membership: {
         Args: {
           p_term_id: string
@@ -632,6 +747,12 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      list_guest_invitations: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       owns_active_member: {
         Args: {
           p_member_id: string
@@ -648,8 +769,22 @@ export type Database = {
           display_name: string
         }[]
       }
+      redeem_guest_invitation: {
+        Args: {
+          p_token: string
+        }
+        Returns: Json | null
+      }
       resolve_auth_context: {
         Args: Record<string, never>
+        Returns: Json | null
+      }
+      revoke_guest_access: {
+        Args: {
+          p_invitation_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
         Returns: Json | null
       }
     }

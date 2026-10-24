@@ -1,0 +1,8 @@
+{
+  "target": "local production unconfigured redemption; development component fixture with explicitly simulated gateway",
+  "checks": [
+    "Production redemption strips fragment, sends no bearer in URL requests, persists none, disables unconfigured actions and reflows at 320px",
+    "Simulated sponsor component: zero-record preview, create/link display/revoke flow; long email, 320px reflow and 44px controls"
+  ],
+  "errors": []
+}

@@ -17,6 +17,7 @@
     "test:identity": "node scripts/test-identity.cjs",
     "test:authorization": "node scripts/test-authorization.cjs",
     "test:google-auth": "node scripts/test-google-auth.cjs",
+    "test:guests": "node scripts/test-guests.cjs",
     "db:types": "node scripts/generate-identity-types.cjs",
     "db:types:check": "node scripts/generate-identity-types.cjs --check",
     "build": "vite build"

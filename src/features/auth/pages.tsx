@@ -3,8 +3,8 @@ import { Link, Outlet, useLoaderData, useLocation, useNavigate, useRevalidator }
 import { LoadingState } from '../../components/FeedbackState'
 import { AppShell } from '../../app/AppShell'
 import type { NavigationCapability } from '../../app/navigation'
-import type { AuthGateway, AuthResult, MemberContext } from './gateway'
-import { consumeReturnPath } from './gateway'
+import type { AuthGateway, AuthResult, WorkspaceContext } from './gateway'
+import { consumeReturnPath, isGuest } from './gateway'
 import { readCallback, safeReturnPath } from './redirects'
 
 export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
@@ -22,13 +22,13 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
 }
 
 export function ProtectedShell() {
-  const member = useLoaderData() as MemberContext
+  const member = useLoaderData() as WorkspaceContext
   const { revalidate } = useRevalidator()
   useEffect(() => {
     const timer = window.setTimeout(() => void revalidate(), Math.min(2_147_483_647, Math.max(0, Date.parse(member.expiresAt) - Date.now())))
     return () => clearTimeout(timer)
   }, [member.expiresAt, revalidate])
-  return <AppShell context={{ audience: 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} />
+  return <AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} />
 }
 
 export function LoginPage({ gateway }: { gateway: AuthGateway }) {
@@ -55,7 +55,7 @@ export function LoginPage({ gateway }: { gateway: AuthGateway }) {
       <button className="button" disabled={busy} onClick={() => void start(denied)}>{busy ? 'Opening Google…' : denied ? 'Use another Google account' : 'Continue with Google'}</button>
     </>}
     {error ? <p className="field-error" role="alert">{error}</p> : null}
-    <p className="muted">Approved guests will use a separate invitation path. Guest access is not enabled yet.</p>
+    <p className="muted">Invited guests may use an external Google account. Open the invitation link from your sponsor to continue.</p>
     {import.meta.env.DEV ? <Link className="button button--secondary" to="/preview">View development shell preview</Link> : null}
   </main>
 }
