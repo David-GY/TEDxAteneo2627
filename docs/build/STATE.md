@@ -2,13 +2,13 @@
 
 Updated October24,2026 (Asia/Manila).
 
-- Current step: **P12 — blocked_external**. Independent private uploads/working-source/immutable-manifest implementation and named P12_A1–A3 delivered. Real Storage/Auth/Edge/JWT/concurrent sessions, authority/privacy and human checks remain blocked.
-- P00/P01 complete; P02–P11 retain their blocked_external ledgers. P13–P63 not executed. Next separately dependency-eligible prompt: **P13 — build-prompts/13-personal-overview.md**; do not auto-run.
-- Current files contract: docs/files.md; comments/tasks/deliverables/work/permissions/identity/guest contracts remain authoritative. Full P12 evidence: docs/build/steps/P12.md and docs/build/evidence/P12-checks.txt. DESIGN.md remains visual authority.
+- Current step: **P13 — blocked_external**. Independent personal overview and named P13_A1–A3 delivered. All P02–P12 external gates remain.
+- P00/P01 complete; P02–P12 retain their blocked_external ledgers. P14–P63 not executed. Next separately dependency-eligible prompt: **P14**; do not auto-run.
+- Current overview contract: docs/overview.md; files contract: docs/files.md; comments/tasks/deliverables/work/permissions/identity/guest contracts remain authoritative. Full P12 evidence: docs/build/steps/P12.md and docs/build/evidence/P12-checks.txt. DESIGN.md remains visual authority.
 
 ## Delivered interfaces
 
-Schema **37tables/425columns/53public functions**, migrations001–017. P12 adds assets/asset_links/asset_manifests/asset_manifest_items, forced RLS before reads/no client writes. Private work-private bucket with restrictive client deny prevents direct reads/listing/upload/signing. Extra links preserve original and target record access independently. Guest access remains read-only and exact-scoped; ordinary summaries confer no file access.
+Schema **37tables/425columns/54public functions**, migrations001–018. P12 adds assets/asset_links/asset_manifests/asset_manifest_items, forced RLS before reads/no client writes. Private work-private bucket with restrictive client deny prevents direct reads/listing/upload/signing. Extra links preserve original and target record access independently. Guest access remains read-only and exact-scoped; ordinary summaries confer no file access.
 
 Session-derived reserve_upload/finalize_upload/save_working_link/attach_asset/authorize_asset_download/read_files/can_read_manifest plus trusted-service-only seal_upload. Actual Edge handler validates Auth/content/hash, writes random paths without overwrite, reauthorizes before sealing and before streamed download, and audits opaque access attempts without contents/URLs/tokens. No signing endpoint or inline/private browser cache. Strict PDF/JPEG/PNG5MiB/file,20MiB staged/manifest. Documented conservative format limitations and no antivirus claim.
 
@@ -30,7 +30,7 @@ P02–P09 gates carried forward: Docker/Podman absent; .env.local/provider refer
 
 P10 retains those same external task/provider/authority/privacy/human gates and the closed contribution interface. P11 retains real authenticated guest/revocation, simultaneous amendment/retry and human comment/redaction/privacy checks. P12 additionally needs approved actual Storage/Edge runtime and exact APP_ORIGIN/server-only credentials, real private direct-path/list/sign denial under current/old revoked JWTs, real concurrent upload/finalize/no-overwrite tests, verified deployed logs/headers/hashes, orphan reconciliation/provider retention/backup and human file/privacy acceptance. No blocker is relabeled complete.
 
-After approved runtime/provider setup, verify loopback Supabase17, migrate/seed synthetic records, compare official types and run P12_A1–A3 through real Auth/Storage/Edge subjects/connections; verify safe audit/headers/hash and record human/privacy acceptance. Resume external checks with CONTINUE. P13 is separately code-eligible only; not started.
+After approved runtime/provider setup, verify loopback Supabase17, migrate/seed synthetic records, compare official types and run P12_A1–A3 through real Auth/Storage/Edge subjects/connections; verify safe audit/headers/hash and record human/privacy acceptance. Resume external checks with CONTINUE. P13 local overview is delivered; its actual Supabase/JWT/human verification remains blocked. P14 was not started.
 
 ## Preview / custody / usage
 
@@ -39,3 +39,11 @@ Live Vite5173 and **http://127.0.0.1:5178/tasks** remain visible, explicitly syn
 Started clean on codex/core-build-checkpoints at8665d43ea94c7013ef42573f2a4ee36bfe53e4fd; fetched remote matched before checkpoint. User authorizes reviewed commit/push. Final local/remote commit/tree and clean worktree are checked after this ledger and reported in chat. Existing verified author identity is used per-command without persistent Git configuration changes.
 
 Fresh shared usage61 →68 →73 →75 →82%, reset1792852230. Effective allowance29points, wind-down85used/ceiling90used. Account-wide observations are not exact prompt attribution. No reset credit/purchase/wait, model/speed change or fresh allowance.
+
+## P13 checkpoint
+
+read_overview returns current assigned tasks/owned deliverables with independent detail access, active term, no terminal records and deterministic50-row cap. Counts equal visible lane rows; blocked/submitted work waits separately. Missing reviewer is explicit. Owner/next person/action/Manila dates/committee and authorized deep links; focus/visibility/route return/manual refetch. No later inbox/handoff/approval sources are invented. Extension contract docs/overview.md.
+
+PASS P13_A1–A3 SQL and actual-SQL browser refetch,21files/87frontend tests, typecheck/lint/build174modules (app430.86kB/gzip129.37kB), generated types37/425/54. Captures inspected; detector[]. Earlier3 fallback-heading test failures and correction retained in P13-checks.txt. Details docs/build/steps/P13.md. Next external action: real authenticated scope/revocation/completion and human next-action UAT after approved runtime setup; no inherited blocker discharged.
+
+P13 started clean at a47401f6c1276f949f4d018ce6f8047ac87f12ea, same branch/remote. Current visible preview http://127.0.0.1:5178/ uses actual isolated SQL/simulated sign-in. Fresh shared P13 usage84 →87%, reset1792852230; allowance6points, wind-down85/ceiling90. Prior usage above belongs to P12. No reset/purchase/wait. Final reviewed commit/push and matching remote commit/tree/clean worktree verified after ledger.

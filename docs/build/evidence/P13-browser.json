@@ -1,0 +1,9 @@
+{
+  "target": "actual isolated SQL overview and completion; simulated sign-in, not Supabase/JWT",
+  "checks": [
+    "counts equal visible rows",
+    "external SQL completion disappears after actual RPC refresh",
+    "desktop/320px/no runtime errors or browser storage"
+  ],
+  "errors": []
+}

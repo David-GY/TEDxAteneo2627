@@ -2350,6 +2350,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_overview: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_own_profile: {
         Args: {
           p_term_id: string

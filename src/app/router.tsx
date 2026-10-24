@@ -1,3 +1,4 @@
+import {Overview} from '../features/overview/Overview'
 import { createBrowserRouter, Link, redirect, type RouteObject } from 'react-router'
 import { readClientEnvironment, type ClientEnvironment } from '../lib/env'
 import { PageHeading, Panel } from '../components/Page'
@@ -86,7 +87,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         const url = new URL(request.url)
         return redirect(`/login?reason=${result.state === 'denied' ? 'denied' : 'check'}&returnTo=${encodeURIComponent(safeReturnPath(url.pathname))}`)
       }, shouldRevalidate: () => true, children: [
-      { index: true, element: <><PageHeading title="Overview" description="Your current core membership has been verified." /><EmptyState title="Your workspace is ready for its next step" description="Work modules will appear here as they are connected. No sample tasks or metrics are shown." /></> },
+      { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
       {path:'tasks/:taskId',element:gateway.tasks?<TaskDetail api={gateway.tasks} comments={gateway.comments} files={gateway.files}/>:<EmptyState title="Task unavailable" description="The connection is unavailable."/>},
       {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage api={gateway.deliverables} commands={gateway.deliverableCommands} comments={gateway.comments} files={gateway.files}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({

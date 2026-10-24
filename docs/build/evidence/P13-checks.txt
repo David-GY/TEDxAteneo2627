@@ -1,0 +1,2167 @@
+P13 local verification · October24,2026 Asia/Manila
+
+> node scripts/test-overview.cjs
+1..3
+ok 1 - P13_A1: normalized rows are unique and form the only source of widget counts
+ok 2 - P13_A2: unrelated restricted task/deliverable titles and aggregate overflow are absent
+ok 3 - P13_A3: actual completion disappears on a fresh authoritative query
+EXIT 0
+
+> pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+ ❯ src/features/guests/guests.test.tsx (6 tests | 1 failed) 1904ms
+   × P05_A2: ordinary core member cannot open sponsor controls 1024ms
+ ❯ src/app/router.test.tsx (6 tests | 2 failed) 2531ms
+   × P04_A1: only server-authorized context enters a protected route 1021ms
+   × P04_A2: denied context cannot deep-link; an old authorized context is rechecked on navigation 1015ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/app/router.test.tsx > P04_A1: only server-authorized context enters a protected route
+TestingLibraryElementError: Unable to find role="heading" and name "Overview"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<a[39m
+      [33mclass[39m=[32m"skip-link"[39m
+      [33mhref[39m=[32m"#main-content"[39m
+    [36m>[39m
+      [0mSkip to main content[0m
+    [36m</a>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"workspace-shell"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33maria-label[39m=[32m"Workspace sidebar"[39m
+        [33mclass[39m=[32m"sidebar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"workspace-identity"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-identity"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mTEDx Ateneo de Manila U[0m
+          [36m</a>[39m
+          [36m<p>[39m
+            [0mCore workspace[0m
+          [36m</p>[39m
+          [36m<small>[39m
+            [0mText identity; approved logo pending[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Workspace navigation"[39m
+          [33mclass[39m=[32m"desktop-navigation"[39m
+        [36m>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--workspace"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"nav-link active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/"[39m
+              [36m>[39m
+                [0mOverview[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/deliverables"[39m
+              [36m>[39m
+                [0mCore deliverables[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/tasks"[39m
+              [36m>[39m
+                [0mMy tasks[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/working-together"[39m
+              [36m>[39m
+                [0mWorking together[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/requests"[39m
+              [36m>[39m
+                [0mDepartment requests[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/calendar"[39m
+              [36m>[39m
+                [0mCalendar[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/resources"[39m
+              [36m>[39m
+                [0mResources & Start Here[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/people"[39m
+              [36m>[39m
+                [0mPeople[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--account"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/notifications"[39m
+              [36m>[39m
+                [0mNotifications[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/account"[39m
+              [36m>[39m
+                [0mAccount[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"sidebar-footer"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mOne team. Clear next steps.[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"muted"[39m
+          [36m>[39m
+            [0mEvent day[0m
+            [36m<br />[39m
+            [36m<time[39m
+              [33mdatetime[39m=[32m"2027-04-17"[39m
+            [36m>[39m
+              [0mApril 17, 2027[0m
+            [36m</time>[39m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</aside>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-body"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"workspace-header"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"location-heading"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"mobile-identity"[39m
+            [36m>[39m
+              [0mTEDxAteneodeManilaU[0m
+            [36m</span>[39m
+            [36m<span>[39m
+              [0mOverview[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"account-summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"identity-details"[39m
+            [36m>[39m
+              [36m<strong>[39m
+                [0mFictional test member[0m
+              [36m</strong>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button button--secondary"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</div>[39m
+        [36m</header>[39m
+        [36m<main[39m
+          [33maria-busy[39m=[32m"false"[39m
+          [33mclass[39m=[32m"workspace-main"[39m
+          [33mid[39m=[32m"main-content"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-labelledby[39m=[32m"_r_0_"[39m
+            [33mclass[39m=[32m"feedback-state"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_0_"[39m
+            [36m>[39m
+              [0mOverview unavailable[0m
+            [36m</h2>[39m
+            [36m<p>[39m
+              [0mThe workspace connection is unavailable.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</main>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"More workspace pages"[39m
+      [33mclass[39m=[32m"mobile-more"[39m
+      [33mhidden[39m=[32m""[39m
+      [33mid[39m=[32m"mobile-more-pages"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"more-heading"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mMore pages[0m
+        [36m</h2>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"button button--secondary"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mClose pages[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Additional workspace navigation"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/requests"[39m
+            [36m>[39m
+              [0mDepartment requests[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/calendar"[39m
+            [36m>[39m
+              [0mCalendar[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/resources"[39m
+            [36m>[39m
+              [0mResources & Start Here[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/people"[39m
+            [36m>[39m
+              [0mPeople[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/notifications"[39m
+            [36m>[39m
+              [0mNotifications[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+    [36m</section>[39m
+    [36m<nav[39m
+      [33maria-label[39m=[32m"Mobile workspace navigation"[39m
+      [33mclass[39m=[32m"mobile-navigation"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33maria-current[39m=[32m"page"[39m
+        [33mclass[39m=[32m"nav-link active"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/"[39m
+      [36m>[39m
+        [0mOverview[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/deliverables"[39m
+      [36m>[39m
+        [0mDeliverables[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/tasks"[39m
+      [36m>[39m
+        [0mMy tasks[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/working-together"[39m
+      [36m>[39m
+        [0mWorking together[0m
+      [36m</a>[39m
+      [36m<button[39m
+        [33maria-controls[39m=[32m"mobile-more-pages"[39m
+        [33maria-expanded[39m=[32m"false"[39m
+        [33mclass[39m=[32m"nav-link more-button"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mMore[0m
+      [36m</button>[39m
+    [36m</nav>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<a[39m
+      [33mclass[39m=[32m"skip-link"[39m
+      [33mhref[39m=[32m"#main-content"[39m
+    [36m>[39m
+      [0mSkip to main content[0m
+    [36m</a>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"workspace-shell"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33maria-label[39m=[32m"Workspace sidebar"[39m
+        [33mclass[39m=[32m"sidebar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"workspace-identity"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-identity"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mTEDx Ateneo de Manila U[0m
+          [36m</a>[39m
+          [36m<p>[39m
+            [0mCore workspace[0m
+          [36m</p>[39m
+          [36m<small>[39m
+            [0mText identity; approved logo pending[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Workspace navigation"[39m
+          [33mclass[39m=[32m"desktop-navigation"[39m
+        [36m>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--workspace"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"nav-link active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/"[39m
+              [36m>[39m
+                [0mOverview[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/deliverables"[39m
+              [36m>[39m
+                [0mCore deliverables[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/tasks"[39m
+              [36m>[39m
+                [0mMy tasks[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/working-together"[39m
+              [36m>[39m
+                [0mWorking together[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/requests"[39m
+              [36m>[39m
+                [0mDepartment requests[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/calendar"[39m
+              [36m>[39m
+                [0mCalendar[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/resources"[39m
+              [36m>[39m
+                [0mResources & Start Here[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/people"[39m
+              [36m>[39m
+                [0mPeople[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--account"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/notifications"[39m
+              [36m>[39m
+                [0mNotifications[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/account"[39m
+              [36m>[39m
+                [0mAccount[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"sidebar-footer"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mOne team. Clear next steps.[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"muted"[39m
+          [36m>[39m
+            [0mEvent day[0m
+            [36m<br />[39m
+            [36m<time[39m
+              [33mdatetime[39m=[32m"2027-04-17"[39m
+            [36m>[39m
+              [0mApril 17, 2027[0m
+            [36m</time>[39m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</aside>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-body"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"workspace-header"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"location-heading"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"mobile-identity"[39m
+            [36m>[39m
+              [0mTEDxAteneodeManilaU[0m
+            [36m</span>[39m
+            [36m<span>[39m
+              [0mOverview[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"account-summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"identity-details"[39m
+            [36m>[39m
+              [36m<strong>[39m
+                [0mFictional test member[0m
+              [36m</strong>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button button--secondary"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</div>[39m
+        [36m</header>[39m
+        [36m<main[39m
+          [33maria-busy[39m=[32m"false"[39m
+          [33mclass[39m=[32m"workspace-main"[39m
+          [33mid[39m=[32m"main-content"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-labelledby[39m=[32m"_r_0_"[39m
+            [33mclass[39m=[32m"feedback-state"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_0_"[39m
+            [36m>[39m
+              [0mOverview unavailable[0m
+            [36m</h2>[39m
+            [36m<p>[39m
+              [0mThe workspace connection is unavailable.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</main>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"More workspace pages"[39m
+      [33mclass[39m=[32m"mobile-more"[39m
+      [33mhidden[39m=[32m""[39m
+      [33mid[39m=[32m"mobile-more-pages"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"more-heading"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mMore pages[0m
+        [36m</h2>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"button button--secondary"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mClose pages[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Additional workspace navigation"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/requests"[39m
+            [36m>[39m
+              [0mDepartment requests[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/calendar"[39m
+            [36m>[39m
+              [0mCalendar[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/resources"[39m
+            [36m>[39m
+              [0mResources & Start Here[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/people"[39m
+            [36m>[39m
+              [0mPeople[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/notifications"[39m
+            [36m>[39m
+              [0mNotifications[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+    [36m</section>[39m
+    [36m<nav[39m
+      [33maria-label[39m=[32m"Mobile workspace navigation"[39m
+      [33mclass[39m=[32m"mobile-navigation"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33maria-current[39m=[32m"page"[39m
+        [33mclass[39m=[32m"nav-link active"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/"[39m
+      [36m>[39m
+        [0mOverview[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/deliverables"[39m
+      [36m>[39m
+        [0mDeliverables[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/tasks"[39m
+      [36m>[39m
+        [0mMy tasks[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/working-together"[39m
+      [36m>[39m
+        [0mWorking together[0m
+      [36m</a>[39m
+      [36m<button[39m
+        [33maria-controls[39m=[32m"mobile-more-pages"[39m
+        [33maria-expanded[39m=[32m"false"[39m
+        [33mclass[39m=[32m"nav-link more-button"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mMore[0m
+      [36m</button>[39m
+    [36m</nav>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/app/router.test.tsx:24:23
+     22|   const router = createMemoryRouter(createAppRoutes(environment, gatew…
+     23|   render(<RouterProvider router={router} />)
+     24|   expect(await screen.findByRole('heading', { name: 'Overview' })).toB…
+       |                       ^
+     25|   expect(screen.getByText('Fictional test member')).toBeTruthy()
+     26| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/app/router.test.tsx > P04_A2: denied context cannot deep-link; an old authorized context is rechecked on navigation
+TestingLibraryElementError: Unable to find role="heading" and name "Overview"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<a[39m
+      [33mclass[39m=[32m"skip-link"[39m
+      [33mhref[39m=[32m"#main-content"[39m
+    [36m>[39m
+      [0mSkip to main content[0m
+    [36m</a>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"workspace-shell"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33maria-label[39m=[32m"Workspace sidebar"[39m
+        [33mclass[39m=[32m"sidebar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"workspace-identity"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-identity"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mTEDx Ateneo de Manila U[0m
+          [36m</a>[39m
+          [36m<p>[39m
+            [0mCore workspace[0m
+          [36m</p>[39m
+          [36m<small>[39m
+            [0mText identity; approved logo pending[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Workspace navigation"[39m
+          [33mclass[39m=[32m"desktop-navigation"[39m
+        [36m>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--workspace"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"nav-link active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/"[39m
+              [36m>[39m
+                [0mOverview[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/deliverables"[39m
+              [36m>[39m
+                [0mCore deliverables[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/tasks"[39m
+              [36m>[39m
+                [0mMy tasks[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/working-together"[39m
+              [36m>[39m
+                [0mWorking together[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/requests"[39m
+              [36m>[39m
+                [0mDepartment requests[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/calendar"[39m
+              [36m>[39m
+                [0mCalendar[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/resources"[39m
+              [36m>[39m
+                [0mResources & Start Here[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/people"[39m
+              [36m>[39m
+                [0mPeople[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--account"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/notifications"[39m
+              [36m>[39m
+                [0mNotifications[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/account"[39m
+              [36m>[39m
+                [0mAccount[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"sidebar-footer"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mOne team. Clear next steps.[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"muted"[39m
+          [36m>[39m
+            [0mEvent day[0m
+            [36m<br />[39m
+            [36m<time[39m
+              [33mdatetime[39m=[32m"2027-04-17"[39m
+            [36m>[39m
+              [0mApril 17, 2027[0m
+            [36m</time>[39m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</aside>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-body"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"workspace-header"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"location-heading"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"mobile-identity"[39m
+            [36m>[39m
+              [0mTEDxAteneodeManilaU[0m
+            [36m</span>[39m
+            [36m<span>[39m
+              [0mOverview[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"account-summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"identity-details"[39m
+            [36m>[39m
+              [36m<strong>[39m
+                [0mFictional test member[0m
+              [36m</strong>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button button--secondary"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</div>[39m
+        [36m</header>[39m
+        [36m<main[39m
+          [33maria-busy[39m=[32m"false"[39m
+          [33mclass[39m=[32m"workspace-main"[39m
+          [33mid[39m=[32m"main-content"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-labelledby[39m=[32m"_r_1_"[39m
+            [33mclass[39m=[32m"feedback-state"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_1_"[39m
+            [36m>[39m
+              [0mOverview unavailable[0m
+            [36m</h2>[39m
+            [36m<p>[39m
+              [0mThe workspace connection is unavailable.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</main>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"More workspace pages"[39m
+      [33mclass[39m=[32m"mobile-more"[39m
+      [33mhidden[39m=[32m""[39m
+      [33mid[39m=[32m"mobile-more-pages"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"more-heading"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mMore pages[0m
+        [36m</h2>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"button button--secondary"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mClose pages[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Additional workspace navigation"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/requests"[39m
+            [36m>[39m
+              [0mDepartment requests[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/calendar"[39m
+            [36m>[39m
+              [0mCalendar[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/resources"[39m
+            [36m>[39m
+              [0mResources & Start Here[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/people"[39m
+            [36m>[39m
+              [0mPeople[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/notifications"[39m
+            [36m>[39m
+              [0mNotifications[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+    [36m</section>[39m
+    [36m<nav[39m
+      [33maria-label[39m=[32m"Mobile workspace navigation"[39m
+      [33mclass[39m=[32m"mobile-navigation"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33maria-current[39m=[32m"page"[39m
+        [33mclass[39m=[32m"nav-link active"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/"[39m
+      [36m>[39m
+        [0mOverview[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/deliverables"[39m
+      [36m>[39m
+        [0mDeliverables[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/tasks"[39m
+      [36m>[39m
+        [0mMy tasks[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/working-together"[39m
+      [36m>[39m
+        [0mWorking together[0m
+      [36m</a>[39m
+      [36m<button[39m
+        [33maria-controls[39m=[32m"mobile-more-pages"[39m
+        [33maria-expanded[39m=[32m"false"[39m
+        [33mclass[39m=[32m"nav-link more-button"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mMore[0m
+      [36m</button>[39m
+    [36m</nav>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<a[39m
+      [33mclass[39m=[32m"skip-link"[39m
+      [33mhref[39m=[32m"#main-content"[39m
+    [36m>[39m
+      [0mSkip to main content[0m
+    [36m</a>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"workspace-shell"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33maria-label[39m=[32m"Workspace sidebar"[39m
+        [33mclass[39m=[32m"sidebar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"workspace-identity"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-identity"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mTEDx Ateneo de Manila U[0m
+          [36m</a>[39m
+          [36m<p>[39m
+            [0mCore workspace[0m
+          [36m</p>[39m
+          [36m<small>[39m
+            [0mText identity; approved logo pending[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Workspace navigation"[39m
+          [33mclass[39m=[32m"desktop-navigation"[39m
+        [36m>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--workspace"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"nav-link active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/"[39m
+              [36m>[39m
+                [0mOverview[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/deliverables"[39m
+              [36m>[39m
+                [0mCore deliverables[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/tasks"[39m
+              [36m>[39m
+                [0mMy tasks[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/working-together"[39m
+              [36m>[39m
+                [0mWorking together[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/requests"[39m
+              [36m>[39m
+                [0mDepartment requests[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/calendar"[39m
+              [36m>[39m
+                [0mCalendar[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/resources"[39m
+              [36m>[39m
+                [0mResources & Start Here[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/people"[39m
+              [36m>[39m
+                [0mPeople[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--account"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/notifications"[39m
+              [36m>[39m
+                [0mNotifications[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/account"[39m
+              [36m>[39m
+                [0mAccount[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"sidebar-footer"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mOne team. Clear next steps.[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"muted"[39m
+          [36m>[39m
+            [0mEvent day[0m
+            [36m<br />[39m
+            [36m<time[39m
+              [33mdatetime[39m=[32m"2027-04-17"[39m
+            [36m>[39m
+              [0mApril 17, 2027[0m
+            [36m</time>[39m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</aside>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-body"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"workspace-header"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"location-heading"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"mobile-identity"[39m
+            [36m>[39m
+              [0mTEDxAteneodeManilaU[0m
+            [36m</span>[39m
+            [36m<span>[39m
+              [0mOverview[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"account-summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"identity-details"[39m
+            [36m>[39m
+              [36m<strong>[39m
+                [0mFictional test member[0m
+              [36m</strong>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button button--secondary"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</div>[39m
+        [36m</header>[39m
+        [36m<main[39m
+          [33maria-busy[39m=[32m"false"[39m
+          [33mclass[39m=[32m"workspace-main"[39m
+          [33mid[39m=[32m"main-content"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-labelledby[39m=[32m"_r_1_"[39m
+            [33mclass[39m=[32m"feedback-state"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_1_"[39m
+            [36m>[39m
+              [0mOverview unavailable[0m
+            [36m</h2>[39m
+            [36m<p>[39m
+              [0mThe workspace connection is unavailable.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</main>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"More workspace pages"[39m
+      [33mclass[39m=[32m"mobile-more"[39m
+      [33mhidden[39m=[32m""[39m
+      [33mid[39m=[32m"mobile-more-pages"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"more-heading"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mMore pages[0m
+        [36m</h2>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"button button--secondary"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mClose pages[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Additional workspace navigation"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/requests"[39m
+            [36m>[39m
+              [0mDepartment requests[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/calendar"[39m
+            [36m>[39m
+              [0mCalendar[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/resources"[39m
+            [36m>[39m
+              [0mResources & Start Here[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/people"[39m
+            [36m>[39m
+              [0mPeople[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/notifications"[39m
+            [36m>[39m
+              [0mNotifications[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+    [36m</section>[39m
+    [36m<nav[39m
+      [33maria-label[39m=[32m"Mobile workspace navigation"[39m
+      [33mclass[39m=[32m"mobile-navigation"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33maria-current[39m=[32m"page"[39m
+        [33mclass[39m=[32m"nav-link active"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/"[39m
+      [36m>[39m
+        [0mOverview[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/deliverables"[39m
+      [36m>[39m
+        [0mDeliverables[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/tasks"[39m
+      [36m>[39m
+        [0mMy tasks[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/working-together"[39m
+      [36m>[39m
+        [0mWorking together[0m
+      [36m</a>[39m
+      [36m<button[39m
+        [33maria-controls[39m=[32m"mobile-more-pages"[39m
+        [33maria-expanded[39m=[32m"false"[39m
+        [33mclass[39m=[32m"nav-link more-button"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mMore[0m
+      [36m</button>[39m
+    [36m</nav>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/app/router.test.tsx:32:16
+     30|   const router = createMemoryRouter(createAppRoutes(environment, auth))
+     31|   render(<RouterProvider router={router} />)
+     32|   await screen.findByRole('heading', { name: 'Overview' })
+       |                ^
+     33|   vi.mocked(auth.readContext).mockResolvedValue({ state: 'denied' })
+     34|   await act(async () => { await router.navigate('/tasks') })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/features/guests/guests.test.tsx > P05_A2: ordinary core member cannot open sponsor controls
+TestingLibraryElementError: Unable to find role="heading" and name "Overview"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<a[39m
+      [33mclass[39m=[32m"skip-link"[39m
+      [33mhref[39m=[32m"#main-content"[39m
+    [36m>[39m
+      [0mSkip to main content[0m
+    [36m</a>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"workspace-shell"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33maria-label[39m=[32m"Workspace sidebar"[39m
+        [33mclass[39m=[32m"sidebar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"workspace-identity"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-identity"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mTEDx Ateneo de Manila U[0m
+          [36m</a>[39m
+          [36m<p>[39m
+            [0mCore workspace[0m
+          [36m</p>[39m
+          [36m<small>[39m
+            [0mText identity; approved logo pending[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Workspace navigation"[39m
+          [33mclass[39m=[32m"desktop-navigation"[39m
+        [36m>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--workspace"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"nav-link active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/"[39m
+              [36m>[39m
+                [0mOverview[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/deliverables"[39m
+              [36m>[39m
+                [0mCore deliverables[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/tasks"[39m
+              [36m>[39m
+                [0mMy tasks[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/working-together"[39m
+              [36m>[39m
+                [0mWorking together[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/requests"[39m
+              [36m>[39m
+                [0mDepartment requests[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/calendar"[39m
+              [36m>[39m
+                [0mCalendar[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/resources"[39m
+              [36m>[39m
+                [0mResources & Start Here[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/people"[39m
+              [36m>[39m
+                [0mPeople[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--account"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/notifications"[39m
+              [36m>[39m
+                [0mNotifications[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/account"[39m
+              [36m>[39m
+                [0mAccount[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"sidebar-footer"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mOne team. Clear next steps.[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"muted"[39m
+          [36m>[39m
+            [0mEvent day[0m
+            [36m<br />[39m
+            [36m<time[39m
+              [33mdatetime[39m=[32m"2027-04-17"[39m
+            [36m>[39m
+              [0mApril 17, 2027[0m
+            [36m</time>[39m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</aside>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-body"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"workspace-header"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"location-heading"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"mobile-identity"[39m
+            [36m>[39m
+              [0mTEDxAteneodeManilaU[0m
+            [36m</span>[39m
+            [36m<span>[39m
+              [0mOverview[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"account-summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"identity-details"[39m
+            [36m>[39m
+              [36m<strong>[39m
+                [0mFictional admin[0m
+              [36m</strong>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button button--secondary"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</div>[39m
+        [36m</header>[39m
+        [36m<main[39m
+          [33maria-busy[39m=[32m"false"[39m
+          [33mclass[39m=[32m"workspace-main"[39m
+          [33mid[39m=[32m"main-content"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-labelledby[39m=[32m"_r_1_"[39m
+            [33mclass[39m=[32m"feedback-state"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_1_"[39m
+            [36m>[39m
+              [0mOverview unavailable[0m
+            [36m</h2>[39m
+            [36m<p>[39m
+              [0mThe workspace connection is unavailable.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</main>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"More workspace pages"[39m
+      [33mclass[39m=[32m"mobile-more"[39m
+      [33mhidden[39m=[32m""[39m
+      [33mid[39m=[32m"mobile-more-pages"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"more-heading"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mMore pages[0m
+        [36m</h2>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"button button--secondary"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mClose pages[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Additional workspace navigation"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/requests"[39m
+            [36m>[39m
+              [0mDepartment requests[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/calendar"[39m
+            [36m>[39m
+              [0mCalendar[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/resources"[39m
+            [36m>[39m
+              [0mResources & Start Here[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/people"[39m
+            [36m>[39m
+              [0mPeople[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/notifications"[39m
+            [36m>[39m
+              [0mNotifications[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+    [36m</section>[39m
+    [36m<nav[39m
+      [33maria-label[39m=[32m"Mobile workspace navigation"[39m
+      [33mclass[39m=[32m"mobile-navigation"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33maria-current[39m=[32m"page"[39m
+        [33mclass[39m=[32m"nav-link active"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/"[39m
+      [36m>[39m
+        [0mOverview[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/deliverables"[39m
+      [36m>[39m
+        [0mDeliverables[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/tasks"[39m
+      [36m>[39m
+        [0mMy tasks[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/working-together"[39m
+      [36m>[39m
+        [0mWorking together[0m
+      [36m</a>[39m
+      [36m<button[39m
+        [33maria-controls[39m=[32m"mobile-more-pages"[39m
+        [33maria-expanded[39m=[32m"false"[39m
+        [33mclass[39m=[32m"nav-link more-button"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mMore[0m
+      [36m</button>[39m
+    [36m</nav>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<a[39m
+      [33mclass[39m=[32m"skip-link"[39m
+      [33mhref[39m=[32m"#main-content"[39m
+    [36m>[39m
+      [0mSkip to main content[0m
+    [36m</a>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"workspace-shell"[39m
+    [36m>[39m
+      [36m<aside[39m
+        [33maria-label[39m=[32m"Workspace sidebar"[39m
+        [33mclass[39m=[32m"sidebar"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"workspace-identity"[39m
+        [36m>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"text-identity"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/"[39m
+          [36m>[39m
+            [0mTEDx Ateneo de Manila U[0m
+          [36m</a>[39m
+          [36m<p>[39m
+            [0mCore workspace[0m
+          [36m</p>[39m
+          [36m<small>[39m
+            [0mText identity; approved logo pending[0m
+          [36m</small>[39m
+        [36m</div>[39m
+        [36m<nav[39m
+          [33maria-label[39m=[32m"Workspace navigation"[39m
+          [33mclass[39m=[32m"desktop-navigation"[39m
+        [36m>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--workspace"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"nav-link active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/"[39m
+              [36m>[39m
+                [0mOverview[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/deliverables"[39m
+              [36m>[39m
+                [0mCore deliverables[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/tasks"[39m
+              [36m>[39m
+                [0mMy tasks[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/working-together"[39m
+              [36m>[39m
+                [0mWorking together[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/requests"[39m
+              [36m>[39m
+                [0mDepartment requests[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/calendar"[39m
+              [36m>[39m
+                [0mCalendar[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/resources"[39m
+              [36m>[39m
+                [0mResources & Start Here[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/people"[39m
+              [36m>[39m
+                [0mPeople[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+          [36m<ul[39m
+            [33mclass[39m=[32m"navigation-group navigation-group--account"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/notifications"[39m
+              [36m>[39m
+                [0mNotifications[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"nav-link"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/account"[39m
+              [36m>[39m
+                [0mAccount[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</nav>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"sidebar-footer"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mOne team. Clear next steps.[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"muted"[39m
+          [36m>[39m
+            [0mEvent day[0m
+            [36m<br />[39m
+            [36m<time[39m
+              [33mdatetime[39m=[32m"2027-04-17"[39m
+            [36m>[39m
+              [0mApril 17, 2027[0m
+            [36m</time>[39m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</aside>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-body"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"workspace-header"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"location-heading"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"mobile-identity"[39m
+            [36m>[39m
+              [0mTEDxAteneodeManilaU[0m
+            [36m</span>[39m
+            [36m<span>[39m
+              [0mOverview[0m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"account-summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"identity-details"[39m
+            [36m>[39m
+              [36m<strong>[39m
+                [0mFictional admin[0m
+              [36m</strong>[39m
+            [36m</div>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"button button--secondary"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</div>[39m
+        [36m</header>[39m
+        [36m<main[39m
+          [33maria-busy[39m=[32m"false"[39m
+          [33mclass[39m=[32m"workspace-main"[39m
+          [33mid[39m=[32m"main-content"[39m
+          [33mtabindex[39m=[32m"-1"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-labelledby[39m=[32m"_r_1_"[39m
+            [33mclass[39m=[32m"feedback-state"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mid[39m=[32m"_r_1_"[39m
+            [36m>[39m
+              [0mOverview unavailable[0m
+            [36m</h2>[39m
+            [36m<p>[39m
+              [0mThe workspace connection is unavailable.[0m
+            [36m</p>[39m
+          [36m</section>[39m
+        [36m</main>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"More workspace pages"[39m
+      [33mclass[39m=[32m"mobile-more"[39m
+      [33mhidden[39m=[32m""[39m
+      [33mid[39m=[32m"mobile-more-pages"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"more-heading"[39m
+      [36m>[39m
+        [36m<h2>[39m
+          [0mMore pages[0m
+        [36m</h2>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"button button--secondary"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mClose pages[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Additional workspace navigation"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/requests"[39m
+            [36m>[39m
+              [0mDepartment requests[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/calendar"[39m
+            [36m>[39m
+              [0mCalendar[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/resources"[39m
+            [36m>[39m
+              [0mResources & Start Here[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/people"[39m
+            [36m>[39m
+              [0mPeople[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/notifications"[39m
+            [36m>[39m
+              [0mNotifications[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"nav-link"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/account"[39m
+            [36m>[39m
+              [0mAccount[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+    [36m</section>[39m
+    [36m<nav[39m
+      [33maria-label[39m=[32m"Mobile workspace navigation"[39m
+      [33mclass[39m=[32m"mobile-navigation"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33maria-current[39m=[32m"page"[39m
+        [33mclass[39m=[32m"nav-link active"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/"[39m
+      [36m>[39m
+        [0mOverview[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/deliverables"[39m
+      [36m>[39m
+        [0mDeliverables[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/tasks"[39m
+      [36m>[39m
+        [0mMy tasks[0m
+      [36m</a>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"nav-link"[39m
+        [33mdata-discover[39m=[32m"true"[39m
+        [33mhref[39m=[32m"/working-together"[39m
+      [36m>[39m
+        [0mWorking together[0m
+      [36m</a>[39m
+      [36m<button[39m
+        [33maria-controls[39m=[32m"mobile-more-pages"[39m
+        [33maria-expanded[39m=[32m"false"[39m
+        [33mclass[39m=[32m"nav-link more-button"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mMore[0m
+      [36m</button>[39m
+    [36m</nav>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/features/guests/guests.test.tsx:34:23
+     32|   const router=createMemoryRouter(createAppRoutes(environment,auth({..…
+     33|   render(<RouterProvider router={router}/> )
+     34|   expect(await screen.findByRole('heading',{name:'Overview'})).toBeTru…
+       |                       ^
+     35|   expect(guests.list).not.toHaveBeenCalled()
+     36| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 19 passed (21)
+      Tests  3 failed | 84 passed (87)
+   Start at  19:20:58
+   Duration  6.54s (environment 63%, tests 19%, setup 11%, import 5%, transform 1%)
+
+Environment  jsdom was created 21 times · 38.24s total, 63% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+[ELIFECYCLE] Test failed. See above for more details.
+EXIT 1
+
+> pnpm test (fallback heading fix)
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  21 passed (21)
+      Tests  87 passed (87)
+   Start at  19:21:17
+   Duration  6.35s (environment 65%, tests 16%, setup 13%, import 5%, transform 1%)
+
+Environment  jsdom was created 21 times · 37.39s total, 65% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+
+> pnpm typecheck (fallback heading fix)
+$ tsc --noEmit
+EXIT 0
+
+> pnpm lint (fallback heading fix)
+$ eslint . --max-warnings 0
+EXIT 0
+
+> pnpm build (fallback heading fix)
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 174 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.31 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-DjjdaFFb.css                           11.67 kB │ gzip:   3.09 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-CDgWb6pc.js                           430.86 kB │ gzip: 129.37 kB
+
+✓ built in 201ms
+EXIT 0
+
+> pnpm db:types:check (fallback heading fix)
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 37 tables (425 columns) and 54 functions.
+EXIT 0
+
+> node scripts/verify-p13.cjs (fallback heading fix)
+PASS P13 actual-SQL overview browser checks
+EXIT 0

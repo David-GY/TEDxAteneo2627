@@ -1,0 +1,9 @@
+{
+  "target": "isolated PostgreSQL18.6/PGlite synthetic subjects; not Supabase/JWT",
+  "tap": [
+    "1..3",
+    "ok 1 - P13_A1: normalized rows are unique and form the only source of widget counts",
+    "ok 2 - P13_A2: unrelated restricted task/deliverable titles and aggregate overflow are absent",
+    "ok 3 - P13_A3: actual completion disappears on a fresh authoritative query"
+  ]
+}

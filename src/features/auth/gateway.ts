@@ -1,3 +1,4 @@
+import {createOverviewApi,type OverviewApi} from '../overview/api'
 import {createFilesApi,type FilesApi} from '../files/api'
 import {createCommentsApi,type CommentsApi} from '../comments/api'
 import type { ClientEnvironment } from '../../lib/env'
@@ -24,6 +25,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  overview?: OverviewApi
   files?: FilesApi
   comments?: CommentsApi
   tasks?: TasksApi
@@ -62,6 +64,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    overview: createOverviewApi(clientReady),
     files: createFilesApi(clientReady),
     comments: createCommentsApi(clientReady),
     tasks: createTasksApi(clientReady),
