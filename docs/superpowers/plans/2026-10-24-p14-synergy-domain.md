@@ -24,4 +24,4 @@ Counters cannot activate before requester confirmation; current authority/owner/
 ### Task 2: Adapter and verification
 
 - [x] Add typed src/features/synergies/api.ts and adapter regressions, actual isolated SQL/transport checks, relevant full-schema regressions/typecheck/lint/build and retained preview.
-- [x] Review diff/access/idempotency; document contracts, STATE/P14 and actual usage/blockers. Commit/push reviewed existing branch and verify fetched remote commit/tree and preserve unrelated newer roadmap edits (whole-worktree cleanliness blocked by those edits).
+- [x] Review diff/access/idempotency; document contracts, STATE/P14 and actual usage/blockers. Commit/push reviewed existing branch and verify fetched remote commit/tree and clean worktree, preserving the independently committed newer roadmap changes.
