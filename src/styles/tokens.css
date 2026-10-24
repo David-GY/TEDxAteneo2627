@@ -1,0 +1,24 @@
+:root {
+  --color-background: #f7f7f4;
+  --color-surface: #ffffff;
+  --color-ink: #252624;
+  --color-muted: #62665f;
+  --color-line: #dedfd8;
+  --color-accent: #b82320;
+  --color-accent-soft: #faeeec;
+  --color-focus: #b82320;
+  --color-logo-red: #eb0028;
+  --font-body: 'Karla Variable', Karla, Arial, sans-serif;
+  --radius-control: 6px;
+  --radius-panel: 10px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --sidebar-width: 236px;
+  --control-min-size: 44px;
+  --mobile-nav-height: 76px;
+}

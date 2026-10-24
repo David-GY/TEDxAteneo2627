@@ -1,0 +1,11 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "checks": [
+    "P01_A1: 320px and 640px reflow; keyboard skip, visible 3px focus, More open/Escape/route focus",
+    "P01_A1: 200% zoom metrics emulated (640 CSS px, DPR 2); native browser toolbar zoom not operated",
+    "P01_A2: 44px mobile controls, Account name/target and wrapping with explicitly fictional DOM stress labels",
+    "P01_A3: production placeholders have no success actions or synthetic metrics; unknown route recovers; no runtime errors/external requests"
+  ],
+  "errors": [],
+  "externalRequests": []
+}

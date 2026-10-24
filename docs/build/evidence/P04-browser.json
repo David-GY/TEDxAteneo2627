@@ -1,0 +1,10 @@
+{
+  "target": "local production preview 4173 with no provider configuration",
+  "checks": [
+    "P04_A2: direct protected route redirects to login; no protected navigation; 320px reflow",
+    "Production has no development /preview route",
+    "P04_A3: rejected callback strips URL details, provides real recovery; no live Google result claimed"
+  ],
+  "errors": [],
+  "externalRequests": []
+}

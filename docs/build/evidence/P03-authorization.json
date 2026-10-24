@@ -1,0 +1,21 @@
+{
+  "target": "isolated in-memory PGlite; assertions executed under SET ROLE authenticated/anon with distinct subject claims",
+  "engine": "PostgreSQL 18.6 (PGlite 0.5.11) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+  "migrations": [
+    "20261024000100_identity.sql",
+    "20261024000200_authorization.sql"
+  ],
+  "tap": [
+    "1..3",
+    "ok 1 - P03_A1: authenticated nonmember/expired/suspended principals see zero workspace rows; cross-org denied",
+    "ok 2 - P03_A2: equivalent affiliation grants identical; unit scopes, guest, revocation and expiry enforced",
+    "ok 3 - P03_A3: API-role self-grants/private reads denied; permitted own writes change actual rows; frozen writes denied"
+  ],
+  "hashes": {
+    "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
+    "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
+    "supabase/seed.sql": "8f90fe0cf2e4c72b4edcec5716b62afe0401f449a8e6b83e5116096bb982170d",
+    "supabase/tests/authorization.test.sql": "fb1dcf5aedc1a75b9277065f77d1e9ebbd5c884f905aea75939289333cd92338"
+  },
+  "limitations": "No real JWT/OAuth verification, PostgREST requests or Supabase PostgreSQL 17; Docker blocker carried from P02."
+}

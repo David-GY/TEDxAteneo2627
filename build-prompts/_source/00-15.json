@@ -1,0 +1,376 @@
+[
+  {
+    "id": 0,
+    "slug": "foundation",
+    "title": "Create the runnable project and build ledger",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "Sections 1, 8 conventions, 9; F25/F26",
+    "needs": [],
+    "files": "package.json; src/main.tsx; src/app/router.tsx; .env.example; .gitignore; docs/build/STATE.md; docs/build/CONTRACTS.md",
+    "interface": "Establish working npm scripts typecheck, lint, test, build and later test:e2e; record real commands and runtime prerequisites. No placeholder scripts returning success.",
+    "steps": [
+      "Inspect existing repo/runtime; scaffold Vite React/TypeScript only if no app exists. Keep dependency choices small, preserve unrelated files, and ignore secrets/build artifacts.",
+      "Add an app route, error boundary, environment validation with a useful not-configured screen, and one meaningful mount/configuration test. Add a fake-free local README.",
+      "Create state/checkpoint conventions and contracts for UUID IDs, Manila dates, structured command errors, expectedVersion and idempotencyKey. Document PostgreSQL as the authority and synthetic staging boundaries."
+    ],
+    "checks": [
+      "Clean dependency install and actual typecheck/lint/test/build pass; an unavailable runtime is a recorded blocker, never a passing check.",
+      "App boots locally with no credentials without exposing secrets or pretending to load real work.",
+      "Repository has no committed secrets and state identifies P01 as next; application code only changes within this foundation."
+    ]
+  },
+  {
+    "id": 1,
+    "slug": "accessible-shell",
+    "title": "Recreate the prototype navigation and visual shell",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "Section 4; F25; section 11 branding",
+    "needs": [
+      0
+    ],
+    "files": "src/app/AppShell.tsx; src/app/navigation.ts; src/styles/tokens.css; src/styles/global.css; DESIGN.md",
+    "interface": "Create reusable accessible page, panel, form/error and navigation patterns; expose role-filterable navigation without treating it as authorization.",
+    "steps": [
+      "Inspect the supplied demo or its locally available source and preserve Karla, neutral palette, compact panels, interface accent and focus language; record tokens in DESIGN.md.",
+      "Implement desktop/sidebar and mobile labeled navigation, skip link, headings, keyboard focus, route-level loading/empty/error states. Use an approved logo asset if supplied; otherwise a plainly labeled temporary text identity.",
+      "Make synthetic preview content explicitly development-only; do not ship fake success buttons or recreate all feature pages now."
+    ],
+    "checks": [
+      "Shell works at 320px width and 200% zoom with keyboard navigation and visible focus.",
+      "44px controls and meaningful accessible names survive long unit/person labels.",
+      "Route errors show a recovery action; production routes do not display synthetic metrics as real data."
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "identity-schema",
+    "title": "Define members, terms, units and scoped roles",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "Sections 3, 8 identity entities; F01/F13",
+    "needs": [
+      0
+    ],
+    "files": "supabase/config.toml; supabase/migrations/*identity.sql; supabase/seed.sql; supabase/tests/identity.test.sql; src/lib/database.types.ts",
+    "interface": "organizations, terms, members, term_memberships, private_profiles, org_units, unit_memberships, roles, role_permissions and role_assignments. Actor linkage is server controlled.",
+    "steps": [
+      "Initialize Supabase local configuration if absent, verify the target is local, and document Docker/CLI prerequisites. Add foundational identity/organization tables with real FKs, same-term checks, unique normalized identity, active/expired states, dated deployments and role assignments. Enable RLS/revoke exposed grants immediately; P03 adds permitted policies.",
+      "Keep committee delivery flags separate from service flags. MEAn affiliation is nullable descriptive data. Defer work-item scope FK until P07 rather than adding dangling references.",
+      "Seed clearly fictional local roles/members/units, not an invented official eight. Generate database types and document the identity contracts."
+    ],
+    "checks": [
+      "Cross-term membership/unit links fail and duplicate normalized identities are rejected.",
+      "Changing MEAn affiliation creates no authorization change or new role assignment.",
+      "Fresh local migration/seed succeeds and all foundational tables have appropriate initial deny-by-default exposure."
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "authorization-foundation",
+    "title": "Implement and test identity authorization boundaries",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "Section 3; F01/F26; section 11 controls",
+    "needs": [
+      2
+    ],
+    "files": "supabase/migrations/*authorization.sql; supabase/tests/authorization.test.sql; docs/permissions.md",
+    "interface": "Current-membership and effective-capability helpers derive auth.uid(); narrowly granted SQL functions use fixed search_path and no untrusted metadata.",
+    "steps": [
+      "Enable RLS and minimal grants for identity/unit/role tables; separate permitted directory projection from private profiles. Add safe read helpers and role assignment restrictions.",
+      "Prevent member edits to auth linkage, grant scope, expiry, organization and private-profile visibility belonging to someone else. Treat project-owner bypass as documented infrastructure risk.",
+      "Create authenticated-principal fixtures for PM/head/member/associate/guest; add negative tests and a concise permission explanation contract. No UI or service-role-only proof."
+    ],
+    "checks": [
+      "Same-domain nonmember, expired guest and suspended member read no workspace rows even with valid identity.",
+      "Equivalent MEAn/non-MEAn grants yield identical results; deployment grants only the configured unit.",
+      "Direct API attempts to self-grant roles or read another private profile fail; allowed writes assert the actual changed row."
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "google-login",
+    "title": "Connect Google login and protected routes",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "F01; section 10 identity",
+    "needs": [
+      1,
+      3
+    ],
+    "files": "src/features/auth/*; src/lib/supabase.ts; src/app/router.tsx; supabase/functions or auth hooks; docs/integrations.md",
+    "interface": "Authenticated session resolves to an active member/term context; routes never infer organization access from email alone.",
+    "steps": [
+      "Implement Supabase Google PKCE callback, exact redirect allowlist configuration, account switching/sign-out, and roster validation through trusted server/database logic.",
+      "Enforce exact student.ateneo.edu plus roster for ordinary core entry, not suffix tricks or hosted-domain hints. Reserve explicit guest path for P05.",
+      "Handle unavailable config, rejected school OAuth, expired sessions and safe post-login return routes. Document provider setup using secret references, not credentials in source."
+    ],
+    "checks": [
+      "Approved school member enters; a different school student and lookalike domain do not.",
+      "Expired/suspended membership cannot bypass by opening a route or using an old token.",
+      "Real Google callback tested if credentials exist; otherwise local authorization tests pass and live OAuth verification is explicitly blocked, not claimed complete."
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "guest-invitations",
+    "title": "Add scoped off-domain guest invitations",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "F01; section 3 guest rules",
+    "needs": [
+      4
+    ],
+    "files": "src/features/guests/*; supabase/migrations/*guests.sql; supabase/tests/guests.test.sql",
+    "interface": "create_guest_invitation, redeem_guest_invitation, revoke_guest_access use hashed one-time tokens, verified identity, sponsor, exact record scopes and expiry.",
+    "steps": [
+      "Implement invitation storage and server commands with exact verified-email binding, default 14-day access, single-use redemption and audit. Record-scoped targets attach once P07 exists.",
+      "Build sponsor admin form with clear scope preview, copy-link action, expiry/renew/revoke. External Google accounts work; no automatic email sending.",
+      "Ensure current DB checks revoke existing sessions' data access. Keep invitation model provider independent; do not add untested non-Google OTP."
+    ],
+    "checks": [
+      "Forwarded token cannot be used by another email; double redemption and expired tokens fail.",
+      "Off-domain guest receives no full directory or membership-wide scope by default.",
+      "Revocation is enforced with a previously issued JWT, and no raw invite token is stored or logged."
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "people-directory",
+    "title": "Build the permitted member directory and process contacts",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "F13/F14; section 3 private data",
+    "needs": [
+      1,
+      4
+    ],
+    "files": "src/features/people/*; src/features/account/*; supabase/tests/directory.test.sql",
+    "interface": "Directory query returns safe name/unit/role/contact-route fields; private profile updates and visibility choices are separate commands.",
+    "steps": [
+      "Build searchable basic people/unit/contact views, own profile editor and optional affiliation/skills/course/contact fields with clear sharing controls.",
+      "Make process contacts primary/backup and display plain descriptions rather than requiring acronyms. Use synthetic units until official roster arrives.",
+      "Keep guest directory limited to own/shared contacts; names in past records remain attributable without granting access to old private profiles."
+    ],
+    "checks": [
+      "Head cannot change another member's optional disclosure or see unshared contact/course fields.",
+      "Affiliation left blank does not block tasks/onboarding or remove help links.",
+      "Multi-unit membership and missing backup contact render clearly on mobile without duplicate people."
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "work-record-spine",
+    "title": "Create common work records, grants, audit and safe commands",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "Section 8 work items/audit; section 6 command contracts",
+    "needs": [
+      3,
+      5
+    ],
+    "files": "supabase/migrations/*work_items.sql; src/lib/commands.ts; supabase/tests/work_access.test.sql; docs/build/CONTRACTS.md",
+    "interface": "work_items, record_grants, status_definitions, audit_events, idempotency_keys and outbox_jobs; commands derive actor and enforce expected version.",
+    "steps": [
+      "Create minimal common work-item spine and typed child creation convention with same-term integrity. Add record-scoped role/invite FKs deferred earlier.",
+      "Add RLS for ordinary summaries vs participant details and restricted classifications. Implement append-only redacted mutation audit and reusable idempotency/concurrency convention without a generic entity platform.",
+      "Provide transparent client command error mapping and generated types. Ensure direct status/owner/approval changes cannot bypass business commands."
+    ],
+    "checks": [
+      "Read access to a child/grant does not leak unrelated parent/sibling or sensitive content.",
+      "Identical command retry returns its earlier result; changed payload under reused key fails.",
+      "Concurrent stale update fails cleanly; denied mutation creates no successful business/audit/outbox side effects."
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "deliverables-reading",
+    "title": "Build the Core Deliverables list and detail view",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "F03; section 4 Core Deliverables",
+    "needs": [
+      6,
+      7
+    ],
+    "files": "src/features/deliverables/api.ts; src/features/deliverables/DeliverablesPage.tsx; src/features/deliverables/DeliverablePage.tsx; supabase/migrations/*deliverables.sql",
+    "interface": "deliverables subtype and permission-filtered list/detail queries with owner, lead unit, date, readiness, next action and safe gate fields.",
+    "steps": [
+      "Add deliverable child schema and real queries, including pagination/filter state and stable deep links. Seed one clearly synthetic shared-output example locally.",
+      "Implement required columns, phase/unit/owner/blocked/overdue/involves-my-unit filters, mobile rows, loading/error/empty states.",
+      "Use provisional pending-gate states until P29 installs authoritative acceptance; no client-generated approval badges or completion percentages masquerading as readiness."
+    ],
+    "checks": [
+      "Restricted deliverables and private details are absent from unauthorized rows/counts.",
+      "Multi-unit filter uses one canonical output without duplicating it.",
+      "List/detail render real DB changes and provide a useful state for no records or denied deep links."
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "deliverable-authoring",
+    "title": "Add deliverable ownership, criteria and acceptance commands",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "F03; section 6 create_deliverable",
+    "needs": [
+      8
+    ],
+    "files": "src/features/deliverables/DeliverableEditor.tsx; supabase/migrations/*deliverable_commands.sql; supabase/tests/deliverables.test.sql",
+    "interface": "create_deliverable and update_deliverable require active owner, lead unit, outcome, date and criteria; acceptance evaluates server readiness.",
+    "steps": [
+      "Build authorized create/edit/propose/reassign flows; preserve original deadline and reasoned changes. Members propose commitments for heads rather than assigning arbitrary people.",
+      "Implement draft/in-progress/submit-for-acceptance/accept/cancel with typed semantic states. Until P29, fail closed when unresolved mandatory gates exist.",
+      "Capture acceptance criteria revisions and final evidence; owner departure queues reassignment rather than silently becoming ownerless."
+    ],
+    "checks": [
+      "Inactive/cross-term owner rejected; ordinary member cannot create a top-level event commitment directly.",
+      "Original deadline survives a later extension and change is attributed.",
+      "Direct API completion or acceptance with unmet criteria/gates fails; an authorized clean case succeeds."
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "tasks",
+    "title": "Implement task creation, assignment and progress",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "F05/F07; section 3 task permissions",
+    "needs": [
+      9
+    ],
+    "files": "src/features/tasks/*; supabase/migrations/*tasks.sql; supabase/tests/tasks.test.sql",
+    "interface": "create_task, update_task, assign_task and transition_task; tasks relate to one canonical work item and optional deliverable/contribution.",
+    "steps": [
+      "Implement My Tasks and task detail/editor with checklist, assignee, collaborators, dates, blocked reason and typed status categories.",
+      "Enforce own/unit/shared editing and prevent cross-unit assignment until accepted agreement exists. Preserve expected-version conflicts and original dates.",
+      "Treat Done as completion evidence/review appropriate to task type, never as authority to approve financial/publicity work."
+    ],
+    "checks": [
+      "Duplicate retry creates one task; unauthorized assignee/owner changes fail.",
+      "Different committee cannot receive an imposed task before agreement/head acceptance.",
+      "Assignee can update allowed progress; overdue/date-only behavior is correct in Manila."
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "comments",
+    "title": "Add comments, history and eligible mentions",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "F07; section 3 inherited access",
+    "needs": [
+      10
+    ],
+    "files": "src/features/comments/*; supabase/migrations/*comments.sql; supabase/tests/comments.test.sql",
+    "interface": "add_comment and revise_comment preserve author/edit history; mention candidates come from eligible participants only.",
+    "steps": [
+      "Build plain-text or safely sanitized Markdown comments shared by task/deliverable records. Show author, timestamps, edits and current permission state.",
+      "Retain original comment revisions referenced in submissions or decisions. Implement own draft removal and reasoned redaction rather than deleting evidence history.",
+      "Emit outbox mention events without sending external messages. Do not expose private directory candidates through autocomplete."
+    ],
+    "checks": [
+      "Script/HTML payload does not execute; pasted unsafe links do not become executable content.",
+      "Unrelated user cannot enumerate comments, revisions or mention candidates.",
+      "Editing a decision-referenced comment preserves original evidence and shows later amendment."
+    ]
+  },
+  {
+    "id": 12,
+    "slug": "private-files",
+    "title": "Implement private uploads, Drive links and immutable manifests",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "F07/F23; section 11 file controls",
+    "needs": [
+      7,
+      11
+    ],
+    "files": "src/features/files/*; supabase/functions/files/*; supabase/migrations/*assets.sql; supabase/tests/files.test.sql",
+    "interface": "assets and asset_links with classification, hash, size and source; finalize_upload creates immutable manifest; downloads reauthorize and audit.",
+    "steps": [
+      "Implement private PDF/JPEG/PNG uploads with proposed 5MB/file and 20MB/submission limits, content validation, random paths and safe download behavior.",
+      "Add validated Drive/Docs/Sheets/Slides/Canva working links with access notes. A working URL is not approved evidence; support snapshot hashes/versions.",
+      "Inherit effective record access for file operations, prevent widening through extra links, and record restricted downloads without logging contents/tokens."
+    ],
+    "checks": [
+      "Anonymous/other-unit/revoked user cannot download object via direct path or issue a signed URL.",
+      "MIME mismatch, executable/SVG/HTML/archive and oversize files are rejected.",
+      "Replacing a working source does not overwrite a finalized snapshot; hashes and manifest stay stable."
+    ]
+  },
+  {
+    "id": 13,
+    "slug": "personal-overview",
+    "title": "Build next actions and Who is waiting on you",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "F02; section 4 Overview",
+    "needs": [
+      10,
+      12
+    ],
+    "files": "src/features/overview/*; supabase/migrations/*overview_queries.sql",
+    "interface": "Authorized overview result separates actionable work from waiting-on-others and supports later request/handoff/approval sources.",
+    "steps": [
+      "Aggregate real assigned due/overdue/blocked work and owned deliverables with next action/person/date. Integrate only sources already implemented, not invented pending approvals.",
+      "Add sensible empty/error/loading states, direct authorized links and committee context.",
+      "Define small source extensions so P18/P23/P30 add handoffs/reviews/inbox without duplicating counts or bypassing scopes."
+    ],
+    "checks": [
+      "Widget count equals its visible actionable rows.",
+      "Restricted work does not leak through aggregate totals or hidden titles.",
+      "An action completed elsewhere disappears after real invalidation/refetch; no hardcoded demo numbers."
+    ]
+  },
+  {
+    "id": 14,
+    "slug": "synergy-domain",
+    "title": "Implement versioned committee synergy agreements",
+    "effort": "high",
+    "phase": "Core",
+    "refs": "F04; section 6 propose_synergy/respond_to_synergy",
+    "needs": [
+      9,
+      10
+    ],
+    "files": "supabase/migrations/*synergy.sql; supabase/tests/synergy.test.sql; src/features/synergies/api.ts",
+    "interface": "propose_synergy and respond_to_synergy support accept/decline/counterproposal against immutable agreement_revisions, creating named contributions on agreement.",
+    "steps": [
+      "Model requester/receiver units, output, criteria, effort band, date, named owner and revision confirmations. Grant receiving heads only a safe proposal preview.",
+      "Require valid receiving-head authority and requester acceptance of counters. Accepted terms are immutable; material changes negotiate a revision.",
+      "Create canonical contribution/grants/tasks transactionally; no duplicate copies per committee and no implicit whole-parent access."
+    ],
+    "checks": [
+      "Counterproposal does not activate work before requester confirms that revision.",
+      "Unrelated head or expired role cannot accept; unknown owner/cross-term links fail.",
+      "Concurrent accept/retry produces one contribution and one audit/outbox result."
+    ]
+  },
+  {
+    "id": 15,
+    "slug": "synergy-interface",
+    "title": "Build Working Together and negotiation screens",
+    "effort": "medium",
+    "phase": "Core",
+    "refs": "F04/F05; section 4 Working Together",
+    "needs": [
+      14,
+      13
+    ],
+    "files": "src/features/synergies/WorkingTogetherPage.tsx; src/features/synergies/AgreementPage.tsx; src/features/deliverables/*",
+    "interface": "UI uses P14 commands and displays same agreement in requesting/receiving committee views with versioned accepted terms.",
+    "steps": [
+      "Create outgoing/incoming agreements and contribution views, request-help form, accept/decline/counterproposal actions and clear pending ownership.",
+      "Add deliverable contributions panel and assigned work links; integrate accepted contributions in My Tasks/Overview.",
+      "Display proposed versus agreed deadlines and immutable history. Preserve mobile/keyboard usability."
+    ],
+    "checks": [
+      "Two scoped users see one agreement with correct actions rather than duplicated independent records.",
+      "Receiver cannot edit other contributions/finance data through shared parent links.",
+      "A failed/stale negotiation keeps entered safe data and offers refresh without fake success."
+    ]
+  }
+]
