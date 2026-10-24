@@ -2,9 +2,9 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- Current step **P16A - in_progress**. Partial date foundation delivered/tested; full timeline NOT implemented. P16A_A1 pending; A2 pure-date subset PASS, server/command cases pending; A3 UI/browser pending. P00/P01 complete; P02-P16 implementations retain external ledgers. P17 not executed.
-- Schema44tables/494columns/63functions, migrations001-021 unchanged. Added only unconnected src/features/timeline/dates.ts and five tests: calendar validation/arithmetic, Manila timestamp end dates, null/start-only unscheduled, end-only markers, inclusive/equal/reversed ranges, week/month windows and event marker. No schedule mutation/projection/UI or fabricated rows.
-- Actual checks: targeted Vitest1file/5tests, typecheck/lint/build PASS; app unchanged464.73kB/gzip137.16kB,182modules. No P16A SQL/browser/full acceptance claimed. Details/remaining plan docs/build/steps/P16A.md and docs/superpowers/plans/2026-10-25-p16a-committee-timeline.md. Existing P16 implementation evidence retained in P16.md.
+- Latest requested step **P17 - not_started (implementation)**. Preflight only; P17_A1-A3 NOT IMPLEMENTED/UNVERIFIED. User explicitly requested P17 after P16A's partial checkpoint. P17 depends on locally delivered P16/P12 and can proceed independently of the chart.
+- **P16A remains in_progress**, preserved: only five-tested pure date helpers exist. Its schema/scheduling commands/projection/forms/chart/A1-A3 remain pending. P00/P01 complete; P02-P16 implementations retain external ledgers. P18 not executed.
+- Schema44tables/494columns/63functions, migrations001-021 unchanged. No P17 code/schema/UI/tests delivered or implied. Actual P17 preflight: clean checkout, fetched matching remote commit/tree and live preview ports confirmed. No unrelated code suites rerun without a code change. Details docs/build/steps/P17.md and P16A.md.
 
 ## External blockers retained
 
@@ -18,10 +18,12 @@ P16 actual concurrent inverse graph edits and graph/state/synergy-amendment race
 
 P16A actual provider/session/privacy/human gates also remain; date-helper tests discharge none of them.
 
+P17 actual concurrent accept/cancel/replay under real receiver JWTs, approved institutional receiver authority, immutable package/file privacy and human handoff UAT remain unverified once implementation exists.
+
 ## Next action / custody
 
-Resume P16A with build-prompts/CONTINUE.md at3:52AM Manila October25 via active one-occurrence thread heartbeat continue-p16a-at-3-52-am. Begin with fresh observed usage/Git baseline, then planned_start_on/scheduling authority and existing deadline guards with named changed-row SQL tests; retain passing date helpers. Finish the approved projection/forms/timeline/A1-A3 in order. Do not run P17.
+At3:52AM Manila October25, active one-occurrence thread heartbeat continue-p16a-at-3-52-am (renamed Continue TEDx P17 and P16A at 3:52 AM) prioritizes the latest P17 request. Read CONTINUE/STATE/P17 and establish a fresh observed usage/Git baseline. Implement exact immutable handoff snapshots and atomic receiver acceptance/receipt/grants/next-task activation, then named A1-A3 and required checks. Preserve P16A's partial code; resume its remaining authorized work serially after P17 checkpoint only if budget permits. Do not run P18. The earlier P16A-only prohibition on P17 is superseded by the new explicit user request.
 
-Existing visible owned P16 synthetic SQL5178 and Vite5173 retained; no fake timeline screen. Started clean atf1e50c1154d1de6853c27ec5e338e5f060acfcbe, fetched commit/tree matched. No agents/chats/worktrees/dependencies/provider changes/deployments/remote resets/external messages. Authorized reviewed partial commit/push uses codex/core-build-checkpoints; final chat records remote commit/tree and clean-worktree verification.
+Existing visible owned P16 synthetic SQL5178 and Vite5173 retained. Started clean at6c178e452547d7e32d41a57a4510115d6f3570cc; fetched commit/tree matched. Only this state and P17 preflight ledger changed. No agents/chats/worktrees/dependencies/provider changes/deployments/remote resets/external messages. Authorized reviewed documentation-only checkpoint uses codex/core-build-checkpoints; final chat records remote commit/tree and clean-worktree verification.
 
-Fresh P16A shared usage85 ->87%, reset1792871469 unchanged; effective5point budget/immediate wind-down/ceiling90used under BUILD-CONTRACT. Weekly57%. No reset credit/purchase/cap change/wait. Partial checkpoint is due to build budget/account headroom, not a claim of actual quota exhaustion. Requested3:52AM continuation is scheduled; execution remains future/unverified.
+Fresh P17 shared usage91%, reset1792871469 unchanged; effective0point budget with10point headroom under BUILD-CONTRACT. Weekly58%. No actual cap-exhaustion claim or cap/reset/billing/purchase change. Requested3:52AM continuation updated; execution remains future/unverified.
