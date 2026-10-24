@@ -102,6 +102,147 @@ export type Database = {
           },
         ]
       }
+      comment_evidence: {
+        Row: {
+          comment_id: string
+          revision: number
+          purpose: string
+          task_work_id: string | null
+          task_version: number | null
+          deliverable_work_id: string | null
+          deliverable_version: number | null
+        }
+        Insert: {
+          comment_id: string
+          revision: number
+          purpose: string
+          task_work_id?: string | null
+          task_version?: number | null
+          deliverable_work_id?: string | null
+          deliverable_version?: number | null
+        }
+        Update: {
+          comment_id?: string
+          revision?: number
+          purpose?: string
+          task_work_id?: string | null
+          task_version?: number | null
+          deliverable_work_id?: string | null
+          deliverable_version?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comment_evidence_comment_id_revision_fkey"
+            columns: ["comment_id","revision"]
+            isOneToOne: false
+            referencedRelation: "comment_revisions"
+            referencedColumns: ["comment_id","revision"]
+          },
+          {
+            foreignKeyName: "comment_evidence_deliverable_work_id_deliverable_version_fkey"
+            columns: ["deliverable_work_id","deliverable_version"]
+            isOneToOne: false
+            referencedRelation: "deliverable_revisions"
+            referencedColumns: ["work_item_id","work_version"]
+          },
+          {
+            foreignKeyName: "comment_evidence_task_work_id_task_version_fkey"
+            columns: ["task_work_id","task_version"]
+            isOneToOne: false
+            referencedRelation: "task_revisions"
+            referencedColumns: ["work_item_id","work_version"]
+          },
+        ]
+      }
+      comment_revisions: {
+        Row: {
+          comment_id: string
+          revision: number
+          body: string
+          reason: string
+          state: string
+          mentions: string[]
+          actor_id: string
+          recorded_at: string
+        }
+        Insert: {
+          comment_id: string
+          revision: number
+          body: string
+          reason: string
+          state: string
+          mentions?: string[]
+          actor_id: string
+          recorded_at?: string
+        }
+        Update: {
+          comment_id?: string
+          revision?: number
+          body?: string
+          reason?: string
+          state?: string
+          mentions?: string[]
+          actor_id?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comment_revisions_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      comments: {
+        Row: {
+          id: string
+          work_item_id: string
+          author_id: string
+          author_name: string
+          version: number
+          state: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          work_item_id: string
+          author_id: string
+          author_name: string
+          version?: number
+          state: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          work_item_id?: string
+          author_id?: string
+          author_name?: string
+          version?: number
+          state?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       deliverable_gate_assessments: {
         Row: {
           work_item_id: string
@@ -1793,6 +1934,16 @@ export type Database = {
     }
     Views: { [_ in never]: never }
     Functions: {
+      add_comment: {
+        Args: {
+          p_work_item_id: string
+          p_body: string
+          p_mentions: string[]
+          p_draft: boolean
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       assign_task: {
         Args: {
           p_work_item_id: string
@@ -1806,6 +1957,12 @@ export type Database = {
         Args: {
           p_work_item_id: string
           p_level: string
+        }
+        Returns: boolean | null
+      }
+      can_read_comment: {
+        Args: {
+          p_comment_id: string
         }
         Returns: boolean | null
       }
@@ -1919,12 +2076,32 @@ export type Database = {
         }
         Returns: Json | null
       }
+      mention_candidates: {
+        Args: {
+          p_work_item_id: string
+          p_search?: string | null
+        }
+        Returns: Json | null
+      }
       owns_active_member: {
         Args: {
           p_member_id: string
           p_write?: boolean | null
         }
         Returns: boolean | null
+      }
+      read_comment_history: {
+        Args: {
+          p_comment_id: string
+        }
+        Returns: Json | null
+      }
+      read_comments: {
+        Args: {
+          p_work_item_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
       }
       read_deliverable: {
         Args: {
@@ -2007,6 +2184,18 @@ export type Database = {
       }
       resolve_auth_context: {
         Args: Record<string, never>
+        Returns: Json | null
+      }
+      revise_comment: {
+        Args: {
+          p_comment_id: string
+          p_body: string
+          p_mentions: string[]
+          p_action: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
         Returns: Json | null
       }
       revoke_guest_access: {

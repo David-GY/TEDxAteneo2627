@@ -1,0 +1,13 @@
+{
+  "target": "actual isolated SQL commands, simulated sign-in; not real Supabase/JWT/concurrent sessions",
+  "checks": [
+    "P11_A1 literal script/HTML/javascript/data link text never executes or creates links",
+    "lost committed reply retries same request, one comment and deduplicated outbox",
+    "eligible candidates exclude unrelated directory members",
+    "actual task completion pins comment revision; later amendment shows original history and evidence notice",
+    "private draft removal and reasoned redaction retain protected originals",
+    "task and deliverable integration, deep-link refresh",
+    "320px reflow,44px controls,Karla,no private browser storage or runtime errors"
+  ],
+  "errors": []
+}

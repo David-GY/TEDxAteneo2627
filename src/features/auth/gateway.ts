@@ -1,3 +1,4 @@
+import {createCommentsApi,type CommentsApi} from '../comments/api'
 import type { ClientEnvironment } from '../../lib/env'
 import { createSupabaseClient } from '../../lib/supabase'
 import { callbackUrl, safeReturnPath } from './redirects'
@@ -22,6 +23,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  comments?: CommentsApi
   tasks?: TasksApi
   deliverables?: DeliverablesApi
   deliverableCommands?: DeliverableCommands
@@ -58,6 +60,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    comments: createCommentsApi(clientReady),
     tasks: createTasksApi(clientReady),
     deliverables: createDeliverablesApi(clientReady),
     deliverableCommands: createDeliverableCommands(clientReady),

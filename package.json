@@ -23,6 +23,7 @@
     "test:deliverables": "node scripts/test-deliverables.cjs",
     "test:deliverable-authoring": "node scripts/test-deliverable-authoring.cjs",
     "test:tasks": "node scripts/test-tasks.cjs && node scripts/test-task-commands.cjs",
+    "test:comments": "node scripts/test-comments.cjs",
     "test:task-commands": "node scripts/test-task-commands.cjs",
     "db:types": "node scripts/generate-identity-types.cjs",
     "db:types:check": "node scripts/generate-identity-types.cjs --check",
