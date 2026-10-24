@@ -17,7 +17,7 @@
   ],
   "artifacts": {
     "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
-    "supabase/seed.sql": "8f90fe0cf2e4c72b4edcec5716b62afe0401f449a8e6b83e5116096bb982170d",
+    "supabase/seed.sql": "26a6c2f8309eed229a5d395bcbf456d8e107dbb1295997908f9cc407be473979",
     "supabase/tests/identity.test.sql": "26f8506df043cf662225e191e2a19922ff947c7746f53897f02d2df3da6c5d7b"
   },
   "limits": "Minimal auth.users/auth.uid and API roles supplied by harness. Full Supabase Docker/Auth/PostgREST verification is not covered."

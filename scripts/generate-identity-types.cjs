@@ -34,7 +34,7 @@ const { createIdentityDatabase } = require('./identity-db.cjs')
     const scalar = { uuid: 'string', text: 'string', timestamptz: 'string', date: 'string', bool: 'boolean', int4: 'number', jsonb: 'Json' }
     const typeOf = (name) => { assert(scalar[name], `Unknown PostgreSQL type: ${name}`); return scalar[name] }
     const tables = [...new Set(columns.map((column) => column.table_name))]
-    assert.equal(tables.length, 25)
+    assert.equal(tables.length, 26)
     const lines = [
       '// Generated from the migrated PostgreSQL catalog by pnpm db:types. Do not edit.',
       '// Supabase-compatible table shape; full Supabase CLI comparison awaits Docker.',

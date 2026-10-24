@@ -7,7 +7,9 @@ import { navigationItems } from './navigation'
 import { createAuthGateway, isGuest, type AuthGateway } from '../features/auth/gateway'
 import { RedeemPage, SponsorPage } from '../features/guests/pages'
 import { AccountPage, AuthRevalidator, CallbackPage, LoginPage, ProtectedShell } from '../features/auth/pages'
-import { safeReturnPath } from '../features/auth/redirects'
+import { safeReturnPath, isDeliverablePath } from '../features/auth/redirects'
+import { DeliverablesRoute } from '../features/deliverables/DeliverablesPage'
+import { DeliverablePage } from '../features/deliverables/DeliverablePage'
 import { LoadingState } from '../components/FeedbackState'
 import { DirectoryPage } from '../features/people/pages'
 
@@ -65,7 +67,8 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
     { element: <AuthRevalidator gateway={gateway} />, errorElement: <RouteErrorPage />, hydrateFallbackElement: <main className="standalone-page"><LoadingState /></main>, children: [
       { path: '/login', loader: async ({ request }) => {
         const result = await gateway.readContext(request.signal)
-        return result.state === 'authorized' ? redirect(isGuest(result)?'/shared':safeReturnPath(new URL(request.url).searchParams.get('returnTo'))) : result
+        const returnTo=safeReturnPath(new URL(request.url).searchParams.get('returnTo'))
+        return result.state === 'authorized' ? redirect(isGuest(result)&&!isDeliverablePath(returnTo)?'/shared':returnTo) : result
       }, element: <LoginPage gateway={gateway} /> },
       { path: '/auth/callback', element: <CallbackPage gateway={gateway} /> },
       { path: '/guest/redeem', loader:({request})=>gateway.readContext(request.signal), element: <RedeemPage gateway={gateway} /> },
@@ -74,7 +77,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         const result = await gateway.readContext(request.signal)
         if (result.state === 'authorized') {
           const path=new URL(request.url).pathname
-          if(isGuest(result) && !navigationItems.some(item=>item.href===path && item.audiences.includes('guest')))return redirect('/shared')
+          if(isGuest(result) && !isDeliverablePath(path) && !navigationItems.some(item=>item.href===path && item.audiences.includes('guest')))return redirect('/shared')
           if(path==='/guests' && !result.capabilities.includes('roles.manage'))return redirect(isGuest(result)?'/shared':'/')
           return result
         }
@@ -82,9 +85,10 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         return redirect(`/login?reason=${result.state === 'denied' ? 'denied' : 'check'}&returnTo=${encodeURIComponent(safeReturnPath(url.pathname))}`)
       }, shouldRevalidate: () => true, children: [
       { index: true, element: <><PageHeading title="Overview" description="Your current core membership has been verified." /><EmptyState title="Your workspace is ready for its next step" description="Work modules will appear here as they are connected. No sample tasks or metrics are shown." /></> },
+      {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage api={gateway.deliverables}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),
-        element: item.id === 'people' && gateway.people ? <DirectoryPage api={gateway.people} /> : item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,
+        element: item.id === 'deliverables' && gateway.deliverables ? <DeliverablesRoute api={gateway.deliverables} /> : item.id === 'people' && gateway.people ? <DirectoryPage api={gateway.people} /> : item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,
         errorElement: <ErrorState title="This page could not open" description="Return to the overview and try again. If it keeps happening, contact the workspace maintainer." action={<Link className="button" to="/">Return to overview</Link>} />,
       })),
       ] },

@@ -1,0 +1,34 @@
+begin;
+select '1..3' as tap;
+create function pg_temp.require(ok boolean,message text) returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'Assertion failed: %',message;end if;end$$;
+grant execute on function pg_temp.require(boolean,text) to authenticated;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333332',true);
+select pg_temp.require((public.list_deliverables('22222222-2222-4222-8222-222222222221')->>'total')::integer=1,'restricted deliverable absent from rows/count');
+select pg_temp.require(public.list_deliverables('22222222-2222-4222-8222-222222222221')::text not like '%PRIVATE%','restricted fields/phase/unit absent from list/filter options');
+select pg_temp.require(public.read_deliverable('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa9') is null,'unauthorized deep link indistinguishable from missing');
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333333',true);
+select pg_temp.require(public.read_deliverable('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8')->'details'='null'::jsonb,'ordinary summary never exposes participant outcome/body/criteria');
+select pg_temp.require((select count(*)=0 from public.deliverables),'raw child details remain denied');
+select 'ok 1 - P08_A1: authorized rows/count/options only, restricted deep link hidden, private details separately gated' as tap;
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333332',true);
+select pg_temp.require((public.list_deliverables('22222222-2222-4222-8222-222222222221',p_involves_my_unit=>true)->>'total')::integer=1,'two matching units yield one output');
+select pg_temp.require((public.list_deliverables('22222222-2222-4222-8222-222222222221',p_unit_id=>'44444444-4444-4444-8444-444444444442')->>'total')::integer=1,'supporting committee filter uses same output');
+select pg_temp.require(jsonb_array_length(public.list_deliverables('22222222-2222-4222-8222-222222222221',p_page=>2,p_page_size=>1)->'items')=0,'pagination does not repeat output');
+select 'ok 2 - P08_A2: canonical shared output across lead/support/multiple own units and pages' as tap;
+reset role;
+update public.work_items set title='Fictional changed output',due_on=(statement_timestamp() at time zone 'Asia/Manila')::date-1 where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8';
+update public.deliverables set outcome='Fictional changed outcome',is_blocked=true,safe_blocker_summary='Fictional missing supplied content' where work_item_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8';
+set local role authenticated;
+select pg_temp.require(public.read_deliverable('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8')->>'title'='Fictional changed output'
+ and public.read_deliverable('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8')->'details'->>'outcome'='Fictional changed outcome','detail reflects real current database changes');
+select pg_temp.require((public.list_deliverables('22222222-2222-4222-8222-222222222221',p_blocked=>true,p_overdue=>true)->>'total')::integer=1,'blocked/overdue filters are real database state');
+select pg_temp.require(public.read_deliverable('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8')->'gates'->>'finance'='pending_assessment'
+ and public.read_deliverable('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8')->>'readiness'='blocked_provisional','no authoritative approval/readiness invented');
+select pg_temp.require((public.list_deliverables('22222222-2222-4222-8222-222222222221',p_phase=>'No such phase')->>'total')::integer=0,'no matching records is honest empty result');
+reset role;
+update public.work_items set due_on=(statement_timestamp() at time zone 'Asia/Manila')::date where id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8';
+set local role authenticated;
+select pg_temp.require((public.list_deliverables('22222222-2222-4222-8222-222222222221',p_overdue=>true)->>'total')::integer=0,'date-only due today is not overdue before Manila day ends');
+select 'ok 3 - P08_A3: real DB updates, honest pending gates, empty and denied state, Manila date boundary' as tap;
+rollback;

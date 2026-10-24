@@ -102,6 +102,42 @@ export type Database = {
           },
         ]
       }
+      deliverable_units: {
+        Row: {
+          organization_id: string
+          term_id: string
+          work_item_id: string
+          unit_id: string
+        }
+        Insert: {
+          organization_id: string
+          term_id: string
+          work_item_id: string
+          unit_id: string
+        }
+        Update: {
+          organization_id?: string
+          term_id?: string
+          work_item_id?: string
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_units_organization_id_term_id_unit_id_fkey"
+            columns: ["organization_id","term_id","unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "deliverable_units_organization_id_term_id_work_item_id_fkey"
+            columns: ["organization_id","term_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["organization_id","term_id","work_item_id"]
+          },
+        ]
+      }
       deliverables: {
         Row: {
           work_item_id: string
@@ -114,6 +150,11 @@ export type Database = {
           updated_at: string
           updated_by: string | null
           version: number
+          phase_key: string | null
+          outcome: string | null
+          acceptance_criteria: string | null
+          is_blocked: boolean
+          safe_blocker_summary: string | null
         }
         Insert: {
           work_item_id: string
@@ -126,6 +167,11 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          phase_key?: string | null
+          outcome?: string | null
+          acceptance_criteria?: string | null
+          is_blocked?: boolean
+          safe_blocker_summary?: string | null
         }
         Update: {
           work_item_id?: string
@@ -138,6 +184,11 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          phase_key?: string | null
+          outcome?: string | null
+          acceptance_criteria?: string | null
+          is_blocked?: boolean
+          safe_blocker_summary?: string | null
         }
         Relationships: [
           {
@@ -1535,6 +1586,21 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      list_deliverables: {
+        Args: {
+          p_term_id: string
+          p_phase?: string | null
+          p_unit_id?: string | null
+          p_owner_id?: string | null
+          p_blocked?: boolean | null
+          p_overdue?: boolean | null
+          p_involves_my_unit?: boolean | null
+          p_review_pending?: boolean | null
+          p_page?: number | null
+          p_page_size?: number | null
+        }
+        Returns: Json | null
+      }
       list_guest_invitations: {
         Args: {
           p_term_id: string
@@ -1547,6 +1613,12 @@ export type Database = {
           p_write?: boolean | null
         }
         Returns: boolean | null
+      }
+      read_deliverable: {
+        Args: {
+          p_work_item_id: string
+        }
+        Returns: Json | null
       }
       read_directory: {
         Args: {

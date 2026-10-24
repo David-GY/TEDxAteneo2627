@@ -14,7 +14,7 @@
   "hashes": {
     "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
     "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
-    "supabase/seed.sql": "8f90fe0cf2e4c72b4edcec5716b62afe0401f449a8e6b83e5116096bb982170d",
+    "supabase/seed.sql": "26a6c2f8309eed229a5d395bcbf456d8e107dbb1295997908f9cc407be473979",
     "supabase/tests/authorization.test.sql": "fb1dcf5aedc1a75b9277065f77d1e9ebbd5c884f905aea75939289333cd92338"
   },
   "limitations": "No real JWT/OAuth verification, PostgREST requests or Supabase PostgreSQL 17; Docker blocker carried from P02."

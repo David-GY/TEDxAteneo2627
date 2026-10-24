@@ -1,0 +1,10 @@
+{
+  "target": "actual isolated PGlite-backed RPC reads with simulated verified sign-in; not Supabase/JWT transport",
+  "checks": [
+    "P08_A1 restricted row/deep link hidden",
+    "P08_A2 own-unit filter gives one canonical output",
+    "P08_A3 real DB edits reflected after reload, stable hard-refreshed deep link, empty recovery and21-row pagination URL refresh",
+    "Desktop/320px reflow, no private browser storage/runtime errors"
+  ],
+  "errors": []
+}

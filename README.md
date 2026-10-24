@@ -48,3 +48,5 @@ TypeScript is pinned to 6.0.3 because the selected TypeScript ESLint release's p
 - Database checks without Docker: `pnpm test:identity`, `pnpm db:types:check`. These use isolated embedded PostgreSQL, not Supabase Auth/PostgREST integration.
 
 P02 full-stack acceptance remains pending the local container runtime; P03 adds permitted authorization policies; P04 introduces real Google login. Do not connect real finance/evaluation records to this scaffold. Production is not configured. Follow the build contract, use synthetic development data, and leave one verified checkpoint per step.
+
+P08 adds permission-filtered deliverable reading at `/deliverables` and `/deliverables/:UUID`; see `docs/deliverables.md` and `docs/build/steps/P08.md`. Run `pnpm test:deliverables` for local SQL assertions. With Vite running, `node scripts/preview-p08.cjs` serves a labeled synthetic PostgreSQL preview at <http://127.0.0.1:5174/deliverables>; `node scripts/verify-p08.cjs` verifies a separate disposable database. These scripts simulate sign-in and do not verify Supabase/Google. Production uses real SDK RPCs and requires the documented provider/privacy gates.
