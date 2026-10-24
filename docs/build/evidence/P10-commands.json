@@ -28,6 +28,7 @@
     "supabase/migrations/20261024001900_synergy.sql": "402bba80e7fa9b36061a02c48dbae04f593e0dbd0567aa2d1956d703ea9b7e0d",
     "supabase/migrations/20261024002000_synergy_interface.sql": "6c80d42ce58cd66bd27b311e0beb6c4a3649e47ffdef84a263373c705ba0b618",
     "supabase/migrations/20261025002100_dependencies.sql": "074630ac3580a1724d78e71f185028a7489b73d29d07eea26fe33440d857a610",
+    "supabase/migrations/20261025002200_handoffs.sql": "19027fa8bdcd135739625153d58c07420579386204bcf6e9bbb0417ed49ee4c5",
     "supabase/tests/task_commands.test.sql": "950cb3d0851f77289b4c56f405c80af2518a5771d0daeec558882cccce92bd9c"
   },
   "blocked": "P02–P09 provider/human/privacy gates retained"

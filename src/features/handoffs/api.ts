@@ -1,0 +1,29 @@
+import type {createSupabaseClient} from '../../lib/supabase'
+import {mapCommandError,type CommandResult} from '../../lib/commands'
+export type HandoffState='proposed'|'changes_requested'|'declined'|'cancelled'|'accepted'
+export type HandoffTerms={output:string;criteria:string;dueOn:string;reason:string}
+export type SubmitHandoff={sourceTaskId:string;receiverId:string;receiverUnitId:string;manifestId:string;terms:HandoffTerms;nextTaskId:string|null;expectedSourceVersion:number;expectedNextVersion:number|null;requestId:string;resubmission?:{handoffId:string;expectedVersion:number}}
+export type RespondHandoff={handoffId:string;action:'accept'|'decline'|'changes_requested'|'cancel';expectedVersion:number;expectedRevision:number;reason:string;requestId:string}
+export type AcceptHandoff=Omit<RespondHandoff,'action'|'reason'>&{notes:string}
+export type HandoffReceipt={handoffId:string;version:number;revision:number;state:HandoffState;receiptId:string|null;nextTaskId:string|null}
+export type PackageFile={assetId:string;name:string;sha256:string;size:number;mime:'application/pdf'|'image/png'|'image/jpeg'}
+export type HandoffView={id:string;version:number;revision:number;state:HandoffState;senderId:string;receiverId:string;receiverUnitId:string;sourceTaskId:string|null;nextTaskId:string|null;
+ package:{downloadContext:string;manifestHash:string;files:PackageFile[];output:string;criteria:string;dueOn:string;nextTerms:{taskId:string;ownerId:string;receiverUnitId:string;dueOn:string|null;dueAt:string|null}|null};
+ receipt:{id:string;revision:number;notes:string;acceptedAt:string}|null;history:{revision:number;action:'proposed'|'accept'|'decline'|'changes_requested'|'cancel';reason:string;recordedAt:string}[]}
+export interface HandoffsApi{submit(input:SubmitHandoff):Promise<CommandResult<HandoffReceipt>>;respond(input:RespondHandoff):Promise<CommandResult<HandoffReceipt>>;accept(input:AcceptHandoff):Promise<CommandResult<HandoffReceipt>>;read(id:string):Promise<HandoffView|null>}
+const uuid=(v:unknown):v is string=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)
+const nullable=(v:unknown)=>v===null||uuid(v),positive=(v:unknown)=>Number.isSafeInteger(v)&&(v as number)>0
+const hash=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{64}$/.test(v),date=(v:unknown)=>typeof v==='string'&&Number.isFinite(Date.parse(v))
+const state=(v:unknown)=>['proposed','changes_requested','declined','cancelled','accepted'].includes(String(v))
+function receipt(v:unknown):v is HandoffReceipt{const r=v as HandoffReceipt;return !!r&&uuid(r.handoffId)&&positive(r.version)&&positive(r.revision)&&state(r.state)&&nullable(r.receiptId)&&nullable(r.nextTaskId)&&(r.state!=='accepted'||uuid(r.receiptId))&&(r.state==='accepted'||r.receiptId===null&&r.nextTaskId===null)}
+function view(v:unknown):v is HandoffView{const r=v as HandoffView;if(!r||!uuid(r.id)||!positive(r.version)||!positive(r.revision)||!state(r.state)||![r.senderId,r.receiverId,r.receiverUnitId].every(uuid)||!nullable(r.sourceTaskId)||!nullable(r.nextTaskId))return false;const p=r.package;return !!p&&uuid(p.downloadContext)&&hash(p.manifestHash)&&typeof p.output==='string'&&typeof p.criteria==='string'&&date(p.dueOn)&&Array.isArray(p.files)&&p.files.length>0&&p.files.every(f=>f&&uuid(f.assetId)&&typeof f.name==='string'&&hash(f.sha256)&&positive(f.size)&&['application/pdf','image/png','image/jpeg'].includes(f.mime))&&(p.nextTerms===null||uuid(p.nextTerms.taskId)&&uuid(p.nextTerms.ownerId)&&uuid(p.nextTerms.receiverUnitId)&&[p.nextTerms.dueOn,p.nextTerms.dueAt].every(d=>d===null||date(d)))&&(r.receipt===null||uuid(r.receipt.id)&&positive(r.receipt.revision)&&typeof r.receipt.notes==='string'&&date(r.receipt.acceptedAt))&&(r.state!=='accepted'||r.receipt!==null)&&Array.isArray(r.history)&&r.history.every(h=>h&&positive(h.revision)&&['proposed','accept','decline','changes_requested','cancel'].includes(h.action)&&typeof h.reason==='string'&&date(h.recordedAt))}
+export function createHandoffsApi(ready:ReturnType<typeof createSupabaseClient>):HandoffsApi{
+ async function client(){const c=await ready;if(!c)throw{code:'COMMAND_UNAVAILABLE'};return c}
+ async function command(run:()=>PromiseLike<{data:unknown;error:unknown}>):Promise<CommandResult<HandoffReceipt>>{try{const{data,error}=await run();if(error)return{ok:false,error:mapCommandError(error)};if(!receipt(data))throw{code:'COMMAND_UNAVAILABLE'};return{ok:true,value:data}}catch(e){return{ok:false,error:mapCommandError(e)}}}
+ return{
+ submit(input){return command(async()=>(await client()).rpc('submit_handoff',{p_source_task_id:input.sourceTaskId,p_receiver_member_id:input.receiverId,p_receiver_unit_id:input.receiverUnitId,p_manifest_id:input.manifestId,p_terms:input.terms,p_next_task_id:input.nextTaskId!,p_expected_source_version:input.expectedSourceVersion,p_expected_next_version:input.expectedNextVersion!,p_request_id:input.requestId,p_handoff_id:input.resubmission?.handoffId??null,p_expected_handoff_version:input.resubmission?.expectedVersion??null}))},
+ respond(input){return command(async()=>(await client()).rpc('respond_to_handoff',{p_handoff_id:input.handoffId,p_action:input.action,p_expected_version:input.expectedVersion,p_expected_revision:input.expectedRevision,p_reason:input.reason,p_request_id:input.requestId}))},
+ accept(input){return command(async()=>(await client()).rpc('accept_handoff',{p_handoff_id:input.handoffId,p_expected_version:input.expectedVersion,p_expected_revision:input.expectedRevision,p_notes:input.notes,p_request_id:input.requestId}))},
+ async read(id){if(!uuid(id))return null;try{const{data,error}=await(await client()).rpc('read_handoff',{p_handoff_id:id});if(error)throw error;if(data===null)return null;if(!view(data))throw new Error();return data}catch{throw new Error('Handoff could not load. Check current access or connection and retry.')}},
+ }
+}

@@ -1,0 +1,4 @@
+PASS P17 actual-SQL/compiled-adapter/isolated-byte browser verification
+EXIT 0
+PASS P16_A1-A3 local routed SQL browser checks (parallel-provider checks remain unverified)
+P16 regression EXIT 0

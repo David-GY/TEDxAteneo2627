@@ -1,0 +1,46 @@
+P17 frontend/Edge/build/catalog checks
+COMMAND pnpm test
+$ vitest run
+
+ RUN  v5.0.5 C:/Users/david/OneDrive/Documents/ChatGPT/TEDx
+
+
+ Test Files  26 passed (26)
+      Tests  112 passed (112)
+   Start at  04:08:55
+   Duration  12.16s (environment 64%, setup 13%, tests 11%, import 9%, transform 4%)
+
+Environment  jsdom was created 26 times · 66.44s total, 64% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+EXIT 0
+COMMAND pnpm typecheck
+$ tsc --noEmit
+EXIT 0
+COMMAND pnpm typecheck:files
+$ tsc --noEmit -p tsconfig.files.json
+EXIT 0
+COMMAND pnpm lint
+$ eslint . --max-warnings 0
+EXIT 0
+COMMAND pnpm build
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 183 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           0.55 kB │ gzip:   0.32 kB
+dist/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2   15.23 kB
+dist/assets/karla-latin-wght-normal-C3-ma4ov.woff2       32.11 kB
+dist/assets/index-D_X9yr6Y.css                           11.69 kB │ gzip:   3.10 kB
+dist/assets/dist-CTOaXH3b.js                            214.40 kB │ gzip:  55.16 kB
+dist/assets/index-B0PqFSmU.js                           467.87 kB │ gzip: 137.76 kB
+
+✓ built in 1.03s
+EXIT 0
+COMMAND pnpm db:types:check
+$ node scripts/generate-identity-types.cjs --check
+Verified catalog types for 48 tables (546 columns) and 67 functions.
+EXIT 0

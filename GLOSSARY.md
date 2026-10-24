@@ -19,3 +19,13 @@ A receiving committee's proposed revision requiring the requesting committee's e
 
 **Safe proposal preview**:
 The intentionally shared negotiation terms available to current participating heads without granting access to the private parent deliverable or its files.
+
+**Handoff package**:
+An explicitly offered immutable revision of output, criteria and finalized files for a named receiver. The sender remains accountable until that receiver accepts it.
+_Avoid_: Mutable source link, automatic approval
+
+**Handoff receipt**:
+The immutable record of one receiver's acceptance of an exact package revision, manifest and criteria. It may activate an existing agreed task; it does not accept a parent deliverable or grant FIN/MCD approval.
+
+**Package download context**:
+A revision-bound entitlement to the exact finalized package files. It grants no access to the private originating work, parent, sibling or financial record.

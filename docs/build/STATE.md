@@ -2,9 +2,10 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- Latest requested step **P17 - not_started (implementation)**. Preflight only; P17_A1-A3 NOT IMPLEMENTED/UNVERIFIED. User explicitly requested P17 after P16A's partial checkpoint. P17 depends on locally delivered P16/P12 and can proceed independently of the chart.
-- **P16A remains in_progress**, preserved: only five-tested pure date helpers exist. Its schema/scheduling commands/projection/forms/chart/A1-A3 remain pending. P00/P01 complete; P02-P16 implementations retain external ledgers. P18 not executed.
-- Schema44tables/494columns/63functions, migrations001-021 unchanged. No P17 code/schema/UI/tests delivered or implied. Actual P17 preflight: clean checkout, fetched matching remote commit/tree and live preview ports confirmed. No unrelated code suites rerun without a code change. Details docs/build/steps/P17.md and P16A.md.
+- **P17 - blocked_external**: independent immutable handoff domain/API delivered. A1/A3 local PASS; A2 sequential competing outcomes/lock/version proof PASS, actual parallel sessions unverified. P18 not executed.
+- **P16A remains in_progress**, date foundation preserved; schema/scheduling/projection/forms/chart/A1-A3 still pending. Scheduled continuation authorizes resuming it serially after the reviewed P17 checkpoint if budget permits. P00/P01 complete; P02-P16 external ledgers retained.
+- Schema48tables/546columns/67functions, migrations001-022. Exact immutable package/receiver/criteria/manifest/next-task binding; explicit receiver acceptance/receipt/task read grants/canonical activation under P16 lock; nonaccepted package gates task progress. Sender responsibility, parent owner/original deadlines and FIN/MCD/acceptance rules preserved. Narrow package-file contexts share exact snapshots without origin/parent/finance access; no P18 UI.
+- Actual: P17 named SQL and actual-SQL/compiled-adapter/isolated-byte proof;26files/112tests; relevant P08-P16 SQL and P16 browser regressions; frontend/Edge typechecks/lint/build182modules(app467.87kB/gzip137.76kB); types/drift48/546/67. Failures/corrections/evidence docs/build/steps/P17.md. No real Auth/Storage/JWT/concurrent-session/human proof.
 
 ## External blockers retained
 
@@ -20,10 +21,12 @@ P16A actual provider/session/privacy/human gates also remain; date-helper tests 
 
 P17 actual concurrent accept/cancel/replay under real receiver JWTs, approved institutional receiver authority, immutable package/file privacy and human handoff UAT remain unverified once implementation exists.
 
+P17 real concurrent accept/cancel/replay/activation, deployed old/current JWT exact package download/scope revocation and institutional receiver/privacy/human acceptance remain unverified; local proof does not discharge these gates.
+
 ## Next action / custody
 
-At3:52AM Manila October25, active one-occurrence thread heartbeat continue-p16a-at-3-52-am (renamed Continue TEDx P17 and P16A at 3:52 AM) prioritizes the latest P17 request. Read CONTINUE/STATE/P17 and establish a fresh observed usage/Git baseline. Implement exact immutable handoff snapshots and atomic receiver acceptance/receipt/grants/next-task activation, then named A1-A3 and required checks. Preserve P16A's partial code; resume its remaining authorized work serially after P17 checkpoint only if budget permits. Do not run P18. The earlier P16A-only prohibition on P17 is superseded by the new explicit user request.
+After reviewed P17 commit/push/custody, resume already-authorized P16A serially within this scheduled execution's remaining original budget: planned_start_on/authority/guards, projection/forms/chart/A1-A3, retaining tested date helpers. Do not run P18. P17 external verification needs approved provider/authority/privacy setup, official types and true parallel/JWT/Storage/human checks; CONTINUE resumes it.
 
-Existing visible owned P16 synthetic SQL5178 and Vite5173 retained. Started clean at6c178e452547d7e32d41a57a4510115d6f3570cc; fetched commit/tree matched. Only this state and P17 preflight ledger changed. No agents/chats/worktrees/dependencies/provider changes/deployments/remote resets/external messages. Authorized reviewed documentation-only checkpoint uses codex/core-build-checkpoints; final chat records remote commit/tree and clean-worktree verification.
+Owned visible P17 synthetic SQL/API preview5178 plus restored Vite5173; existing canonical task pages, no P18 UI. Started clean at25f62ceeb3f7411f990c2cf3a14e16552407fe69; fetched commit/tree matched. No agents/chats/worktrees/provider changes/deployments/remote resets/messages/dependencies. Reviewed checkpoint on codex/core-build-checkpoints; final receipt verifies remote commit/tree and clean status. Earlier P16A foundation preserved.
 
-Fresh P17 shared usage91%, reset1792871469 unchanged; effective0point budget with10point headroom under BUILD-CONTRACT. Weekly58%. No actual cap-exhaustion claim or cap/reset/billing/purchase change. Requested3:52AM continuation updated; execution remains future/unverified.
+Fresh scheduled execution usage1 ->10 ->16%, reset1792889538; effective40points/wind-down36used/ceiling41used, weekly58 ->61%. Shared observations, not exact attribution. No reset/cap/billing/purchase/wait. Single requested continuation has now executed; remove its one-occurrence automation when this run ends.

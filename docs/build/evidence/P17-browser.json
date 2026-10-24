@@ -1,0 +1,12 @@
+{
+  "target": "compiled real handoff adapter/isolated SQL and actual P12 handler with synthetic receiver + isolated bytes; not real Supabase/Auth/Storage/JWT/concurrency",
+  "checks": [
+    "proposal reply lost after commit; exact caller-key retry returns same one handoff",
+    "receiver reads explicit package without private source/parent access",
+    "narrow revision-context bytes download with attachment/no-store and second scope check",
+    "acceptance reply lost after actual next-task activation; identical retry returns one immutable receipt",
+    "canonical agreed task in progress, existing UI320px, no fake handoff UI/P18",
+    "revocation during download denies bytes and later package reads; no runtime errors/private browser storage"
+  ],
+  "errors": []
+}

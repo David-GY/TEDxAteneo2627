@@ -1,0 +1,17 @@
+begin;
+select '1..3' as tap;
+create function pg_temp.require(ok boolean)returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'P17 SQL assertion failed';end if;end$$;
+create function pg_temp.rejects(command text,code text)returns void language plpgsql as $$begin begin execute command;exception when others then if sqlstate=code then return;end if;raise;end;raise exception 'Expected P17 rejection %',code;end$$;
+select pg_temp.require((select r.manifest_sha256=m.sha256 and(r.files->0->>'sha256')=a.sha256 from public.handoff_revisions r join public.asset_manifests m on m.id=r.manifest_id join public.assets a on a.id=(r.files->0->>'assetId')::uuid where r.handoff_id=(current_setting('p17.a'))::uuid and r.revision=2));
+select pg_temp.require((select bool_and(c.relrowsecurity and c.relforcerowsecurity)from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public'and c.relname in('handoffs','handoff_revisions','handoff_decisions','handoff_receipts')));
+select pg_temp.rejects($q$update public.handoff_revisions set output='Rewrite snapshot'$q$,'42501');
+select 'ok 1 - P17_A1 SQL: finalized manifest/hash and forced RLS; immutable package snapshot' as tap;
+select pg_temp.require((select h.state='accepted'and count(x.id)=1 from public.handoffs h join public.handoff_receipts x on x.handoff_id=h.id where h.id=current_setting('p17.a')::uuid group by h.state));
+select pg_temp.rejects($q$update public.handoffs set state='cancelled'where id=current_setting('p17.a')::uuid$q$,'55000');
+select pg_temp.require((select count(*)=1 from public.audit_events where action='accept_handoff'and request_id=current_setting('p17.accept_key')::uuid));
+select 'ok 2 - P17_A2 SQL: one accepted receipt/command audit; accepted state cannot be cancelled afterward' as tap;
+select pg_temp.require((select count(*)=0 from public.handoff_receipts where handoff_id=current_setting('p17.b')::uuid));
+select pg_temp.require((select t.workflow_state='todo'from public.handoffs h join public.tasks t on t.work_item_id=h.next_task_id where h.id=current_setting('p17.b')::uuid));
+select pg_temp.rejects($q$update public.handoff_receipts set notes='Rewrite receipt'$q$,'42501');
+select 'ok 3 - P17_A3 SQL: decline/change path leaves next task inactive with no receipt; accepted receipts immutable' as tap;
+rollback;

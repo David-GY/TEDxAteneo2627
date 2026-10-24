@@ -18,6 +18,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       import {createAppRoutes} from '${vite}/src/app/router.tsx';
       import {createDeliverablesApi} from '${vite}/src/features/deliverables/api.ts';
       import {createDeliverableCommands} from '${vite}/src/features/deliverables/commands.ts';
+      import {createHandoffsApi} from '${vite}/src/features/handoffs/api.ts';
       import {createDependenciesApi} from '${vite}/src/features/tasks/dependenciesApi.ts';
       import {createSynergiesApi} from '${vite}/src/features/synergies/api.ts';
       import {createOverviewApi} from '${vite}/src/features/overview/api.ts';
@@ -28,7 +29,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       const previewReceiver=${synergies?'true':'false'}&&new URL(location.href).searchParams.get('synthetic')==='receiver';
       const ready=Promise.resolve({functions:{invoke:async(name,{body})=>{const response=await fetch('/__files',{method:'POST',headers:body instanceof FormData?{}:{'content-type':'application/json'},body:body instanceof FormData?body:JSON.stringify(body)});return response.ok?{data:response.headers.get('content-type').includes('application/octet-stream')?await response.blob():await response.json(),error:null}:{data:null,error:{context:response}}}},rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json','x-preview-subject':previewReceiver?'receiver':'requester'},body:JSON.stringify({name,args})}).then(r=>r.json())});
       const context={state:'authorized',memberId:previewReceiver?'${ids.owner}':'${ids.viewer}',displayName:previewReceiver?'Fictional Alex (synthetic receiving head)':'Fictional River (synthetic requesting head)',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:previewReceiver?'66666666-6666-4666-8666-666666666661':'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
-      const gateway={dependencies:createDependenciesApi(ready),synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:previewReceiver?undefined:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      const gateway={handoffs:createHandoffsApi(ready),dependencies:createDependenciesApi(ready),synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:previewReceiver?undefined:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
       ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createBrowserRouter(createAppRoutes({state:'not_configured',issues:[]},gateway))}));
       </script></body></html>`
     const server=http.createServer(async(req,res)=>{
@@ -53,6 +54,10 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
             if(name==='list_deliverables')return tx.query('select public.list_deliverables($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) as value',[a.p_term_id,a.p_phase,a.p_unit_id,a.p_owner_id,a.p_blocked,a.p_overdue,a.p_involves_my_unit,a.p_review_pending,a.p_page,a.p_page_size])
             if(name==='list_synergies')return tx.query('select public.list_synergies($1,$2,$3,$4) as value',[a.p_term_id,a.p_view,a.p_parent_id,a.p_page])
             if(name==='synergy_options')return tx.query('select public.synergy_options($1,$2) as value',[a.p_term_id,a.p_parent_id])
+            if(name==='submit_handoff')return tx.query('select public.submit_handoff($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) as value',[a.p_source_task_id,a.p_receiver_member_id,a.p_receiver_unit_id,a.p_manifest_id,a.p_terms,a.p_next_task_id,a.p_expected_source_version,a.p_expected_next_version,a.p_request_id,a.p_handoff_id??null,a.p_expected_handoff_version??null])
+            if(name==='read_handoff')return tx.query('select public.read_handoff($1) as value',[a.p_handoff_id])
+            if(name==='respond_to_handoff')return tx.query('select public.respond_to_handoff($1,$2,$3,$4,$5,$6) as value',[a.p_handoff_id,a.p_action,a.p_expected_version,a.p_expected_revision,a.p_reason,a.p_request_id])
+            if(name==='accept_handoff')return tx.query('select public.accept_handoff($1,$2,$3,$4,$5) as value',[a.p_handoff_id,a.p_expected_version,a.p_expected_revision,a.p_notes,a.p_request_id])
             if(name==='read_task_dependencies')return tx.query('select public.read_task_dependencies($1,$2) as value',[a.p_successor_id,a.p_search??''])
             if(name==='add_task_dependency')return tx.query('select public.add_task_dependency($1,$2,$3,$4,$5,$6,$7,$8) as value',[a.p_predecessor_id,a.p_successor_id,a.p_type,a.p_required,a.p_expected_predecessor_version,a.p_expected_successor_version,a.p_reason,a.p_request_id])
             if(name==='remove_task_dependency')return tx.query('select public.remove_task_dependency($1,$2,$3,$4,$5,$6) as value',[a.p_dependency_id,a.p_expected_predecessor_version,a.p_expected_successor_version,a.p_reason,a.p_scope_exception,a.p_request_id])
@@ -89,7 +94,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       res.setHeader('content-type','text/html; charset=utf-8');res.end(html)
     })
     await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve)})
-    return{db,ids,synergyFixture,url:`http://127.0.0.1:${port}`,close:async()=>{await new Promise(resolve=>server.close(resolve));await db.close()}}
+    return{db,ids,synergyFixture,filePreview,url:`http://127.0.0.1:${port}`,close:async()=>{await new Promise(resolve=>server.close(resolve));await db.close()}}
   }catch(error){await db.close();throw error}
 }
 module.exports={createPreview}

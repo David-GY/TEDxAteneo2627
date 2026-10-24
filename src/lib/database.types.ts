@@ -1097,6 +1097,328 @@ export type Database = {
           },
         ]
       }
+      handoff_decisions: {
+        Row: {
+          id: string
+          handoff_id: string
+          revision: number
+          handoff_version: number
+          action: string
+          member_id: string
+          reason: string
+          actor_id: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          handoff_id: string
+          revision: number
+          handoff_version: number
+          action: string
+          member_id: string
+          reason: string
+          actor_id: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          handoff_id?: string
+          revision?: number
+          handoff_version?: number
+          action?: string
+          member_id?: string
+          reason?: string
+          actor_id?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "handoff_decisions_handoff_id_revision_fkey"
+            columns: ["handoff_id","revision"]
+            isOneToOne: false
+            referencedRelation: "handoff_revisions"
+            referencedColumns: ["handoff_id","revision"]
+          },
+          {
+            foreignKeyName: "handoff_decisions_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      handoff_receipts: {
+        Row: {
+          id: string
+          handoff_id: string
+          revision: number
+          receiver_member_id: string
+          manifest_id: string
+          manifest_sha256: string
+          criteria: string
+          next_task_id: string | null
+          next_version: number | null
+          notes: string
+          actor_id: string
+          accepted_at: string
+        }
+        Insert: {
+          id?: string
+          handoff_id: string
+          revision: number
+          receiver_member_id: string
+          manifest_id: string
+          manifest_sha256: string
+          criteria: string
+          next_task_id?: string | null
+          next_version?: number | null
+          notes: string
+          actor_id: string
+          accepted_at?: string
+        }
+        Update: {
+          id?: string
+          handoff_id?: string
+          revision?: number
+          receiver_member_id?: string
+          manifest_id?: string
+          manifest_sha256?: string
+          criteria?: string
+          next_task_id?: string | null
+          next_version?: number | null
+          notes?: string
+          actor_id?: string
+          accepted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "handoff_receipts_handoff_id_revision_fkey"
+            columns: ["handoff_id","revision"]
+            isOneToOne: true
+            referencedRelation: "handoff_revisions"
+            referencedColumns: ["handoff_id","revision"]
+          },
+          {
+            foreignKeyName: "handoff_receipts_manifest_id_fkey"
+            columns: ["manifest_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "handoff_receipts_next_task_id_fkey"
+            columns: ["next_task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "handoff_receipts_receiver_member_id_fkey"
+            columns: ["receiver_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      handoff_revisions: {
+        Row: {
+          id: string
+          handoff_id: string
+          revision: number
+          source_version: number
+          next_version: number | null
+          receiver_member_id: string
+          receiver_unit_id: string
+          manifest_id: string
+          manifest_sha256: string
+          files: Json
+          output: string
+          criteria: string
+          due_on: string
+          next_terms: Json | null
+          reason: string
+          created_by: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          handoff_id: string
+          revision: number
+          source_version: number
+          next_version?: number | null
+          receiver_member_id: string
+          receiver_unit_id: string
+          manifest_id: string
+          manifest_sha256: string
+          files: Json
+          output: string
+          criteria: string
+          due_on: string
+          next_terms?: Json | null
+          reason: string
+          created_by: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          handoff_id?: string
+          revision?: number
+          source_version?: number
+          next_version?: number | null
+          receiver_member_id?: string
+          receiver_unit_id?: string
+          manifest_id?: string
+          manifest_sha256?: string
+          files?: Json
+          output?: string
+          criteria?: string
+          due_on?: string
+          next_terms?: Json | null
+          reason?: string
+          created_by?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "handoff_revisions_handoff_id_fkey"
+            columns: ["handoff_id"]
+            isOneToOne: false
+            referencedRelation: "handoffs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "handoff_revisions_manifest_id_fkey"
+            columns: ["manifest_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "handoff_revisions_receiver_member_id_fkey"
+            columns: ["receiver_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "handoff_revisions_receiver_unit_id_fkey"
+            columns: ["receiver_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      handoffs: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          source_task_id: string
+          next_task_id: string | null
+          sender_member_id: string
+          receiver_member_id: string
+          receiver_unit_id: string
+          version: number
+          current_revision: number
+          state: string
+          created_by: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          source_task_id: string
+          next_task_id?: string | null
+          sender_member_id: string
+          receiver_member_id: string
+          receiver_unit_id: string
+          version?: number
+          current_revision?: number
+          state?: string
+          created_by: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          source_task_id?: string
+          next_task_id?: string | null
+          sender_member_id?: string
+          receiver_member_id?: string
+          receiver_unit_id?: string
+          version?: number
+          current_revision?: number
+          state?: string
+          created_by?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "handoff_current_revision"
+            columns: ["id","current_revision"]
+            isOneToOne: true
+            referencedRelation: "handoff_revisions"
+            referencedColumns: ["handoff_id","revision"]
+          },
+          {
+            foreignKeyName: "handoffs_next_task_id_fkey"
+            columns: ["next_task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "handoffs_organization_id_term_id_next_task_id_fkey"
+            columns: ["organization_id","term_id","next_task_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "handoffs_organization_id_term_id_receiver_unit_id_fkey"
+            columns: ["organization_id","term_id","receiver_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "handoffs_organization_id_term_id_source_task_id_fkey"
+            columns: ["organization_id","term_id","source_task_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "handoffs_receiver_member_id_fkey"
+            columns: ["receiver_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "handoffs_sender_member_id_fkey"
+            columns: ["sender_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "handoffs_source_task_id_fkey"
+            columns: ["source_task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       idempotency_keys: {
         Row: {
           actor_id: string
@@ -2595,6 +2917,16 @@ export type Database = {
     }
     Views: { [_ in never]: never }
     Functions: {
+      accept_handoff: {
+        Args: {
+          p_handoff_id: string
+          p_expected_version: number
+          p_expected_revision: number
+          p_notes: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       add_comment: {
         Args: {
           p_work_item_id: string
@@ -2870,6 +3202,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_handoff: {
+        Args: {
+          p_handoff_id: string
+        }
+        Returns: Json | null
+      }
       read_overview: {
         Args: {
           p_term_id: string
@@ -2969,6 +3307,17 @@ export type Database = {
         Args: Record<string, never>
         Returns: Json | null
       }
+      respond_to_handoff: {
+        Args: {
+          p_handoff_id: string
+          p_action: string
+          p_expected_version: number
+          p_expected_revision: number
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       respond_to_synergy: {
         Args: {
           p_agreement_id: string
@@ -3056,6 +3405,22 @@ export type Database = {
           p_visibility: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      submit_handoff: {
+        Args: {
+          p_source_task_id: string
+          p_receiver_member_id: string
+          p_receiver_unit_id: string
+          p_manifest_id: string
+          p_terms: Json
+          p_next_task_id: string
+          p_expected_source_version: number
+          p_expected_next_version: number
+          p_request_id: string
+          p_handoff_id?: string | null
+          p_expected_handoff_version?: number | null
         }
         Returns: Json | null
       }
