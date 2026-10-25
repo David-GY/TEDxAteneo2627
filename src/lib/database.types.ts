@@ -1073,6 +1073,197 @@ export type Database = {
           },
         ]
       }
+      finance_cases: {
+        Row: {
+          request_id: string
+          organization_id: string
+          term_id: string
+          created_by: string
+          created_at: string
+        }
+        Insert: {
+          request_id: string
+          organization_id: string
+          term_id: string
+          created_by: string
+          created_at?: string
+        }
+        Update: {
+          request_id?: string
+          organization_id?: string
+          term_id?: string
+          created_by?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_cases_organization_id_term_id_request_id_fkey"
+            columns: ["organization_id","term_id","request_id"]
+            isOneToOne: true
+            referencedRelation: "requests"
+            referencedColumns: ["organization_id","term_id","work_item_id"]
+          },
+        ]
+      }
+      finance_lines: {
+        Row: {
+          finance_revision_id: string
+          line_no: number
+          description: string
+          quantity_milli: number
+          unit_amount_centavos: number
+          total_centavos: number
+        }
+        Insert: {
+          finance_revision_id: string
+          line_no: number
+          description: string
+          quantity_milli: number
+          unit_amount_centavos: number
+          total_centavos: number
+        }
+        Update: {
+          finance_revision_id?: string
+          line_no?: number
+          description?: string
+          quantity_milli?: number
+          unit_amount_centavos?: number
+          total_centavos?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_lines_finance_revision_id_fkey"
+            columns: ["finance_revision_id"]
+            isOneToOne: false
+            referencedRelation: "finance_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      finance_revisions: {
+        Row: {
+          id: string
+          request_id: string
+          organization_id: string
+          term_id: string
+          request_revision_id: string
+          revision_no: number
+          case_kind: string
+          currency: string
+          purpose: string
+          fund_source: string
+          beneficiary_member_id: string
+          related_deliverable_id: string | null
+          planned_on: string | null
+          terms_risks: string
+          requested_total_centavos: number
+          unit_price_centavos: number | null
+          forecast_quantity_milli: number | null
+          forecast_revenue_centavos: number | null
+          manifest_id: string | null
+          manifest_hash: string
+          payload_hash: string
+          hash_version: string
+          submitted_by: string
+          submitted_at: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          organization_id: string
+          term_id: string
+          request_revision_id: string
+          revision_no: number
+          case_kind: string
+          currency: string
+          purpose: string
+          fund_source: string
+          beneficiary_member_id: string
+          related_deliverable_id?: string | null
+          planned_on?: string | null
+          terms_risks: string
+          requested_total_centavos: number
+          unit_price_centavos?: number | null
+          forecast_quantity_milli?: number | null
+          forecast_revenue_centavos?: number | null
+          manifest_id?: string | null
+          manifest_hash: string
+          payload_hash: string
+          hash_version?: string
+          submitted_by: string
+          submitted_at?: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          organization_id?: string
+          term_id?: string
+          request_revision_id?: string
+          revision_no?: number
+          case_kind?: string
+          currency?: string
+          purpose?: string
+          fund_source?: string
+          beneficiary_member_id?: string
+          related_deliverable_id?: string | null
+          planned_on?: string | null
+          terms_risks?: string
+          requested_total_centavos?: number
+          unit_price_centavos?: number | null
+          forecast_quantity_milli?: number | null
+          forecast_revenue_centavos?: number | null
+          manifest_id?: string | null
+          manifest_hash?: string
+          payload_hash?: string
+          hash_version?: string
+          submitted_by?: string
+          submitted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_revisions_beneficiary_member_id_fkey"
+            columns: ["beneficiary_member_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "finance_revisions_manifest_id_request_id_fkey"
+            columns: ["manifest_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "finance_revisions_organization_id_term_id_request_id_fkey"
+            columns: ["organization_id","term_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "finance_cases"
+            referencedColumns: ["organization_id","term_id","request_id"]
+          },
+          {
+            foreignKeyName: "finance_revisions_organization_id_term_id_request_id_reque_fkey"
+            columns: ["organization_id","term_id","request_id","request_revision_id"]
+            isOneToOne: true
+            referencedRelation: "request_revisions"
+            referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+          {
+            foreignKeyName: "finance_revisions_related_deliverable_id_fkey"
+            columns: ["related_deliverable_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "finance_revisions_request_id_request_revision_id_revision__fkey"
+            columns: ["request_id","request_revision_id","revision_no"]
+            isOneToOne: true
+            referencedRelation: "request_revisions"
+            referencedColumns: ["request_id","id","revision_no"]
+          },
+        ]
+      }
       form_versions: {
         Row: {
           id: string
@@ -4236,6 +4427,14 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_finance_revision: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_revision?: number | null
+        }
+        Returns: Json | null
+      }
       read_guest_contacts: {
         Args: {
           p_term_id: string
@@ -4506,6 +4705,19 @@ export type Database = {
           p_visibility: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      submit_finance_request: {
+        Args: {
+          p_work_item_id: string
+          p_values: Json
+          p_requested_on: string
+          p_title: string
+          p_finance_payload: Json
+          p_expected_version: number
+          p_request_id: string
+          p_revision?: boolean | null
         }
         Returns: Json | null
       }

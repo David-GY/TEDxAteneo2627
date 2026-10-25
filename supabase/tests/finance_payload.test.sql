@@ -1,0 +1,18 @@
+begin;
+create function pg_temp.p24_require(ok boolean)returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'P24 assertion failed';end if;end$$;
+create function pg_temp.p24_rejects(command text,code text)returns void language plpgsql as $$begin begin execute command;exception when others then if sqlstate=code then return;end if;raise;end;raise exception 'Expected P24 rejection %',code;end$$;
+grant execute on function pg_temp.p24_require(boolean),pg_temp.p24_rejects(text,text)to authenticated;
+select pg_temp.p24_require((select bool_and(relrowsecurity and relforcerowsecurity)from pg_class where oid=any(array['public.finance_cases'::regclass,'public.finance_revisions'::regclass,'public.finance_lines'::regclass])));
+select pg_temp.p24_rejects('update public.finance_revisions set purpose=''Changed''','55000');
+select pg_temp.p24_rejects('delete from public.finance_lines','55000');
+select pg_temp.p24_rejects('delete from public.finance_cases','55000');
+select pg_temp.p24_require(not has_function_privilege('anon','public.submit_finance_request(uuid,jsonb,date,text,jsonb,integer,uuid,boolean)','execute')and not has_function_privilege('service_role','public.read_finance_revision(uuid,uuid,integer)','execute'));
+select pg_temp.p24_require(not has_table_privilege('anon','public.finance_revisions','select')and not has_table_privilege('service_role','public.finance_revisions','select')and not has_table_privilege('authenticated','public.finance_revisions','insert'));
+set local role authenticated;
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333331',true);
+select pg_temp.p24_rejects('select * from public.finance_cases','42501');
+select pg_temp.p24_rejects('select * from public.finance_revisions','42501');
+select pg_temp.p24_rejects('select * from public.finance_lines','42501');
+select pg_temp.p24_rejects('select app_private.validate_finance_payload(''{}''::jsonb)','42501');
+select 'ok - P24_A2/A3 restricted raw access and immutable finance history' as tap;
+rollback;
