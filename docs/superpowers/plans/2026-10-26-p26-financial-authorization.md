@@ -31,4 +31,4 @@
 - [x] Verify local independence, alternate, partial ceiling, exact evidence, expiry/revocation/supersession, metadata and rollback/retry assertions.
 - [x] Add scoped FIN decision/view and exact uncertain-retry behavior, reusing P25/P12.
 - [x] Run appropriate SQL/browser/frontend regressions and required checks; record provider/concurrent-session/human limits.
-- [ ] Review, checkpoint, commit/push and verify live remote/tree/clean custody. No automatic P27.
+- [x] Review, checkpoint, commit/push and verify live remote/tree/clean custody. No automatic P27.

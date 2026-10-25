@@ -1,0 +1,53 @@
+{
+  "step": "P26",
+  "status": "blocked_external",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "aead8de25ce5f205a2354e809f7948fb03805e22",
+  "startedFromTree": "f31ddd106876dd407c92a224e7323575932dd8c3",
+  "implementationCommit": "4143d81ada6536a7af4054aabdaefadc015a9904",
+  "implementationTree": "c4bb78a53bbab0ca088c93033b2ab29a69819600",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch; local/fetched/live ls-remote SHA equality; local/fetched tree equality; empty git status --porcelain",
+  "schema": {
+    "migrations": 34,
+    "tables": 73,
+    "columns": 809,
+    "publicFunctions": 99
+  },
+  "checks": "P26_A1-A3 isolated SQL/compiled browser UI/selected PNG/conflict/uncertain exact retry/partial ceiling/immutable revision/expiry/revocation/policy binding/320px/focus;41files157frontend tests;frontend/Edge typechecks/lint/build/catalog;P24/P25/P22/P23 SQL and P25/P23 browser regressions; all recorded current source hashes match",
+  "review": "In-session review by this assistant using simulated product/security/skeptical perspectives; not independent reviewers. No agents, chats or worktrees.",
+  "limits": "Only explicitly confirmed single-stage, one-reviewer terminal FIN policies mapped. Other routing remains paused pending approved typed mapping. No actual institutional designation/policy seeded. All inherited provider/JWT/independent concurrency/institutional authority/evidence/privacy/retention/human gates persist. Actual concurrent approve/reject/retry races remain unverified; local constraints/sequential assertions are not concurrency proof. No actuals, ledger, payment, deployment or P27. Existing >500kB chunk warning remains.",
+  "preview": {
+    "ownedCommand": "node scripts/preview-p26.cjs",
+    "processIdAtVerification": 49388,
+    "port": 5178,
+    "vitePort": 5173,
+    "visibilitySetAndReadTrueViaCua": true,
+    "shownUrl": "http://127.0.0.1:5178/finance/reviews/22222222-2222-4222-8222-222222222221/fa484da0-b711-48d9-a1a1-f288e2f26d26?synthetic=receiver",
+    "note": "Explicit fictional policy/designations banner, isolated SQL and PNG bytes. Prior owned P25 replaced on same port; final P26 reload uses current migration/source. Existing tab retained and marked deliverable; no provider substitute."
+  },
+  "usage": {
+    "baselineUsedPercent": 0,
+    "lastObservedUsedPercent": 36,
+    "resetTimestamp": 1792975667,
+    "baselineWeeklyUsedPercent": 12,
+    "lastObservedWeeklyUsedPercent": 18,
+    "effectiveBudgetPoints": 40,
+    "windDownAtUsedPercent": 35,
+    "softCeilingUsedPercent": 40,
+    "observations": [
+      8,
+      12,
+      20,
+      22,
+      33,
+      36
+    ],
+    "interpretation": "Shared-account observations, not exact task attribution. Final implementation verified at36%; winding down to documentation custody only. New window was already observed at session start; no reset/new allocation, reset credit, purchase, cap/billing/provider change or reset wait."
+  },
+  "gitIdentity": "Command-local git -c flags reuse the verified prior checkpoint author/committer identity. No persistent Git configuration change.",
+  "receiptCommit": "This receipt is in a subsequent documentation commit, with final local/fetched/live remote commit/tree and clean-worktree verification repeated after pushing it.",
+  "nextCodeEligiblePrompt": "P27 build-prompts/27-finance-reconciliation.md; separate authorization required; not started"
+}
