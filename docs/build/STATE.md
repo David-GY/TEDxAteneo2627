@@ -2,11 +2,9 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- **P19 - in_progress**: preflight and resumable plan only; request definitions/catalog/validation and P19_A1–A3 are not implemented. Current91% usage gives zero effective implementation budget under BUILD-CONTRACT. One-time same-chat continuation saved for8:52:30AM Asia/Manila October25,2026, after the observed8:52:18 reset; fresh usage must be read then.
-- **P18 - blocked_external**: independent local handoff interface delivered: submission/file-criteria review, accept/changes/decline/withdraw/revision/history, task/Working together links, immutable receipts and canonical accepted next work. Overview substitutes current handoff actions for pending next-task rows and resolves them after acceptance/cancellation. Named P18_A1–A3 local checks pass; real provider/authority/privacy/human gates remain.
-- P16A and P17 remain blocked_external with independent implementations delivered. P00/P01 complete; P02–P17 external ledgers retained. P19 implementation remains pending.
-- Migration026; schema48tables/547columns/72public functions. Scoped list/options/party-history metadata and neutral next-task waiting; original P17 mutations/P12 bytes own all state/access. No owner/deadline/FIN/MCD/deliverable-acceptance bypass.
-- Actual:30files/127frontend tests; P18 actual SQL/UI/byte A1–A3; P17/P16A browser regressions; handoffs/timeline/synergy-interface SQL regressions; frontend/Edge typechecks/lint/build193modules(app512.62kB/gzip148.42; CSS15.45/gzip3.77); generated types48/547/72; design detector[]. Vite warns initial app chunk exceeds500kB; build passed. Evidence/failures: docs/build/steps/P18.md. Synthetic subjects/bytes/delayed sign-in are not real Supabase/Auth/Storage/JWT, independent concurrency or human verification.
+- **P19 — blocked_external**: independent local versioned request definitions/catalog delivered. Migration027,51tables/580columns/73public functions. Immutable published versions, bounded closed schemas/typed conditions, protected storage/classification, current scoped published catalog; unconfirmed general/FIN/MCD templates cannot submit live cases. Legacy generic request creation closed. Named P19_A1–A3 local SQL and catalog browser checks pass.
+- **P18, P16A and P17 — blocked_external**: independent implementations delivered; earlier P02–P18 gates retained verbatim below. P00/P01 complete. No P21 implemented.
+- P19 checks:31files/129frontend tests; actual SQL A1–A3 and existing/new-term migration seed paths; catalog320px/keyboard/failure recovery browser; task/P07/file regressions; frontend/Edge typechecks/lint/build195modules; generated-type check passed. Existing app chunk warning519.13kB/gzip150.38. Evidence/failures/review: docs/build/steps/P19.md.
 
 ## External blockers retained
 
@@ -26,12 +24,10 @@ P17 real concurrent accept/cancel/replay/activation, deployed old/current JWT ex
 
 P18 real authenticated sender/receiver mobile/keyboard/assistive-technology review, current/old revoked JWT exact-package byte access, independent accept/withdraw/revision/assignment races and approved institutional authority/privacy/human handoff acceptance remain unverified. Local UI/SQL/bytes discharge none of these gates.
 
+P19 actual provider/JWT definition/read/RLS checks, approved service/contact/lead-time/official-process/guest/FIN/MCD configuration, privacy and human mobile/keyboard/assistive-technology acceptance remain unverified. Disabled institutional templates do not substitute for those checks.
+
 ## Next action / custody
 
-Resume P19 at8:52:30AM Asia/Manila October25,2026 using build-prompts/CONTINUE.md and docs/build/steps/P19.md. Implement only P19; no P20. Verify fresh usage/Git/current remote, retain prior implementations and exact provider/authority/privacy/human gates. Bounded plan: docs/superpowers/plans/2026-10-25-p19-request-definitions.md.
+Review/commit/push the P19 checkpoint on existing codex/core-build-checkpoints and verify live remote commit/tree and clean worktree before starting separately authorized P20. Retain this execution's original3% baseline across both steps;40pp allocation, wind-down at38% used/ceiling43%. Observed8% then10%, reset1792907568, weekly74→75%; shared account, no exact attribution. No reset/purchase/cap changes.
 
-Automation continue-tedx-p19-at-8-52-am created/viewed and saved same-thread target inspected. Single occurrence within the requested8:52minute, scheduled after the first-party observed8:52:18 reset; no reset/purchase/wait or guarantee of future credits/execution. Remove it when the continuation ends. Keep the local app/computer running for local workspace work.
-
-Current owned P18 preview node scripts/preview-p18.cjs on5178/Vite5173 remains visible in existing tab12 and marked for continuation. No P19 UI or synthetic catalog is presented. Started clean ate593a1968fb227958b03979272a9b10851a01e87; fetched remote tree7ac1da1549027f5231dce7d4b8fa412af87d60ce matched. Only preflight/checkpoint docs changed; no migration/source/seed/provider changes or test-pass claim. Reviewed checkpoint commit/push authorized on existing codex/core-build-checkpoints; final receipt verifies matching live remote commit/tree and clean worktree.
-
-Fresh P19 baseline91%, reset1792889538 (=8:52:18AM Manila), weekly72%; effective budget0 after10-point reserve, immediate wind-down. ordinaryUsageAllowed was true: this is BUILD-CONTRACT headroom, not an assertion of exhausted credits. Shared observations, not exact attribution. No cap/billing/provider/reset-credit changes or agents/chats/worktrees/external messages.
+Owned actual synthetic SQL/file preview node scripts/preview-p18.cjs on5178 and Vite5173; existing visible tab12 /requests. One-time continue-tedx-p19-at-8-52-am has fired; remove when this execution ends, no new schedule. No agents/chats/worktrees/deployment/provider/external messages. Next local step P20 only after custody; no P21.

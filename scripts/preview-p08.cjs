@@ -19,6 +19,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       import {createDeliverablesApi} from '${vite}/src/features/deliverables/api.ts';
       import {createDeliverableCommands} from '${vite}/src/features/deliverables/commands.ts';
       import {createTimelineApi} from '${vite}/src/features/timeline/api.ts';
+      import {createCatalogApi} from '${vite}/src/features/requests/catalog/api.ts';
       import {createHandoffsApi} from '${vite}/src/features/handoffs/api.ts';
       import {createDependenciesApi} from '${vite}/src/features/tasks/dependenciesApi.ts';
       import {createSynergiesApi} from '${vite}/src/features/synergies/api.ts';
@@ -30,7 +31,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       const previewReceiver=${synergies?'true':'false'}&&new URL(location.href).searchParams.get('synthetic')==='receiver';
       const ready=Promise.resolve({functions:{invoke:async(name,{body})=>{const response=await fetch('/__files',{method:'POST',headers:{...(body instanceof FormData?{}:{'content-type':'application/json'}),'x-preview-subject':previewReceiver?'receiver':'requester'},body:body instanceof FormData?body:JSON.stringify(body)});return response.ok?{data:response.headers.get('content-type').includes('application/octet-stream')?await response.blob():await response.json(),error:null}:{data:null,error:{context:response}}}},rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json','x-preview-subject':previewReceiver?'receiver':'requester'},body:JSON.stringify({name,args})}).then(r=>r.json())});
       const context={state:'authorized',memberId:previewReceiver?'${ids.owner}':'${ids.viewer}',displayName:previewReceiver?'Fictional Alex (synthetic receiving head)':'Fictional River (synthetic requesting head)',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:previewReceiver?'66666666-6666-4666-8666-666666666661':'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
-      const gateway={timeline:createTimelineApi(ready),handoffs:createHandoffsApi(ready),dependencies:createDependenciesApi(ready),synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>{if(${Number(contextDelay)||0})await new Promise(r=>setTimeout(r,${Number(contextDelay)||0}));return context},onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      const gateway={catalog:createCatalogApi(ready),timeline:createTimelineApi(ready),handoffs:createHandoffsApi(ready),dependencies:createDependenciesApi(ready),synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>{if(${Number(contextDelay)||0})await new Promise(r=>setTimeout(r,${Number(contextDelay)||0}));return context},onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
       ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createBrowserRouter(createAppRoutes({state:'not_configured',issues:[]},gateway))}));
       </script></body></html>`
     const server=http.createServer(async(req,res)=>{
@@ -52,6 +53,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
           const result=await db.transaction(async tx=>{
             await tx.exec('set local role authenticated')
             await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[synergies&&req.headers['x-preview-subject']==='receiver'?ids.owner:ids.viewer])
+            if(name==='read_request_catalog')return tx.query('select public.read_request_catalog($1,$2) as value',[a.p_term_id,a.p_type_id??null])
             if(name==='read_committee_timeline')return tx.query('select public.read_committee_timeline($1,$2,$3,$4) as value',[a.p_term_id,a.p_filters??{},a.p_page??1,a.p_page_size??50])
             if(name==='read_work_schedule')return tx.query('select public.read_work_schedule($1) as value',[a.p_work_item_id])
             if(name==='update_work_schedule')return tx.query('select public.update_work_schedule($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_planned_start_on,a.p_expected_version,a.p_request_id])

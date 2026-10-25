@@ -1,0 +1,6 @@
+const assert=require('node:assert/strict'),fs=require('node:fs/promises'),{createHash}=require('node:crypto')
+;(async()=>{const p=await require('./deliverable-authoring-db.cjs').createAuthoringDatabase();try{
+ const out=await p.db.exec(await fs.readFile('supabase/tests/request_definitions.test.sql','utf8')),tap=out.flatMap(r=>r.rows.map(x=>x.tap).filter(Boolean));assert.equal(tap.length,4);for(let i=1;i<=3;i++)assert(tap[i].startsWith(`ok ${i} - P19_A${i}`));
+ const files=[...p.migrations.map(m=>'supabase/migrations/'+m),'supabase/tests/request_definitions.test.sql',__filename];
+ await fs.writeFile('docs/build/evidence/P19-domain.json',JSON.stringify({target:'Isolated PGlite, synthetic authenticated SQL subjects. Not Supabase/Auth/JWT/concurrent-session/human verification.',tap,hashes:Object.fromEntries(await Promise.all(files.map(async f=>[f.replace(process.cwd()+'\\',''),createHash('sha256').update(await fs.readFile(f)).digest('hex')]))),remaining:'Institutional configuration/authority/privacy, real provider/JWT and human gates remain.'},null,2)+'\n');console.log(tap.join('\n'));
+}finally{await p.db.close()}})().catch(e=>{console.error(e.code,e.message,e.where||'',e.stack);process.exitCode=1})

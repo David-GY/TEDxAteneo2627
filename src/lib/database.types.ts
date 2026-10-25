@@ -924,6 +924,44 @@ export type Database = {
           },
         ]
       }
+      form_versions: {
+        Row: {
+          id: string
+          request_type_id: string
+          version: number
+          state: string
+          restricted: boolean
+          schema_json: Json
+          published_at: string | null
+        }
+        Insert: {
+          id?: string
+          request_type_id: string
+          version: number
+          state: string
+          restricted?: boolean
+          schema_json: Json
+          published_at?: string | null
+        }
+        Update: {
+          id?: string
+          request_type_id?: string
+          version?: number
+          state?: string
+          restricted?: boolean
+          schema_json?: Json
+          published_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "form_versions_request_type_id_fkey"
+            columns: ["request_type_id"]
+            isOneToOne: false
+            referencedRelation: "request_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       guest_contact_profiles: {
         Row: {
           user_id: string
@@ -1882,6 +1920,118 @@ export type Database = {
             columns: ["organization_id","term_id","work_item_id"]
             isOneToOne: false
             referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+        ]
+      }
+      request_types: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          stable_key: string
+          label: string
+          need: string
+          governed_kind: string
+          payload_classification: string
+          form_version_id: string | null
+          workflow_version_id: string | null
+          receiving_unit_id: string | null
+          primary_contact_id: string | null
+          backup_contact_id: string | null
+          guest_eligible: boolean
+          authority_confirmed: boolean
+          live_enabled: boolean
+          lead_time_days: number | null
+          official_url: string | null
+          process_note: string
+          archived_at: string | null
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          stable_key: string
+          label: string
+          need: string
+          governed_kind: string
+          payload_classification?: string
+          form_version_id?: string | null
+          workflow_version_id?: string | null
+          receiving_unit_id?: string | null
+          primary_contact_id?: string | null
+          backup_contact_id?: string | null
+          guest_eligible?: boolean
+          authority_confirmed?: boolean
+          live_enabled?: boolean
+          lead_time_days?: number | null
+          official_url?: string | null
+          process_note: string
+          archived_at?: string | null
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          stable_key?: string
+          label?: string
+          need?: string
+          governed_kind?: string
+          payload_classification?: string
+          form_version_id?: string | null
+          workflow_version_id?: string | null
+          receiving_unit_id?: string | null
+          primary_contact_id?: string | null
+          backup_contact_id?: string | null
+          guest_eligible?: boolean
+          authority_confirmed?: boolean
+          live_enabled?: boolean
+          lead_time_days?: number | null
+          official_url?: string | null
+          process_note?: string
+          archived_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_types_id_form_version_id_fkey"
+            columns: ["id","form_version_id"]
+            isOneToOne: true
+            referencedRelation: "form_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "request_types_id_workflow_version_id_fkey"
+            columns: ["id","workflow_version_id"]
+            isOneToOne: true
+            referencedRelation: "workflow_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "request_types_organization_id_term_id_backup_contact_id_fkey"
+            columns: ["organization_id","term_id","backup_contact_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "request_types_organization_id_term_id_fkey"
+            columns: ["organization_id","term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["organization_id","id"]
+          },
+          {
+            foreignKeyName: "request_types_organization_id_term_id_primary_contact_id_fkey"
+            columns: ["organization_id","term_id","primary_contact_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "request_types_organization_id_term_id_receiving_unit_id_fkey"
+            columns: ["organization_id","term_id","receiving_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
             referencedColumns: ["organization_id","term_id","id"]
           },
         ]
@@ -2917,6 +3067,41 @@ export type Database = {
           },
         ]
       }
+      workflow_versions: {
+        Row: {
+          id: string
+          request_type_id: string
+          version: number
+          state: string
+          definition_json: Json
+          published_at: string | null
+        }
+        Insert: {
+          id?: string
+          request_type_id: string
+          version: number
+          state: string
+          definition_json: Json
+          published_at?: string | null
+        }
+        Update: {
+          id?: string
+          request_type_id?: string
+          version?: number
+          state?: string
+          definition_json?: Json
+          published_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_versions_request_type_id_fkey"
+            columns: ["request_type_id"]
+            isOneToOne: false
+            referencedRelation: "request_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: { [_ in never]: never }
     Functions: {
@@ -3264,6 +3449,13 @@ export type Database = {
       read_process_contacts: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_request_catalog: {
+        Args: {
+          p_term_id: string
+          p_type_id?: string | null
         }
         Returns: Json | null
       }

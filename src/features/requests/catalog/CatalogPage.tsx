@@ -1,0 +1,25 @@
+import {useEffect,useState} from 'react'
+import {Link,useParams,useRouteLoaderData} from 'react-router'
+import {PageHeading,Panel} from '../../../components/Page'
+import {EmptyState,ErrorState,LoadingState} from '../../../components/FeedbackState'
+import type {WorkspaceContext} from '../../auth/gateway'
+import type {CatalogApi,CatalogEntry} from './api'
+
+export function CatalogPage({api}:{api:CatalogApi}){
+ const context=useRouteLoaderData('workspace') as WorkspaceContext,{typeId}=useParams(),[retry,setRetry]=useState(0),[search,setSearch]=useState('');
+ const identity=context.termId+('memberId'in context?context.memberId:context.guestAccessId),key=identity+typeId+retry;
+ const[state,setState]=useState<{key:string;rows:CatalogEntry[]|null;error:boolean}|null>(null);
+ useEffect(()=>{let live=true;void api.read(context.termId,typeId).then(rows=>{if(live)setState({key,rows,error:false})}).catch(()=>{if(live)setState({key,rows:null,error:true})});return()=>{live=false}},[api,context.termId,typeId,key]);
+ const current=state?.key===key?state:null,rows=current?.rows?.filter(r=>typeId||[r.label,r.need,r.receivingUnit??''].join(' ').toLowerCase().includes(search.trim().toLowerCase()));
+ return <><PageHeading title={typeId?'Service requirements':'Department requests'} description="Find the right support and review its requirements before approaching the receiving service."/>
+ {typeId?<p><Link to="/requests">Back to service catalog</Link></p>:<div className="form-field"><label htmlFor="service-search">What do you need help with?</label><input id="service-search" type="search" maxLength={100} value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search support, costs or publicity"/></div>}
+ <p>Catalog entries describe a process. Dashboard request submission is not enabled yet. Unconfirmed templates do not grant FIN, MCD or school approval.</p>
+ <button className="button button--secondary" onClick={()=>setRetry(n=>n+1)}>Refresh service catalog</button>
+ {!current?<LoadingState title="Loading service catalog"/>:current.error?<ErrorState title="Service catalog unavailable" description="Check your access or connection, then refresh the catalog."/>:current.rows===null?<EmptyState title="Catalog access unavailable" description="Current workspace membership is required."/>:!rows?.length?<EmptyState title="No matching published services" description="Try another search, or ask the workspace maintainer about service configuration."/>:rows.map(r=><Panel key={r.id} title={r.label}>
+ <p>{r.need}</p><p><strong>{r.authorityConfirmed?'Authority recorded; live submission unavailable':'Unconfirmed template · live submission unavailable'}</strong></p>
+ <dl className="detail-facts"><div><dt>Receiving service</dt><dd>{r.receivingUnit??'Not confirmed'}</dd></div><div><dt>Primary contact</dt><dd>{r.primaryContact??'Not available in your directory scope'}</dd></div><div><dt>Backup contact</dt><dd>{r.backupContact??'Not available in your directory scope'}</dd></div><div><dt>Lead time</dt><dd>{r.leadTimeDays===null?'Not confirmed':`${r.leadTimeDays} calendar days`}</dd></div><div><dt>Payload privacy</dt><dd>{r.classification==='restricted'?'Restricted request type; confidential fields require a restricted payload':'Ordinary fields only; protected finance and approval values use typed records'}</dd></div><div><dt>Guest requests</dt><dd>{r.guestEligible?'Configured as eligible; explicit guest access still required':'Not enabled'}</dd></div></dl>
+ <p className="record-text">{r.processNote}</p><p>{r.officialUrl?<a href={r.officialUrl} target="_blank" rel="noopener noreferrer">Open official process</a>:'Official process link not confirmed.'}</p>
+ {!typeId?<p><Link className="button button--secondary" to={'/requests/services/'+r.id}>Review requirements for {r.label}</Link></p>:<><h3>Published requirements · form version {r.formVersion}</h3><p>Workflow version {r.workflowVersion}. These pinned definitions contain no submitted case data.</p>{r.form?.sections.map(s=><section key={s.key} aria-label={s.label}><h4>{s.label}</h4><ul>{r.form?.fields.filter(f=>f.section===s.key).map(f=><li key={f.key}><strong>{f.label}</strong> · {f.type.replaceAll('_',' ')} · {f.required?'Required':f.requiredWhen?'Conditionally required':'Optional'}{f.visibleWhen?' · Conditional visibility':''}<p>{f.help}</p>{f.classification==='confidential'?<p>Confidential · restricted payload required</p>:null}{f.storage&&f.storage!=='custom'?<p>Protected {f.storage} record; never an ordinary JSON value</p>:null}{f.options?<p>Choices: {f.options.map(o=>o.label).join(', ')}</p>:null}{f.type==='file'?<p>Final files require independently authorized file access; this page grants none.</p>:null}</li>)}</ul></section>)}</>}
+ </Panel>)}
+ </>
+}

@@ -1,0 +1,10 @@
+{
+  "target": "Disposable local SQL preview, headless Edge; synthetic subject, not actual Auth/Storage/JWT or human UAT",
+  "checks": [
+    "Published 3-entry catalog; plain need search; exact read-only MCD requirements and confidential routing",
+    "No submission/approval action; 320px reflow; keyboard refresh with visible focus",
+    "Failed RPC removes stale entries, retains search and recovers without fake success"
+  ],
+  "errors": [],
+  "sourceHash": "dbb25c582af167de75c25b73c3e429890c1341c98a795a8ae5467d975b550b29"
+}

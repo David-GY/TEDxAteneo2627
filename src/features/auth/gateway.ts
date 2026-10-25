@@ -1,3 +1,4 @@
+import {createCatalogApi,type CatalogApi} from '../requests/catalog/api'
 import {createTimelineApi,type TimelineApi} from '../timeline/api'
 import {createHandoffsApi,type HandoffsApi} from '../handoffs/api'
 import {createDependenciesApi,type DependenciesApi} from '../tasks/dependenciesApi'
@@ -29,6 +30,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  catalog?: CatalogApi
   timeline?: TimelineApi
   handoffs?: HandoffsApi
   dependencies?: DependenciesApi
@@ -72,6 +74,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    catalog: createCatalogApi(clientReady),
     timeline: createTimelineApi(clientReady),
     handoffs: createHandoffsApi(clientReady),
     dependencies: createDependenciesApi(clientReady),
