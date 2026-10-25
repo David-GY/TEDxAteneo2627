@@ -7,3 +7,8 @@
 .request-payload dd { margin-inline: 0; }
 .request-actions { display: grid; gap: var(--space-4); }
 .request-actions input[type="checkbox"] { inline-size: 44px; block-size: 44px; vertical-align: middle; accent-color: var(--color-accent); }
+
+.review-choice { display:flex; align-items:center; gap:var(--space-3); min-block-size:44px; overflow-wrap:anywhere; }
+.review-choice input { flex-shrink:0; inline-size:20px; block-size:20px; }
+
+.review-filter { min-block-size:44px; max-inline-size:100%; padding:var(--space-2); font:inherit; }

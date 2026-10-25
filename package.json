@@ -11,6 +11,7 @@
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "typecheck:files": "tsc --noEmit -p tsconfig.files.json",
+    "test:review-inboxes": "node scripts/test-review-inboxes.cjs",
     "test:workflow-engine": "node scripts/test-workflow-engine.cjs",
     "test:request-submission": "node scripts/test-request-submission.cjs",
     "test:form-validation": "node scripts/test-form-validation.cjs",

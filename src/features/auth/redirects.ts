@@ -16,7 +16,7 @@ export function safeReturnPath(value: string | null): string {
   if(value==='/working-together/timeline')return value
   if (!value?.startsWith('/') || value.startsWith('//') || /[\\%]/.test(value) || hasControl(value)) return '/'
   const path = value.split(/[?#]/, 1)[0]
-  return path === '/guest/redeem' || isDeliverablePath(path) || isTaskPath(path) || isAgreementPath(path) || isHandoffPath(path) || navigationItems.some((item) => item.href === path) ? path : '/'
+  return path === '/reviews' || /^\/reviews\/[0-9a-f-]{36}\/[0-9a-f-]{36}$/i.test(path) || path === '/guest/redeem' || isDeliverablePath(path) || isTaskPath(path) || isAgreementPath(path) || isHandoffPath(path) || navigationItems.some((item) => item.href === path) ? path : '/'
 }
 
 export function readCallback(search: string): string | null {

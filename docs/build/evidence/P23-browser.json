@@ -1,0 +1,17 @@
+{
+  "target": "Compiled UI/actual isolated SQL/PNG bytes; synthetic subjects, not actual Supabase/Auth/JWT/concurrency/human UAT.",
+  "checks": [
+    "P23_A1 assigned-only associate queue and counts; scoped head metadata, filters and lost-authority reassignment",
+    "P23_A2 open page reviewer revoked, DB denies, package/actions removed",
+    "P23_A3 conflict and validation preserve reason, no optimistic approval, lost successful response retries identical payload/key and one vote",
+    "Exact submitted PNG download, accepted/original dates, general-only completion, revision overview links",
+    "320px reflow, native filter visible keyboard focus, no page errors"
+  ],
+  "errors": [],
+  "hashes": {
+    "src/features/approvals/ReviewScreens.tsx": "abd62bb4f067373d704335ed710f1022eb48458822be548e3b58b043bdaf9b3c",
+    "src/features/approvals/Memory.tsx": "a926348f0c16c816456447f675c4e31a2e893b8670e0c816786c4e1dce1b2431",
+    "src/features/approvals/inbox-api.ts": "87998dabb4a6060da582df48c0fac80306dfcebeb269f1570d333e5409e2d156",
+    "scripts/verify-p23.cjs": "815e9f352f4e7dcbf01054b0a3d29c05c233dd6c724da4d5c9f3af849e3ab969"
+  }
+}

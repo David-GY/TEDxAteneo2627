@@ -2320,6 +2320,53 @@ export type Database = {
           },
         ]
       }
+      request_triage_events: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          revision_id: string
+          kind: string
+          note: string
+          accepted_on: string | null
+          actor_name: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          revision_id: string
+          kind: string
+          note: string
+          accepted_on?: string | null
+          actor_name: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          request_id?: string
+          revision_id?: string
+          kind?: string
+          note?: string
+          accepted_on?: string | null
+          actor_name?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_triage_events_organization_id_term_id_request_id_r_fkey"
+            columns: ["organization_id","term_id","request_id","revision_id"]
+            isOneToOne: false
+            referencedRelation: "request_revisions"
+            referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+        ]
+      }
       request_types: {
         Row: {
           id: string
@@ -4090,6 +4137,14 @@ export type Database = {
         }
         Returns: Json | null
       }
+      list_review_inbox: {
+        Args: {
+          p_term_id: string
+          p_view?: string | null
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       list_synergies: {
         Args: {
           p_term_id: string
@@ -4526,6 +4581,18 @@ export type Database = {
           p_work_item_id: string
           p_data: Json
           p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      triage_request: {
+        Args: {
+          p_work_item_id: string
+          p_expected_revision: number
+          p_expected_version: number
+          p_action: string
+          p_note: string
+          p_accepted_on: string
           p_request_id: string
         }
         Returns: Json | null

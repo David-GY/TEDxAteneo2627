@@ -1,0 +1,13 @@
+{
+  "target": "Actual isolated migrated SQL with synthetic subjects. Not actual provider/Auth/JWT/concurrent sessions or human acceptance.",
+  "checks": [
+    "P23_A1 scoped queue/count/package",
+    "P23_A2 revocation retained assignment",
+    "P23_A3 failed commands unchanged; UI verification separate",
+    "explicit accepted date, exact retry, append-only operational notes, revision overview and safe completion"
+  ],
+  "hashes": {
+    "supabase/migrations/20261025003100_review_inboxes.sql": "5d85948e8fdad0e5486eb0b729096d23789c5b41a167ebe337e3c012caaf0a5a",
+    "scripts/test-review-inboxes.cjs": "2ac4fb5e2c984f0f507f311f9fa453c063cd6b59b5bf65f7e2616e5ba706a5b0"
+  }
+}

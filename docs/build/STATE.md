@@ -2,11 +2,10 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- **P23 — in_progress**: budget-limited prerequisite tests only; queues/screens/assignment/date/notes/actions/overview and named P23 UI checks remain pending. Resume build-prompts/CONTINUE.md for P23; no P24. Details docs/build/steps/P23.md.
-- **P22 — blocked_external**: independent sequential workflow domain/API delivered. Immutable assignments/decisions, explicit scoped activation/reassignment, one/all quorum, current authority/expiry/independence, pinned revision routing, fixed conditions/document evidence, atomic safe general outcomes/audit/outbox and exact reviewer package/file context. Local P22_A1–A3 pass; real provider/concurrent/authority/privacy/human checks remain. FIN/MCD typed hooks fail closed. No P23 inbox.
-- P21/P20/P19/P18/P16A/P17 independent implementations remain delivered with all inherited external gates below; P00/P01 complete. Institutional templates remain unconfirmed/disabled; isolated fictional routing is only in disposable local fixtures.
-- Migration030; schema63tables/714columns/86public functions. Private tracked spines remain restricted; current scoped review-package API grants no origin/common work access. Protected money/approval semantics cannot be changed by labels.
-- Actual checks:35files/141frontend tests; named P22 SQL/isolated PNG/rollback/quorum/revision/publication/role assertions; P21/P20/P12 regressions; frontend/Edge typechecks/lint/build/type drift pass. Build207modules/app564.03kB(gzip162.09), CSS16.79(gzip3.99), existing chunk warning. Evidence/failures/corrections: docs/build/steps/P22.md.
+- **P23 — blocked_external**: independent department inbox/reviewer UI, scoped rows/counts/aging/revision views, reviewer assignment/reassignment, exact package/evidence/actions, shared operational notes, explicit accepted service dates and general completion, actionable reviews/owner revisions in Overview delivered. Local P23_A1–A3 pass. Real provider/authority/privacy/human gates persist; no P24.
+- P22/P21/P20/P19/P18/P16A/P17 independent implementations remain delivered with all inherited external gates below; P00/P01 complete. Institutional templates remain unconfirmed/disabled; isolated fictional routing/reviewers exist only in disposable local fixtures. FIN/MCD typed authority remains fail-closed.
+- Migration031; schema64tables/724columns/88public functions. Private tracked spines remain restricted; heads triage metadata without automatic package access, current exact-stage reviewers obtain independently authorized packages/files. Original/requested dates preserved; proposed dates never become accepted overdue commitments.
+- Actual checks:37files/146frontend tests; named P23 SQL/browser/PNG/CAS/revocation/retry/rollback/aging/date/notes/completion assertions; P22/P21 SQL and P21/P18 browser regressions; frontend/Edge typechecks/lint/build/type drift pass. Build210modules/app581.30kB(gzip166.52), CSS17.06(gzip4.04), existing chunk warning. Evidence/failures/corrections: docs/build/steps/P23.md.
 
 ## External blockers retained
 
@@ -34,12 +33,12 @@ P21 actual independent Supabase17/Auth/JWT counter/submission/revision/cancel/re
 
 P22 actual independent Supabase17/Auth/JWT vote/reassignment/revocation/publication/revision races, deployed current/old JWT review-package byte access, approved independent service-reviewer authority and human/privacy acceptance remain unverified. Synthetic subjects, isolated PNG bytes and sequential PGlite checks do not establish concurrent provider sessions. FIN/MCD typed authority hooks remain uninstalled and fail closed; no financial/publicity clearance is issued.
 
+P23 actual provider/JWT queue/count/package/action revocation, approved service-triage/accepted-date authority, privacy and human reviewer/mobile/keyboard/assistive-technology acceptance remain unverified. Local isolated SQL/UI/bytes do not discharge these gates or inherited independent-session checks.
+
 ## Next action / custody
 
-Reviewed P22 implementation c24d2e615f057b574a34a9dd8ac4cbb698613ffa/treed6ef820fe784b9b3510c242fedfec2879798cee1 committed/pushed; local/fetched/live remote SHA and tree matched, porcelain empty. Receipt docs/build/evidence/P22-custody.json is committed/pushed with final verification repeated. Started clean6592f482cc22b78a99299139fcd439b602874b48/tree2fe6487120e4e39db67802f9a1533cc6b2b4420a. P23 is now authorized and active; resume its partial checkpoint through build-prompts/CONTINUE.md. Do not start P24. External next action is actual provider/JWT concurrency plus approved institutional authority/privacy/human acceptance.
+Reviewed P23 implementation checkpoint commit/push and final local/fetched/live remote SHA/tree/clean verification follow. Started clean1830a5a78d404545a522d0477deaee8058cd12e7/treee6c53744fe5c625bb46bf97e268788ddb6a5415e matched fetched remote. Next code-eligible prompt P24 requires separate authorization; do not auto-advance. External next action is actual provider/JWT/concurrent review and approved authority/privacy/human acceptance.
 
-Fresh P22 baseline65%/reset1792907568, weekly84%;25pp allocation, wind-down85%/ceiling90%. Observed75→80→83→85% and weekly85→86→87%; shared-account observations. No reset/cap/billing/provider change, purchase or reset wait.
+Fresh P23 continuation baseline3%/reset1792957207, weekly0%;40pp allocation/wind-down38%/ceiling43%. Observed8→13→18→22→25→27%/weekly1→2→3→4%; shared-account observations. No reset/cap/billing/provider change, purchase or reset wait. Actual trigger22:39 Manila, later than requested13:47; one-time schedule removed at run end.
 
-Owned node scripts/preview-p22.cjs on5178 with Vite5173. Existing tab12 visible at an actual isolated SQL general request in_review after one of two votes. Synthetic sign-in/isolated bytes/fictional reviewers do not establish real authority. Google remains disabled.
-
-P23 checkpoint: fresh86%/reset1792907568, weekly87%;4pp effective allocation/ceiling90%, observed88%. Added/passed isolated assigned-only/revoked retained-assignment prerequisite assertions, not completed P23_A1–A3. Product/schema unchanged; existing P22 preview remains visible. Mandatory partial checkpoint commit/push follows with remote SHA/tree/clean verification. Continue P23 through build-prompts/CONTINUE.md.
+Owned node scripts/preview-p23.cjs on5178 with Vite5173. Requested existing tab12 at /reviews?synthetic=receiver; app returned queued, physical panel visibility unconfirmed because CUA unavailable. Headless actual UI/SQL/bytes verified. Fictional reviewers do not establish institutional authority; Google remains disabled.
