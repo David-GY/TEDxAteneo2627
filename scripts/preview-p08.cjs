@@ -1,6 +1,6 @@
 const http=require('node:http')
 const {createDeliverablesDatabase}=require('./deliverables-db.cjs')
-async function createPreview({port=5174,authoring=false,tasks=false,synergies=false,contextDelay=0}={}){
+async function createPreview({port=5174,authoring=false,tasks=false,synergies=false,contextDelay=0,financeAuthorityPreview=false}={}){
   const {db,ids}=await (authoring?require('./deliverable-authoring-db.cjs').createAuthoringDatabase():createDeliverablesDatabase())
   try{
     if(tasks)await db.transaction(async tx=>{await tx.exec('set local role authenticated');await tx.query(`select set_config('request.jwt.claim.sub',$1,true)`,[ids.viewer]);await tx.query(`select public.create_task($1,$2,gen_random_uuid())`,[ids.term,{title:'Fictional owned task draft',summary:'Synthetic local task example',body:'Fictional task notes',classification:'restricted',taskType:'ordinary',leadUnitId:null,assigneeId:ids.viewer,assignedUnitId:null,collaborators:[],checklist:[],dueOn:'2027-04-10',dueAt:null,parentId:null,reason:'Fictional task seed'}])})
@@ -11,7 +11,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
     const vite='http://127.0.0.1:5173'
     const html=`<!doctype html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local synthetic workspace preview</title><script type="module">
       import RefreshRuntime from '${vite}/@react-refresh';RefreshRuntime.injectIntoGlobalHook(window);window.$RefreshReg$=()=>{};window.$RefreshSig$=()=>type=>type;window.__vite_plugin_react_preamble_installed__=true;
-      </script></head><body><p style="margin:0;padding:12px 20px;background:#252624;color:white">Local synthetic PostgreSQL + isolated file bytes · simulated sign-in · no real Supabase Storage/Auth</p><div id="root"></div><script type="module">
+      </script></head><body><p style="margin:0;padding:12px 20px;background:#252624;color:white">Local synthetic PostgreSQL + isolated file bytes · simulated sign-in · no real Supabase Storage/Auth${financeAuthorityPreview?' | fictional FIN policy/designations; no institutional approval':''}</p><div id="root"></div><script type="module">
       import React from '${vite}/node_modules/.vite/deps/react.js${suffix}';
       import ReactDOMClient from '${vite}/node_modules/.vite/deps/react-dom_client.js${suffix}';
       import {createBrowserRouter,RouterProvider} from '${vite}/node_modules/.vite/deps/react-router.js${suffix}';
@@ -23,6 +23,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       import {createApprovalsApi} from '${vite}/src/features/approvals/api.ts';
       import {createRequestsApi} from '${vite}/src/features/requests/api.ts';
       import {createFinanceApi} from '${vite}/src/features/finance/api.ts';
+      import {createFinAuthorityApi} from '${vite}/src/features/finance/authority-api.ts';
       import {createFormsApi} from '${vite}/src/features/forms/api.ts';
       import {createCatalogApi} from '${vite}/src/features/requests/catalog/api.ts';
       import {createHandoffsApi} from '${vite}/src/features/handoffs/api.ts';
@@ -37,7 +38,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
       const previewReceiver=${synergies?'true':'false'}&&new URL(location.href).searchParams.get('synthetic')==='receiver';
       const ready=Promise.resolve({functions:{invoke:async(name,{body})=>{const response=await fetch('/__files',{method:'POST',headers:{...(body instanceof FormData?{}:{'content-type':'application/json'}),'x-preview-subject':previewAssociate?'associate':previewReceiver?'receiver':'requester'},body:body instanceof FormData?body:JSON.stringify(body)});return response.ok?{data:response.headers.get('content-type').includes('application/octet-stream')?await response.blob():await response.json(),error:null}:{data:null,error:{context:response}}}},rpc:(name,args)=>fetch('/__rpc',{method:'POST',headers:{'content-type':'application/json','x-preview-subject':previewAssociate?'associate':previewReceiver?'receiver':'requester'},body:JSON.stringify({name,args})}).then(r=>r.json())});
       const context={state:'authorized',memberId:previewAssociate?'${ids.outsider}':previewReceiver?'${ids.owner}':'${ids.viewer}',displayName:previewAssociate?'Fictional associate (synthetic reviewer)':previewReceiver?'Fictional Alex (synthetic receiving head)':'Fictional River (synthetic requesting head)',organizationId:'${ids.org}',termId:'${ids.term}',termMembershipId:previewAssociate?'${ids.outsider}':previewReceiver?'66666666-6666-4666-8666-666666666661':'${ids.viewerMembership}',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']};
-      const gateway={finance:createFinanceApi(ready),inbox:createInboxApi(ready),approvals:createApprovalsApi(ready),requests:createRequestsApi(ready),forms:createFormsApi(ready),catalog:createCatalogApi(ready),timeline:createTimelineApi(ready),handoffs:createHandoffsApi(ready),dependencies:createDependenciesApi(ready),synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>{if(${Number(contextDelay)||0})await new Promise(r=>setTimeout(r,${Number(contextDelay)||0}));return context},onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
+      const gateway={finAuthority:createFinAuthorityApi(ready),finance:createFinanceApi(ready),inbox:createInboxApi(ready),approvals:createApprovalsApi(ready),requests:createRequestsApi(ready),forms:createFormsApi(ready),catalog:createCatalogApi(ready),timeline:createTimelineApi(ready),handoffs:createHandoffsApi(ready),dependencies:createDependenciesApi(ready),synergies:createSynergiesApi(ready),overview:createOverviewApi(ready),files:createFilesApi(ready),comments:previewReceiver?undefined:createCommentsApi(ready),deliverables:createDeliverablesApi(ready),${tasks?'tasks:createTasksApi(ready),':''}${authoring?'deliverableCommands:createDeliverableCommands(ready),':''}readContext:async()=>{if(${Number(contextDelay)||0})await new Promise(r=>setTimeout(r,${Number(contextDelay)||0}));return context},onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}};
       ReactDOMClient.createRoot(document.getElementById('root')).render(React.createElement(RouterProvider,{router:createBrowserRouter(createAppRoutes({state:'not_configured',issues:[]},gateway))}));
       </script></body></html>`
     const server=http.createServer(async(req,res)=>{
@@ -70,6 +71,12 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
             if(name==='revise_request')return tx.query('select public.revise_request($1,$2,$3,$4,$5,$6,$7) as value',[a.p_work_item_id,a.p_values,a.p_requested_centavos,a.p_requested_on,a.p_title,a.p_expected_version,a.p_request_id])
             if(name==='begin_request_revision')return tx.query('select public.begin_request_revision($1,$2,$3) as value',[a.p_work_item_id,a.p_expected_version,a.p_request_id])
             if(name==='cancel_request')return tx.query('select public.cancel_request($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_expected_version,a.p_reason,a.p_request_id])
+            if(name==='read_finance_review')return tx.query('select public.read_finance_review($1,$2) as value',[a.p_term_id,a.p_work_item_id])
+            if(name==='list_finance_reviews')return tx.query('select public.list_finance_reviews($1) as value',[a.p_term_id])
+            if(name==='activate_finance_review')return tx.query('select public.activate_finance_review($1,$2,$3,$4,$5,$6) as value',[a.p_work_item_id,a.p_reviewer_id,a.p_expected_revision,a.p_expected_version,a.p_reason,a.p_request_id])
+            if(name==='decide_finance_request')return tx.query('select public.decide_finance_request($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) as value',[a.p_work_item_id,a.p_expected_revision,a.p_expected_version,a.p_action,a.p_reason,a.p_ceiling_centavos,a.p_conditions,a.p_expires_at,a.p_external_outcome,a.p_external_manifest_id,a.p_request_id])
+            if(name==='change_financial_authorization')return tx.query('select public.change_financial_authorization($1,$2,$3,$4,$5,$6) as value',[a.p_authorization_id,a.p_kind,a.p_reason,a.p_manifest_id,a.p_expected_version,a.p_request_id])
+            if(name==='update_finance_metadata')return tx.query('select public.update_finance_metadata($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_contact_label,a.p_expected_version,a.p_request_id])
             if(name==='read_finance_intake')return tx.query('select public.read_finance_intake($1,$2,$3) as value',[a.p_term_id,a.p_work_item_id,a.p_revision??null])
             if(name==='list_finance_cases')return tx.query('select public.list_finance_cases($1,$2) as value',[a.p_term_id,a.p_page??1])
             if(name==='read_finance_gate')return tx.query('select public.read_finance_gate($1,$2) as value',[a.p_term_id,a.p_work_item_id])

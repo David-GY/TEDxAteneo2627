@@ -1,0 +1,4 @@
+require('./preview-p08.cjs').createPreview({port:5178,authoring:true,tasks:true,synergies:true,financeAuthorityPreview:true}).then(async p=>{
+ const f=await require('./financial-authorization-fixtures.cjs').setupFinancialAuthorization(p);await f.designate(f.alternate,f.primary);const c=await f.create({},true);await f.activate(c);const self=await f.create({beneficiaryMemberId:p.ids.owner});await f.activate(self,p.ids.viewerMembership);
+ console.log('P26 fictional designated FIN reviewer: '+p.url+'/finance/reviews/'+p.ids.term+'/'+c.id+'?synthetic=receiver');console.log('P26 self/beneficiary case paused: '+p.url+'/finance/reviews/'+p.ids.term+'/'+self.id);console.log('SYNTHETIC DESIGNATIONS/POLICY ONLY. Not institutional approval or provider proof.');
+}).catch(e=>{console.error(e.stack);process.exitCode=1})

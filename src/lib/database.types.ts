@@ -1073,6 +1073,161 @@ export type Database = {
           },
         ]
       }
+      finance_authority_designations: {
+        Row: {
+          authority_id: string
+          authority_version: number
+          alternate_for_id: string | null
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Insert: {
+          authority_id: string
+          authority_version: number
+          alternate_for_id?: string | null
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Update: {
+          authority_id?: string
+          authority_version?: number
+          alternate_for_id?: string | null
+          official_reference?: string
+          confirmed_by?: string
+          effective_from?: string
+          effective_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_authority_designations_alternate_for_id_fkey"
+            columns: ["alternate_for_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "finance_authority_designations_authority_id_fkey"
+            columns: ["authority_id"]
+            isOneToOne: true
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "finance_authority_designations_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      finance_authorization_policies: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          request_type_id: string
+          workflow_version_id: string
+          version: number
+          stage_key: string
+          primary_authority_id: string
+          external_requirement: string
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          request_type_id: string
+          workflow_version_id: string
+          version: number
+          stage_key: string
+          primary_authority_id: string
+          external_requirement: string
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          request_type_id?: string
+          workflow_version_id?: string
+          version?: number
+          stage_key?: string
+          primary_authority_id?: string
+          external_requirement?: string
+          official_reference?: string
+          confirmed_by?: string
+          effective_from?: string
+          effective_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_authorization_policie_organization_id_term_id_requ_fkey"
+            columns: ["organization_id","term_id","request_type_id"]
+            isOneToOne: false
+            referencedRelation: "request_types"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "finance_authorization_policie_request_type_id_workflow_ver_fkey"
+            columns: ["request_type_id","workflow_version_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "finance_authorization_policies_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "finance_authorization_policies_primary_authority_id_fkey"
+            columns: ["primary_authority_id"]
+            isOneToOne: false
+            referencedRelation: "finance_authority_designations"
+            referencedColumns: ["authority_id"]
+          },
+        ]
+      }
+      finance_case_metadata: {
+        Row: {
+          request_id: string
+          contact_label: string
+          updated_at: string
+        }
+        Insert: {
+          request_id: string
+          contact_label: string
+          updated_at?: string
+        }
+        Update: {
+          request_id?: string
+          contact_label?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_case_metadata_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: true
+            referencedRelation: "finance_cases"
+            referencedColumns: ["request_id"]
+          },
+        ]
+      }
       finance_cases: {
         Row: {
           request_id: string
@@ -1136,6 +1291,36 @@ export type Database = {
             columns: ["finance_revision_id"]
             isOneToOne: false
             referencedRelation: "finance_revisions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      finance_review_bindings: {
+        Row: {
+          assignment_id: string
+          policy_id: string
+        }
+        Insert: {
+          assignment_id: string
+          policy_id: string
+        }
+        Update: {
+          assignment_id?: string
+          policy_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "finance_review_bindings_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: true
+            referencedRelation: "approval_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "finance_review_bindings_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "finance_authorization_policies"
             referencedColumns: ["id"]
           },
         ]
@@ -1261,6 +1446,178 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "request_revisions"
             referencedColumns: ["request_id","id","revision_no"]
+          },
+        ]
+      }
+      financial_authorization_events: {
+        Row: {
+          id: string
+          authorization_id: string
+          kind: string
+          reason: string
+          actor_id: string
+          manifest_id: string | null
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          authorization_id: string
+          kind: string
+          reason: string
+          actor_id: string
+          manifest_id?: string | null
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          authorization_id?: string
+          kind?: string
+          reason?: string
+          actor_id?: string
+          manifest_id?: string | null
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "financial_authorization_events_authorization_id_fkey"
+            columns: ["authorization_id"]
+            isOneToOne: false
+            referencedRelation: "financial_authorizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_authorization_events_manifest_id_fkey"
+            columns: ["manifest_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      financial_authorizations: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          finance_revision_id: string
+          request_revision_id: string
+          policy_id: string
+          assignment_id: string
+          decision_id: string
+          payload_hash: string
+          requested_total_centavos: number
+          ceiling_centavos: number
+          purpose: string
+          conditions: string
+          expires_at: string
+          external_outcome: string
+          external_manifest_id: string | null
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          finance_revision_id: string
+          request_revision_id: string
+          policy_id: string
+          assignment_id: string
+          decision_id: string
+          payload_hash: string
+          requested_total_centavos: number
+          ceiling_centavos: number
+          purpose: string
+          conditions: string
+          expires_at: string
+          external_outcome: string
+          external_manifest_id?: string | null
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          request_id?: string
+          finance_revision_id?: string
+          request_revision_id?: string
+          policy_id?: string
+          assignment_id?: string
+          decision_id?: string
+          payload_hash?: string
+          requested_total_centavos?: number
+          ceiling_centavos?: number
+          purpose?: string
+          conditions?: string
+          expires_at?: string
+          external_outcome?: string
+          external_manifest_id?: string | null
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "financial_authorizations_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: true
+            referencedRelation: "approval_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_assignment_id_policy_id_fkey"
+            columns: ["assignment_id","policy_id"]
+            isOneToOne: true
+            referencedRelation: "finance_review_bindings"
+            referencedColumns: ["assignment_id","policy_id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_decision_id_assignment_id_request_fkey"
+            columns: ["decision_id","assignment_id","request_id","request_revision_id"]
+            isOneToOne: true
+            referencedRelation: "approval_decisions"
+            referencedColumns: ["id","assignment_id","request_id","revision_id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_decision_id_fkey"
+            columns: ["decision_id"]
+            isOneToOne: true
+            referencedRelation: "approval_decisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_external_manifest_id_request_id_fkey"
+            columns: ["external_manifest_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_finance_revision_id_fkey"
+            columns: ["finance_revision_id"]
+            isOneToOne: true
+            referencedRelation: "finance_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_finance_revision_id_request_id_re_fkey"
+            columns: ["finance_revision_id","request_id","request_revision_id","payload_hash"]
+            isOneToOne: true
+            referencedRelation: "finance_revisions"
+            referencedColumns: ["id","request_id","request_revision_id","payload_hash"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_organization_id_term_id_request_i_fkey"
+            columns: ["organization_id","term_id","request_id","request_revision_id"]
+            isOneToOne: false
+            referencedRelation: "request_revisions"
+            referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+          {
+            foreignKeyName: "financial_authorizations_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "finance_authorization_policies"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -4078,6 +4435,17 @@ export type Database = {
         }
         Returns: Json | null
       }
+      activate_finance_review: {
+        Args: {
+          p_work_item_id: string
+          p_reviewer_id: string
+          p_expected_revision: number
+          p_expected_version: number
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       activate_request_workflow: {
         Args: {
           p_work_item_id: string
@@ -4181,6 +4549,17 @@ export type Database = {
         }
         Returns: Json | null
       }
+      change_financial_authorization: {
+        Args: {
+          p_authorization_id: string
+          p_kind: string
+          p_reason: string
+          p_manifest_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       create_deliverable: {
         Args: {
           p_term_id: string
@@ -4240,6 +4619,22 @@ export type Database = {
           p_term_id: string
         }
         Returns: string | null
+      }
+      decide_finance_request: {
+        Args: {
+          p_work_item_id: string
+          p_expected_revision: number
+          p_expected_version: number
+          p_action: string
+          p_reason: string
+          p_ceiling_centavos: string
+          p_conditions: string
+          p_expires_at: string
+          p_external_outcome: string
+          p_external_manifest_id: string
+          p_request_id: string
+        }
+        Returns: Json | null
       }
       explain_access: {
         Args: {
@@ -4310,6 +4705,12 @@ export type Database = {
         Args: {
           p_term_id: string
           p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      list_finance_reviews: {
+        Args: {
+          p_term_id: string
         }
         Returns: Json | null
       }
@@ -4446,6 +4847,13 @@ export type Database = {
           p_term_id: string
           p_work_item_id: string
           p_revision?: number | null
+        }
+        Returns: Json | null
+      }
+      read_finance_review: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
         }
         Returns: Json | null
       }
@@ -4835,6 +5243,15 @@ export type Database = {
         Args: {
           p_work_item_id: string
           p_data: Json
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      update_finance_metadata: {
+        Args: {
+          p_work_item_id: string
+          p_contact_label: string
           p_expected_version: number
           p_request_id: string
         }

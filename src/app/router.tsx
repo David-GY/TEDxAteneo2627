@@ -1,3 +1,4 @@
+import {FinanceReviewPage,FinanceReviewQueue} from '../features/finance/FinanceReview'
 import {FinanceCasePage} from '../features/finance/FinanceCasePage'
 import {FinanceDesk} from '../features/finance/FinanceDesk'
 import {ReviewInbox,ReviewPage} from '../features/approvals/ReviewScreens'
@@ -100,7 +101,8 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
       { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
       {path:'reviews',element:gateway.inbox?<ReviewInbox api={gateway.inbox}/>:<EmptyState title="Reviews unavailable" description="The connection is unavailable."/>},
-      {path:'finance',element:gateway.finance?<FinanceDesk api={gateway.finance}/>:<EmptyState title="Finance unavailable" description="The connection is unavailable."/>},
+      {path:'finance',element:gateway.finance?<><FinanceDesk api={gateway.finance}/>{gateway.finAuthority?<FinanceReviewQueue api={gateway.finAuthority}/>:null}</>:<EmptyState title="Finance unavailable" description="The connection is unavailable."/>},
+      {path:'finance/reviews/:finTerm/:finId',element:gateway.finAuthority?<FinanceReviewPage api={gateway.finAuthority} files={gateway.files}/>:<EmptyState title="FIN review unavailable" description="The connection is unavailable."/>},
       {path:'finance/:financeTermId/:financeId',element:gateway.finance&&gateway.requests?<FinanceCasePage api={gateway.finance} requests={gateway.requests} files={gateway.files}/>:<EmptyState title="Finance unavailable" description="The connection is unavailable."/>},
       {path:'reviews/:reviewTermId/:reviewId',element:gateway.inbox&&gateway.approvals?<ReviewPage api={gateway.approvals} inbox={gateway.inbox} files={gateway.files}/>:<EmptyState title="Review unavailable" description="The connection is unavailable."/>},
       {path:'requests/mine',element:gateway.requests?<MyRequestsPage api={gateway.requests}/>:<EmptyState title="Requests unavailable" description="The connection is unavailable."/>},

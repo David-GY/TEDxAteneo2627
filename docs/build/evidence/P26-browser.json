@@ -1,0 +1,19 @@
+{
+  "target": "Actual compiled UI/isolated SQL/synthetic subjects/70-byte PNG; not real Supabase/Auth/JWT/concurrent sessions/institutional/human proof.",
+  "checks": [
+    "P26_A1 self/beneficiary has no approve control; explicit designated alternate only",
+    "P26_A2 exact private package/hash, selected bytes, partial ceiling conditions/expiry and owner view",
+    "P26_A3 conflict preserves fields; lost successful reply recovers identical payload/key with one decision and original requested total unchanged",
+    "Current role revocation removes open review package/actions/downloads;320px reflow and native keyboard focus; no page errors"
+  ],
+  "errors": [],
+  "hashes": {
+    "supabase/migrations/20261026003400_financial_authorization.sql": "7c72a5e92e4aeb03783e4bf05d12c2423970f4ae6baf9eed152b93a818fc51fb",
+    "src/features/finance/FinanceReview.tsx": "2f872322813b9c16448c9a429e3cbee2688109f9bb54241c60bbd160e04b6ab6",
+    "src/features/finance/DecisionMemory.tsx": "60cc6dd8fe8924d736749436319c25b6b4b9218d8450fcdaf25d82bdb6479696",
+    "src/features/finance/authority-api.ts": "ddaae64ac3ad2772713f2415c833be72e8e55a419a292184caf538f4f92aa740",
+    "src/features/finance/FinanceCasePage.tsx": "ef76cebec28cb4d1b50ae3f650380e8fdc1db3e7d846a96cd260152d0a7c5fa3",
+    "src/features/finance/finance.css": "696911637fec4b3e0481c165d8c504a4e9e1b75a8300c3d261ec7421a8d1efea",
+    "scripts/verify-p26.cjs": "ae3f905cd22ec0ec8282d9e912134d0fbf8099985905315d035dd3cc1df14662"
+  }
+}

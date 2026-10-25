@@ -1,0 +1,16 @@
+begin;
+create function pg_temp.p26_require(ok boolean)returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'P26 assertion failed';end if;end$$;
+create function pg_temp.p26_rejects(command text,code text)returns void language plpgsql as $$begin begin execute command;exception when others then if sqlstate=code then return;end if;raise;end;raise exception 'Expected P26 denial %',code;end$$;
+grant execute on function pg_temp.p26_require(boolean),pg_temp.p26_rejects(text,text)to authenticated;
+select pg_temp.p26_rejects('update public.financial_authorizations set conditions=''Rewritten''','55000');
+select pg_temp.p26_rejects('delete from public.financial_authorization_events','55000');
+select pg_temp.p26_rejects('update public.finance_authorization_policies set external_requirement=''not_required''','55000');
+select pg_temp.p26_require(not has_function_privilege('anon','public.decide_finance_request(uuid,integer,integer,text,text,text,text,timestamptz,text,uuid,uuid)','execute'));
+select pg_temp.p26_require(not has_function_privilege('service_role','public.activate_finance_review(uuid,uuid,integer,integer,text,uuid)','execute'));
+set local role authenticated;
+select pg_temp.p26_rejects('select *from public.financial_authorizations','42501');
+select pg_temp.p26_rejects('select *from public.finance_authority_designations','42501');
+select pg_temp.p26_rejects('select *from public.finance_authorization_policies','42501');
+select pg_temp.p26_rejects('select *from public.finance_review_bindings','42501');
+select 'ok - P26_A1/A2 immutable authority/policy/decision and restricted raw access' as tap;
+rollback;
