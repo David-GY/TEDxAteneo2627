@@ -64,3 +64,8 @@ Owned Vite5173 reused; verified owned P27 preview replaced by node scripts/previ
 ## P29 active continuation boundary
 
 P29 baseline89%/reset1792975667, weekly26%; effective1pp/soft ceiling90%, immediate wind-down. Shared-account observation; no reset credit/purchase/wait/new allocation. Checkpoint only: no application/schema changes or P29 test/typecheck/lint/build claims. All prior gates remain. Existing owned synthetic P28 preview retained/visible. Resume P29 via build-prompts/CONTINUE.md: focused readiness spec/code reads, named A1-A3 failing tests, then authoritative safe aggregation/submit/accept/reopening/protected work-type policy and UI/overview verification. No P30. Starting c55d148afb6553609979e3780c911302c1dea9b1/treeff46ea7732b1152efcdadf454b3e41bdb7f325c5 was clean and matched fetched/live remote. Reviewed documentation checkpoint commit/push authorized; repeat remote/tree/clean verification after push.
+
+
+## P30 requested - not started
+
+Documentation-only checkpoint docs/build/steps/P30.md. P30 requires P29 code; P29 remains in_progress with implementation absent. Baseline93% five-hour/reset1792975667, weekly27%, effective0pp under account-headroom rule. No notification implementation, tests, schema or provider changes. Resume P29 via CONTINUE.md before completing P30 integration; no P31. Existing synthetic preview visibility set/retained. Starting2ebe803f75c16afc737d628c288a34835bc34355/treef82c81163508496e2d71c9e93732de7d16e0e44a was clean and matched fetched/live remote. Reviewed documentation checkpoint push authorized; final remote/tree/clean verification repeated after push. All prior external gates remain; no reset credit/purchase/wait/new allocation.
