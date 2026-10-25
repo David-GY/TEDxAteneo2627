@@ -1,0 +1,15 @@
+{
+  "target": "Disposable synthetic SQL preview/headless Edge/isolated PNG bytes. Not real Supabase/Auth/Storage/JWT, native AT or human UAT.",
+  "checks": [
+    "P20_A3 keyboard error summary/link/ARIA correctly targets conditional required control; no direct RPC for local invalid form",
+    "All configured field kinds, PHP123.45→typed12345, Manila timestamp→UTC; same trusted valid case; no new case/work row",
+    "P12 native upload panel and exact existing finalized PNG selection/download, independently scoped",
+    "320px reflow/visible focus; safe inputs survive scope/choice refresh and stale failure; newly hidden values removed; no fake success"
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/features/forms/FormRenderer.tsx": "2a9ef5a41b6692a0eca1d30dd7f6efd5ce213aac56aef74f021455367b4577de",
+    "src/features/forms/FormPreviewPage.tsx": "ebcab7b85ae331bb265f010f3b252c6961458c6563d66916b9ad8913201f707b",
+    "scripts\\verify-p20.cjs": "baccc54e124394d2df59960874fcd68a11beded8e684ed7224fae2d42d530dd8"
+  }
+}

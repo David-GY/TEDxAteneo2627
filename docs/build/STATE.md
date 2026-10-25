@@ -2,9 +2,10 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- **P19 — blocked_external**: independent local versioned request definitions/catalog delivered. Migration027,51tables/580columns/73public functions. Immutable published versions, bounded closed schemas/typed conditions, protected storage/classification, current scoped published catalog; unconfirmed general/FIN/MCD templates cannot submit live cases. Legacy generic request creation closed. Named P19_A1–A3 local SQL and catalog browser checks pass.
-- **P18, P16A and P17 — blocked_external**: independent implementations delivered; earlier P02–P18 gates retained verbatim below. P00/P01 complete. No P21 implemented.
-- P19 checks:31files/129frontend tests; actual SQL A1–A3 and existing/new-term migration seed paths; catalog320px/keyboard/failure recovery browser; task/P07/file regressions; frontend/Edge typechecks/lint/build195modules; generated-type check passed. Existing app chunk warning519.13kB/gzip150.38. Evidence/failures/review: docs/build/steps/P19.md.
+- **P20 — blocked_external**: independent local configured renderer/trusted validation delivered. Native accessible controls, fixed bounded conditions, current selector/file authorization, hidden/protected-value rejection, typed PHP centavos outside ordinary JSON and stable choice snapshots. P20_A1–A3 local checks pass. Validation preview creates no case/draft/approval; no P21.
+- **P19 — blocked_external**: independent immutable definitions/catalog delivered and verified/pushed first at a4a8806b60642b3d2e8fca6344dd2f516597dffd/tree f7845a441ba55d8484756b67130264b3f3b31d47, clean worktree before P20. Explicitly unconfirmed general/FIN/MCD templates; live submission disabled, generic request creation closed. P19_A1–A3 pass locally.
+- **P18, P16A and P17 — blocked_external**: independent implementations delivered; exact earlier gates below. P00/P01 complete. Schema51tables/580columns/75public functions, migrations001–028.
+- Actual P20 checks: cross-runtime SQL A1/A2 and A3 DOM/browser/isolated-byte checks;33files/136full-suite tests plus final2files/8focused tests including added grouped-error assertion; P19/P18/P16A browser and P12 file regressions; frontend/Edge typechecks/lint/build/type drift passed. Build201modules/app539.05kB(gzip156.29), CSS16.11(gzip3.89); existing chunk warning retained. Evidence/failures/limits: docs/build/steps/P20.md. No actual Supabase17/Auth/Storage/JWT/concurrent-session or human acceptance claim.
 
 ## External blockers retained
 
@@ -26,8 +27,12 @@ P18 real authenticated sender/receiver mobile/keyboard/assistive-technology revi
 
 P19 actual provider/JWT definition/read/RLS checks, approved service/contact/lead-time/official-process/guest/FIN/MCD configuration, privacy and human mobile/keyboard/assistive-technology acceptance remain unverified. Disabled institutional templates do not substitute for those checks.
 
+P20 actual provider/JWT direct-validation and selector/file access, approved institutional form/classification/finance adapter policy, privacy review and human keyboard/mobile/assistive-technology UAT remain unverified. Validation-only receipts do not discharge P19 activation or any earlier gate.
+
 ## Next action / custody
 
-Review/commit/push the P19 checkpoint on existing codex/core-build-checkpoints and verify live remote commit/tree and clean worktree before starting separately authorized P20. Retain this execution's original3% baseline across both steps;40pp allocation, wind-down at38% used/ceiling43%. Observed8% then10%, reset1792907568, weekly74→75%; shared account, no exact attribution. No reset/purchase/cap changes.
+Finish reviewed P20 mandatory checkpoint commit/push on existing codex/core-build-checkpoints; verify live/fetched/local commit/tree and clean worktree. P19 custody passed before P20. Next code-eligible step is P21 only on separate authorization; do not auto-advance. Both requested independent implementations are delivered with external gates retained.
 
-Owned actual synthetic SQL/file preview node scripts/preview-p18.cjs on5178 and Vite5173; existing visible tab12 /requests. One-time continue-tedx-p19-at-8-52-am has fired; remove when this execution ends, no new schedule. No agents/chats/worktrees/deployment/provider/external messages. Next local step P20 only after custody; no P21.
+Same execution baseline3%/reset1792907568;40pp allocation across P19+P20, wind-down38%/ceiling43%. Later8→10→16→21→25% observations, weekly74→77%; shared account, no exact attribution or new allocation. No cap/billing/provider/reset-credit changes, purchases or waiting.
+
+Owned node scripts/preview-p20.cjs on5178 with Vite5173; actual isolated SQL/PNG bytes, simulated sign-in, explicit fictional/unconfirmed fixture, existing tab12 visible. One-time continue-tedx-p19-at-8-52-am deleted via first-party tool; no new schedule. No agents/chats/worktrees/deployment/provider changes/external messages.

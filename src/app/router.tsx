@@ -1,3 +1,4 @@
+import {FormPreviewPage} from '../features/forms/FormPreviewPage'
 import {CatalogPage} from '../features/requests/catalog/CatalogPage'
 import {HandoffPage,HandoffsPage} from '../features/handoffs/HandoffScreens'
 import {TimelinePage} from '../features/timeline/TimelinePage'
@@ -94,6 +95,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       // Timeline filter RPCs recheck scope themselves. Explicit focus/expiry checks still revalidate.
       }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
       { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
+      {path:'requests/services/:typeId/preview',element:gateway.forms&&gateway.catalog?<FormPreviewPage api={gateway.forms} catalog={gateway.catalog} files={gateway.files}/>:<EmptyState title="Form unavailable" description="The connection is unavailable."/>},
       {path:'requests/services/:typeId',element:gateway.catalog?<CatalogPage api={gateway.catalog}/>:<EmptyState title="Catalog unavailable" description="The connection is unavailable."/>},
       {path:'working-together/handoffs',element:gateway.handoffs?<HandoffsPage api={gateway.handoffs}/>:<EmptyState title="Handoffs unavailable" description="The connection is unavailable."/>},
       {path:'working-together/handoffs/:handoffId',element:gateway.handoffs?<HandoffPage api={gateway.handoffs} files={gateway.files}/>:<EmptyState title="Handoff unavailable" description="The connection is unavailable."/>},

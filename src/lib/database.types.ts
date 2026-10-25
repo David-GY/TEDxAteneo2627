@@ -3515,6 +3515,14 @@ export type Database = {
         }
         Returns: Json | null
       }
+      request_form_options: {
+        Args: {
+          p_term_id: string
+          p_type_id: string
+          p_work_item_id?: string | null
+        }
+        Returns: Json | null
+      }
       reserve_upload: {
         Args: {
           p_work_item_id: string
@@ -3719,6 +3727,17 @@ export type Database = {
           p_planned_start_on: string
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      validate_request_form: {
+        Args: {
+          p_term_id: string
+          p_type_id: string
+          p_form_version_id: string
+          p_values: Json
+          p_requested_centavos?: number | null
+          p_work_item_id?: string | null
         }
         Returns: Json | null
       }

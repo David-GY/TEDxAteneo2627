@@ -1,3 +1,4 @@
+import {FormDrafts} from '../forms/Drafts'
 import {HandoffDrafts} from '../handoffs/Drafts'
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useLoaderData, useLocation, useNavigate, useRevalidator, useRouteLoaderData } from 'react-router'
@@ -24,7 +25,7 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
     const timer = window.setInterval(refresh, 30_000)
     return () => { stop(); clearInterval(timer); window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [gateway, revalidate])
-  return <ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</HandoffDrafts></ScheduleDrafts>
+  return <FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</HandoffDrafts></ScheduleDrafts></FormDrafts>
 }
 
 export function ProtectedShell() {
