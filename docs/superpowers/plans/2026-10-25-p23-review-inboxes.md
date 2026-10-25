@@ -14,6 +14,8 @@ Simulated product/security/skeptical perspectives (one assistant): a head needs 
 - [x] Migration031: queue/count predicate, metadata/read extensions, current eligible reviewers, append-only triage notes/date/completion with CAS/exact retry and atomic audit/outbox. Scope denial and P22 regression tests.
 - [x] Inbox/detail UI, assigned/lost-authority routing, fixed reasons/actions/evidence/date/history; preserve inputs/uncertain exact retries and no optimistic success. Existing design/components; mobile/keyboard.
 - [x] Overview actionable reviews and owner revisions using same predicates; routing/navigation and preview wiring. Scoped counts, no private title in manager-only queue.
-- [ ] P23_A1–A3 SQL/UI/browser, P22/P21/P18 regressions, required typechecks/lint/build/generated types; review/custody/checkpoint with exact inherited blockers. Stop at P23.
+- [x] P23_A1–A3 SQL/UI/browser, P22/P21/P18 regressions, required typechecks/lint/build/generated types; review/custody/checkpoint with exact inherited blockers. Stop at P23.
 
 Named local A1–A3 and146frontend tests and checks pass; prior failures/corrections and exact inherited blockers recorded in P23. Final custody is checked after commit/push.
+
+Implementation83e8219 pushed; local/fetched/live remote SHA/tree matched and porcelain empty. Custody receipt committed/pushed with final verification repeated; one-time automation deleted. No P24.

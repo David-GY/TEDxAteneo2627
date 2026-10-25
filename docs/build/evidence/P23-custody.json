@@ -1,0 +1,21 @@
+{
+  "step": "P23",
+  "branch": "codex/core-build-checkpoints",
+  "implementationCommit": "83e82190e6b62dbf8f8998ea141fffcdfe09369e",
+  "implementationTree": "20d33a22d0b665c808e0e839bc393b7ca5b37181",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch; local/fetched/live ls-remote SHA equality; local/fetched tree equality; empty git status --porcelain",
+  "usage": {
+    "baselineUsed": 3,
+    "lastObservedUsed": 27,
+    "reset": 1792957207,
+    "weeklyUsed": 4,
+    "effectiveBudgetPoints": 40
+  },
+  "checks": "P23_A1-A3 local SQL/UI/bytes/retry/revocation,37files146tests, required typechecks/lint/build/catalog, P22/P21 SQL and P21/P18 browser regressions",
+  "limits": "Actual provider/JWT/concurrency/authority/privacy/human gates retained. Codex open_in_codex queued; physical panel visibility unconfirmed, owned preview running and headless-rendered proof recorded.",
+  "automation": "continue-tedx-p23-at-1-47-pm deleted via first-party app tool after checkpoint verification; no replacement.",
+  "receiptCommit": "This receipt is in a subsequent documentation commit, with final remote/tree/clean verification repeated."
+}
