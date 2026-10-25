@@ -1,0 +1,17 @@
+{
+  "target": "Actual compiled UI/isolated SQL/PNG bytes/fictional MCD policy and subjects, not provider/JWT/concurrent/institutional/privacy/human proof.",
+  "checks": [
+    "P28 final intake/configured form/manifest submitted, assigned exact final PNG downloaded",
+    "P28 40001 preserves fields; lost successful reply recovers identical payload/key and one canonical decision",
+    "P28 caption-only governed revision and immutable historical copy/approval supersession",
+    "Current MCD scope revocation removes package/actions/bytes;320px/focus/44px; no page errors"
+  ],
+  "errors": [],
+  "hashes": {
+    "supabase/migrations/20261026003600_publicity_review.sql": "5df2839e32ed02895f96fc67f9f7b060c9e7a6b574bc6c63fa26627af2145d08",
+    "src/features/publicity/Publicity.tsx": "a18771584de76ae5af61c4844c83e992aef18beab1fcef180955e9d087c9f64a",
+    "src/features/publicity/api.ts": "22b6c5ab9dd3a83cefced37b088437184441d9cb530727ab1fde5787acfc9837",
+    "src/features/finance/DecisionMemory.tsx": "4800630952547ac2da26255ddc7b40e20001cc86a080e7578114d3f81e729126",
+    "scripts/verify-p28.cjs": "d581e5881318b1ad2bc6a394e3dd91e030e83d6e0e1bc6d6dd44d8e25dd869e7"
+  }
+}

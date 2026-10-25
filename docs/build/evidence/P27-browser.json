@@ -11,7 +11,7 @@
     "supabase/migrations/20261026003500_finance_ledger.sql": "0ab59395e9dd94268713324ec2f81b7d01dbf75ba9917bb02d237172be2f2fe9",
     "src/features/finance/Reconciliation.tsx": "a77f870c62bd261bf0d4c3d2ff1456dd7638b38482ef3ae3dadc99cf535c3a94",
     "src/features/finance/ledger-api.ts": "8b13d7f33ea25e6fd6080ed5d9beed779532066e9045d8685ebbde672d4df669",
-    "src/features/finance/DecisionMemory.tsx": "2e9a9600a0a3f51704cf0c3074a2b2fb9f421b0210e2702d0c590a3e66a151c9",
+    "src/features/finance/DecisionMemory.tsx": "4800630952547ac2da26255ddc7b40e20001cc86a080e7578114d3f81e729126",
     "src/features/files/Files.tsx": "550b0f476c31244423b1c0de065a8248616229df043f1cba26c72b5fae4d0d93",
     "scripts/verify-p27.cjs": "5d5cbcc4d8929b98f1f85025ae35747e66eeb42928a8c4290355b7ed649a5fc3"
   }

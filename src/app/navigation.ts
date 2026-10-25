@@ -4,6 +4,7 @@ export type NavigationCapability =
   | 'committee.manage'
   | 'department.review'
   | 'finance.review'
+  | 'mcd.review'
   | 'feedback.review'
   | 'mentoring.view'
   | 'reports.view'
@@ -39,6 +40,7 @@ export const navigationItems: readonly NavigationItem[] = [
   { id: 'people', label: 'People', href: '/people', description: 'Committee contacts and the permitted member directory.', group: 'workspace', audiences: ['setup', 'core'] },
   { id: 'committee', label: 'My committee', href: '/committee', description: 'Work and contributions for your assigned committee.', group: 'role', audiences: ['core'], capability: 'committee.manage' },
   { id: 'department', label: 'Department inbox', href: '/department', description: 'Requests assigned to your department scope.', group: 'role', audiences: ['core'], capability: 'department.review' },
+  { id: 'publicity', label: 'Final publicity', href: '/publicity', description: 'Frozen final publicity and independent MCD review.', group: 'role', audiences: ['core'] },
   { id: 'finance', label: 'FIN desk', href: '/finance', description: 'Financial cases within your explicit review authority.', group: 'role', audiences: ['core'], capability: 'finance.review' },
   { id: 'feedback', label: 'PRISM desk', href: '/feedback', description: 'Evaluation cases explicitly assigned to you.', group: 'role', audiences: ['core'], capability: 'feedback.review' },
   { id: 'mentoring', label: 'Mentoring', href: '/mentoring', description: 'Goals and check-ins for assigned mentoring relationships.', group: 'role', audiences: ['core'], capability: 'mentoring.view' },

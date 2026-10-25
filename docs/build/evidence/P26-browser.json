@@ -10,7 +10,7 @@
   "hashes": {
     "supabase/migrations/20261026003400_financial_authorization.sql": "7c72a5e92e4aeb03783e4bf05d12c2423970f4ae6baf9eed152b93a818fc51fb",
     "src/features/finance/FinanceReview.tsx": "49a5ca6d1ae378396620f787761080ec24a18c650f7c0714eb33feb66c6531af",
-    "src/features/finance/DecisionMemory.tsx": "2e9a9600a0a3f51704cf0c3074a2b2fb9f421b0210e2702d0c590a3e66a151c9",
+    "src/features/finance/DecisionMemory.tsx": "4800630952547ac2da26255ddc7b40e20001cc86a080e7578114d3f81e729126",
     "src/features/finance/authority-api.ts": "ddaae64ac3ad2772713f2415c833be72e8e55a419a292184caf538f4f92aa740",
     "src/features/finance/FinanceCasePage.tsx": "85d16f87c19ca6bcfd3cfe050aa2d3d623370a0355b3af267ff4bf45bc5b233a",
     "src/features/finance/finance.css": "696911637fec4b3e0481c165d8c504a4e9e1b75a8300c3d261ec7421a8d1efea",

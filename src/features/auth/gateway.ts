@@ -1,3 +1,4 @@
+import {createPublicityApi,type PublicityApi} from '../publicity/api'
 import {createLedgerApi,type LedgerApi} from '../finance/ledger-api'
 import {createFinAuthorityApi,type FinAuthorityApi} from '../finance/authority-api'
 import {createFinanceApi,type FinanceApi} from '../finance/api'
@@ -37,6 +38,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  publicity?: PublicityApi
   ledger?: LedgerApi
   finAuthority?: FinAuthorityApi
   finance?: FinanceApi
@@ -88,6 +90,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    publicity: createPublicityApi(clientReady),
     ledger: createLedgerApi(clientReady),
     finAuthority: createFinAuthorityApi(clientReady),
     finance: createFinanceApi(clientReady),

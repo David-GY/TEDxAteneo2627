@@ -37,6 +37,11 @@
     "supabase/migrations/20261025002900_request_submission.sql": "9e3f136cb357e469ccb2d7542b13793f55623f9e5f170b44960e784444ac277c",
     "supabase/migrations/20261025003000_workflow_engine.sql": "9ed486d4a4caf6ae14dbdcab72298832d3a416cbd13c63a75c3dab84daee606c",
     "supabase/migrations/20261025003100_review_inboxes.sql": "5d85948e8fdad0e5486eb0b729096d23789c5b41a167ebe337e3c012caaf0a5a",
+    "supabase/migrations/20261025003200_finance_payload.sql": "df54861d309d98d8994f0ef8f3fbd1db63b83711a2f66e70ab295f911cf7bfad",
+    "supabase/migrations/20261025003300_finance_intake.sql": "d58e389bfc6b3b01e6450c369010dac39841b7ac43cc88a991bbd500d0dd9675",
+    "supabase/migrations/20261026003400_financial_authorization.sql": "7c72a5e92e4aeb03783e4bf05d12c2423970f4ae6baf9eed152b93a818fc51fb",
+    "supabase/migrations/20261026003500_finance_ledger.sql": "0ab59395e9dd94268713324ec2f81b7d01dbf75ba9917bb02d237172be2f2fe9",
+    "supabase/migrations/20261026003600_publicity_review.sql": "5df2839e32ed02895f96fc67f9f7b060c9e7a6b574bc6c63fa26627af2145d08",
     "scripts\\test-request-submission.cjs": "0d0217fb0ad5b8246988bdc54a79bcc6c9b57ba489178331ddc93ab6ac265920",
     "scripts/request-fixtures.cjs": "36677217935e709175313711e980ff6ad189f3f105d97475cd37381889fbcabf",
     "supabase/tests/request_submission.test.sql": "25e53107c238362cdab3208ce58062874690cf8c9381d3a1b767de9915e20e22"

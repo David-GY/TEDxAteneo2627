@@ -2802,6 +2802,332 @@ export type Database = {
           },
         ]
       }
+      publicity_approval_events: {
+        Row: {
+          id: string
+          approval_id: string
+          reason: string
+          actor_id: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          approval_id: string
+          reason: string
+          actor_id: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          approval_id?: string
+          reason?: string
+          actor_id?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publicity_approval_events_approval_id_fkey"
+            columns: ["approval_id"]
+            isOneToOne: true
+            referencedRelation: "publicity_approvals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      publicity_approvals: {
+        Row: {
+          id: string
+          publicity_review_id: string
+          request_id: string
+          request_revision_id: string
+          payload_hash: string
+          decision_id: string
+          assignment_id: string
+          policy_id: string
+          conditions: string
+          expires_at: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          publicity_review_id: string
+          request_id: string
+          request_revision_id: string
+          payload_hash: string
+          decision_id: string
+          assignment_id: string
+          policy_id: string
+          conditions: string
+          expires_at: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          publicity_review_id?: string
+          request_id?: string
+          request_revision_id?: string
+          payload_hash?: string
+          decision_id?: string
+          assignment_id?: string
+          policy_id?: string
+          conditions?: string
+          expires_at?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publicity_approvals_assignment_id_policy_id_fkey"
+            columns: ["assignment_id","policy_id"]
+            isOneToOne: true
+            referencedRelation: "publicity_review_bindings"
+            referencedColumns: ["assignment_id","policy_id"]
+          },
+          {
+            foreignKeyName: "publicity_approvals_decision_id_assignment_id_request_id_r_fkey"
+            columns: ["decision_id","assignment_id","request_id","request_revision_id"]
+            isOneToOne: true
+            referencedRelation: "approval_decisions"
+            referencedColumns: ["id","assignment_id","request_id","revision_id"]
+          },
+          {
+            foreignKeyName: "publicity_approvals_publicity_review_id_request_id_request_fkey"
+            columns: ["publicity_review_id","request_id","request_revision_id","payload_hash"]
+            isOneToOne: true
+            referencedRelation: "publicity_reviews"
+            referencedColumns: ["id","request_id","request_revision_id","payload_hash"]
+          },
+        ]
+      }
+      publicity_authority_designations: {
+        Row: {
+          authority_id: string
+          authority_version: number
+          alternate_for_id: string | null
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Insert: {
+          authority_id: string
+          authority_version: number
+          alternate_for_id?: string | null
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Update: {
+          authority_id?: string
+          authority_version?: number
+          alternate_for_id?: string | null
+          official_reference?: string
+          confirmed_by?: string
+          effective_from?: string
+          effective_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publicity_authority_designations_alternate_for_id_fkey"
+            columns: ["alternate_for_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "publicity_authority_designations_authority_id_fkey"
+            columns: ["authority_id"]
+            isOneToOne: true
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "publicity_authority_designations_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      publicity_review_bindings: {
+        Row: {
+          assignment_id: string
+          policy_id: string
+        }
+        Insert: {
+          assignment_id: string
+          policy_id: string
+        }
+        Update: {
+          assignment_id?: string
+          policy_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publicity_review_bindings_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: true
+            referencedRelation: "approval_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "publicity_review_bindings_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "publicity_review_policies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      publicity_review_policies: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          request_type_id: string
+          workflow_version_id: string
+          version: number
+          stage_key: string
+          primary_authority_id: string
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          request_type_id: string
+          workflow_version_id: string
+          version: number
+          stage_key: string
+          primary_authority_id: string
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          request_type_id?: string
+          workflow_version_id?: string
+          version?: number
+          stage_key?: string
+          primary_authority_id?: string
+          official_reference?: string
+          confirmed_by?: string
+          effective_from?: string
+          effective_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publicity_review_policies_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "publicity_review_policies_organization_id_term_id_request__fkey"
+            columns: ["organization_id","term_id","request_type_id"]
+            isOneToOne: false
+            referencedRelation: "request_types"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "publicity_review_policies_primary_authority_id_fkey"
+            columns: ["primary_authority_id"]
+            isOneToOne: false
+            referencedRelation: "publicity_authority_designations"
+            referencedColumns: ["authority_id"]
+          },
+          {
+            foreignKeyName: "publicity_review_policies_request_type_id_workflow_version_fkey"
+            columns: ["request_type_id","workflow_version_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+        ]
+      }
+      publicity_reviews: {
+        Row: {
+          id: string
+          request_id: string
+          term_id: string
+          request_revision_id: string
+          revision_no: number
+          manifest_id: string
+          manifest_hash: string
+          payload: Json
+          payload_hash: string
+          related_deliverable_id: string
+          finance_revision_id: string | null
+          submitted_by: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          term_id: string
+          request_revision_id: string
+          revision_no: number
+          manifest_id: string
+          manifest_hash: string
+          payload: Json
+          payload_hash: string
+          related_deliverable_id: string
+          finance_revision_id?: string | null
+          submitted_by: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          term_id?: string
+          request_revision_id?: string
+          revision_no?: number
+          manifest_id?: string
+          manifest_hash?: string
+          payload?: Json
+          payload_hash?: string
+          related_deliverable_id?: string
+          finance_revision_id?: string | null
+          submitted_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publicity_reviews_finance_revision_id_fkey"
+            columns: ["finance_revision_id"]
+            isOneToOne: false
+            referencedRelation: "finance_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "publicity_reviews_manifest_id_request_id_fkey"
+            columns: ["manifest_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "publicity_reviews_related_deliverable_id_fkey"
+            columns: ["related_deliverable_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "publicity_reviews_request_id_request_revision_id_revision__fkey"
+            columns: ["request_id","request_revision_id","revision_no"]
+            isOneToOne: true
+            referencedRelation: "request_revisions"
+            referencedColumns: ["request_id","id","revision_no"]
+          },
+        ]
+      }
       record_grants: {
         Row: {
           id: string
@@ -4723,6 +5049,17 @@ export type Database = {
         }
         Returns: Json | null
       }
+      activate_publicity_review: {
+        Args: {
+          p_work_item_id: string
+          p_reviewer_id: string
+          p_expected_revision: number
+          p_expected_version: number
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       activate_request_workflow: {
         Args: {
           p_work_item_id: string
@@ -4913,6 +5250,19 @@ export type Database = {
         }
         Returns: Json | null
       }
+      decide_publicity_request: {
+        Args: {
+          p_work_item_id: string
+          p_expected_revision: number
+          p_expected_version: number
+          p_action: string
+          p_reason: string
+          p_conditions: string
+          p_expires_at: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       explain_access: {
         Args: {
           p_term_id: string
@@ -5056,6 +5406,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      publicity_options: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_comment_history: {
         Args: {
           p_comment_id: string
@@ -5189,6 +5545,21 @@ export type Database = {
       read_process_contacts: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_publicity_gate: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
+      read_publicity_request: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_revision?: number | null
         }
         Returns: Json | null
       }
@@ -5386,6 +5757,15 @@ export type Database = {
         }
         Returns: Json | null
       }
+      revoke_publicity_approval: {
+        Args: {
+          p_approval_id: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       revoke_work_access: {
         Args: {
           p_grant_id: string
@@ -5481,6 +5861,19 @@ export type Database = {
           p_request_id: string
           p_handoff_id?: string | null
           p_expected_handoff_version?: number | null
+        }
+        Returns: Json | null
+      }
+      submit_publicity_request: {
+        Args: {
+          p_work_item_id: string
+          p_values: Json
+          p_requested_on: string
+          p_title: string
+          p_payload: Json
+          p_expected_version: number
+          p_request_id: string
+          p_revision?: boolean | null
         }
         Returns: Json | null
       }

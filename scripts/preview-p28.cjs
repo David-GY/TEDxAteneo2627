@@ -1,0 +1,3 @@
+require('./preview-p08.cjs').createPreview({port:5178,authoring:true,tasks:true,synergies:true,financeAuthorityPreview:true}).then(async p=>{
+ const f=await require('./publicity-review-fixtures.cjs').setupPublicityReview(p),c=await f.create();await f.activate(c);console.log('P28 fictional independent MCD reviewer: '+p.url+'/publicity/'+p.ids.term+'/'+c.id+'?synthetic=associate');console.log('P28 requester: '+p.url+'/publicity/'+p.ids.term+'/'+c.id);console.log('FICTIONAL MCD/FIN policy/designations; no institutional approval or social posting.');
+}).catch(e=>{console.error(e.stack);process.exitCode=1})
