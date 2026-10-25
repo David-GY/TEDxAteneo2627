@@ -35,6 +35,7 @@
     "supabase/migrations/20261025002700_request_definitions.sql": "075166886121be003683f21e956844ee03daba45bb8bce9dc87a6d7b3c414c7b",
     "supabase/migrations/20261025002800_form_validation.sql": "8524376b7c3ba657ba2b177195c8c2df9464c9cc2f21a9a7b0393bb79efac211",
     "supabase/migrations/20261025002900_request_submission.sql": "9e3f136cb357e469ccb2d7542b13793f55623f9e5f170b44960e784444ac277c",
+    "supabase/migrations/20261025003000_workflow_engine.sql": "9ed486d4a4caf6ae14dbdcab72298832d3a416cbd13c63a75c3dab84daee606c",
     "scripts\\test-request-submission.cjs": "0d0217fb0ad5b8246988bdc54a79bcc6c9b57ba489178331ddc93ab6ac265920",
     "scripts/request-fixtures.cjs": "36677217935e709175313711e980ff6ad189f3f105d97475cd37381889fbcabf",
     "supabase/tests/request_submission.test.sql": "25e53107c238362cdab3208ce58062874690cf8c9381d3a1b767de9915e20e22"

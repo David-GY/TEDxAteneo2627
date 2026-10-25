@@ -34,7 +34,8 @@
     "supabase/migrations/20261025002600_handoff_interface.sql": "3d69763f4ba35a6bc4bc43b72b0d370bb7544b7fa883a19d05748baaf93683ce",
     "supabase/migrations/20261025002700_request_definitions.sql": "075166886121be003683f21e956844ee03daba45bb8bce9dc87a6d7b3c414c7b",
     "supabase/migrations/20261025002800_form_validation.sql": "8524376b7c3ba657ba2b177195c8c2df9464c9cc2f21a9a7b0393bb79efac211",
-    "supabase/migrations/20261025002900_request_submission.sql": "c4c3a989d72c49b5da026a2714097742846f7cefff19d6fa8543786fa116e951",
+    "supabase/migrations/20261025002900_request_submission.sql": "9e3f136cb357e469ccb2d7542b13793f55623f9e5f170b44960e784444ac277c",
+    "supabase/migrations/20261025003000_workflow_engine.sql": "9ed486d4a4caf6ae14dbdcab72298832d3a416cbd13c63a75c3dab84daee606c",
     "supabase/tests/files.test.sql": "05c5e65e31d1c10bfba6faa866743ae650759c171d314d226f4f711c1911c819"
   },
   "blocked": "P02–P11 provider/privacy/human gates retained"

@@ -219,6 +219,155 @@ export type Database = {
           },
         ]
       }
+      approval_assignments: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          revision_id: string
+          instance_id: string
+          stage_key: string
+          generation: number
+          slot: number
+          reviewer_id: string
+          reviewer_name: string
+          authority_id: string
+          authority_version: number
+          expires_at: string
+          assigned_at: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          revision_id: string
+          instance_id: string
+          stage_key: string
+          generation: number
+          slot: number
+          reviewer_id: string
+          reviewer_name: string
+          authority_id: string
+          authority_version: number
+          expires_at: string
+          assigned_at?: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          request_id?: string
+          revision_id?: string
+          instance_id?: string
+          stage_key?: string
+          generation?: number
+          slot?: number
+          reviewer_id?: string
+          reviewer_name?: string
+          authority_id?: string
+          authority_version?: number
+          expires_at?: string
+          assigned_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "approval_assignments_organization_id_term_id_authority_id_fkey"
+            columns: ["organization_id","term_id","authority_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+          {
+            foreignKeyName: "approval_assignments_organization_id_term_id_request_id_re_fkey"
+            columns: ["organization_id","term_id","request_id","revision_id","instance_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_instances"
+            referencedColumns: ["organization_id","term_id","request_id","revision_id","id"]
+          },
+          {
+            foreignKeyName: "approval_assignments_organization_id_term_id_reviewer_id_fkey"
+            columns: ["organization_id","term_id","reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["organization_id","term_id","id"]
+          },
+        ]
+      }
+      approval_decisions: {
+        Row: {
+          id: string
+          assignment_id: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          revision_id: string
+          instance_id: string
+          stage_key: string
+          generation: number
+          action: string
+          reason: string
+          payload_hash: string
+          evidence_manifest_id: string | null
+          decided_at: string
+        }
+        Insert: {
+          id?: string
+          assignment_id: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          revision_id: string
+          instance_id: string
+          stage_key: string
+          generation: number
+          action: string
+          reason: string
+          payload_hash: string
+          evidence_manifest_id?: string | null
+          decided_at?: string
+        }
+        Update: {
+          id?: string
+          assignment_id?: string
+          organization_id?: string
+          term_id?: string
+          request_id?: string
+          revision_id?: string
+          instance_id?: string
+          stage_key?: string
+          generation?: number
+          action?: string
+          reason?: string
+          payload_hash?: string
+          evidence_manifest_id?: string | null
+          decided_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "approval_decisions_assignment_id_request_id_revision_id_in_fkey"
+            columns: ["assignment_id","request_id","revision_id","instance_id","stage_key","generation"]
+            isOneToOne: true
+            referencedRelation: "approval_assignments"
+            referencedColumns: ["id","request_id","revision_id","instance_id","stage_key","generation"]
+          },
+          {
+            foreignKeyName: "approval_decisions_evidence_manifest_id_request_id_fkey"
+            columns: ["evidence_manifest_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "approval_decisions_organization_id_term_id_request_id_revi_fkey"
+            columns: ["organization_id","term_id","request_id","revision_id"]
+            isOneToOne: false
+            referencedRelation: "request_revisions"
+            referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+        ]
+      }
       asset_links: {
         Row: {
           asset_id: string
@@ -2283,6 +2432,104 @@ export type Database = {
           },
         ]
       }
+      request_workflow_events: {
+        Row: {
+          id: string
+          request_id: string
+          revision_id: string
+          organization_id: string
+          term_id: string
+          stage_key: string
+          generation: number
+          action: string
+          actor_name: string
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          revision_id: string
+          organization_id: string
+          term_id: string
+          stage_key: string
+          generation: number
+          action: string
+          actor_name: string
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          revision_id?: string
+          organization_id?: string
+          term_id?: string
+          stage_key?: string
+          generation?: number
+          action?: string
+          actor_name?: string
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_workflow_events_organization_id_term_id_request_id_fkey"
+            columns: ["organization_id","term_id","request_id","revision_id"]
+            isOneToOne: false
+            referencedRelation: "request_revisions"
+            referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+        ]
+      }
+      request_workflow_outcomes: {
+        Row: {
+          id: string
+          request_id: string
+          revision_id: string
+          organization_id: string
+          term_id: string
+          decision_id: string
+          category: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          revision_id: string
+          organization_id: string
+          term_id: string
+          decision_id: string
+          category: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          revision_id?: string
+          organization_id?: string
+          term_id?: string
+          decision_id?: string
+          category?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_workflow_outcomes_decision_id_fkey"
+            columns: ["decision_id"]
+            isOneToOne: true
+            referencedRelation: "approval_decisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "request_workflow_outcomes_organization_id_term_id_request__fkey"
+            columns: ["organization_id","term_id","request_id","revision_id"]
+            isOneToOne: false
+            referencedRelation: "request_revisions"
+            referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+        ]
+      }
       requests: {
         Row: {
           work_item_id: string
@@ -2311,6 +2558,7 @@ export type Database = {
           tracking_id: string | null
           original_requested_on: string | null
           accepted_on: string | null
+          revision_resume_stage_key: string | null
         }
         Insert: {
           work_item_id: string
@@ -2339,6 +2587,7 @@ export type Database = {
           tracking_id?: string | null
           original_requested_on?: string | null
           accepted_on?: string | null
+          revision_resume_stage_key?: string | null
         }
         Update: {
           work_item_id?: string
@@ -2367,6 +2616,7 @@ export type Database = {
           tracking_id?: string | null
           original_requested_on?: string | null
           accepted_on?: string | null
+          revision_resume_stage_key?: string | null
         }
         Relationships: [
           {
@@ -3489,6 +3739,8 @@ export type Database = {
           current_stage_key: string
           state: string
           pause_reason: string
+          generation: number
+          review_context_id: string
         }
         Insert: {
           id?: string
@@ -3500,6 +3752,8 @@ export type Database = {
           current_stage_key: string
           state?: string
           pause_reason?: string
+          generation?: number
+          review_context_id?: string
         }
         Update: {
           id?: string
@@ -3511,6 +3765,8 @@ export type Database = {
           current_stage_key?: string
           state?: string
           pause_reason?: string
+          generation?: number
+          review_context_id?: string
         }
         Relationships: [
           {
@@ -3580,6 +3836,18 @@ export type Database = {
           p_expected_version: number
           p_expected_revision: number
           p_notes: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      activate_request_workflow: {
+        Args: {
+          p_work_item_id: string
+          p_expected_revision: number
+          p_expected_stage: string
+          p_expected_version: number
+          p_reviewers: string[]
+          p_reason: string
           p_request_id: string
         }
         Returns: Json | null
@@ -3972,6 +4240,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_request_workflow: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
       read_synergy: {
         Args: {
           p_agreement_id: string
@@ -4229,6 +4504,20 @@ export type Database = {
           p_expected_version: number
           p_request_id: string
           p_criteria_revision?: number | null
+        }
+        Returns: Json | null
+      }
+      transition_request: {
+        Args: {
+          p_work_item_id: string
+          p_assignment_id: string
+          p_expected_revision: number
+          p_expected_stage: string
+          p_expected_version: number
+          p_action: string
+          p_reason: string
+          p_evidence_manifest_id: string
+          p_request_id: string
         }
         Returns: Json | null
       }

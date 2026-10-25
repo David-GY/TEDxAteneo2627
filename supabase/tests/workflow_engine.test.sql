@@ -1,0 +1,16 @@
+begin;
+create function pg_temp.p22_require(ok boolean)returns void language plpgsql as $$begin if ok is distinct from true then raise exception 'P22 scoped SQL assertion failed';end if;end$$;
+create function pg_temp.p22_rejects(command text,code text)returns void language plpgsql as $$begin begin execute command;exception when others then if sqlstate=code then return;end if;raise;end;raise exception 'Expected P22 rejection %',code;end$$;
+grant execute on function pg_temp.p22_require(boolean),pg_temp.p22_rejects(text,text)to authenticated;
+select pg_temp.p22_require((select bool_and(relrowsecurity)from pg_class where oid=any(array['public.approval_assignments'::regclass,'public.approval_decisions'::regclass,'public.request_workflow_outcomes'::regclass,'public.request_workflow_events'::regclass])));
+select pg_temp.p22_rejects('update public.approval_decisions set reason=''Rewritten decision''','55000');
+select pg_temp.p22_rejects('delete from public.approval_assignments','55000');
+select pg_temp.p22_require(not has_function_privilege('anon','public.transition_request(uuid,uuid,integer,text,integer,text,text,uuid,uuid)','execute')and not has_function_privilege('service_role','public.activate_request_workflow(uuid,integer,text,integer,uuid[],text,uuid)','execute'));
+set local role authenticated;
+select set_config('request.jwt.claim.sub','33333333-3333-4333-8333-333333333331',true);
+select pg_temp.p22_rejects('select * from public.approval_assignments','42501');
+select pg_temp.p22_rejects('select * from public.approval_decisions','42501');
+select pg_temp.p22_rejects('select * from public.request_workflow_outcomes','42501');
+select pg_temp.p22_rejects('select * from public.request_workflow_events','42501');
+select 'ok - P22_A1/A3 independent raw table/role denial and immutable assignment/decision history' as tap;
+rollback;

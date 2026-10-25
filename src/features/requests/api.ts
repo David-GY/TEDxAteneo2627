@@ -3,7 +3,7 @@ import {mapCommandError,type CommandResult} from '../../lib/commands'
 import type {Json} from '../../lib/database.types'
 import type {FormDefinition} from './catalog/api'
 import {validDefinition,type FormValues,type Choice} from '../forms/validation'
-export type RequestState='draft'|'revision_draft'|'paused'|'cancelled'
+export type RequestState='draft'|'revision_draft'|'paused'|'in_review'|'needs_revision'|'approved'|'rejected'|'completed'|'cancelled'
 export type RequestReceipt={requestId:string;termId:string;version:number;state:RequestState;revision:number;trackingId:string|null}
 export type RequestInput={id:string;values:FormValues;centavos:number|null;requestedOn:string|null;title:string;version:number}
 export type RequestCommand={kind:'create';termId:string;typeId:string;formVersionId:string;workflowVersionId:string;title:string}|{kind:'save'|'submit'|'revise';input:RequestInput}|{kind:'begin'|'cancel';id:string;version:number;reason:string}
@@ -15,7 +15,7 @@ export type RequestList={page:number;pageSize:20;total:number;items:{id:string;t
 export interface RequestsApi{run(command:RequestCommand,key:string):Promise<CommandResult<RequestReceipt>>;read(termId:string,id:string,revision?:number,page?:number):Promise<RequestView|null>;list(termId:string,page:number):Promise<RequestList|null>}
 const uuid=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)
 const integer=(v:unknown)=>Number.isSafeInteger(v)&&(v as number)>=0
-const state=(v:unknown)=>['draft','revision_draft','paused','cancelled'].includes(String(v))
+const state=(v:unknown)=>['draft','revision_draft','paused','in_review','needs_revision','approved','rejected','completed','cancelled'].includes(String(v))
 const object=(v:unknown)=>!!v&&typeof v==='object'&&!Array.isArray(v)
 const date=(v:unknown)=>v===null||typeof v==='string'&&Number.isFinite(Date.parse(v))
 const tracking=(v:unknown)=>v===null||typeof v==='string'&&/^[A-Z][A-Z0-9_-]{0,39}-[0-9]{3,16}$/.test(v)

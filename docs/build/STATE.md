@@ -2,10 +2,10 @@
 
 Updated October25,2026 (Asia/Manila).
 
-- **P21 — blocked_external**: independent tracked request domain/UI delivered. Private drafts/save, current-input atomic submit, revisions/cancel/My requests/term-qualified detail, immutable payload/manifests/history, shared FIN/MCD counters, typed centavos and paused workflow/assignment shells. P21_A1 local allocator/nonrecycle passes; actual independent-session concurrency UNVERIFIED. P21_A2/A3 pass locally; provider/authority/privacy/human gates persist. No P22 decisions.
-- P19/P20/P18/P16A/P17 independent implementations remain delivered with their external gates below; P00/P01 complete. Existing institutional templates remain unconfirmed/disabled; only isolated fictional preview routing is configured.
-- Migration029; schema59tables/663columns/83public functions. Tracked work spines restricted/requester-only; ordinary/restricted payloads and typed money separated. No generic tracked-request grant/edit bypass or approval/accepted-date shortcut.
-- Actual checks:34files/139frontend tests; focused4files/12tests; P21 local SQL/browser/PNG bytes/stale/exact-retry/privacy/mobile/keyboard checks; P19/P20 SQL/browser, P18/P16A browser, P12 file and task regressions; frontend/Edge typechecks/lint/build/type drift passed. Build206modules/app560.69kB(gzip161.39), CSS16.79(gzip3.99); existing chunk warning remains. Evidence, failures and limits: docs/build/steps/P21.md.
+- **P22 — blocked_external**: independent sequential workflow domain/API delivered. Immutable assignments/decisions, explicit scoped activation/reassignment, one/all quorum, current authority/expiry/independence, pinned revision routing, fixed conditions/document evidence, atomic safe general outcomes/audit/outbox and exact reviewer package/file context. Local P22_A1–A3 pass; real provider/concurrent/authority/privacy/human checks remain. FIN/MCD typed hooks fail closed. No P23 inbox.
+- P21/P20/P19/P18/P16A/P17 independent implementations remain delivered with all inherited external gates below; P00/P01 complete. Institutional templates remain unconfirmed/disabled; isolated fictional routing is only in disposable local fixtures.
+- Migration030; schema63tables/714columns/86public functions. Private tracked spines remain restricted; current scoped review-package API grants no origin/common work access. Protected money/approval semantics cannot be changed by labels.
+- Actual checks:35files/141frontend tests; named P22 SQL/isolated PNG/rollback/quorum/revision/publication/role assertions; P21/P20/P12 regressions; frontend/Edge typechecks/lint/build/type drift pass. Build207modules/app564.03kB(gzip162.09), CSS16.79(gzip3.99), existing chunk warning. Evidence/failures/corrections: docs/build/steps/P22.md.
 
 ## External blockers retained
 
@@ -31,10 +31,12 @@ P20 actual provider/JWT direct-validation and selector/file access, approved ins
 
 P21 actual independent Supabase17/Auth/JWT counter/submission/revision/cancel/retry races, current/old revoked JWT requester/file scope, approved service/contact/approver/privacy configuration and human requester/mobile/keyboard/assistive-technology UAT remain unverified. Local allocator constraints, synthetic subjects and isolated PNG bytes do not discharge P21_A1 concurrency or inherited gates.
 
+P22 actual independent Supabase17/Auth/JWT vote/reassignment/revocation/publication/revision races, deployed current/old JWT review-package byte access, approved independent service-reviewer authority and human/privacy acceptance remain unverified. Synthetic subjects, isolated PNG bytes and sequential PGlite checks do not establish concurrent provider sessions. FIN/MCD typed authority hooks remain uninstalled and fail closed; no financial/publicity clearance is issued.
+
 ## Next action / custody
 
-Reviewed P21 implementation a22db6f2f0cb498dff54cfd2b856941ae2553d71/treec59539cd0209448862976162f9071890d7cb77c2 committed/pushed; local/fetched/live remote SHA and tree matched, porcelain empty. Receipt: docs/build/evidence/P21-custody.json. This documentation receipt is committed/pushed with final remote/tree/clean verification. Started clean at424aa333b8aaee3663fbd58d5704ec77bcc1c762; fetched treebdd6d14d5e839ee799a71a5a327346aa77abed24 matched. Next local code-eligible prompt P22 requires separate authorization; do not auto-advance. External next action remains real provider concurrency/JWT and institutional/privacy/human acceptance.
+P22 reviewed implementation awaiting the authorized checkpoint commit/push and final local/fetched/live remote SHA/tree/clean verification. Started clean6592f482cc22b78a99299139fcd439b602874b48/tree2fe6487120e4e39db67802f9a1533cc6b2b4420a. Next code-eligible prompt P23 requires separate authorization; do not auto-advance. External next action is actual provider/JWT concurrency plus approved institutional authority/privacy/human acceptance.
 
-Fresh P21 baseline30%/reset1792907568, weekly78%;40pp allocation, wind-down65%/ceiling70%. Observed40→49→54→58→63% and weekly80→81→82→83%; shared account, not exact attribution. No reset/cap/billing/provider change, purchase or waiting.
+Fresh P22 baseline65%/reset1792907568, weekly84%;25pp allocation, wind-down85%/ceiling90%. Observed75→80→83% and weekly85→86→87%; shared-account observations. No reset/cap/billing/provider change, purchase or reset wait.
 
-Owned node scripts/preview-p21.cjs on5178/Vite5173; actual isolated SQL/PNG bytes with simulated sign-in and fictional routing, existing tab12 visible/retained. No agents/chats/worktrees/deployment/external messages/new automation. Prior one-time continuation remains removed.
+Owned node scripts/preview-p22.cjs on5178 with Vite5173. Existing tab12 visible at an actual isolated SQL general request in_review after one of two votes. Synthetic sign-in/isolated bytes/fictional reviewers do not establish real authority. Google remains disabled.

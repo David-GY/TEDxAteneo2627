@@ -1,3 +1,4 @@
+import {createApprovalsApi,type ApprovalsApi} from '../approvals/api'
 import {createRequestsApi,type RequestsApi} from '../requests/api'
 import {createFormsApi,type FormsApi} from '../forms/api'
 import {createCatalogApi,type CatalogApi} from '../requests/catalog/api'
@@ -35,6 +36,7 @@ export interface AuthGateway {
   catalog?: CatalogApi
   forms?: FormsApi
   requests?: RequestsApi
+  approvals?: ApprovalsApi
   timeline?: TimelineApi
   handoffs?: HandoffsApi
   dependencies?: DependenciesApi
@@ -81,6 +83,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     catalog: createCatalogApi(clientReady),
     forms: createFormsApi(clientReady),
     requests: createRequestsApi(clientReady),
+    approvals: createApprovalsApi(clientReady),
     timeline: createTimelineApi(clientReady),
     handoffs: createHandoffsApi(clientReady),
     dependencies: createDependenciesApi(clientReady),
