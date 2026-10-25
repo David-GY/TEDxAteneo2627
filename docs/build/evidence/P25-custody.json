@@ -1,0 +1,40 @@
+{
+  "step": "P25",
+  "status": "blocked_external",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "9cee925298cd473e337ac7ba52c31864b968014d",
+  "startedFromTree": "958dea856017d94c4cf885e67bad9464259174c4",
+  "implementationCommit": "b3122bca3fd39ef39615db0e20343e553856112a",
+  "implementationTree": "046c0328b210c912d0c2ed59669868f4ba80a50d",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch; local/fetched/live ls-remote SHA equality; local/fetched tree equality; empty git status --porcelain",
+  "schema": { "migrations": 33, "tables": 67, "columns": 759, "publicFunctions": 93 },
+  "checks": "P25_A1-A3 isolated SQL/compiled browser UI/selected PNG/conflict/uncertain exact retry/revision history/revocation/320px/focus/44px;40files155frontend tests;frontend/Edge typechecks/lint/build/catalog;P24/P23 SQL and P23 browser regressions; evidence hashes current",
+  "review": "In-session review by this assistant using simulated product/security/skeptical perspectives; not independent reviewers. No agents, chats or worktrees.",
+  "limits": "All inherited provider/JWT/independent concurrency/institutional authority/evidence/privacy/retention/human gates persist. Requester-only private UI; reviewer authority remains unavailable until P26. No authorization, actuals, ledger, payment or deployment. Existing >500kB chunk warning remains.",
+  "preview": {
+    "ownedCommand": "node scripts/preview-p25.cjs",
+    "processIdAtVerification": 30464,
+    "port": 5178,
+    "vitePort": 5173,
+    "visibilitySetAndReadTrueViaCua": true,
+    "shownUrl": "http://127.0.0.1:5178/finance/22222222-2222-4222-8222-222222222221/b477598c-1c5b-4b0e-a2a0-21b01a2decc5",
+    "note": "Explicitly synthetic SQL/subjects/requirements; isolated PNG bytes. Prior owned preview-p23 PID61176 was verified and replaced on the same port. Existing browser tab retained; no provider substitute."
+  },
+  "usage": {
+    "baselineUsedPercent": 52,
+    "lastObservedUsedPercent": 76,
+    "resetTimestamp": 1792957207,
+    "baselineWeeklyUsedPercent": 8,
+    "lastObservedWeeklyUsedPercent": 12,
+    "effectiveBudgetPoints": 38,
+    "windDownAtUsedPercent": 85,
+    "softCeilingUsedPercent": 90,
+    "interpretation": "Shared-account observations, not exact task attribution. No reset/new allocation, reset credit, purchase, cap/billing/provider change or reset wait. Started October25/checkpoint October26 Manila."
+  },
+  "gitIdentity": "Command-local git -c flags reuse the verified prior checkpoint author/committer identity. No persistent Git configuration change.",
+  "receiptCommit": "This receipt is in a subsequent documentation commit, with final local/fetched/live remote commit/tree and clean-worktree verification repeated after pushing it.",
+  "nextCodeEligiblePrompt": "P26 build-prompts/26-finance-authorization.md; separate authorization required; not started"
+}

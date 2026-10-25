@@ -31,4 +31,4 @@
 - [x] Build typed draft fields, exact recomputation, P24 command/retry memory, confidential revision page and scoped desk.
 - [x] Integrate catalog/request deep links, auth returns, file selection/download and safe task/deliverable summaries.
 - [x] Verify P25_A1–A3 plus conflict/uncertain/revocation,320px/keyboard/browser checks; required typechecks/tests/lint/build/catalog.
-- [ ] Review in-session; record evidence/STATE/contracts/checkpoint, commit/push and verify live remote/tree/clean custody. P26 requires separate authorization.
+- [x] Review in-session; record evidence/STATE/contracts/checkpoint, commit/push and verify live remote/tree/clean custody. Implementation b3122bc verified; receipt push verified again. P26 requires separate authorization.
