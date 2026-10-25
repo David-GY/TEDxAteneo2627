@@ -39,6 +39,7 @@
     "supabase/migrations/20261025003200_finance_payload.sql": "df54861d309d98d8994f0ef8f3fbd1db63b83711a2f66e70ab295f911cf7bfad",
     "supabase/migrations/20261025003300_finance_intake.sql": "d58e389bfc6b3b01e6450c369010dac39841b7ac43cc88a991bbd500d0dd9675",
     "supabase/migrations/20261026003400_financial_authorization.sql": "7c72a5e92e4aeb03783e4bf05d12c2423970f4ae6baf9eed152b93a818fc51fb",
+    "supabase/migrations/20261026003500_finance_ledger.sql": "0ab59395e9dd94268713324ec2f81b7d01dbf75ba9917bb02d237172be2f2fe9",
     "scripts/finance-intake-fixtures.cjs": "0c1f101255f88e0faa60c876f2669f86110fdfb7eab3c77dadfdb2f40cc6d0ea",
     "scripts/test-finance-intake.cjs": "a93eeb4b63b1cf119cfd80a070d3481290f0a5030af5a0121bcca18fb8e9bd93"
   }

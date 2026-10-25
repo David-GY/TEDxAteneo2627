@@ -14,6 +14,7 @@
     "test:review-inboxes": "node scripts/test-review-inboxes.cjs",
     "test:finance-payload": "node scripts/test-finance-payload.cjs",
     "test:finance-intake": "node scripts/test-finance-intake.cjs",
+    "test:finance-ledger": "node scripts/test-finance-ledger.cjs",
     "test:financial-authorization": "node scripts/test-financial-authorization.cjs",
     "test:workflow-engine": "node scripts/test-workflow-engine.cjs",
     "test:request-submission": "node scripts/test-request-submission.cjs",

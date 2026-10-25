@@ -13,7 +13,7 @@
     "src/features/finance/intake.ts": "7a00b25c37e6687f5243f0d325eb69b9a53294848ab4a01cb8515208c3f92fa1",
     "src/features/finance/Memory.tsx": "8a0f2833c6ddcb473ec6b51678b6827558c83f8cc4df2ab7c0eb7842d9b2a159",
     "src/features/finance/FinanceRequestForm.tsx": "746de2eff8b2c8222d469d8854b64a286ce41214635a4e07bea6f005cf4753de",
-    "src/features/finance/FinanceCasePage.tsx": "ef76cebec28cb4d1b50ae3f650380e8fdc1db3e7d846a96cd260152d0a7c5fa3",
+    "src/features/finance/FinanceCasePage.tsx": "85d16f87c19ca6bcfd3cfe050aa2d3d623370a0355b3af267ff4bf45bc5b233a",
     "src/features/finance/FinanceDesk.tsx": "356d3b13e391281623e1fbd209e65c2b7e5ec7acb852b3be0931fc0800e92107",
     "src/features/finance/finance.css": "696911637fec4b3e0481c165d8c504a4e9e1b75a8300c3d261ec7421a8d1efea",
     "scripts/verify-p25.cjs": "80e8f3c8d55997647378f35035eec4d0cf0edd8cb7bad9898cf01c164aa7beea"

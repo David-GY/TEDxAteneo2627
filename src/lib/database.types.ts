@@ -5,6 +5,135 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      actual_finance_events: {
+        Row: {
+          id: string
+          record_id: string
+          kind: string
+          authorization_id: string
+          entry_id: string | null
+          actor_id: string
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          record_id: string
+          kind: string
+          authorization_id: string
+          entry_id?: string | null
+          actor_id: string
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          record_id?: string
+          kind?: string
+          authorization_id?: string
+          entry_id?: string | null
+          actor_id?: string
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "actual_finance_events_authorization_id_fkey"
+            columns: ["authorization_id"]
+            isOneToOne: false
+            referencedRelation: "financial_authorizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "actual_finance_events_entry_id_fkey"
+            columns: ["entry_id"]
+            isOneToOne: true
+            referencedRelation: "budget_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "actual_finance_events_record_id_fkey"
+            columns: ["record_id"]
+            isOneToOne: false
+            referencedRelation: "actual_finance_records"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      actual_finance_records: {
+        Row: {
+          id: string
+          request_id: string
+          term_id: string
+          authorization_id: string
+          kind: string
+          amount_centavos: number
+          evidence_asset_id: string
+          evidence_sha256: string
+          reference: string
+          recorded_on: string
+          recorded_by: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          term_id: string
+          authorization_id: string
+          kind: string
+          amount_centavos: number
+          evidence_asset_id: string
+          evidence_sha256: string
+          reference: string
+          recorded_on: string
+          recorded_by: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          term_id?: string
+          authorization_id?: string
+          kind?: string
+          amount_centavos?: number
+          evidence_asset_id?: string
+          evidence_sha256?: string
+          reference?: string
+          recorded_on?: string
+          recorded_by?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "actual_finance_records_authorization_id_fkey"
+            columns: ["authorization_id"]
+            isOneToOne: false
+            referencedRelation: "financial_authorizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "actual_finance_records_evidence_asset_id_request_id_fkey"
+            columns: ["evidence_asset_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "assets"
+            referencedColumns: ["id","origin_work_item_id"]
+          },
+          {
+            foreignKeyName: "actual_finance_records_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "finance_cases"
+            referencedColumns: ["request_id"]
+          },
+          {
+            foreignKeyName: "actual_finance_records_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       agreement_confirmations: {
         Row: {
           id: string
@@ -599,6 +728,141 @@ export type Database = {
           },
         ]
       }
+      budget_accounts: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          unit_id: string
+          fund_source: string
+          ceiling_centavos: number
+          enabled: boolean
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          unit_id: string
+          fund_source: string
+          ceiling_centavos: number
+          enabled: boolean
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          unit_id?: string
+          fund_source?: string
+          ceiling_centavos?: number
+          enabled?: boolean
+          official_reference?: string
+          confirmed_by?: string
+          effective_from?: string
+          effective_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "budget_accounts_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "budget_accounts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "budget_accounts_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "budget_accounts_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      budget_entries: {
+        Row: {
+          id: string
+          account_id: string
+          authorization_id: string
+          kind: string
+          reserved_delta_centavos: number
+          expense_delta_centavos: number
+          revenue_delta_centavos: number
+          reverses_entry_id: string | null
+          actor_id: string
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          account_id: string
+          authorization_id: string
+          kind: string
+          reserved_delta_centavos?: number
+          expense_delta_centavos?: number
+          revenue_delta_centavos?: number
+          reverses_entry_id?: string | null
+          actor_id: string
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          account_id?: string
+          authorization_id?: string
+          kind?: string
+          reserved_delta_centavos?: number
+          expense_delta_centavos?: number
+          revenue_delta_centavos?: number
+          reverses_entry_id?: string | null
+          actor_id?: string
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "budget_entries_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "budget_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "budget_entries_authorization_id_fkey"
+            columns: ["authorization_id"]
+            isOneToOne: false
+            referencedRelation: "financial_authorizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "budget_entries_reverses_entry_id_fkey"
+            columns: ["reverses_entry_id"]
+            isOneToOne: true
+            referencedRelation: "budget_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       comment_evidence: {
         Row: {
           comment_id: string
@@ -1140,6 +1404,8 @@ export type Database = {
           confirmed_by: string
           effective_from: string
           effective_to: string
+          budget_account_id: string | null
+          reconciliation_enabled: boolean
         }
         Insert: {
           id?: string
@@ -1155,6 +1421,8 @@ export type Database = {
           confirmed_by: string
           effective_from: string
           effective_to: string
+          budget_account_id?: string | null
+          reconciliation_enabled?: boolean
         }
         Update: {
           id?: string
@@ -1170,6 +1438,8 @@ export type Database = {
           confirmed_by?: string
           effective_from?: string
           effective_to?: string
+          budget_account_id?: string | null
+          reconciliation_enabled?: boolean
         }
         Relationships: [
           {
@@ -1185,6 +1455,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "workflow_versions"
             referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "finance_authorization_policies_budget_account_id_fkey"
+            columns: ["budget_account_id"]
+            isOneToOne: false
+            referencedRelation: "budget_accounts"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "finance_authorization_policies_confirmed_by_fkey"
@@ -4850,6 +5127,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_finance_ledger: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
       read_finance_review: {
         Args: {
           p_term_id: string
@@ -4970,9 +5254,42 @@ export type Database = {
         }
         Returns: Json | null
       }
+      reconcile_finance_actual: {
+        Args: {
+          p_record_id: string
+          p_action: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      record_finance_actual: {
+        Args: {
+          p_work_item_id: string
+          p_kind: string
+          p_amount_centavos: string
+          p_evidence_asset_id: string
+          p_reference: string
+          p_recorded_on: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       redeem_guest_invitation: {
         Args: {
           p_token: string
+        }
+        Returns: Json | null
+      }
+      release_finance_budget: {
+        Args: {
+          p_authorization_id: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
         }
         Returns: Json | null
       }
