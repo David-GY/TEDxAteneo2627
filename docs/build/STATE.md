@@ -31,8 +31,8 @@ P20 actual provider/JWT direct-validation and selector/file access, approved ins
 
 ## Next action / custody
 
-Finish reviewed P20 mandatory checkpoint commit/push on existing codex/core-build-checkpoints; verify live/fetched/local commit/tree and clean worktree. P19 custody passed before P20. Next code-eligible step is P21 only on separate authorization; do not auto-advance. Both requested independent implementations are delivered with external gates retained.
+P20 implementation5466803325f36f1a4306505f7ff0283047dea260/tree697fde5d5c33abab5cd2cabd7b602ffc46c374bd pushed on codex/core-build-checkpoints; local/fetched/live remote SHA and tree matched, porcelain empty. P19 custody passed before P20. Durable implementation custody receipt: docs/build/evidence/P19-P20-custody.json; this documentation receipt is committed/pushed and verified by the final custody command. Next code-eligible step is P21 only on separate authorization; do not auto-advance. Both requested independent implementations are delivered with external gates retained.
 
-Same execution baseline3%/reset1792907568;40pp allocation across P19+P20, wind-down38%/ceiling43%. Later8→10→16→21→25% observations, weekly74→77%; shared account, no exact attribution or new allocation. No cap/billing/provider/reset-credit changes, purchases or waiting.
+Same execution baseline3%/reset1792907568;40pp allocation across P19+P20, wind-down38%/ceiling43%. Later8→10→16→21→25→29% observations, weekly74→78%; shared account, no exact attribution or new allocation. No cap/billing/provider/reset-credit changes, purchases or waiting.
 
 Owned node scripts/preview-p20.cjs on5178 with Vite5173; actual isolated SQL/PNG bytes, simulated sign-in, explicit fictional/unconfirmed fixture, existing tab12 visible. One-time continue-tedx-p19-at-8-52-am deleted via first-party tool; no new schedule. No agents/chats/worktrees/deployment/provider changes/external messages.

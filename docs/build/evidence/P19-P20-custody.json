@@ -1,0 +1,37 @@
+{
+  "recordedAtUTC": "2026-10-25 01:29:04 UTC",
+  "branch": "codex/core-build-checkpoints",
+  "P19": {
+    "commit": "a4a8806b60642b3d2e8fca6344dd2f516597dffd",
+    "tree": "f7845a441ba55d8484756b67130264b3f3b31d47",
+    "verifiedBeforeP20": true,
+    "liveRemoteMatched": true,
+    "clean": true
+  },
+  "P20": {
+    "implementationCommit": "5466803325f36f1a4306505f7ff0283047dea260",
+    "tree": "697fde5d5c33abab5cd2cabd7b602ffc46c374bd",
+    "localFetchedAndLiveRemoteMatched": true,
+    "cleanAfterPush": true
+  },
+  "checks": [
+    "git fetch origin codex/core-build-checkpoints",
+    "HEAD == origin/codex/core-build-checkpoints == live git ls-remote branch SHA",
+    "local HEAD tree == fetched remote tree",
+    "git status --porcelain empty"
+  ],
+  "automation": {
+    "id": "continue-tedx-p19-at-8-52-am",
+    "deleteStatus": "deleted"
+  },
+  "usage": {
+    "startingFiveHourUsedPercent": 3,
+    "observedFiveHourUsedPercentAfterImplementationPush": 29,
+    "reset": 1792907568,
+    "weeklyStartingPercent": 74,
+    "weeklyObservedPercent": 78,
+    "allocationPercentagePoints": 40,
+    "note": "Shared-account observations, not exact attribution; same allocation across both steps. No reset/cap/purchase."
+  },
+  "scope": "Independent local P19/P20 delivered; all institutional/provider/authority/privacy/human gates retained. No P21."
+}
