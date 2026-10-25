@@ -28,4 +28,4 @@
 - [x] Red/green P28_A1-A3 SQL assertions; migration036 typed snapshot/designation/policy/decision/revocation/gate commands, scoped bytes and canonical P22 integration.
 - [x] Final-publicity desk/intake/reviewer/history and safe delivery gate using existing forms/files/memory.
 - [x] SQL/browser regressions, frontend/typecheck/Edge/lint/build/catalog; record actual limits.
-- [ ] Reviewed mandatory checkpoint, commit/push, local/fetched/live remote/tree/clean custody and visible preview. No P29.
+- [x] Reviewed mandatory checkpoint, commit/push, local/fetched/live remote/tree/clean custody and visible preview. No P29.

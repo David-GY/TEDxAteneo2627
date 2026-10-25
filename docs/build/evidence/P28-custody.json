@@ -1,0 +1,57 @@
+{
+  "step": "P28",
+  "status": "blocked_external",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "ab015bc5e1b9bfa2785e0b682e7005bf66632054",
+  "startedFromTree": "6dddf9b66469174a7fdb2fb8949a00cb082dfb46",
+  "implementationCommit": "e7a6b29c706872e190a87b8b21738c660ee0138a",
+  "implementationTree": "3f101dbb64552e8eb98b59ae12dfb13d7f648a2a",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch; local/fetched/live ls-remote commit equality; local/fetched tree equality; empty git status --porcelain",
+  "schema": {
+    "migrations": 36,
+    "tables": 83,
+    "columns": 902,
+    "publicFunctions": 110
+  },
+  "checks": "P28_A1-A3 isolated SQL and compiled intake/reviewer/selected PNG/exact uncertain retry/caption revision/history/scope revocation/320px/focus/44px;43files161frontend tests;frontend/Edge typechecks/lint/build/catalog;P21/P22/P23/P26/P27 SQL and P26/P27 browser regressions; current evidence hashes match",
+  "review": "In-session simulated product/security/skeptical perspectives by this assistant, not independent reviewers. Explicit privileged MCD capability, typed snapshot/decision bindings and all-related-FIN checks reviewed. No agents/chats/worktrees.",
+  "limits": "Confirmed single-stage/one-reviewer MCD routing only; other routing remains paused. All inherited provider/JWT/independent-concurrency/institutional/privacy/retention/human gates remain. No actual policy/designation seeded. Exact requester/deliverable/use/current FIN mapping and all linked valid financial plans are local predicates, not institutional cost coverage/payment/settlement proof. Mutable external source changes do not update the frozen snapshot or approve replacements. No social posting/deployment/provider/billing/cap/reset/external message/P29. Existing >500kB chunk warning remains.",
+  "preview": {
+    "ownedCommand": "node scripts/preview-p28.cjs",
+    "processIdAtVerification": 88536,
+    "port": 5178,
+    "vitePort": 5173,
+    "visibilitySetViaCua": true,
+    "currentPageObservedViaCua": true,
+    "markedDeliverable": true,
+    "shownUrl": "http://127.0.0.1:5178/publicity/22222222-2222-4222-8222-222222222221/ff01f3be-f8e6-4c8e-993b-f0baeba61d7f?synthetic=associate",
+    "note": "Owned P27 PID56176 verified/replaced; final P28 reload uses current migration/source. Explicit fictional FIN/MCD policy/designations banner; isolated SQL/subjects/PNG bytes only. Existing visible tab retained."
+  },
+  "usage": {
+    "baselineUsedPercent": 59,
+    "lastObservedUsedPercent": 87,
+    "resetTimestamp": 1792975667,
+    "baselineWeeklyUsedPercent": 21,
+    "lastObservedWeeklyUsedPercent": 26,
+    "effectiveBudgetPoints": 31,
+    "windDownAtUsedPercent": 85,
+    "softCeilingUsedPercent": 90,
+    "observations": [
+      59,
+      67,
+      74,
+      78,
+      82,
+      84,
+      86,
+      87
+    ],
+    "interpretation": "Shared-account observations, not exact task attribution. Custody-only wind-down after implementation. No allocation restart/reset credit/purchase/cap/billing/provider change/reset wait."
+  },
+  "gitIdentity": "Command-local verified prior author/committer flags; no persistent Git config change.",
+  "receiptCommit": "This receipt is in a subsequent documentation commit. Final local/fetched/live remote commit/tree and clean-worktree verification repeated after its push.",
+  "nextCodeEligiblePrompt": "P29 build-prompts/29-readiness-gates.md; separate authorization required; not started"
+}
