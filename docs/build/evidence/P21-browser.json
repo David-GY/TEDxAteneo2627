@@ -1,0 +1,18 @@
+{
+  "target": "Disposable actual SQL/compiled UI/isolated PNG bytes; synthetic subjects, not real Supabase/Auth/Storage/JWT, independent concurrent sessions or human UAT",
+  "checks": [
+    "P21_A1 local shared tracking receipt shown; actual concurrent-session proof remains blocked",
+    "P21_A2 lost create/submit replies recovered with exact payload/key, one draft/submission; current unsaved input submitted atomically",
+    "Incomplete draft save vs required submission errors and keyboard target",
+    "Real P12 upload/finalize and exact selected request manifest byte download",
+    "P21_A3 separate synthetic requester cannot read case/title/payload/file; historical revision immutable in UI",
+    "Append revision keeps tracking ID/original date, cancel retains both revisions; My requests count;320px/visible focus"
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/features/requests/RequestPages.tsx": "8467f051782fbee95e839d5f65452b99fe1c99d485c0a2a64ba8fc6fad60a5f1",
+    "src/features/requests/Memory.tsx": "da593dbc3d3f3624ca1bd9bfbcd51315ed91864e75a9d629eaa44ea14eddb435",
+    "src/features/forms/FormRenderer.tsx": "e76452d8d43f52bbe970107773817d07418425c5c8b80b056a59c5b270e5e1ff",
+    "scripts\\verify-p21.cjs": "a71fe7e01ab1914809b1c59e04c96c910b647ac3f3345877979508029c34308c"
+  }
+}

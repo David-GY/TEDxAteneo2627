@@ -60,7 +60,7 @@ export function validHttpsUrl(value:string):boolean{
  if(host.length>253||port!==undefined&&(Number(port)<1||Number(port)>65535)||parts.some(p=>!/^([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])$/.test(p)))return false
  return !/^[0-9.]+$/.test(host)||parts.length===4&&parts.every(p=>Number(p)<=255&&String(Number(p))===p)
 }
-export function validateForm(s:FormDefinition,values:FormValues,options:FormOptions,restricted:boolean,requestedCentavos:number|null=null):Validation{
+export function validateForm(s:FormDefinition,values:FormValues,options:FormOptions,restricted:boolean,requestedCentavos:number|null=null,complete=true):Validation{
  const errors:Record<string,string>=Object.create(null),out:FormValues=Object.create(null),snapshots:Record<string,Choice[]>=Object.create(null);let lines=0
  const fail=(k:string,code:string)=>{errors[k]??=code}
  if(!validDefinition(s,restricted))fail('$form','schema')
@@ -68,7 +68,7 @@ export function validateForm(s:FormDefinition,values:FormValues,options:FormOpti
  else{
   function fields(defs:FormField[],input:FormValues,target:FormValues,prefix='',top=true){
    for(const k of Object.keys(input))if(!defs.some(f=>f.key===k))fail(prefix+k,'unknown')
-   for(const f of defs){const path=prefix+f.key,v=input[f.key],visible=!f.visibleWhen||evaluateCondition(f.visibleWhen,target),required=f.required||evaluateCondition(f.requiredWhen,target)
+   for(const f of defs){const path=prefix+f.key,v=input[f.key],visible=!f.visibleWhen||evaluateCondition(f.visibleWhen,target),required=complete&&(f.required||evaluateCondition(f.requiredWhen,target))
     if(!visible){if(Object.hasOwn(input,f.key))fail(path,'hidden');continue}
     if((f.storage??'custom')!=='custom'){
      if(Object.hasOwn(input,f.key))fail(path,'protected')

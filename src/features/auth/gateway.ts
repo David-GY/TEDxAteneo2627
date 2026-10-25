@@ -1,3 +1,4 @@
+import {createRequestsApi,type RequestsApi} from '../requests/api'
 import {createFormsApi,type FormsApi} from '../forms/api'
 import {createCatalogApi,type CatalogApi} from '../requests/catalog/api'
 import {createTimelineApi,type TimelineApi} from '../timeline/api'
@@ -33,6 +34,7 @@ export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out
 export interface AuthGateway {
   catalog?: CatalogApi
   forms?: FormsApi
+  requests?: RequestsApi
   timeline?: TimelineApi
   handoffs?: HandoffsApi
   dependencies?: DependenciesApi
@@ -78,6 +80,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   return {
     catalog: createCatalogApi(clientReady),
     forms: createFormsApi(clientReady),
+    requests: createRequestsApi(clientReady),
     timeline: createTimelineApi(clientReady),
     handoffs: createHandoffsApi(clientReady),
     dependencies: createDependenciesApi(clientReady),

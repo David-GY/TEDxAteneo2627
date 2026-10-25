@@ -1,3 +1,4 @@
+import {NewRequestPage,MyRequestsPage,RequestDetailPage} from '../features/requests/RequestPages'
 import {FormPreviewPage} from '../features/forms/FormPreviewPage'
 import {CatalogPage} from '../features/requests/catalog/CatalogPage'
 import {HandoffPage,HandoffsPage} from '../features/handoffs/HandoffScreens'
@@ -95,6 +96,9 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       // Timeline filter RPCs recheck scope themselves. Explicit focus/expiry checks still revalidate.
       }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
       { index: true, element: gateway.overview?<Overview api={gateway.overview}/>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
+      {path:'requests/mine',element:gateway.requests?<MyRequestsPage api={gateway.requests}/>:<EmptyState title="Requests unavailable" description="The connection is unavailable."/>},
+      {path:'requests/services/:typeId/new',element:gateway.requests&&gateway.catalog?<NewRequestPage api={gateway.requests} catalog={gateway.catalog}/>:<EmptyState title="Draft unavailable" description="The connection is unavailable."/>},
+      {path:'requests/:requestTermId/:requestId',element:gateway.requests&&gateway.forms?<RequestDetailPage api={gateway.requests} forms={gateway.forms} files={gateway.files}/>:<EmptyState title="Request unavailable" description="The connection is unavailable."/>},
       {path:'requests/services/:typeId/preview',element:gateway.forms&&gateway.catalog?<FormPreviewPage api={gateway.forms} catalog={gateway.catalog} files={gateway.files}/>:<EmptyState title="Form unavailable" description="The connection is unavailable."/>},
       {path:'requests/services/:typeId',element:gateway.catalog?<CatalogPage api={gateway.catalog}/>:<EmptyState title="Catalog unavailable" description="The connection is unavailable."/>},
       {path:'working-together/handoffs',element:gateway.handoffs?<HandoffsPage api={gateway.handoffs}/>:<EmptyState title="Handoffs unavailable" description="The connection is unavailable."/>},
