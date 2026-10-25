@@ -1,0 +1,6 @@
+.finance-fields,.finance-line{min-width:0;margin-block:var(--space-4);padding:var(--space-4)}
+.finance-line-fields{display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-4)}
+.finance-line-fields>*{min-width:0}
+.finance-line p,.finance-fields p{overflow-wrap:anywhere}
+.finance-fields select,#finance-history{inline-size:100%;max-inline-size:100%;min-inline-size:0;min-block-size:var(--control-min-size);padding:var(--space-3);border:1px solid var(--color-line);border-radius:var(--radius-control);background:var(--color-surface);color:var(--color-ink);font:inherit}
+@media(max-width:45rem){.finance-line-fields{grid-template-columns:1fr}}

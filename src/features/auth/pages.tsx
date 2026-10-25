@@ -1,3 +1,4 @@
+import {FinanceMemory} from '../finance/Memory'
 import {ReviewMemory} from '../approvals/Memory'
 import {RequestMemory} from '../requests/Memory'
 import {FormDrafts} from '../forms/Drafts'
@@ -27,7 +28,7 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
     const timer = window.setInterval(refresh, 30_000)
     return () => { stop(); clearInterval(timer); window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [gateway, revalidate])
-  return <ReviewMemory identity={draftIdentity}><RequestMemory identity={draftIdentity}><FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</HandoffDrafts></ScheduleDrafts></FormDrafts></RequestMemory></ReviewMemory>
+  return <FinanceMemory identity={draftIdentity}><ReviewMemory identity={draftIdentity}><RequestMemory identity={draftIdentity}><FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</HandoffDrafts></ScheduleDrafts></FormDrafts></RequestMemory></ReviewMemory></FinanceMemory>
 }
 
 export function ProtectedShell() {

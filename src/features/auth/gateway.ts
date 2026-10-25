@@ -1,3 +1,4 @@
+import {createFinanceApi,type FinanceApi} from '../finance/api'
 import {createInboxApi,type InboxApi} from '../approvals/inbox-api'
 import {createApprovalsApi,type ApprovalsApi} from '../approvals/api'
 import {createRequestsApi,type RequestsApi} from '../requests/api'
@@ -34,6 +35,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  finance?: FinanceApi
   catalog?: CatalogApi
   forms?: FormsApi
   requests?: RequestsApi
@@ -82,6 +84,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    finance: createFinanceApi(clientReady),
     catalog: createCatalogApi(clientReady),
     forms: createFormsApi(clientReady),
     requests: createRequestsApi(clientReady),

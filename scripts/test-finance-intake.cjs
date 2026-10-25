@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict'),fs=require('node:fs/promises'),{createHash}=require('node:crypto')
+;(async()=>{const p=await require('./deliverable-authoring-db.cjs').createAuthoringDatabase();try{
+ assert.equal((await p.db.query("select count(*)::int n from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public'and p.proname='read_finance_gate'")).rows[0].n,1,'P25 safe gate projection must exist')
+ const f=await require('./finance-intake-fixtures.cjs').setupFinanceIntake(p),call=f.f.call;
+ const own=await call(p.ids.viewer,'read_finance_intake',[p.ids.term,f.zero.requestId,null]);assert.equal(own.finance.kind,'fundraising');assert.equal(own.finance.requestedTotalCentavos,'0');assert.equal(own.request.state,'paused');assert.equal(own.request.governedKind,'fin');assert.equal((await p.db.query('select count(*)::int n from public.approval_decisions where request_id=$1',[f.zero.requestId])).rows[0].n,0);
+ assert.equal((await call(p.ids.viewer,'list_finance_cases',[p.ids.term,1])).total,2);
+ for(const subject of[p.ids.owner,p.ids.outsider]){assert.equal(await call(subject,'read_finance_intake',[p.ids.term,f.zero.requestId,null]),null);assert.equal((await call(subject,'list_finance_cases',[p.ids.term,1])).total,0)}
+ assert.deepEqual(await call(p.ids.outsider,'read_finance_gate',[p.ids.term,f.taskId]),{state:'not_verified'});
+ assert.deepEqual(await call(p.ids.owner,'read_finance_gate',[p.ids.term,p.ids.item]),{state:'pending'});
+ assert.equal(await call(p.ids.outsider,'read_finance_gate',[p.ids.term,p.ids.hidden]),null);
+ assert.equal(JSON.stringify(await call(p.ids.outsider,'read_finance_gate',[p.ids.term,f.taskId])).includes('PRIVATE'),false);
+ await p.db.query("update public.term_memberships set status='revoked'where id=$1",[p.ids.viewerMembership]);assert.equal(await call(p.ids.viewer,'read_finance_intake',[p.ids.term,f.zero.requestId,null]),null);await p.db.query("update public.term_memberships set status='active'where id=$1",[p.ids.viewerMembership]);
+ const files=[...p.migrations.map(m=>'supabase/migrations/'+m),'scripts/finance-intake-fixtures.cjs','scripts/test-finance-intake.cjs'];await fs.writeFile('docs/build/evidence/P25-domain.json',JSON.stringify({target:'Isolated PGlite/synthetic subjects only. Not real Supabase17/Auth/JWT/concurrency/authority/privacy/human verification.',checks:['P25_A1 zero-cost fundraising creates exact typed FIN plan and remains paused without decisions','P25_A3 private intake/list/count denial; neutral shared task gate has exactly one safe state and no case metadata; permission and revocation rechecked'],hashes:Object.fromEntries(await Promise.all(files.map(async file=>[file,createHash('sha256').update(await fs.readFile(file)).digest('hex')])) )},null,2)+'\n');
+ console.log('P25_A1/A3 isolated typed FIN path, private list/intake scope, neutral shared task/deliverable gate and revocation passed')
+}finally{await p.db.close()}})().catch(e=>{console.error(e.code,e.message,e.where||'');process.exitCode=1})

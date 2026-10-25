@@ -4306,6 +4306,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      list_finance_cases: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       list_guest_invitations: {
         Args: {
           p_term_id: string
@@ -4424,6 +4431,21 @@ export type Database = {
       read_files: {
         Args: {
           p_work_item_id: string
+        }
+        Returns: Json | null
+      }
+      read_finance_gate: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
+      read_finance_intake: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_revision?: number | null
         }
         Returns: Json | null
       }

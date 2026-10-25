@@ -1,0 +1,43 @@
+import {useEffect,useState} from 'react'
+import {Link,useParams,useRouteLoaderData,useSearchParams} from 'react-router'
+import {PageHeading,Panel} from '../../components/Page'
+import {EmptyState,LoadingState,ErrorState} from '../../components/FeedbackState'
+import type {WorkspaceContext} from '../auth/gateway'
+import type {RequestsApi} from '../requests/api'
+import {useRequestMemory} from '../requests/Memory'
+import {requestDate} from '../requests/Payload'
+import type {FilesApi} from '../files/api'
+import {Files} from '../files/Files'
+import {emptyPlan,phpText,quantityText,showPhp} from './intake'
+import type {FinanceApi,FinanceIntake} from './api'
+import {useFinanceMemory} from './Memory'
+import {FinanceRequestForm} from './FinanceRequestForm'
+import './finance.css'
+export function FinanceCasePage({api,requests,files}:{api:FinanceApi;requests:RequestsApi;files?:FilesApi}){
+ const context=useRouteLoaderData('workspace')as WorkspaceContext,{financeTermId='',financeId=''}=useParams(),[params,setParams]=useSearchParams(),rev=params.get('revision'),revision=rev&&/^[1-9][0-9]{0,2}$/.test(rev)?Number(rev):undefined,[reload,setReload]=useState(0),key=financeTermId+financeId+revision+reload+('memberId'in context?context.memberId:context.guestAccessId);
+ const[state,setState]=useState<{key:string;data:FinanceIntake|null;error:boolean}|null>(null);
+ useEffect(()=>{let live=true;void api.read(financeTermId,financeId,revision).then(data=>{if(live)setState({key,data,error:false})}).catch(()=>{if(live)setState({key,data:null,error:true})});return()=>{live=false}},[api,financeTermId,financeId,revision,key]);
+ useEffect(()=>{const fn=()=>setReload(n=>n+1);window.addEventListener('focus',fn);return()=>window.removeEventListener('focus',fn)},[]);
+ const current=state?.key===key?state:null;
+ return <><PageHeading title="Finance plan" description="Review the exact requested plan and evidence. Submission does not authorize a commitment or process a payment."/><p><Link to="/finance">My finance plans</Link> · <Link to="/requests">Service catalog</Link></p><button className="button button--secondary" onClick={()=>setReload(n=>n+1)}>Refresh finance case (keep inputs)</button>
+ {!current?<LoadingState/>:current.error?<ErrorState title="Finance case unavailable" description="Check current access or connection and refresh. Entered values stay in memory for this account."/>:!current.data?<EmptyState title="Finance case cannot be shown" description="This case is unavailable to your current account. A shared work link grants no private financial access."/>:<FinanceBody key={financeTermId+financeId+revision+current.data.request.version} data={current.data} api={api} requests={requests} files={files} member={'memberId'in context?context.memberId:''} historical={revision!==undefined} refresh={()=>setReload(n=>n+1)} select={n=>setParams(n?{revision:String(n)}:{})}/>}
+ </>
+}
+function FinanceBody({data,api,requests,files,member,historical,refresh,select}:{data:FinanceIntake;api:FinanceApi;requests:RequestsApi;files?:FilesApi;member:string;historical:boolean;refresh:()=>void;select:(n:number|undefined)=>void}){
+ const r=data.request,f=data.finance,plan=f?{kind:f.kind,purpose:f.purpose,fundSource:f.fundSource,beneficiaryMemberId:f.beneficiaryMemberId,relatedDeliverableId:f.relatedDeliverableId??'',plannedOn:f.plannedOn??'',termsRisks:f.termsRisks,price:f.pricing?phpText(f.pricing.unitPriceCentavos):'',forecastQuantity:f.pricing?quantityText(f.pricing.forecastQuantityMilli):'',lines:f.lines.map(l=>({description:l.description,quantity:quantityText(l.quantityMilli),amount:phpText(l.unitAmountCentavos)}))}:emptyPlan(member),m=useFinanceMemory(api,r.id,{plan,title:r.title,requestedOn:r.draft?.requestedOn??'',ack:false}),actions=useRequestMemory(requests,'finance-actions:'+r.id,{reason:''}),[fileError,setFileError]=useState('');
+ async function download(id:string){if(!files||m.locked||actions.locked)return;setFileError('');try{const blob=await files.download(r.id,id),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=f?.files.find(v=>v.id===id)?.name??'finance-evidence';a.click();setTimeout(()=>URL.revokeObjectURL(url),0)}catch{setFileError('File access could not be confirmed. Refresh current access and retry.')}}
+ async function action(kind:'begin'|'cancel'){const result=await actions.run({kind,id:r.id,version:r.version,reason:actions.fields.reason});if(result)refresh();else if(!actions.pending)refresh()}
+ return <>
+ <Panel title={r.trackingId??'Private finance draft'}><p role="status">{r.state==='paused'?'Submitted · FIN review paused':r.state.replaceAll('_',' ')}</p><dl className="request-payload"><div><dt>Submitted requested total</dt><dd>{f?showPhp(f.requestedTotalCentavos):'Draft / no typed submission'}</dd></div><div><dt>Submitted forecast revenue</dt><dd>{f?.pricing?showPhp(f.pricing.forecastRevenueCentavos):'No sales forecast'}</dd></div><div><dt>Authorized ceiling</dt><dd>Not issued</dd></div><div><dt>Recorded actuals</dt><dd>None recorded</dd></div></dl><p>FIN authorization is unavailable. A submitted plan grants no approval, spending permission or payment.</p><p>Original requested date: {requestDate(r.originalRequestedOn)} · Accepted service date: {r.acceptedOn?requestDate(r.acceptedOn):'Not agreed'}</p></Panel>
+ {m.error?<p role="alert">{m.error}</p>:null}{m.pending?<Panel title="Recover finance submission"><p>The result is uncertain. Inputs are locked; recover the identical payload and request key.</p><button className="button" disabled={m.busy} onClick={()=>void m.run().then(result=>{if(result)refresh()})}>Retry same finance submission</button></Panel>:null}
+ {r.canEdit&&!historical?<div inert={actions.locked}><FinanceRequestForm data={data} m={m} refresh={refresh}/></div>:null}
+ {r.canEdit&&!historical&&files?<div inert={m.locked||actions.locked}><Files api={files} workId={r.id}/></div>:null}
+ {r.revisionHeaders.length?<Panel title="Immutable finance history"><div className="form-field"><label htmlFor="finance-history">Submitted revision</label><select id="finance-history" value={historical?r.selected?.revision:r.revision} onChange={e=>select(Number(e.target.value))}>{r.revisionHeaders.map(h=><option key={h.revision} value={h.revision}>Revision {h.revision}</option>)}</select></div>{historical?<button className="button button--secondary" onClick={()=>select(undefined)}>Return to current case</button>:null}
+ {f?<><h3>{r.selected?.title??r.title}</h3><p>{f.kind} · {f.purpose}</p><p>Fund source: {f.fundSource}</p><p>Terms, risks and school requirements: {f.termsRisks}</p><p>Planned date: {requestDate(f.plannedOn)}</p><ol>{f.lines.map((l,i)=><li key={i}>{l.description} · {quantityText(l.quantityMilli)} × {showPhp(l.unitAmountCentavos)} = {showPhp(l.totalCentavos)}</li>)}</ol><p className="record-text">Finance payload SHA-256: <code>{f.payloadHash}</code></p><p className="record-text">Selected evidence SHA-256: <code>{f.manifestHash}</code></p><ul>{f.files.map(v=><li key={v.id}><button className="button button--secondary" disabled={!files||m.locked} onClick={()=>void download(v.id)}>Download finance evidence · {v.name}</button></li>)}</ul>{fileError?<p role="alert">{fileError}</p>:null}</>:<p>This envelope has no typed finance snapshot. Begin an explicit revision to submit itemized finance data; it grants no authorization.</p>}
+ </Panel>:null}
+ <Panel title="Requester actions">{actions.error?<p role="alert">{actions.error}</p>:null}{actions.pending?<button className="button" disabled={actions.busy||m.locked} onClick={()=>void actions.run().then(result=>{if(result)refresh()})}>Retry same requester action</button>:null}
+ {r.canRevise?<button className="button button--secondary" disabled={historical||m.locked||actions.locked} onClick={()=>void action('begin')}>Start finance revision</button>:null}
+ {r.canCancel?<><TextFieldForCancel value={actions.fields.reason} locked={m.locked||actions.locked} change={reason=>actions.change({reason})}/><button className="button button--secondary" disabled={historical||m.locked||actions.locked||!actions.fields.reason.trim()} onClick={()=>void action('cancel')}>Cancel finance request</button></>:null}<p>Cancellation preserves prior revisions and tracking IDs. School requirements and FIN review remain separate from this administrative action.</p></Panel>
+ </>
+}
+function TextFieldForCancel({value,locked,change}:{value:string;locked:boolean;change:(value:string)=>void}){return <div className="form-field"><label htmlFor="finance-cancel">Cancellation reason</label><input id="finance-cancel" maxLength={2000} value={value} disabled={locked} onChange={e=>change(e.target.value)}/></div>}

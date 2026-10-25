@@ -1,0 +1,21 @@
+{
+  "target": "Compiled UI/isolated SQL/synthetic subjects/isolated PNG bytes; not real Supabase/Auth/JWT/concurrent-session/human UAT.",
+  "checks": [
+    "P25_A1 zero-cost fundraiser stays typed FIN/paused",
+    "P25_A2 partial lines exact 0.10+0.20=0.30 with field error; forecast and negative margin separate",
+    "P25_A3 shared task neutral only; private case/file denial and revocation removal",
+    "40001/22023 preserve draft; lost successful reply retries identical command/key and creates one revision",
+    "Exact selected PNG download,320px form/case reflow, native keyboard focus, no page errors"
+  ],
+  "errors": [],
+  "hashes": {
+    "src/features/finance/api.ts": "b8ae83b36f55d565cb84fe371aa828fe147fd4d9b122a809daee2edf62c62078",
+    "src/features/finance/intake.ts": "7a00b25c37e6687f5243f0d325eb69b9a53294848ab4a01cb8515208c3f92fa1",
+    "src/features/finance/Memory.tsx": "8a0f2833c6ddcb473ec6b51678b6827558c83f8cc4df2ab7c0eb7842d9b2a159",
+    "src/features/finance/FinanceRequestForm.tsx": "746de2eff8b2c8222d469d8854b64a286ce41214635a4e07bea6f005cf4753de",
+    "src/features/finance/FinanceCasePage.tsx": "3811b06c2bd0b6fbfe16449eaafabb83c3fb6c6914cf67be6b5d545bd6ae1266",
+    "src/features/finance/FinanceDesk.tsx": "0bee39a696ce2d8c0dbe0308286b80932125e0804ecd402d0cbd59429e35414c",
+    "src/features/finance/finance.css": "2ed24184beac8feab886fd5a78430c6941add0258c26a98f7320127eb607550e",
+    "scripts/verify-p25.cjs": "80e8f3c8d55997647378f35035eec4d0cf0edd8cb7bad9898cf01c164aa7beea"
+  }
+}

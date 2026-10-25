@@ -1,3 +1,5 @@
+import {FinanceGate} from '../finance/FinanceDesk'
+import type {FinanceApi} from '../finance/api'
 import type {TimelineApi} from '../timeline/api'
 import {ContributionsPanel} from '../synergies/ContributionsPanel'
 import type {SynergiesApi} from '../synergies/api'
@@ -14,7 +16,7 @@ import { filterSearch, parseFilters, type DeliverablesApi, type DeliverableDetai
 import { dateLabel, DeliverableFacts } from './DeliverableFacts'
 import { DeliverableEditor } from './DeliverableEditor'
 import type { DeliverableCommands } from './commands'
-export function DeliverablePage({ api, commands, comments, files, synergies, timeline }: { timeline?:TimelineApi;api: DeliverablesApi; commands?: DeliverableCommands; comments?:CommentsApi; files?:FilesApi; synergies?:SynergiesApi }) {
+export function DeliverablePage({ api, commands, comments, files, synergies, timeline, finance }: { finance?:FinanceApi; timeline?:TimelineApi;api: DeliverablesApi; commands?: DeliverableCommands; comments?:CommentsApi; files?:FilesApi; synergies?:SynergiesApi }) {
   const {deliverableId=''}=useParams(); const location=useLocation()
   const context=useRouteLoaderData('workspace') as WorkspaceContext|undefined
   const [negotiationPending,setNegotiationPending]=useState(false);const[schedulePending,setSchedulePending]=useState(false);const [reload,setReload]=useState(0);const key=deliverableId+':'+reload+':'+(context&&'memberId'in context?context.memberId:context&&'guestAccessId'in context?context.guestAccessId:'')
@@ -34,7 +36,7 @@ export function DeliverablePage({ api, commands, comments, files, synergies, tim
       <Panel title="Outcome and acceptance criteria">{item.details?<><h3>Outcome</h3><p className="record-text">{item.details.outcome??'Not recorded'}</p><h3>Acceptance criteria</h3><p className="record-text">{item.details.acceptanceCriteria??'Not recorded'}</p><h3>Working notes</h3><p className="record-text">{item.details.body||'None recorded'}</p></>:<p>Summary access only. Participant details are not shared with your account.</p>}</Panel>
       {commands&&context&&!guest?<div inert={negotiationPending}><DeliverableEditor timeline={timeline} onPendingChange={setSchedulePending} key={context.termId+context.memberId+deliverableId} api={commands} termId={context.termId} id={deliverableId} onSaved={()=>setReload(reload+1)} onReload={()=>setReload(reload+1)}/></div>:null}
       {synergies&&context&&!guest?<ContributionsPanel key={context.termId+context.memberId+deliverableId} api={synergies} termId={context.termId} parentId={deliverableId} onPendingChange={setNegotiationPending}/>:null}
-      {files?<Files api={files} workId={deliverableId}/>:null}{comments?<Comments api={comments} workId={deliverableId}/>:null}
+      {finance&&context?<FinanceGate api={finance} term={context.termId} id={deliverableId}/>:null}{files?<Files api={files} workId={deliverableId}/>:null}{comments?<Comments api={comments} workId={deliverableId}/>:null}
     </>}
   </>
 }
