@@ -1,0 +1,39 @@
+{
+  "step": "P24",
+  "status": "blocked_external",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "7aba148906697ccc80cbbde41e886a19194b5e86",
+  "startedFromTree": "718edd6d35d1ce7a2223addac9f0a9ea604f8ade",
+  "implementationCommit": "f3ae00b038b1dfbf7c5d25b2d5b8f17a61e6af8e",
+  "implementationTree": "96f6f1e025a73ec0cbc594d1970be8ad148894e7",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch; local/fetched/live ls-remote SHA equality; local/fetched tree equality; empty git status --porcelain",
+  "schema": { "migrations": 32, "tables": 67, "columns": 759, "publicFunctions": 90 },
+  "checks": "P24_A1-A3 isolated SQL/synthetic subjects/exact PNG bytes; 38files150frontend tests; frontend/Edge typechecks, lint, build and catalog type check; P22/P23/P12 SQL and P23 compiled browser regressions",
+  "review": "Read-only in-session review by this assistant with simulated product/security/skeptical lenses. No independent reviewer, agent, chat or worktree.",
+  "limits": "Actual provider/JWT/independent concurrency, approved institutional authority/evidence/privacy/retention and human acceptance remain unverified. All inherited gates remain. FIN/MCD hooks fail closed; no financial authorization, actuals, ledger, payments or P25 UI.",
+  "preview": {
+    "ownedCommand": "node scripts/preview-p23.cjs",
+    "port": 5178,
+    "vitePort": 5173,
+    "visibilitySetAndReadTrueViaCua": true,
+    "lastObservedUrl": "http://127.0.0.1:5178/working-together?view=incoming",
+    "note": "Existing synthetic preview retained; user's current navigation preserved. Current-migration P23 browser regression also passed in an independent disposable preview. No new finance UI in P24."
+  },
+  "usage": {
+    "baselineUsedPercent": 35,
+    "lastObservedUsedPercent": 50,
+    "resetTimestamp": 1792957207,
+    "baselineWeeklyUsedPercent": 6,
+    "lastObservedWeeklyUsedPercent": 8,
+    "effectiveBudgetPoints": 40,
+    "windDownAtUsedPercent": 70,
+    "softCeilingUsedPercent": 75,
+    "interpretation": "Shared-account observations, not exact task attribution. No reset credit, purchase, cap/billing/provider change or reset wait."
+  },
+  "gitIdentity": "Initial commit lacked configured identity; reused verified previous checkpoint author/committer identity with command-local git -c flags. No persistent Git configuration change.",
+  "receiptCommit": "This receipt is in a subsequent documentation commit. Final local/fetched/live remote commit/tree and clean-worktree verification is repeated after pushing it.",
+  "nextCodeEligiblePrompt": "P25 build-prompts/25-finance-intake.md; separate user authorization required; not started"
+}

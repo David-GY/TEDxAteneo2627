@@ -30,4 +30,4 @@
 - [x] Write failing isolated SQL command/security assertions, then migration032: `finance_cases`, `finance_revisions`, `finance_lines`, `submit_finance_request`, `read_finance_revision`. Reuse request submission, current ownership and exact selected manifests; never install FIN approval hooks.
 - [x] Verify P24_A1 arithmetic, invalid inputs and rollback; P24_A2 API/table/list/count/file denial; P24_A3 immutable forecast/revision history and absence of actuals.
 - [x] Generate catalog types; run frontend/Edge typechecks, tests, lint, build and relevant P22/P23/P12 regressions.
-- [ ] Review diff and privacy boundaries in-session; update contracts/STATE/P24 evidence, commit/push authorized checkpoint, verify live remote commit/tree and clean worktree.
+- [x] Review diff and privacy boundaries in-session; update contracts/STATE/P24 evidence, commit/push authorized checkpoint, verify live remote commit/tree and clean worktree. Implementation f3ae00b; custody receipt records the match and the final receipt push is verified again.
