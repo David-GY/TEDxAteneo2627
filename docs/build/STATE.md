@@ -35,8 +35,8 @@ P22 actual independent Supabase17/Auth/JWT vote/reassignment/revocation/publicat
 
 ## Next action / custody
 
-P22 reviewed implementation awaiting the authorized checkpoint commit/push and final local/fetched/live remote SHA/tree/clean verification. Started clean6592f482cc22b78a99299139fcd439b602874b48/tree2fe6487120e4e39db67802f9a1533cc6b2b4420a. Next code-eligible prompt P23 requires separate authorization; do not auto-advance. External next action is actual provider/JWT concurrency plus approved institutional authority/privacy/human acceptance.
+Reviewed P22 implementation c24d2e615f057b574a34a9dd8ac4cbb698613ffa/treed6ef820fe784b9b3510c242fedfec2879798cee1 committed/pushed; local/fetched/live remote SHA and tree matched, porcelain empty. Receipt docs/build/evidence/P22-custody.json is committed/pushed with final verification repeated. Started clean6592f482cc22b78a99299139fcd439b602874b48/tree2fe6487120e4e39db67802f9a1533cc6b2b4420a. Next code-eligible prompt P23 requires separate authorization; do not auto-advance. External next action is actual provider/JWT concurrency plus approved institutional authority/privacy/human acceptance.
 
-Fresh P22 baseline65%/reset1792907568, weekly84%;25pp allocation, wind-down85%/ceiling90%. Observed75→80→83% and weekly85→86→87%; shared-account observations. No reset/cap/billing/provider change, purchase or reset wait.
+Fresh P22 baseline65%/reset1792907568, weekly84%;25pp allocation, wind-down85%/ceiling90%. Observed75→80→83→85% and weekly85→86→87%; shared-account observations. No reset/cap/billing/provider change, purchase or reset wait.
 
 Owned node scripts/preview-p22.cjs on5178 with Vite5173. Existing tab12 visible at an actual isolated SQL general request in_review after one of two votes. Synthetic sign-in/isolated bytes/fictional reviewers do not establish real authority. Google remains disabled.

@@ -1,0 +1,19 @@
+{
+  "step": "P22",
+  "branch": "codex/core-build-checkpoints",
+  "implementationCommit": "c24d2e615f057b574a34a9dd8ac4cbb698613ffa",
+  "implementationTree": "d6ef820fe784b9b3510c242fedfec2879798cee1",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch origin codex/core-build-checkpoints; git rev-parse HEAD; git ls-remote origin refs/heads/codex/core-build-checkpoints; local/fetched tree comparison; empty git status --porcelain",
+  "scope": "Independent local implementation only. Inherited provider/JWT/concurrency/authority/privacy/human gates remain; no FIN/MCD clearance.",
+  "usage": {
+    "baselineUsed": 65,
+    "finalObservedUsed": 85,
+    "reset": 1792907568,
+    "weeklyObserved": 87,
+    "effectiveBudgetPoints": 25
+  },
+  "receiptCommit": "This receipt is in a subsequent documentation commit with final remote/tree/clean verification repeated."
+}
