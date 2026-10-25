@@ -33,8 +33,8 @@ P21 actual independent Supabase17/Auth/JWT counter/submission/revision/cancel/re
 
 ## Next action / custody
 
-Leave the reviewed P21 mandatory checkpoint on codex/core-build-checkpoints: commit/push and verify live/fetched/local commit/tree and clean worktree. Started clean at424aa333b8aaee3663fbd58d5704ec77bcc1c762; fetched treebdd6d14d5e839ee799a71a5a327346aa77abed24 matched. Next local code-eligible prompt P22 requires separate authorization; do not auto-advance. External next action remains real provider concurrency/JWT and institutional/privacy/human acceptance.
+Reviewed P21 implementation a22db6f2f0cb498dff54cfd2b856941ae2553d71/treec59539cd0209448862976162f9071890d7cb77c2 committed/pushed; local/fetched/live remote SHA and tree matched, porcelain empty. Receipt: docs/build/evidence/P21-custody.json. This documentation receipt is committed/pushed with final remote/tree/clean verification. Started clean at424aa333b8aaee3663fbd58d5704ec77bcc1c762; fetched treebdd6d14d5e839ee799a71a5a327346aa77abed24 matched. Next local code-eligible prompt P22 requires separate authorization; do not auto-advance. External next action remains real provider concurrency/JWT and institutional/privacy/human acceptance.
 
-Fresh P21 baseline30%/reset1792907568, weekly78%;40pp allocation, wind-down65%/ceiling70%. Observed40→49→54→58% and weekly80→81→82→83%; shared account, not exact attribution. No reset/cap/billing/provider change, purchase or waiting.
+Fresh P21 baseline30%/reset1792907568, weekly78%;40pp allocation, wind-down65%/ceiling70%. Observed40→49→54→58→63% and weekly80→81→82→83%; shared account, not exact attribution. No reset/cap/billing/provider change, purchase or waiting.
 
 Owned node scripts/preview-p21.cjs on5178/Vite5173; actual isolated SQL/PNG bytes with simulated sign-in and fictional routing, existing tab12 visible/retained. No agents/chats/worktrees/deployment/external messages/new automation. Prior one-time continuation remains removed.

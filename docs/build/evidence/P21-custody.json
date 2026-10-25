@@ -1,0 +1,24 @@
+{
+  "recordedAtUTC": "2026-10-25 02:25:05 UTC",
+  "branch": "codex/core-build-checkpoints",
+  "implementationCommit": "a22db6f2f0cb498dff54cfd2b856941ae2553d71",
+  "tree": "c59539cd0209448862976162f9071890d7cb77c2",
+  "localFetchedAndLiveRemoteMatched": true,
+  "cleanAfterImplementationPush": true,
+  "checks": [
+    "git fetch origin codex/core-build-checkpoints",
+    "local HEAD equals fetched branch and live ls-remote SHA",
+    "local tree equals fetched remote tree",
+    "git status --porcelain empty"
+  ],
+  "usage": {
+    "startingFiveHourUsedPercent": 30,
+    "observedAfterImplementationPush": 63,
+    "reset": 1792907568,
+    "weeklyStartingPercent": 78,
+    "weeklyObservedPercent": 83,
+    "allocationPercentagePoints": 40,
+    "note": "Shared-account observations, not exact attribution. No reset/cap/purchase."
+  },
+  "scope": "Independent P21 local implementation and named local checks delivered; actual P21_A1 independent-session concurrency and all inherited provider/authority/privacy/human gates remain unverified. No P22."
+}
