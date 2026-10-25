@@ -28,4 +28,4 @@
 - [x] Domain red/green: migration035 finance_ledger; SQL fixture and P27_A1-A3 regression assertions for reserves, releases, evidence, actuals, overrun/re-review and reversals.
 - [x] Restricted reconciliation read/commands and actual-evidence download, wired into current FIN review. Identity-bound exact retry memory; native controls and safe gate.
 - [x] Compiled browser checks, SQL regressions, frontend tests/typechecks/lint/build/catalog; explicit independent-concurrency limits.
-- [ ] Reviewed mandatory checkpoint, commit/push, exact remote/tree/clean custody and visible preview. No automatic P28.
+- [x] Reviewed mandatory checkpoint, commit/push, exact remote/tree/clean custody and visible preview. No automatic P28.

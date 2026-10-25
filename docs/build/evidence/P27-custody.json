@@ -1,0 +1,56 @@
+{
+  "step": "P27",
+  "status": "blocked_external",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "0804cbf90ba19e797a092c3f1764caa15161aab1",
+  "startedFromTree": "15954b6ab6d1cc700ce4d69abba0d547820a9714",
+  "implementationCommit": "c5fbd38546e5aa0ffbf779810ba361ca878c16b7",
+  "implementationTree": "0fc5c05f4a39d82a0d1c268ecf4def68872c1c41",
+  "localFetchedLiveRemoteMatch": true,
+  "localFetchedTreeMatch": true,
+  "cleanWorktreeAtImplementationVerification": true,
+  "verification": "git fetch; local/fetched/live ls-remote SHA equality; local/fetched tree equality; empty git status --porcelain",
+  "schema": {
+    "migrations": 35,
+    "tables": 77,
+    "columns": 853,
+    "publicFunctions": 103
+  },
+  "checks": "P27_A1-A3 isolated SQL account locks/guards, reservation failure rollback, once-only release/cancellation/reversal, preserved booked expenses, held prior reservation/review, evidence hash/reference dedupe across cases, overrun/new review, forecast/actual distinction, explicit opt-in/current authority, late rollback; compiled browser actual isolated PNG upload-finalization/download/exact uncertain retry/overrun/reversal/requester denial/revocation/320px/focus/44px;42files159frontend tests;frontend/Edge typechecks/lint/build/catalog;P22/P23/P24/P25/P26 SQL and P25/P26 browser regressions; all current evidence source hashes match",
+  "review": "This assistant performed in-session simulated product/security/skeptical review, not independent reviewers. Tightened explicit policy reconciliation opt-in, prior reservation release, account entry/balance guards and receipt-only file scope. No agents/chats/worktrees.",
+  "limits": "All inherited provider/JWT/independent concurrent-session/institutional routing/authority/privacy/retention/human gates remain. Actual simultaneous reservation/approval/actual/reversal/cancellation/policy races remain unverified; PGlite is not that proof. Only confirmed single-stage/one-reviewer FIN routing is mapped. No real account/ceiling/policy/designation/reconciliation authorization seeded. Duplicate detection is same-kind term evidence SHA/normalized reference, not forensic matching of differently scanned receipts. No payment integration/deployment/P28. Existing >500kB chunk warning remains.",
+  "preview": {
+    "ownedCommand": "node scripts/preview-p27.cjs",
+    "processIdAtVerification": 56176,
+    "port": 5178,
+    "viteProcessId": 28428,
+    "vitePort": 5173,
+    "visibilitySetViaCua": true,
+    "currentPageObservedViaCua": true,
+    "markedDeliverable": true,
+    "shownUrl": "http://127.0.0.1:5178/finance/reviews/22222222-2222-4222-8222-222222222221/8b55e5dd-a743-4264-b759-28db3a039c85?synthetic=receiver",
+    "note": "Explicit fictional FIN policy/designations/budget banner. Owned P26 PID49388 verified/replaced; final P27 reload uses current migration/source. Isolated synthetic SQL/file bytes, not real Supabase/institutional proof. Existing visible tab retained."
+  },
+  "usage": {
+    "baselineUsedPercent": 36,
+    "lastObservedUsedPercent": 58,
+    "resetTimestamp": 1792975667,
+    "baselineWeeklyUsedPercent": 18,
+    "lastObservedWeeklyUsedPercent": 21,
+    "effectiveBudgetPoints": 40,
+    "windDownAtUsedPercent": 71,
+    "softCeilingUsedPercent": 76,
+    "observations": [
+      36,
+      44,
+      49,
+      51,
+      56,
+      58
+    ],
+    "interpretation": "Shared-account observations, not exact task attribution. No allocation restart, reset credit, purchase, cap/billing/provider change or reset wait."
+  },
+  "gitIdentity": "Command-local git -c flags reuse the verified prior checkpoint author/committer identity. No persistent Git configuration change.",
+  "receiptCommit": "This receipt is a subsequent documentation commit. Final local/fetched/live remote commit/tree and clean-worktree verification is repeated after pushing it.",
+  "nextCodeEligiblePrompt": "P28 build-prompts/28-mcd-final-review.md; separate authorization required; not started"
+}
