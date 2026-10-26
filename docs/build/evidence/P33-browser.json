@@ -1,0 +1,15 @@
+{
+  "target": "Isolated PGlite and compiled Vite UI/synthetic subjects; not real provider/JWT/independent concurrency/institutional/human proof",
+  "checks": [
+    "P33_A1 compiled local PASS",
+    "P33_A2 compiled local PASS",
+    "P33_A3 compiled fail-closed archive local PASS",
+    "Conflict/lost-response exact retry/320px/focus/44px/current denial PASS"
+  ],
+  "hashes": {
+    "scripts/verify-p33.cjs": "27be07f597d34cf04537cc593cbbf32c1d7f06299f06f0c0ae5c089b84a7105b",
+    "scripts/organization-preview-fixtures.cjs": "18e9e11fb05c442a02e08f3ea1ee9dcf4fdcfa1075bdecc7e7ae60e6ea3feaca",
+    "src/features/admin/organization/Organization.tsx": "2940988e70f692a8a5bb5ec4f094cc762ccdf1c19fc587a4d8daadcac372c05a",
+    "src/features/admin/organization/api.ts": "f68c8ab960c27dbe612bf7e05520259bc249c62623d6316c708b567a545b6a96"
+  }
+}

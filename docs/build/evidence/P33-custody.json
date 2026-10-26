@@ -1,0 +1,82 @@
+{
+  "step": "P33",
+  "status": "blocked_external",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "fbb0e58e5ee659c0fea203bdbee6bf7acf615f07",
+  "startedFromTree": "e25025e33366bbd3b9a89e86b4aa448d8059efd8",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": "migrations001-041;100tables/1036columns/134public functions",
+  "scope": "Local previewed units/aliases/identity-only merge/approved roster/dated deployments/explicit ordinary remap and refusal-before-orphan archive path delivered; no protected case migration or mass case-freeze",
+  "acceptance": {
+    "P33_A1": "SQL and compiled browser local PASS",
+    "P33_A2": "SQL FIN submission/feedback capability/historical private task denial and compiled no-grant-transfer merge PASS; no actual PRISM module/privacy proof",
+    "P33_A3": "SQL active assigned-reviewer/ownership and compiled explicit archive refusal PASS; old unit/deployment/case state retained"
+  },
+  "usage": {
+    "baselineUsedPercent": 30,
+    "baselineWeeklyUsedPercent": 16,
+    "baselineResetTimestamp": 1793065345,
+    "effectiveBudgetPoints": 40,
+    "windDownUsedPercent": 65,
+    "softCeilingUsedPercent": 70,
+    "observedFiveHourWeeklyPairs": [
+      [
+        38,
+        17
+      ],
+      [
+        44,
+        18
+      ],
+      [
+        47,
+        19
+      ],
+      [
+        51,
+        19
+      ],
+      [
+        58,
+        20
+      ]
+    ],
+    "latestUsedPercent": 58,
+    "latestWeeklyUsedPercent": 20,
+    "latestResetTimestamp": 1793065345,
+    "interpretation": "Shared-account observations only, not task attribution. One reading reported reset1793065344 (one-second drift); no allocation restart/reset action/credit/purchase/wait."
+  },
+  "checks": {
+    "domain": "P33_A1-A3 plus actual tracking IDs/current reviewer/private task/FIN/feedback/no union/original unit/roster/no auth link/deployment/self-admin-head/stale/exact retry/immutable history/late rollback/freeze/raw-RLS PASS",
+    "browser": "P33_A1-A3 + conflict/uncertain identical retry/current denial/320px/focus/44px PASS",
+    "frontend": "52files/179tests PASS",
+    "typechecks": "frontend/Edge PASS",
+    "lint": "PASS",
+    "build": "PASS; existing >500kB chunk warning remains (736.90kB main chunk)",
+    "catalog": "100tables/1036columns/134public functions PASS",
+    "regressions": "P32/P21/P26 SQL and historical P03 boundary PASS; historical evidence preserved",
+    "providerAdvisor": "BLOCKED connection refused at127.0.0.1:54322; no remote fallback",
+    "failedChecks": "Initial missing interfaces/module red; incorrect request_types.version; ambiguous id; unused imports; EOF whitespace; historical task fixture missing assignee. Corrected and applicable checks rerun."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/admin",
+    "command": "node scripts/preview-p33.cjs",
+    "pid": 84112,
+    "vitePid": 73836,
+    "loopbackPorts": [
+      5178,
+      5173
+    ],
+    "visibleRetained": true,
+    "finalScreenshotConfirmed": true,
+    "tabId": "2",
+    "processCustody": "P32 PID54984 verified before replacement; P33 PID54036 verified before final schema refresh; Vite73836 reused",
+    "browserRecovery": "Old retained tab cached blocked connection-error data page while server returned HTTP200. A fresh visible same-browser tab restored the authorized localhost page without policy bypass; old error tab close unavailable.",
+    "syntheticOnly": true
+  },
+  "remaining": "All inherited STATE gates plus institutional structural/custodian/role/successor/service/roster/lifecycle/privacy/retention inputs; real Supabase17/Auth/PostgREST/Storage/JWT old-current revocation and independent concurrency/clock/freeze; deployed redaction/audit retention; administrator/successor/member/mobile/keyboard/assistive human UAT",
+  "nextAction": "Approved inputs and actual P33 provider/concurrent/human verification before activation. P34 only on separate user request; not started.",
+  "restrictions": "No agents/chats/worktrees/deployment/provider/billing/cap changes/reset credits/remote resets/external messages/automations/replacement schedules",
+  "finalVerification": "Pre-push delivery receipt. After reviewed implementation push record local/fetched/live commit/tree equality and clean status; repeat after final custody receipt push; final SHA reported in response."
+}

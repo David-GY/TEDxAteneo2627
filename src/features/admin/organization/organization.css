@@ -1,0 +1,3 @@
+.organization-list{list-style:none;padding:0}.organization-list>li{border-top:1px solid #dedfd8;padding-block:16px;overflow-wrap:anywhere}
+.organization-editor{display:grid;gap:12px;border:0;padding:0;min-width:0}.organization-editor label{display:grid;gap:8px;min-height:44px}.organization-editor label:has(input[type=checkbox]),.organization-confirm{display:flex;align-items:center;gap:12px;min-height:44px}
+.organization-editor select{font:inherit;min-height:44px;width:100%;max-width:100%;padding:10px;border:1px solid #62665f;border-radius:6px}.organization-editor input[type=checkbox],.organization-confirm input{width:24px;height:24px;flex-shrink:0}

@@ -3098,6 +3098,77 @@ export type Database = {
           },
         ]
       }
+      organization_changes: {
+        Row: {
+          control_id: string
+          version: number
+          action: string
+          target_id: string | null
+          metadata: Json
+          actor_id: string
+          reason: string
+          created_at: string
+        }
+        Insert: {
+          control_id: string
+          version: number
+          action: string
+          target_id?: string | null
+          metadata: Json
+          actor_id: string
+          reason: string
+          created_at?: string
+        }
+        Update: {
+          control_id?: string
+          version?: number
+          action?: string
+          target_id?: string | null
+          metadata?: Json
+          actor_id?: string
+          reason?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_changes_control_id_fkey"
+            columns: ["control_id"]
+            isOneToOne: false
+            referencedRelation: "organization_control"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      organization_control: {
+        Row: {
+          term_id: string
+          work_item_id: string
+        }
+        Insert: {
+          term_id: string
+          work_item_id: string
+        }
+        Update: {
+          term_id?: string
+          work_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_control_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: true
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "organization_control_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           id: string
@@ -5407,6 +5478,72 @@ export type Database = {
           },
         ]
       }
+      unit_aliases: {
+        Row: {
+          term_id: string
+          alias: string
+          unit_id: string
+        }
+        Insert: {
+          term_id: string
+          alias: string
+          unit_id: string
+        }
+        Update: {
+          term_id?: string
+          alias?: string
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_aliases_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_aliases_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      unit_links: {
+        Row: {
+          source_unit_id: string
+          target_unit_id: string
+          created_at: string
+        }
+        Insert: {
+          source_unit_id: string
+          target_unit_id: string
+          created_at?: string
+        }
+        Update: {
+          source_unit_id?: string
+          target_unit_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_links_source_unit_id_fkey"
+            columns: ["source_unit_id"]
+            isOneToOne: true
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_links_target_unit_id_fkey"
+            columns: ["target_unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       unit_memberships: {
         Row: {
           id: string
@@ -5594,6 +5731,36 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "status_definitions"
             referencedColumns: ["organization_id","term_id","id","resource_kind"]
+          },
+        ]
+      }
+      work_unit_origins: {
+        Row: {
+          work_item_id: string
+          unit_id: string | null
+        }
+        Insert: {
+          work_item_id: string
+          unit_id?: string | null
+        }
+        Update: {
+          work_item_id?: string
+          unit_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "work_unit_origins_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "work_unit_origins_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -6106,6 +6273,14 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      preview_organization_change: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_values: Json
+        }
+        Returns: Json | null
+      }
       propose_synergy: {
         Args: {
           p_parent_id: string
@@ -6121,6 +6296,18 @@ export type Database = {
       publicity_options: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      publish_organization_change: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_values: Json
+          p_expected_version: number
+          p_fingerprint: string
+          p_reason: string
+          p_request_id: string
         }
         Returns: Json | null
       }
@@ -6262,6 +6449,12 @@ export type Database = {
         Args: {
           p_term_id: string
           p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_organization: {
+        Args: {
+          p_term_id: string
         }
         Returns: Json | null
       }

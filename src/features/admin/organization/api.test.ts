@@ -1,0 +1,6 @@
+import {it,expect} from 'vitest'
+import {createOrganizationApi} from './api'
+import type {createSupabaseClient} from '../../../lib/supabase'
+const api=(data:unknown,error:unknown=null)=>createOrganizationApi(Promise.resolve({rpc:async()=>({data,error})})as unknown as ReturnType<typeof createSupabaseClient>)
+it('P33 gateway hides unconfirmed reads and unsafe impact links',async()=>{await expect(api(null).read('term')).rejects.toThrow();await expect(api({version:0,fingerprint:'a'.repeat(64),blocked:false,message:'Review',openWork:[{id:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',title:'Work',href:'https://outside.invalid'}],activeReviewers:[],accessDelta:{message:'No transfer'}}).preview('term','unit_archive',{id:'id'})).rejects.toThrow()})
+it('P33 gateway cannot fabricate success for a failed or malformed publication',async()=>{const cmd={term:'term',action:'unit_archive' as const,values:{id:'id'},version:0,fingerprint:'a'.repeat(64),reason:'Reviewed change'};expect(await api(null,{code:'40001'}).run(cmd,'key')).toMatchObject({ok:false,error:{kind:'stale_version',retryable:false}});expect(await api({id:'not-a-uuid',version:1}).run(cmd,'key')).toMatchObject({ok:false});expect(await api({id:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',version:1}).run(cmd,'key')).toMatchObject({ok:true})})
