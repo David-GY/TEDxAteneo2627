@@ -1,0 +1,3 @@
+require('./preview-p08.cjs').createPreview({port:5178,authoring:true,tasks:true,financeAuthorityPreview:true}).then(async p=>{
+ const f=await require('./readiness-fixtures.cjs').setupReadiness(p),c=await f.create();await f.task(c);const pending=await f.create(false,{title:'P29 Done tasks with pending handoff'});await f.handoff(await f.task(pending));console.log('P29 owner: '+p.url+'/deliverables/'+c.id+'?synthetic=receiver');console.log('P29 independent reviewer: '+p.url+'/deliverables/'+c.id);console.log('P29 pending handoff: '+p.url+'/deliverables/'+pending.id+'?synthetic=receiver');console.log('FICTIONAL acceptance policy and explicit unit authority; no institutional approval.');
+}).catch(e=>{console.error(e.stack);process.exitCode=1})

@@ -31,10 +31,10 @@ const { createIdentityDatabase } = require('./identity-db.cjs')
         join pg_type t on t.oid=a.oid),'[]'::jsonb) as args
       from pg_proc p join pg_namespace n on n.oid=p.pronamespace join pg_type result on result.oid=p.prorettype
       where n.nspname='public' and result.typname <> 'trigger' order by p.proname`)
-    const scalar = { uuid: 'string', _uuid: 'string[]', text: 'string', timestamptz: 'string', date: 'string', bool: 'boolean', int4: 'number', int8: 'number', jsonb: 'Json' }
+    const scalar = { uuid: 'string', _uuid: 'string[]', _text: 'string[]', text: 'string', timestamptz: 'string', date: 'string', bool: 'boolean', int4: 'number', int8: 'number', jsonb: 'Json' }
     const typeOf = (name) => { assert(scalar[name], `Unknown PostgreSQL type: ${name}`); return scalar[name] }
     const tables = [...new Set(columns.map((column) => column.table_name))]
-    assert.equal(tables.length, 83)
+    assert.equal(tables.length, 87)
     const lines = [
       '// Generated from the migrated PostgreSQL catalog by pnpm db:types. Do not edit.',
       '// Supabase-compatible table shape; full Supabase CLI comparison awaits Docker.',

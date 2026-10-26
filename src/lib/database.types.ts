@@ -1113,6 +1113,89 @@ export type Database = {
           },
         ]
       }
+      deliverable_external_authorizations: {
+        Row: {
+          id: string
+          work_item_id: string
+          policy_id: string
+          criteria_revision: number
+          authority_stamp: string
+          material_hash: string
+          manifest_id: string
+          manifest_hash: string
+          authority_id: string
+          authority_version: number
+          actor_id: string
+          official_reference: string
+          reason: string
+          expires_at: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          work_item_id: string
+          policy_id: string
+          criteria_revision: number
+          authority_stamp: string
+          material_hash: string
+          manifest_id: string
+          manifest_hash: string
+          authority_id: string
+          authority_version: number
+          actor_id: string
+          official_reference: string
+          reason: string
+          expires_at: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          work_item_id?: string
+          policy_id?: string
+          criteria_revision?: number
+          authority_stamp?: string
+          material_hash?: string
+          manifest_id?: string
+          manifest_hash?: string
+          authority_id?: string
+          authority_version?: number
+          actor_id?: string
+          official_reference?: string
+          reason?: string
+          expires_at?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_external_authorizatio_manifest_id_work_item_id_fkey"
+            columns: ["manifest_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "asset_manifests"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "deliverable_external_authorizations_authority_id_fkey"
+            columns: ["authority_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_external_authorizations_policy_id_work_item_id_fkey"
+            columns: ["policy_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverable_readiness_policies"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "deliverable_external_authorizations_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       deliverable_gate_assessments: {
         Row: {
           work_item_id: string
@@ -1151,6 +1234,160 @@ export type Database = {
           },
           {
             foreignKeyName: "deliverable_gate_assessments_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      deliverable_readiness_events: {
+        Row: {
+          id: string
+          sequence: number
+          work_item_id: string
+          kind: string
+          policy_id: string
+          criteria_revision: number
+          fingerprint: string
+          submission_id: string | null
+          actor_id: string
+          authority_id: string | null
+          authority_version: number | null
+          evidence: string
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          sequence: number
+          work_item_id: string
+          kind: string
+          policy_id: string
+          criteria_revision: number
+          fingerprint: string
+          submission_id?: string | null
+          actor_id: string
+          authority_id?: string | null
+          authority_version?: number | null
+          evidence: string
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          sequence?: number
+          work_item_id?: string
+          kind?: string
+          policy_id?: string
+          criteria_revision?: number
+          fingerprint?: string
+          submission_id?: string | null
+          actor_id?: string
+          authority_id?: string | null
+          authority_version?: number | null
+          evidence?: string
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_readiness_events_authority_id_fkey"
+            columns: ["authority_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_readiness_events_policy_id_work_item_id_fkey"
+            columns: ["policy_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverable_readiness_policies"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "deliverable_readiness_events_submission_id_work_item_id_fkey"
+            columns: ["submission_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverable_readiness_events"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "deliverable_readiness_events_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      deliverable_readiness_policies: {
+        Row: {
+          id: string
+          work_item_id: string
+          version: number
+          acceptor_authority_id: string
+          acceptor_authority_version: number
+          external_required: boolean
+          external_authority_id: string | null
+          external_authority_version: number | null
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Insert: {
+          id?: string
+          work_item_id: string
+          version: number
+          acceptor_authority_id: string
+          acceptor_authority_version: number
+          external_required: boolean
+          external_authority_id?: string | null
+          external_authority_version?: number | null
+          official_reference: string
+          confirmed_by: string
+          effective_from: string
+          effective_to: string
+        }
+        Update: {
+          id?: string
+          work_item_id?: string
+          version?: number
+          acceptor_authority_id?: string
+          acceptor_authority_version?: number
+          external_required?: boolean
+          external_authority_id?: string | null
+          external_authority_version?: number | null
+          official_reference?: string
+          confirmed_by?: string
+          effective_from?: string
+          effective_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_readiness_policies_acceptor_authority_id_fkey"
+            columns: ["acceptor_authority_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_readiness_policies_confirmed_by_fkey"
+            columns: ["confirmed_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_readiness_policies_external_authority_id_fkey"
+            columns: ["external_authority_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_readiness_policies_work_item_id_fkey"
             columns: ["work_item_id"]
             isOneToOne: false
             referencedRelation: "deliverables"
@@ -1230,6 +1467,77 @@ export type Database = {
           },
         ]
       }
+      deliverable_scope_exceptions: {
+        Row: {
+          id: string
+          work_item_id: string
+          task_id: string
+          task_version: number
+          criteria_revision: number
+          policy_id: string
+          authority_id: string
+          authority_version: number
+          actor_id: string
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          work_item_id: string
+          task_id: string
+          task_version: number
+          criteria_revision: number
+          policy_id: string
+          authority_id: string
+          authority_version: number
+          actor_id: string
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          work_item_id?: string
+          task_id?: string
+          task_version?: number
+          criteria_revision?: number
+          policy_id?: string
+          authority_id?: string
+          authority_version?: number
+          actor_id?: string
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliverable_scope_exceptions_authority_id_fkey"
+            columns: ["authority_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deliverable_scope_exceptions_policy_id_work_item_id_fkey"
+            columns: ["policy_id","work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverable_readiness_policies"
+            referencedColumns: ["id","work_item_id"]
+          },
+          {
+            foreignKeyName: "deliverable_scope_exceptions_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "deliverable_scope_exceptions_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "deliverables"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       deliverable_units: {
         Row: {
           organization_id: string
@@ -1286,6 +1594,9 @@ export type Database = {
           workflow_state: string
           criteria_revision: number
           final_evidence: string | null
+          work_types: string[]
+          finance_required: boolean
+          publicity_required: boolean
         }
         Insert: {
           work_item_id: string
@@ -1306,6 +1617,9 @@ export type Database = {
           workflow_state?: string
           criteria_revision?: number
           final_evidence?: string | null
+          work_types?: string[]
+          finance_required?: boolean
+          publicity_required?: boolean
         }
         Update: {
           work_item_id?: string
@@ -1326,6 +1640,9 @@ export type Database = {
           workflow_state?: string
           criteria_revision?: number
           final_evidence?: string | null
+          work_types?: string[]
+          finance_required?: boolean
+          publicity_required?: boolean
         }
         Relationships: [
           {
@@ -5028,6 +5345,18 @@ export type Database = {
     }
     Views: { [_ in never]: never }
     Functions: {
+      accept_deliverable: {
+        Args: {
+          p_work_item_id: string
+          p_evidence: string
+          p_reason: string
+          p_expected_version: number
+          p_criteria_revision: number
+          p_fingerprint: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       accept_handoff: {
         Args: {
           p_handoff_id: string
@@ -5263,6 +5592,16 @@ export type Database = {
         }
         Returns: Json | null
       }
+      declare_deliverable_work_types: {
+        Args: {
+          p_work_item_id: string
+          p_types: string[]
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       explain_access: {
         Args: {
           p_term_id: string
@@ -5453,6 +5792,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_deliverable_readiness: {
+        Args: {
+          p_work_item_id: string
+        }
+        Returns: Json | null
+      }
       read_directory: {
         Args: {
           p_term_id: string
@@ -5635,6 +5980,17 @@ export type Database = {
         }
         Returns: Json | null
       }
+      record_deliverable_scope_exception: {
+        Args: {
+          p_work_item_id: string
+          p_task_id: string
+          p_task_version: number
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       record_finance_actual: {
         Args: {
           p_work_item_id: string
@@ -5671,6 +6027,18 @@ export type Database = {
           p_expected_successor_version: number
           p_reason: string
           p_scope_exception: boolean
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      reopen_deliverable: {
+        Args: {
+          p_work_item_id: string
+          p_evidence: string
+          p_reason: string
+          p_expected_version: number
+          p_criteria_revision: number
+          p_fingerprint: string
           p_request_id: string
         }
         Returns: Json | null
@@ -5831,6 +6199,18 @@ export type Database = {
           p_term_id: string
           p_visibility: Json
           p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      submit_deliverable: {
+        Args: {
+          p_work_item_id: string
+          p_evidence: string
+          p_reason: string
+          p_expected_version: number
+          p_criteria_revision: number
+          p_fingerprint: string
           p_request_id: string
         }
         Returns: Json | null
@@ -6004,6 +6384,18 @@ export type Database = {
           p_values: Json
           p_requested_centavos?: number | null
           p_work_item_id?: string | null
+        }
+        Returns: Json | null
+      }
+      verify_deliverable_external: {
+        Args: {
+          p_work_item_id: string
+          p_manifest_id: string
+          p_official_reference: string
+          p_expires_at: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
         }
         Returns: Json | null
       }

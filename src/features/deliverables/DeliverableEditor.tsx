@@ -41,7 +41,7 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload,timeline,onPen
     {uncertain?<button className="button" disabled={busy||schedulePending} onClick={()=>pending.current&&void run(pending.current.input)}>Retry same request</button>:null}
     {context===undefined?!error?<LoadingState title="Checking authoring access"/>:null:<>
       {context.queue.length?<div><h3>Owners needing reassignment</h3><ul>{context.queue.map(q=><li key={q.id}><Link to={'/deliverables/'+q.id}>{q.title}</Link></li>)}</ul></div>:null}
-      {id?<p>Workflow: {context.state?.replaceAll('_',' ')} · Version {context.version}. Readiness remains provisional.</p>:<p>Members propose themselves as owners. A configured committee manager must approve the event commitment.</p>}
+      {id?<p>Workflow: {context.state?.replaceAll('_',' ')} · Version {context.version}. Use current readiness checks for final acceptance.</p>:<p>Members propose themselves as owners. A configured committee manager must approve the event commitment.</p>}
       {!id||context.editable?<form key={reload+':'+context.version} onSubmit={save} className="deliverable-editor">
         <fieldset disabled={busy||uncertain||schedulePending}>
           <TextField id="deliverable-title" name="title" label="Title" required maxLength={240} defaultValue={d?.title}/>

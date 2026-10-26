@@ -1,11 +1,12 @@
+import {readinessCategories,type ReadinessCategory} from './readiness-api'
 import type { createSupabaseClient } from '../../lib/supabase'
 export type Named = { id: string; name: string }
 export type Deliverable = {
   workflowState?: 'proposed'|'draft'|'in_progress'|'submitted'|'accepted'|'cancelled'
   id: string; termId: string; title: string; summary: string; owner: Named & { active: boolean }; leadUnit: Named | null
   supportingUnits: Named[]; phase: string | null; dueAt: string | null; dueOn: string | null; originalDueAt: string | null; originalDueOn: string | null
-  overdue: boolean; blocked: boolean; blocker: string | null; readiness: 'blocked_provisional' | 'pending_gate_verification'; nextAction: string
-  gates: { finance: 'pending_assessment'; publicity: 'pending_assessment'; acceptance: 'pending_definition' }; updatedAt: string; archivedAt: string | null; version: number
+  overdue: boolean; blocked: boolean; blocker: string | null; readiness: ReadinessCategory | 'blocked_provisional' | 'pending_gate_verification'; reviewRequired?:boolean; tasksComplete?:boolean; nextAction: string
+  gates: { finance: 'pending_assessment'|'not_required'|'verified'|'pending'; publicity: 'pending_assessment'|'not_required'|'verified'|'pending'; acceptance: 'pending_definition'|ReadinessCategory }; updatedAt: string; archivedAt: string | null; version: number
 }
 export type DeliverableDetail = Deliverable & { details: { outcome: string | null; acceptanceCriteria: string | null; body: string } | null }
 export type Filters = { phase: string; unit: string; owner: string; blocked: boolean; overdue: boolean; mine: boolean; review: boolean; page: number }
@@ -35,8 +36,8 @@ function row(v: unknown): v is Deliverable {
     && ['phase','dueAt','dueOn','originalDueAt','originalDueOn','blocker','archivedAt'].every(k => r[k] === null || typeof r[k] === 'string')
     && named(r.owner) && !!owner && typeof owner.active === 'boolean' && (r.leadUnit === null || named(r.leadUnit))
     && Array.isArray(r.supportingUnits) && r.supportingUnits.every(named) && typeof r.overdue === 'boolean' && typeof r.blocked === 'boolean'
-    && ['blocked_provisional','pending_gate_verification'].includes(r.readiness as string)
-    && !!gates && gates.finance === 'pending_assessment' && gates.publicity === 'pending_assessment' && gates.acceptance === 'pending_definition'
+    && [...readinessCategories,'blocked_provisional','pending_gate_verification'].includes(r.readiness as string)&&(r.reviewRequired===undefined||typeof r.reviewRequired==='boolean')&&(r.tasksComplete===undefined||typeof r.tasksComplete==='boolean')
+    && !!gates && ['pending_assessment','not_required','verified','pending'].includes(gates.finance as string) && ['pending_assessment','not_required','verified','pending'].includes(gates.publicity as string) && [...readinessCategories,'pending_definition'].includes(gates.acceptance as string)
     && Number.isInteger(r.version) && (r.version as number) > 0
 }
 export function createDeliverablesApi(ready: ReturnType<typeof createSupabaseClient>): DeliverablesApi {
