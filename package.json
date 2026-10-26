@@ -17,6 +17,7 @@
     "test:calendar": "node scripts/test-calendar.cjs",
     "test:resources": "node scripts/test-resources.cjs",
     "test:organization": "node scripts/test-organization.cjs",
+    "test:access": "node scripts/test-access.cjs",
     "test:notifications": "node scripts/test-notifications.cjs",
     "test:readiness": "node scripts/test-readiness.cjs",
     "test:publicity-review": "node scripts/test-publicity-review.cjs",

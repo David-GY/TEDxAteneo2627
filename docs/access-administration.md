@@ -1,0 +1,26 @@
+# P34 Access administration — inspection/preflight foundation
+
+Status: in_progress. Migration042 (`20261026231636_delegation.sql`);102tables/1060columns/138public functions. This contract describes the delivered read/validation batch, not completed role mutation administration.
+
+## Delivered interfaces
+
+- read_access_admin(term): fixed resource/action/scope catalog, existing role grid, only the caller's current delegation ceilings and own effective assignments, independently permitted directory/unit/record options. Current core workspace access plus roles.manage or a live explicit ceiling is required. A role label alone creates no ceiling.
+- preflight_access_change(term,values): validation-only proposed grant/removal with current actor, exact capability/scope/unit/record, source assignment/role version, source/recipient membership/account/deployment dates, independent trusted ceiling, sensitive authorization flag, no-self-change and custodian continuity checks. Always mutationAvailable=false. It writes no assignment, role, audit/outbox or receipt and returns no success for an unimplemented mutation.
+- explain_my_access(term,work?): own current grants and mandatory conditions; no actor/user override. Missing and unreadable requested work yield the same false result, with no title/body/count/file metadata. App roles, provider-console ownership, independent case review and emergency recovery remain distinct.
+- preview_synthetic_access(term,values): fixed fictional ordinary/finance/feedback/admin scenarios and fixed capability/scope choices. Real member/record input is rejected. Output always synthetic=true and allowsRealAccess=false; no other person, amount, feedback, case or bytes are queried.
+
+The two new forced-RLS/raw-denied tables delegation_ceilings and verified_app_custodians are trusted-provisioning boundaries. No public endpoint can enroll, grant, edit or expand them. No actual institutional ceiling/custodian is seeded. A ceiling pins a current source assignment/role version, fixed capability/scope, exact unit or record, independent same-term approver/reference, dates and optional sensitive-delegation attestation. Its evaluator rechecks actual current source authority; an attestation cannot supply a capability the source lacks. Custody evidence is separate from an app role label, requires a same-term independent verifier and current verified-school identity/assignment. It does not certify actual provider-console ownership or human custody.
+
+A required interface repair restores P07's workspace.read/committee.manage work scopes that P28's expanded role_permissions check had accidentally omitted. The fixed mcd.review vocabulary and all sensitive/unit/own/term restrictions remain. Current SQL tests insert valid work and MCD-unit permissions into an unassigned fictional role and reject finance.review work scope. No existing role permission/assignment is changed by this repair.
+
+## UI and boundaries
+
+/admin/access uses src/features/admin/access and links from the existing Organization screen. It shows the existing role grid/current own access/approved ceilings, a synthetic role-choice grid and prospective single-capability/date/scope checks. Publication is visibly closed; no assign/revoke/publish/impersonate control or mutation API method exists. Directory names and record choices use their existing independent scopes; there is no private-profile or sensitive read-all endpoint. Failed/current refresh checks hide prior inspection data. Existing Karla/tokens/focus/44px/mobile behavior is retained.
+
+Successful withinCeiling is a prospective validation result only. It is not an assigned role, approval, authority transfer or verified replacement. The custody removal-denial branch does not revoke anything. No emergency bypass, infrastructure account change, recovery automation or message is implemented.
+
+## Required next P34 batch
+
+Do not expose mutations by merely reusing the preflight boolean. Implement immutable published role revisions, explicit dated unit/exact-record assignments/revocations and audit history with expected versions, current fingerprints, idempotency and atomic audit/outbox. Verify delegated assignment provenance and invalidation across every authority consumer before opening writes: source role/permission/membership/deployment change or expiry must not leave delegated authority alive. Implement independently verified replacement-custodian enrollment/confirmation and continuity checks, including time-bound coverage and last-custodian protection. Add actual authorized editing/expiry/revoke/history UI and named full A1–A3 mutation tests. No provider-console or emergency access bridge may be inferred from these app roles.
+
+P34_A1–A3 **full acceptance remains unverified**. Local SQL/compiled tests pass only the named preflight/inspection boundaries, raw-RLS denial, no real assignment changes, source expiry, synthetic no-impersonation, denied/current-scope hiding and automated320px/focus/44px checks. All inherited real Supabase17/Auth/PostgREST/Storage/JWT, independent concurrent-session, institutional authority/privacy/retention/provider custody and human/assistive-technology gates remain. Fixtures are synthetic PGlite18.6; they discharge none of those gates.

@@ -1,0 +1,56 @@
+{
+  "step": "P34",
+  "status": "in_progress",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "4aa7f2fa25f86959acb44caa8f25c2048fb31fa7",
+  "startedFromTree": "de8287c22713af6c2d3571e22bf495051b670411",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": "migrations001-042;102tables/1060columns/138public functions",
+  "scope": "Inspection, source-bound ceiling/custody preflight, own-only explanation and fixed synthetic preview. No role/assignment/revoke/custody mutation implemented.",
+  "acceptance": {
+    "P34_A1": "Preflight ceiling/self/sensitive denial local PASS; full mutation acceptance UNVERIFIED",
+    "P34_A2": "Preflight last-custodian denial local PASS; verified replacement enrollment/removal mutation UNVERIFIED",
+    "P34_A3": "Preflight expiry/own-only/synthetic input rejection local PASS; full mutation acceptance UNVERIFIED"
+  },
+  "checks": {
+    "domain": "Named preflight assertions, raw/helper/RLS denial, exact work/MCD catalog and unchanged role assignments PASS; P34-domain.json",
+    "browser": "Compiled inspection/preflight, no publication or impersonation controls, sensitive/self denial, scope hiding,320px/focus/44px PASS; P34-browser.json",
+    "frontend": "53files/180tests PASS",
+    "typechecks": "frontend/Edge PASS",
+    "lint": "PASS",
+    "build": "PASS; existing >500kB warning remains (747.19kB main chunk)",
+    "catalog": "102tables/1060columns/138public functions PASS",
+    "regressions": "Current P33/P26 SQL and historical P07 boundary PASS; historical ledgers preserved",
+    "providerAdvisor": "BLOCKED connection refused at127.0.0.1:54322; no remote fallback",
+    "expectedRed": "Initial named SQL missing APIs and UI missing Access module failed before implementation",
+    "finalGitProtocol": "Verify staged diff/source hashes, commit/push, then local/fetched/live commit/tree equality and clean worktree; report actual final SHA in response"
+  },
+  "usage": {
+    "baselineUsedPercent": 66,
+    "baselineWeeklyUsedPercent": 22,
+    "baselineResetTimestamp": 1793065344,
+    "effectiveBudgetPoints": 24,
+    "windDownUsedPercent": 85,
+    "softCeilingUsedPercent": 90,
+    "observedFiveHourWeeklyPairs": [[75,23],[78,24],[83,24]],
+    "latestUsedPercent": 83,
+    "latestWeeklyUsedPercent": 24,
+    "latestResetTimestamp": 1793065345,
+    "interpretation": "Shared-account readings, not attribution. One-second reset drift; no allocation restart/reset action/credit/purchase/wait. Finalization only after83%."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/admin/access",
+    "command": "node scripts/preview-p34.cjs",
+    "pid": 57872,
+    "vitePid": 73836,
+    "visibleRetained": true,
+    "tabId": "3",
+    "syntheticOnly": true,
+    "custody": "Owned P33 PID84112 verified before replacement; Vite73836 reused. HTTP200 and visible fresh same-browser tab AX/screenshot verified. Final loopback listeners57872/73836 rechecked."
+  },
+  "review": "Single assistant simulated security, continuity and execution perspectives; no independent reviewer/agent. Manual review and verification boundary recorded in P34.md.",
+  "remaining": "Batch2 immutable role revisions, scoped dated assignments/revoke and provenance/invalidation across authority readers, independently verified custody replacement, atomic audited publication/history and full named A1-A3 mutation tests. All inherited provider/institutional/concurrent/privacy/human gates remain.",
+  "nextAction": "Resume P34 through build-prompts/CONTINUE.md and the existing Batch2 plan. Do not wire preflight into publication. Do not advance to P35.",
+  "restrictions": "No agents/chats/worktrees/deployment/provider/billing/cap changes/reset credits/remote resets/external messages/automations/replacement schedules"
+}

@@ -1198,6 +1198,106 @@ export type Database = {
           },
         ]
       }
+      delegation_ceilings: {
+        Row: {
+          id: string
+          term_id: string
+          grantor_membership_id: string
+          source_assignment_id: string
+          source_assignment_version: number
+          source_role_version: number
+          capability: string
+          scope_type: string
+          unit_id: string | null
+          work_id: string | null
+          sensitive_authorized: boolean
+          starts_at: string
+          ends_at: string
+          approved_by: string
+          approval_reference: string
+          revoked_at: string | null
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          grantor_membership_id: string
+          source_assignment_id: string
+          source_assignment_version: number
+          source_role_version: number
+          capability: string
+          scope_type: string
+          unit_id?: string | null
+          work_id?: string | null
+          sensitive_authorized?: boolean
+          starts_at: string
+          ends_at: string
+          approved_by: string
+          approval_reference: string
+          revoked_at?: string | null
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          grantor_membership_id?: string
+          source_assignment_id?: string
+          source_assignment_version?: number
+          source_role_version?: number
+          capability?: string
+          scope_type?: string
+          unit_id?: string | null
+          work_id?: string | null
+          sensitive_authorized?: boolean
+          starts_at?: string
+          ends_at?: string
+          approved_by?: string
+          approval_reference?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "delegation_ceilings_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delegation_ceilings_grantor_membership_id_fkey"
+            columns: ["grantor_membership_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delegation_ceilings_source_assignment_id_fkey"
+            columns: ["source_assignment_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delegation_ceilings_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delegation_ceilings_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delegation_ceilings_work_id_fkey"
+            columns: ["work_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       deliverable_external_authorizations: {
         Row: {
           id: string
@@ -5620,6 +5720,54 @@ export type Database = {
           },
         ]
       }
+      verified_app_custodians: {
+        Row: {
+          assignment_id: string
+          assignment_version: number
+          role_version: number
+          verified_by: string
+          verification_reference: string
+          verified_at: string
+          effective_to: string
+          revoked_at: string | null
+        }
+        Insert: {
+          assignment_id: string
+          assignment_version: number
+          role_version: number
+          verified_by: string
+          verification_reference: string
+          verified_at: string
+          effective_to: string
+          revoked_at?: string | null
+        }
+        Update: {
+          assignment_id?: string
+          assignment_version?: number
+          role_version?: number
+          verified_by?: string
+          verification_reference?: string
+          verified_at?: string
+          effective_to?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "verified_app_custodians_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: true
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verified_app_custodians_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       work_items: {
         Row: {
           id: string
@@ -6148,6 +6296,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      explain_my_access: {
+        Args: {
+          p_term_id: string
+          p_work_id?: string | null
+        }
+        Returns: Json | null
+      }
       finalize_upload: {
         Args: {
           p_work_item_id: string
@@ -6273,10 +6428,24 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      preflight_access_change: {
+        Args: {
+          p_term_id: string
+          p_values: Json
+        }
+        Returns: Json | null
+      }
       preview_organization_change: {
         Args: {
           p_term_id: string
           p_action: string
+          p_values: Json
+        }
+        Returns: Json | null
+      }
+      preview_synthetic_access: {
+        Args: {
+          p_term_id: string
           p_values: Json
         }
         Returns: Json | null
@@ -6308,6 +6477,12 @@ export type Database = {
           p_fingerprint: string
           p_reason: string
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      read_access_admin: {
+        Args: {
+          p_term_id: string
         }
         Returns: Json | null
       }

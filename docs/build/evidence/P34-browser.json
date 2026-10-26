@@ -1,0 +1,16 @@
+{
+  "status": "in_progress",
+  "target": "Isolated PGlite/compiled Vite/synthetic subjects and ceiling/custody only; not provider/human proof",
+  "checks": [
+    "Inspection/preflight/synthetic no real user or mutation PASS",
+    "Sensitive/self ceiling denial and role rows unchanged PASS",
+    "Current scope/error hiding,320px/focus/44px PASS",
+    "Full P34_A1-A3 mutation/replacement UNVERIFIED"
+  ],
+  "hashes": {
+    "scripts/verify-p34.cjs": "88b2d9c2fb5a4ee169988b58a8585d0653d22ef3768c85223d72cdae45d2384c",
+    "src/features/admin/access/Access.tsx": "18db2b41991e095cbbefcf361222ad32d84b87dcc12f5eac5617cf083c773351",
+    "src/features/admin/access/api.ts": "5ce5381da9ee1b5d70ff0678add2076bf95538954c6f0140d17a969293107fc1",
+    "scripts/access-preview-fixtures.cjs": "11eae7388e5f17de1c136cca58223b386ea35ecfddc0fbe257ea3467b5db699b"
+  }
+}
