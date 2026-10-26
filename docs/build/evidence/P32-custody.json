@@ -1,39 +1,85 @@
 {
- "step":"P32", "status":"blocked_external",
- "scope":"Bounded local implementation delivered; A1-A3 SQL/compiled browser PASS; actual provider/institutional/privacy/concurrency/human gates retained",
- "branch":"codex/core-build-checkpoints",
- "startedFromCommit":"8f9caa83f243c82dc2e5d88ca75b016c58d48f8e",
- "startedFromTree":"1887e04901024e83b335d718b164ad4571e1f892",
- "startClean":true,"startLocalFetchedLiveRemoteMatch":true,
- "schema":"migrations001-040;95tables/1018columns/131public functions",
- "usage":{
-  "baselineUsedPercent":33,"baselineResetTimestamp":1793036083,"baselineWeeklyUsedPercent":11,
-  "effectiveBudgetPoints":40,"originalWindDownUsedPercent":68,"originalSoftCeilingUsedPercent":73,
-  "handoffUsedPercent":1,"handoffResetTimestamp":1793065345,"handoffWeeklyUsedPercent":11,
-  "resumedStartUsedPercent":3,"resumedStartWeeklyUsedPercent":12,"resumedResetTimestamp":1793065345,
-  "observedFiveHourWeeklyPairs":[[9,13],[13,13],[19,14],[24,15]],
-  "latestUsedPercent":24,"latestWeeklyUsedPercent":15,
-  "interpretation":"Shared readings only. Original-window final consumption unknown. Changed chat/window did not restart a fresh40-point allocation; original bounded scope retained. No reset action/credit/purchase/wait."
- },
- "checks":{
-  "domain":"A1-A3 and exact replay/version/immutable history/form schema/current target-unit revocation/raw-helper/guest/freeze/late rollback PASS",
-  "browser":"A1-A3 and blank actual synthetic profile/scoped contact/practice/author/publish/alias/conflict/uncertain exact retry/320px/focus/44px PASS",
-  "frontend":"50files/174tests PASS","typechecks":"frontend and Edge PASS",
-  "lint":"PASS after two temporary editing helpers removed",
-  "build":"PASS; existing >500kB chunk warning remains",
-  "catalog":"95tables/1018columns/131public functions PASS",
-  "regressions":"P06/P12/P31 SQL PASS; historical evidence preserved",
-  "providerAdvisor":"BLOCKED: local127.0.0.1:54322 connection refused; no remote fallback",
-  "diff":"git diff --check PASS before staging"
- },
- "preview":{
-  "url":"http://127.0.0.1:5178/resources","command":"node scripts/preview-p32.cjs",
-  "pid":54984,"vitePid":73836,"loopbackPorts":[5178,5173],"visibleRetained":true,
-  "observation":"CUA retained the tab; current AX confirms Start Here/MEA unconfirmed/permitted fictional school contact. Synthetic subjects/guidance/authority only, no institutional approval.",
-  "processCustody":"P31 PID54448 verified before replacement; P32 PID51696 verified before fixture/adapter refresh; Vite73836 reused"
- },
- "remaining":"All inherited STATE gates; approved publishers/content/owners/review/service/primary-backup contacts and privacy/basis/retention; real provider/JWT/concurrent/human/assistive checks; MEA expansion unconfirmed",
- "nextAction":"Approved inputs and real provider/human P32 verification before activation. P33 code-eligible only on separate instruction; not started.",
- "restrictions":"No agents/chats/worktrees/deployment/provider/billing/cap changes/reset credits/remote resets/external messages/automation/replacement schedules",
- "finalVerification":"Pre-push delivery receipt. Record implementation commit/tree equality and clean status after reviewed push; repeat after final custody push. Final SHA reported in response."
+  "step": "P32",
+  "status": "blocked_external",
+  "scope": "Bounded local implementation delivered; A1-A3 SQL/compiled browser PASS; actual provider/institutional/privacy/concurrency/human gates retained",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "8f9caa83f243c82dc2e5d88ca75b016c58d48f8e",
+  "startedFromTree": "1887e04901024e83b335d718b164ad4571e1f892",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": "migrations001-040;95tables/1018columns/131public functions",
+  "usage": {
+    "baselineUsedPercent": 33,
+    "baselineResetTimestamp": 1793036083,
+    "baselineWeeklyUsedPercent": 11,
+    "effectiveBudgetPoints": 40,
+    "originalWindDownUsedPercent": 68,
+    "originalSoftCeilingUsedPercent": 73,
+    "handoffUsedPercent": 1,
+    "handoffResetTimestamp": 1793065345,
+    "handoffWeeklyUsedPercent": 11,
+    "resumedStartUsedPercent": 3,
+    "resumedStartWeeklyUsedPercent": 12,
+    "resumedResetTimestamp": 1793065345,
+    "observedFiveHourWeeklyPairs": [
+      [
+        9,
+        13
+      ],
+      [
+        13,
+        13
+      ],
+      [
+        19,
+        14
+      ],
+      [
+        24,
+        15
+      ],
+      [
+        28,
+        16
+      ]
+    ],
+    "latestUsedPercent": 28,
+    "latestWeeklyUsedPercent": 16,
+    "interpretation": "Shared readings only. Original-window final consumption unknown. Changed chat/window did not restart a fresh40-point allocation; original bounded scope retained. No reset action/credit/purchase/wait."
+  },
+  "checks": {
+    "domain": "A1-A3 and exact replay/version/immutable history/form schema/current target-unit revocation/raw-helper/guest/freeze/late rollback PASS",
+    "browser": "A1-A3 and blank actual synthetic profile/scoped contact/practice/author/publish/alias/conflict/uncertain exact retry/320px/focus/44px PASS",
+    "frontend": "50files/174tests PASS",
+    "typechecks": "frontend and Edge PASS",
+    "lint": "PASS after two temporary editing helpers removed",
+    "build": "PASS; existing >500kB chunk warning remains",
+    "catalog": "95tables/1018columns/131public functions PASS",
+    "regressions": "P06/P12/P31 SQL PASS; historical evidence preserved",
+    "providerAdvisor": "BLOCKED: local127.0.0.1:54322 connection refused; no remote fallback",
+    "diff": "Staged git diff --check PASS; source hashes matched all domain/browser evidence"
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/resources",
+    "command": "node scripts/preview-p32.cjs",
+    "pid": 54984,
+    "vitePid": 73836,
+    "loopbackPorts": [
+      5178,
+      5173
+    ],
+    "visibleRetained": true,
+    "observation": "CUA retained the tab; current AX confirms Start Here/MEA unconfirmed/permitted fictional school contact. Synthetic subjects/guidance/authority only, no institutional approval.",
+    "processCustody": "P31 PID54448 verified before replacement; P32 PID51696 verified before fixture/adapter refresh; Vite73836 reused",
+    "finalScreenshotConfirmed": true
+  },
+  "remaining": "All inherited STATE gates; approved publishers/content/owners/review/service/primary-backup contacts and privacy/basis/retention; real provider/JWT/concurrent/human/assistive checks; MEA expansion unconfirmed",
+  "nextAction": "Approved inputs and real provider/human P32 verification before activation. P33 code-eligible only on separate instruction; not started.",
+  "restrictions": "No agents/chats/worktrees/deployment/provider/billing/cap changes/reset credits/remote resets/external messages/automation/replacement schedules",
+  "finalVerification": "Implementation commit/tree local/fetched/live equality and clean worktree verified after push. This final custody checkpoint is followed by the same equality/clean verification; final SHA reported in response.",
+  "implementationCommit": "de76b7cd50a7dd483ff58ad07d03308058481493",
+  "implementationTree": "878c22ce17fc6d77f41bff949121ae375bf52296",
+  "implementationLocalFetchedLiveRemoteMatch": true,
+  "implementationCleanAfterPush": true,
+  "gitIdentity": "Initial commit attempt failed with missing author identity. Reused verified previous four checkpoint name/noreply address with command-local -c options only; no persistent/global identity change."
 }
