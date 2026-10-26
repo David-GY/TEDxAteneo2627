@@ -1,0 +1,37 @@
+{
+  "step": "P32",
+  "status": "in_progress",
+  "scope": "Documentation/context handoff only; implementation not started; A1-A3 unverified",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "b97df77b80c4561ba53eea64f0521ada3f5a2025",
+  "startedFromTree": "19750587da4122f7084913ec09111c288cba213b",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": "migrations001\u2013039;91tables/992columns/128public functions",
+  "usage": {
+    "baselineUsedPercent": 33,
+    "baselineResetTimestamp": 1793036083,
+    "baselineWeeklyUsedPercent": 11,
+    "effectiveBudgetPoints": 40,
+    "originalWindDownUsedPercent": 68,
+    "originalSoftCeilingUsedPercent": 73,
+    "handoffUsedPercent": 1,
+    "handoffResetTimestamp": 1793065345,
+    "handoffWeeklyUsedPercent": 11,
+    "interpretation": "Window changed during context/handoff; prior-window final consumption unknown. Shared observations only; no fresh40-point allocation/reset credit/purchase/wait."
+  },
+  "checks": "Git/remote/owned-process/documentation checks only; no P32 application/schema/test/typecheck/lint/build claims",
+  "preview": {
+    "url": "http://127.0.0.1:5178/calendar?month=2027-04",
+    "command": "node scripts/preview-p31.cjs",
+    "pid": 54448,
+    "vitePid": 73836,
+    "loopbackPorts": [
+      5178,
+      5173
+    ],
+    "note": "P31 synthetic preview; processes verified, physical visibility not rechecked at handoff"
+  },
+  "nextAction": "Resume P32 build-prompts/32-resources-onboarding.md or build-prompts/CONTINUE.md P32; no P33",
+  "finalVerification": "This receipt accompanies the documentation checkpoint. After push verify local/fetched/live SHA/tree equality and empty porcelain status; final SHA reported in handoff prompt."
+}
