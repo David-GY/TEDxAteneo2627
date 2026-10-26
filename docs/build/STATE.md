@@ -2,6 +2,8 @@
 
 Updated October27,2026 (Asia/Manila).
 
+- **P36 — in_progress**: explicit request; context/handoff checkpoint only, no implementation or tests. A1–A3 unverified. P35 publication interface absent; P34/P35 remain incomplete. Start89%/reset1793065345/weekly25%, effective1pp/ceiling90%, wind-down already reached. Existing synthetic P34 preview retained. Resume P36 CONTINUE.md from required P35 interface repair and named failing tests; docs/build/steps/P36.md. No P37. Explicit request supersedes historical no-automatic-P36 notes without completing prerequisites.
+
 - **P35 — in_progress**: explicit user-requested context/custody checkpoint only; no application code, migration, implementation plan or tests. P35_A1–A3 unverified. Start87%/reset1793065345/weekly25%, effective3pp, ceiling90%, wind-down85% already reached. Resume P35 CONTINUE.md with bounded kind/owner mapping and named failing tests; keep P34 incomplete and prevent generic config permission bypass. Checkpoint docs/build/steps/P35.md; existing synthetic P34 preview retained. No P36. This explicit request supersedes historical no-automatic-P35 text; it does not mark P34 complete.
 
 P34 finalization observation:83% five-hour/weekly24%/reset1793065345. Original effective24pp, wind-down85%, ceiling90% retained; checkpoint only, full mutation acceptance remains unverified.

@@ -1,0 +1,15 @@
+{
+  "step":"P36",
+  "status":"in_progress",
+  "scope":"Documentation-only context checkpoint; no implementation or tests",
+  "startedFromCommit":"587ee2f76531059bb497e07d89935d109c16d3d3",
+  "startedFromTree":"6a0850e9cfdcbb47e736bb811b7512607c8e2741",
+  "startClean":true,
+  "startLocalFetchedLiveRemoteMatch":true,
+  "acceptance":{"P36_A1":"UNVERIFIED","P36_A2":"UNVERIFIED","P36_A3":"UNVERIFIED"},
+  "usage":{"baselineUsedPercent":89,"weeklyUsedPercent":25,"resetTimestamp":1793065345,"effectiveBudgetPoints":1,"softCeilingUsedPercent":90,"windDownUsedPercent":85,"note":"Already winding down; same window/no restarted allocation/reset action/credit"},
+  "preview":{"url":"http://127.0.0.1:5178/admin/access","pid":57872,"vitePid":73836,"tabId":"3","visibleRetained":true,"syntheticOnly":true,"p36Screen":false},
+  "checks":"Documentation diff/JSON, source discovery and HTTP/process/Git custody; no P36 tests/typecheck/lint/build run",
+  "nextAction":"Resume P36 CONTINUE.md; required P35 publication interface repair, then named failing A1-A3 tests and typed editor. P34/P35 gaps and all STATE external gates remain. No P37.",
+  "finalVerification":"After push compare local/fetched/live commit/tree and require clean worktree; actual SHA reported in final response"
+}
