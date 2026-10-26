@@ -2,6 +2,8 @@
 
 Updated October27,2026 (Asia/Manila).
 
+Continuation/deployment runbook: docs/build/RESUME-PROMPTS.md. Correct dependency order resumes unfinished P34, then P35/P36, coreP37–P48, actual synthetic previewP49/pilotP50, selected optional scope, requiredP62 and gated productionP63. Source/checkpoints are pushed to GitHub; localhost preview is not deployment. No actual remote deployment is verified or performed in this runbook preparation. P34/P35/P36 status and all external blockers remain unchanged. Preparation usage91%/reset1793065345/weekly26%; no implementation or deployment opened.
+
 - **P36 — in_progress**: explicit request; context/handoff checkpoint only, no implementation or tests. A1–A3 unverified. P35 publication interface absent; P34/P35 remain incomplete. Start89%/reset1793065345/weekly25%, effective1pp/ceiling90%, wind-down already reached. Existing synthetic P34 preview retained. Resume P36 CONTINUE.md from required P35 interface repair and named failing tests; docs/build/steps/P36.md. No P37. Explicit request supersedes historical no-automatic-P36 notes without completing prerequisites.
 
 - **P35 — in_progress**: explicit user-requested context/custody checkpoint only; no application code, migration, implementation plan or tests. P35_A1–A3 unverified. Start87%/reset1793065345/weekly25%, effective3pp, ceiling90%, wind-down85% already reached. Resume P35 CONTINUE.md with bounded kind/owner mapping and named failing tests; keep P34 incomplete and prevent generic config permission bypass. Checkpoint docs/build/steps/P35.md; existing synthetic P34 preview retained. No P36. This explicit request supersedes historical no-automatic-P35 text; it does not mark P34 complete.
