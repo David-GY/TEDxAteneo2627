@@ -34,4 +34,4 @@ Files: src/features/admin/organization/*; auth gateway/router; preview harness.
 ## Task 3: Mandatory checkpoint
 - [x] Run frontend/Edge typechecks, tests, lint/build/catalog and review diff.
 - [x] Record exact acceptance/remaining scope/external gates/usage in P33/STATE/CONTRACTS/custody.
-- [ ] Commit/push reviewed checkpoint and verify local/fetched/live commit/tree equality and clean status. Retain visible owned preview. No P34.
+- [x] Commit/push reviewed checkpoint and verify local/fetched/live commit/tree equality and clean status. Retain visible owned preview. No P34.

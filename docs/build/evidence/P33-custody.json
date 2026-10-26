@@ -40,11 +40,15 @@
       [
         58,
         20
+      ],
+      [
+        64,
+        21
       ]
     ],
-    "latestUsedPercent": 58,
-    "latestWeeklyUsedPercent": 20,
-    "latestResetTimestamp": 1793065345,
+    "latestUsedPercent": 64,
+    "latestWeeklyUsedPercent": 21,
+    "latestResetTimestamp": 1793065344,
     "interpretation": "Shared-account observations only, not task attribution. One reading reported reset1793065344 (one-second drift); no allocation restart/reset action/credit/purchase/wait."
   },
   "checks": {
@@ -57,7 +61,8 @@
     "catalog": "100tables/1036columns/134public functions PASS",
     "regressions": "P32/P21/P26 SQL and historical P03 boundary PASS; historical evidence preserved",
     "providerAdvisor": "BLOCKED connection refused at127.0.0.1:54322; no remote fallback",
-    "failedChecks": "Initial missing interfaces/module red; incorrect request_types.version; ambiguous id; unused imports; EOF whitespace; historical task fixture missing assignee. Corrected and applicable checks rerun."
+    "failedChecks": "Initial missing interfaces/module red; incorrect request_types.version; ambiguous id; unused imports; EOF whitespace; historical task fixture missing assignee. Corrected and applicable checks rerun.",
+    "diff": "Staged diff --check PASS; all domain/browser source hashes matched; final lint PASS"
   },
   "preview": {
     "url": "http://127.0.0.1:5178/admin",
@@ -78,5 +83,9 @@
   "remaining": "All inherited STATE gates plus institutional structural/custodian/role/successor/service/roster/lifecycle/privacy/retention inputs; real Supabase17/Auth/PostgREST/Storage/JWT old-current revocation and independent concurrency/clock/freeze; deployed redaction/audit retention; administrator/successor/member/mobile/keyboard/assistive human UAT",
   "nextAction": "Approved inputs and actual P33 provider/concurrent/human verification before activation. P34 only on separate user request; not started.",
   "restrictions": "No agents/chats/worktrees/deployment/provider/billing/cap changes/reset credits/remote resets/external messages/automations/replacement schedules",
-  "finalVerification": "Pre-push delivery receipt. After reviewed implementation push record local/fetched/live commit/tree equality and clean status; repeat after final custody receipt push; final SHA reported in response."
+  "finalVerification": "Implementation local/fetched/live commit/tree equality and clean worktree verified after push. This final custody receipt is followed by the same checks; final receipt SHA is reported in the response.",
+  "implementationCommit": "f2b8ce10036d0c2dfccfb1c5ce7f58091c1a5518",
+  "implementationTree": "21c94ab3132aae864f78e57a5cde7ff277d53d15",
+  "implementationLocalFetchedLiveRemoteMatch": true,
+  "implementationCleanAfterPush": true
 }
