@@ -1,23 +1,97 @@
 {
   "step": "P29",
-  "status": "in_progress",
-  "scope": "Documentation/context checkpoint only; implementation not started; A1-A3 unverified",
+  "status": "blocked_external",
+  "scope": "Independent local authoritative readiness implementation delivered; real provider/concurrency/institutional/privacy/human gates remain open",
   "branch": "codex/core-build-checkpoints",
-  "startedFromCommit": "c55d148afb6553609979e3780c911302c1dea9b1",
-  "startedFromTree": "ff46ea7732b1152efcdadf454b3e41bdb7f325c5",
+  "startedFromCommit": "caf9a58d00cf989dc349451bc2d57e9f4b5cdc2f",
+  "startedFromTree": "f779752b2b9ad8b8a12e8e1954cb2cb464614573",
   "startLocalFetchedLiveRemoteMatch": true,
   "startClean": true,
-  "usage": {
-    "baselineUsedPercent": 89,
-    "resetTimestamp": 1792975667,
-    "weeklyUsedPercent": 26,
-    "effectiveBudgetPoints": 1,
-    "softCeilingUsedPercent": 90,
-    "interpretation": "Shared observation; immediate checkpoint under BUILD-CONTRACT; no reset/purchase/wait"
+  "historicalAllocationCheckpoint": {
+    "commit": "c55d148afb6553609979e3780c911302c1dea9b1",
+    "tree": "ff46ea7732b1152efcdadf454b3e41bdb7f325c5",
+    "baseline": 89,
+    "effectiveBudget": 1,
+    "note": "Earlier context-only checkpoint retained verbatim in P29.md; implementation was absent then"
   },
-  "checks": "Git custody and documentation diff only; no P29 application/schema/test/typecheck/lint/build claims",
-  "preview": "Existing owned synthetic P28 tab retained; CUA visibility set and marked deliverable, not a P29 preview",
-  "review": "Documentation-only checkpoint reviewed by this assistant; no new architecture decision or independent reviewer claimed",
-  "finalVerification": "This receipt is included in the checkpoint commit; local/fetched/live remote commit/tree equality and clean worktree are checked after pushing it. Final SHA reported in response.",
-  "nextAction": "P29 build-prompts/CONTINUE.md; no P30"
+  "implementation": {
+    "commit": "faf46a3abe1001bbfa5ac32cf2b13ee1ebe4bacb",
+    "tree": "2f133c3b22f1912e2dea216661c56788491664e6",
+    "pushed": true,
+    "localFetchedLiveRemoteMatch": true,
+    "cleanAfterPush": true,
+    "review": "This assistant reviewed current scope/RLS/private grants/fingerprints/authority/reopening/receipt rollback and UI; simulated perspectives only, no independent agent review"
+  },
+  "schema": {
+    "migration": "20261026005454_readiness.sql",
+    "ordinal": 37,
+    "tables": 87,
+    "columns": 957,
+    "publicFunctions": 117
+  },
+  "checks": {
+    "P29_A1": "local SQL/browser PASS",
+    "P29_A2": "local SQL/browser PASS",
+    "P29_A3": "local SQL/browser PASS",
+    "frontend": "44files162tests PASS",
+    "typecheck": "PASS",
+    "edgeTypecheck": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing >500kB warning",
+    "catalog": "87/957/117 checked PASS",
+    "sqlRegressions": [
+      "P15",
+      "P16",
+      "P17",
+      "P26",
+      "P27",
+      "P28"
+    ],
+    "browserRegressions": [
+      "P18",
+      "P26",
+      "P28"
+    ],
+    "exactCommandsAndFailures": "docs/build/steps/P29.md; P29-domain.json; P29-browser.json"
+  },
+  "usage": {
+    "baselineUsedPercent": 1,
+    "baselineResetTimestamp": 1792993692,
+    "baselineWeeklyUsedPercent": 27,
+    "effectiveBudgetPoints": 40,
+    "windDownUsedPercent": 36,
+    "softCeilingUsedPercent": 41,
+    "observations": [
+      12,
+      23,
+      28,
+      31,
+      34
+    ],
+    "lastObservedUsedPercent": 34,
+    "lastWeeklyUsedPercent": 32,
+    "lastResetTimestamp": 1792993692,
+    "interpretation": "Shared-account observations, not exact task attribution; one-second reset timestamp drift to1792993691 occurred; no allocation restart, credit consumption, purchase, provider/billing/cap change or reset wait"
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/deliverables/9c50e70b-c583-426d-9576-5aa375792d56?synthetic=receiver",
+    "command": "node scripts/preview-p29.cjs",
+    "pid": 87208,
+    "vitePid": 28428,
+    "listeningOnLoopback": [
+      5173,
+      5178
+    ],
+    "visible": true,
+    "retainedTab": true,
+    "observedFullAX": [
+      "Authoritative readiness",
+      "Submit current scope for acceptance",
+      "fictional acceptance/FIN/MCD policy banner"
+    ],
+    "target": "Synthetic isolated SQL/PNG/subjects and fictional policy; not actual provider or institutional approval"
+  },
+  "remaining": "All exact inherited STATE external gates plus approved P29 acceptor/external assessor mapping/policy provisioning/classification, actual provider/JWT/revocation/independent races and contention/privacy/human acceptance remain unverified. No deployment or real policy seeded.",
+  "nextAction": "Next dependency-eligible code prompt P30 build-prompts/30-notifications-inapp.md. Not executed automatically.",
+  "finalVerification": "Receipt-only commit follows this verified implementation. After pushing the receipt, local/fetched/live remote SHA and tree and empty porcelain status are verified again; final receipt SHA/tree reported in the response."
 }
