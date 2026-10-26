@@ -1,0 +1,19 @@
+{
+  "step": "P35",
+  "status": "in_progress",
+  "scope": "Context and handoff checkpoint only; no P35 implementation or tests",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "7c0020feeb099938ae19bc2bcc184deeb485b579",
+  "startedFromTree": "ebffc0bce91b8bbb1025d19d5a2a25d7c524e79d",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": "migrations001-042;102tables/1060columns/138public functions",
+  "acceptance": {"P35_A1":"UNVERIFIED","P35_A2":"UNVERIFIED","P35_A3":"UNVERIFIED"},
+  "usage": {"baselineUsedPercent":87,"baselineWeeklyUsedPercent":25,"baselineResetTimestamp":1793065345,"effectiveBudgetPoints":3,"windDownUsedPercent":85,"softCeilingUsedPercent":90,"latestUsedPercent":89,"latestWeeklyUsedPercent":25,"latestResetTimestamp":1793065345,"interpretation":"Wind-down threshold already reached at start; documentation checkpoint only. Final observation89%; only checkpoint commit/push and custody checks follow. Shared-account observations; no reset/restarted allocation."},
+  "preview": {"url":"http://127.0.0.1:5178/admin/access","command":"node scripts/preview-p34.cjs","pid":57872,"vitePid":73836,"tabId":"3","visibleRetained":true,"syntheticOnly":true,"p35Screen":false,"processReused":true},
+  "checks": {"discovery":"P19 immutable definition/validator interfaces and P34 mutation gap inspected; no publish_configuration/config_versions implementation found","verification":"Documentation diff/JSON plus HTTP/process and Git custody checks; no P35 runtime acceptance tests/typecheck/lint/build run","finalGitProtocol":"After commit/push verify local/fetched/live commit/tree equality and clean worktree; report actual SHA in response"},
+  "review":"Single assistant simulated security/continuity/execution review; no independent agents",
+  "nextAction":"Resume P35 CONTINUE.md: bound supported kinds/owner interfaces, preserve P34 gap, write failing A1-A3 tests before implementation. No P36.",
+  "remaining":"All P35 implementation and acceptance plus inherited STATE provider/institutional/privacy/concurrency/human gates",
+  "restrictions":"No agents/chats/worktrees/deployment/provider/billing/cap changes/reset credits/remote resets/external messages/automations/replacement schedules"
+}

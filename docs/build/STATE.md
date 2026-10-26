@@ -2,6 +2,8 @@
 
 Updated October27,2026 (Asia/Manila).
 
+- **P35 — in_progress**: explicit user-requested context/custody checkpoint only; no application code, migration, implementation plan or tests. P35_A1–A3 unverified. Start87%/reset1793065345/weekly25%, effective3pp, ceiling90%, wind-down85% already reached. Resume P35 CONTINUE.md with bounded kind/owner mapping and named failing tests; keep P34 incomplete and prevent generic config permission bypass. Checkpoint docs/build/steps/P35.md; existing synthetic P34 preview retained. No P36. This explicit request supersedes historical no-automatic-P35 text; it does not mark P34 complete.
+
 P34 finalization observation:83% five-hour/weekly24%/reset1793065345. Original effective24pp, wind-down85%, ceiling90% retained; checkpoint only, full mutation acceptance remains unverified.
 
 - **P34 — in_progress**: verified role inspection/current exact delegation-ceiling and custody preflight/own-only explanation/synthetic preview foundation. No role/assignment/revoke/custody publication mutation is implemented. Full P34_A1–A3 remain unverified; named preflight checks and53files180tests/typechecks/Edge/lint/build/catalog PASS. Contract docs/access-administration.md; checkpoint docs/build/steps/P34.md. Resume P34 CONTINUE.md Batch2; no P35.
