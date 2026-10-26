@@ -1,0 +1,21 @@
+{
+  "target": "Actual compiled UI/isolated SQL/fictional subjects and publishing authority; not provider/JWT/Google client interoperability/privacy/human proof",
+  "checks": [
+    "P31_A1 actual ICS downloads retain Manila midnight UTC and exclusive all-day end; cancellation status",
+    "P31_A2 other-unit title/location hidden; edits absent",
+    "P31_A3 individual copy/not-sync labels and Google template URL; no Google page opened or API call",
+    "40001 retains details; lost successful save recovers identical payload/key with one event",
+    "Month grid/list/mobile320px/focus44px/no page errors"
+  ],
+  "errors": [],
+  "hashes": {
+    "supabase/migrations/20261026123949_calendar.sql": "c1c0e23682f1d80871c6d4ff6c78e90f5b1e120c138a80b6cfa37cfa18ef016e",
+    "scripts/calendar-preview-fixtures.cjs": "ec3d49845078cd5ea88e410e0ae56b3abc101f2feaaf58f99decbdbb18d44a97",
+    "scripts/preview-p08.cjs": "cd56af6a468a7fec7f75902f30e321367bb6735917f86f16dd39c3a5c8c7334b",
+    "src/features/calendar/Calendar.tsx": "1bb863bc1c47f0878b4ac0c1e1a99a4f690ca3fbb6f811010ee790784f25c63c",
+    "src/features/calendar/api.ts": "365d5b96078e301ac5d9d05648753394698dda6a0a579c60f65706130b4bb543",
+    "src/features/calendar/ics.ts": "49d2df621bf81897be645113f112e00fe7fa88fa78af94e7ebb1dbc5d2cd05b4",
+    "src/features/calendar/calendar.css": "f549774945f3178022d5087fc8fbd72bceb3bbae3d4b56d1fd3e1aeabdd7d4a0",
+    "scripts/verify-p31.cjs": "2c995b71a300b8c11ca4c2d648f435463630f5db40dbd1bab8590583c9214b00"
+  }
+}

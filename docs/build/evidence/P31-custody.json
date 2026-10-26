@@ -1,0 +1,82 @@
+{
+  "step": "P31",
+  "status": "blocked_external",
+  "scope": "Bounded independent local calendar and explicit individual copies delivered; real activation/interoperability/human gates remain open",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "e73183871f6426dea6c0a63693572027743b602d",
+  "startedFromTree": "e723660734edbc2ed05d2c07a18f2a27059149d1",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": {
+    "migration": "20261026123949_calendar.sql",
+    "ordinal": 39,
+    "tables": 91,
+    "columns": 992,
+    "publicFunctions": 128
+  },
+  "checks": {
+    "P31_A1": "local SQL/unit/compiled downloaded ICS PASS",
+    "P31_A2": "local SQL/compiled other-unit/guest/peer/revocation/count redaction PASS",
+    "P31_A3": "local UI/ICS/Google-template copy labels and URL PASS; actual Google page/API/import not invoked",
+    "frontend": "48files169tests PASS",
+    "typechecks": "frontend and Edge PASS",
+    "lint": "PASS",
+    "build": "PASS; existing >500kB chunk warning",
+    "catalog": "91/992/128 PASS",
+    "sqlRegressions": [
+      "P16A",
+      "P29",
+      "P30"
+    ],
+    "browserRegressions": [
+      "P30"
+    ],
+    "evidence": [
+      "P31-domain.json",
+      "P31-browser.json",
+      "P31-month-desktop.png",
+      "P31-list-mobile.png"
+    ],
+    "commandsAndFailures": "docs/build/steps/P31.md"
+  },
+  "review": "One assistant reviewed scope-before-counts, private typed fields/neutral spine, old/new publication guards, strict dates/JSON/core-safe acknowledgment, source keys/current export and exact retry/atomic rollback. Council perspectives were simulated; no independent reviewers or agents claimed.",
+  "usage": {
+    "baselineUsedPercent": 2,
+    "baselineWeeklyUsedPercent": 6,
+    "resetTimestamp": 1793036083,
+    "effectiveBudgetPoints": 40,
+    "windDownUsedPercent": 37,
+    "softCeilingUsedPercent": 42,
+    "observations": [
+      16,
+      23,
+      27,
+      30
+    ],
+    "lastObservedUsedPercent": 30,
+    "lastWeeklyUsedPercent": 10,
+    "interpretation": "The window had changed before P31. Shared-account observations, not exact attribution. No reset action/credit/purchase/wait/model/provider/billing/cap change or restarted allocation."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/calendar?month=2027-04",
+    "command": "node scripts/preview-p31.cjs",
+    "pid": 54448,
+    "vitePid": 73836,
+    "loopbackPorts": [
+      5178,
+      5173
+    ],
+    "visible": true,
+    "retainedTab": true,
+    "observedCompleteAX": [
+      "Event details",
+      "Download ICS copy",
+      "fictional calendar publishing authority",
+      "no sync has run"
+    ],
+    "target": "Synthetic isolated SQL/subjects/fictional publishing authority; informational locations, no Google API/sync/reservation/external delivery"
+  },
+  "remaining": "Exact inherited STATE provider/JWT/authority/privacy/retention/human gates plus approved calendar publishing/content/room policy, actual revocation/concurrent-session/clock/term/source/version races and contention, deployed redaction, actual ICS/Google template interoperability and human core/committee/guest/mobile/keyboard/assistive-technology acceptance. No Google API/P53, room certification, deployment or external messages.",
+  "nextAction": "P32 build-prompts/32-resources-onboarding.md is next dependency-eligible code prompt (P06 local directory already delivered); not executed automatically.",
+  "finalVerification": "This receipt is included in the reviewed implementation checkpoint. After commit/push, local/fetched/live remote commit/tree equality and empty porcelain status are checked. Resulting final SHA/tree are reported in the response; no recursive self-hash claimed."
+}

@@ -863,6 +863,91 @@ export type Database = {
           },
         ]
       }
+      calendar_event_versions: {
+        Row: {
+          work_item_id: string
+          version: number
+          actor_id: string
+          snapshot: Json
+          reason: string
+          recorded_at: string
+        }
+        Insert: {
+          work_item_id: string
+          version: number
+          actor_id: string
+          snapshot: Json
+          reason: string
+          recorded_at?: string
+        }
+        Update: {
+          work_item_id?: string
+          version?: number
+          actor_id?: string
+          snapshot?: Json
+          reason?: string
+          recorded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_event_versions_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "calendar_events"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      calendar_events: {
+        Row: {
+          work_item_id: string
+          visibility: string
+          title: string
+          description: string
+          location: string
+          all_day: boolean
+          start_on: string | null
+          end_on: string | null
+          starts_at: string | null
+          ends_at: string | null
+          state: string
+        }
+        Insert: {
+          work_item_id: string
+          visibility: string
+          title: string
+          description?: string
+          location?: string
+          all_day: boolean
+          start_on?: string | null
+          end_on?: string | null
+          starts_at?: string | null
+          ends_at?: string | null
+          state: string
+        }
+        Update: {
+          work_item_id?: string
+          visibility?: string
+          title?: string
+          description?: string
+          location?: string
+          all_day?: boolean
+          start_on?: string | null
+          end_on?: string | null
+          starts_at?: string | null
+          ends_at?: string | null
+          state?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_events_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       comment_evidence: {
         Row: {
           comment_id: string
@@ -5865,6 +5950,23 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_calendar: {
+        Args: {
+          p_term_id: string
+          p_from: string
+          p_to: string
+          p_unit_id?: string | null
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_calendar_event: {
+        Args: {
+          p_term_id: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       read_comment_history: {
         Args: {
           p_comment_id: string
@@ -6276,6 +6378,16 @@ export type Database = {
           p_grant_id: string
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_calendar_event: {
+        Args: {
+          p_term_id: string
+          p_work_item_id?: string | null
+          p_values?: Json | null
+          p_expected_version?: number | null
+          p_request_id?: string | null
         }
         Returns: Json | null
       }

@@ -14,6 +14,7 @@
     "test:review-inboxes": "node scripts/test-review-inboxes.cjs",
     "test:finance-payload": "node scripts/test-finance-payload.cjs",
     "test:finance-intake": "node scripts/test-finance-intake.cjs",
+    "test:calendar": "node scripts/test-calendar.cjs",
     "test:notifications": "node scripts/test-notifications.cjs",
     "test:readiness": "node scripts/test-readiness.cjs",
     "test:publicity-review": "node scripts/test-publicity-review.cjs",

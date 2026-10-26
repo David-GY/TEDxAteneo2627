@@ -1,0 +1,4 @@
+import{expect,it,vi}from 'vitest'
+import{createCalendarApi,type CalendarCommand}from './api'
+import type{createSupabaseClient}from '../../lib/supabase'
+it('malformed calendar success stays uncertain; exact retry preserves scope/version/key',async()=>{const input:CalendarCommand={term:'22222222-2222-4222-8222-222222222221',id:null,version:0,values:{title:'Core-safe rehearsal',reason:'Explicit change'}},id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1',rpc=vi.fn().mockResolvedValueOnce({data:{version:1},error:null}).mockResolvedValue({data:{workItemId:id,key:'local:'+id,version:1},error:null}),api=createCalendarApi(Promise.resolve({rpc})as unknown as ReturnType<typeof createSupabaseClient>),first=await api.run(input,'stable-key');expect(first.ok).toBe(false);if(!first.ok)expect(first.error.retryable).toBe(true);expect((await api.run(input,'stable-key')).ok).toBe(true);expect(rpc.mock.calls[0]).toEqual(rpc.mock.calls[1])})
