@@ -1,3 +1,4 @@
+import {Notifications} from '../features/notifications/Notifications'
 import {PublicityDesk,PublicityPage} from '../features/publicity/Publicity'
 import {FinanceReviewPage,FinanceReviewQueue} from '../features/finance/FinanceReview'
 import {FinanceCasePage} from '../features/finance/FinanceCasePage'
@@ -88,7 +89,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       { path: '/auth/callback', element: <CallbackPage gateway={gateway} /> },
       { path: '/guest/redeem', loader:({request})=>gateway.readContext(request.signal), element: <RedeemPage gateway={gateway} /> },
       ...(import.meta.env.DEV ? [{ path: '/preview', element: <AppShell />, children: [{ index: true, element: <FoundationPage environment={environment} /> }] }] : []),
-      { id:'workspace', path: '/', element: <ProtectedShell />, loader: async ({ request }) => {
+      { id:'workspace', path: '/', element: <ProtectedShell notifications={gateway.notifications}/>, loader: async ({ request }) => {
         const result = await gateway.readContext(request.signal)
         if (result.state === 'authorized') {
           const path=new URL(request.url).pathname
@@ -121,7 +122,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       {path:'deliverables/:deliverableId',element:gateway.deliverables?<DeliverablePage readiness={gateway.readiness} publicity={gateway.publicity} finance={gateway.finance} timeline={gateway.timeline} api={gateway.deliverables} commands={gateway.deliverableCommands} comments={gateway.comments} files={gateway.files} synergies={gateway.synergies}/>:<EmptyState title="Deliverable unavailable" description="The workspace connection is unavailable."/>},
       ...navigationItems.filter((item) => item.href !== '/').map((item) => ({
         path: item.href.slice(1),
-        element: item.id === 'department' && gateway.inbox ? <ReviewInbox api={gateway.inbox}/> : item.id === 'requests' && gateway.catalog ? <CatalogPage api={gateway.catalog}/> : item.href === '/working-together' && gateway.synergies ? <WorkingTogetherPage api={gateway.synergies}/> : item.id === 'tasks' && gateway.tasks ? <TasksPage api={gateway.tasks} /> : item.id === 'deliverables' && gateway.deliverables ? <DeliverablesRoute api={gateway.deliverables} commands={gateway.deliverableCommands} /> : item.id === 'people' && gateway.people ? <DirectoryPage api={gateway.people} /> : item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,
+        element: item.id === 'notifications' ? <Notifications/> : item.id === 'department' && gateway.inbox ? <ReviewInbox api={gateway.inbox}/> : item.id === 'requests' && gateway.catalog ? <CatalogPage api={gateway.catalog}/> : item.href === '/working-together' && gateway.synergies ? <WorkingTogetherPage api={gateway.synergies}/> : item.id === 'tasks' && gateway.tasks ? <TasksPage api={gateway.tasks} /> : item.id === 'deliverables' && gateway.deliverables ? <DeliverablesRoute api={gateway.deliverables} commands={gateway.deliverableCommands} /> : item.id === 'people' && gateway.people ? <DirectoryPage api={gateway.people} /> : item.id === 'guests' && gateway.guests ? <SponsorPage api={gateway.guests} /> : item.id === 'account' ? <AccountPage gateway={gateway} /> : <><PageHeading title={item.label} description={item.description} /><EmptyState title="This area is not connected yet" description="Its records and actions will become available after the relevant feature is implemented." action={<Link className="button button--secondary" to="/">Return to overview</Link>} /></>,
         errorElement: <ErrorState title="This page could not open" description="Return to the overview and try again. If it keeps happening, contact the workspace maintainer." action={<Link className="button" to="/">Return to overview</Link>} />,
       })),
       ] },

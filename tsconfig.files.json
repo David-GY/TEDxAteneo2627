@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["supabase/functions/files"]
+  "include": ["supabase/functions/files", "supabase/functions/dispatch-notifications"]
 }

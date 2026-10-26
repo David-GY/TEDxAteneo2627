@@ -1,3 +1,4 @@
+import {createNotificationsApi,type NotificationsApi} from '../notifications/api'
 import {createReadinessApi,type ReadinessApi} from '../deliverables/readiness-api'
 import {createPublicityApi,type PublicityApi} from '../publicity/api'
 import {createLedgerApi,type LedgerApi} from '../finance/ledger-api'
@@ -39,6 +40,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  notifications?: NotificationsApi
   readiness?: ReadinessApi
   publicity?: PublicityApi
   ledger?: LedgerApi
@@ -92,6 +94,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    notifications: createNotificationsApi(clientReady),
     readiness: createReadinessApi(clientReady),
     publicity: createPublicityApi(clientReady),
     ledger: createLedgerApi(clientReady),

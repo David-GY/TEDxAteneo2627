@@ -1,3 +1,5 @@
+import {NotificationCenter} from '../notifications/Notifications'
+import type {NotificationsApi} from '../notifications/api'
 import {FinDecisionMemory} from '../finance/DecisionMemory'
 import {FinanceMemory} from '../finance/Memory'
 import {ReviewMemory} from '../approvals/Memory'
@@ -32,14 +34,14 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
   return <FinDecisionMemory identity={draftIdentity}><FinanceMemory identity={draftIdentity}><ReviewMemory identity={draftIdentity}><RequestMemory identity={draftIdentity}><FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</HandoffDrafts></ScheduleDrafts></FormDrafts></RequestMemory></ReviewMemory></FinanceMemory></FinDecisionMemory>
 }
 
-export function ProtectedShell() {
+export function ProtectedShell({notifications}:{notifications?:NotificationsApi}) {
   const member = useLoaderData() as WorkspaceContext
   const { revalidate } = useRevalidator()
   useEffect(() => {
     const timer = window.setTimeout(() => void revalidate(), Math.min(2_147_483_647, Math.max(0, Date.parse(member.expiresAt) - Date.now())))
     return () => clearTimeout(timer)
   }, [member.expiresAt, revalidate])
-  return <AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} />
+  return <NotificationCenter api={notifications} term={member.termId} identity={'memberId'in member?member.memberId:member.guestAccessId}><AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} /></NotificationCenter>
 }
 
 export function LoginPage({ gateway }: { gateway: AuthGateway }) {

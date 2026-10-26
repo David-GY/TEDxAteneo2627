@@ -1,0 +1,23 @@
+{
+  "target": "Actual compiled UI/isolated SQL/fictional subjects and policies; not real provider/JWT/independent simultaneous sessions/privacy/human acceptance proof",
+  "checks": [
+    "Inbox/badge generic current rows",
+    "Read-state40001/exact lost-success recovery and canonical read count",
+    "Mute skeleton preserves required inbox; custodian sees failure and explicit retry",
+    "Resolved handoff action;320px/focus/44px/no page errors",
+    "Revoked typed reviewer loses inbox row/count and actual destination package"
+  ],
+  "errors": [],
+  "hashes": {
+    "scripts/preview-p08.cjs": "d514d43414a41b0748d68ee6ae18e9e0db5b2e69ad41c8741f772ed1f180180c",
+    "scripts/notification-preview-fixtures.cjs": "b1bcc45f8455d9270ccacf5d3f00b21e71936e23674b82597f2662834ed89e66",
+    "src/app/AppShell.tsx": "b224158ebfaaf99b4a027c4ae7eb937dd682201c28daccdf0784ae20c37a9c41",
+    "src/features/auth/pages.tsx": "70b062deb1207c9c43e84e28291bc39c33ed0432985ebd4457f7b86606b16533",
+    "supabase/functions/dispatch-notifications/index.ts": "9e1f90ed081555fbed1dd2ce7d28af098eba5391b192eedeb0ec867b58f325f2",
+    "supabase/migrations/20261026013040_notifications.sql": "b01d04faa99ae03291cb78491b8ce0804b596eeed0f356e41f4900274bc4c98a",
+    "src/features/notifications/api.ts": "3c65db1948453efb75cb2aaf4f4c031153ce8ad20d1307a70b072c9b9258624e",
+    "src/features/notifications/Notifications.tsx": "7209e306f8b8daee596d5cf5600e933a00b36a5c7c80fcf06854770b70e13c63",
+    "supabase/functions/dispatch-notifications/handler.ts": "a8edb38fc5b3d5eb263de495ff0e0777dd98a025d92edee0639fe917ff1d0196",
+    "scripts/verify-p30.cjs": "e8242456a2cce924698bd1db61e55b8186eabbc2943dc58a5b5fd614e6c16088"
+  }
+}

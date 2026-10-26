@@ -1,3 +1,4 @@
+import {NotificationBadge} from '../features/notifications/Notifications'
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigation } from 'react-router'
 import { LoadingState } from '../components/FeedbackState'
@@ -70,7 +71,7 @@ export function AppShell({ context = setupNavigation, identity, preview = true }
             <div className="location-heading"><span className="mobile-identity">TEDxAteneodeManilaU</span><span>{current?.label ?? 'Core workspace'}</span></div>
             <div className="account-summary">
               {identity ? <div className="identity-details"><strong>{identity.displayName}</strong>{identity.unitName ? <span>{identity.unitName}</span> : null}</div> : <span className="muted">Not signed in</span>}
-              <Link className="button button--secondary" to="/account">Account</Link>
+              <NotificationBadge/><Link className="button button--secondary" to="/account">Account</Link>
             </div>
           </header>
           <main className="workspace-main" id="main-content" tabIndex={-1} ref={mainRef} aria-busy={navigation.state !== 'idle'}>

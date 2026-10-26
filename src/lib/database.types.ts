@@ -2845,6 +2845,83 @@ export type Database = {
           },
         ]
       }
+      notification_preferences: {
+        Row: {
+          membership_id: string
+          mode: string
+          version: number
+          updated_at: string
+        }
+        Insert: {
+          membership_id: string
+          mode?: string
+          version?: number
+          updated_at?: string
+        }
+        Update: {
+          membership_id?: string
+          mode?: string
+          version?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_preferences_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: true
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          id: string
+          job_id: string
+          recipient_id: string
+          target_kind: string
+          target_id: string
+          read_at: string | null
+          version: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          job_id: string
+          recipient_id: string
+          target_kind: string
+          target_id: string
+          read_at?: string | null
+          version?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          job_id?: string
+          recipient_id?: string
+          target_kind?: string
+          target_id?: string
+          read_at?: string | null
+          version?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "outbox_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       org_units: {
         Row: {
           id: string
@@ -2941,7 +3018,7 @@ export type Database = {
       outbox_jobs: {
         Row: {
           id: string
-          event_id: string
+          event_id: string | null
           work_item_id: string
           event_type: string
           payload: Json
@@ -2953,10 +3030,16 @@ export type Database = {
           updated_at: string
           updated_by: string | null
           version: number
+          lease_token: string | null
+          lease_until: string | null
+          last_error: string | null
+          delivered_at: string | null
+          dispatch_version: number
+          reminder_key: string | null
         }
         Insert: {
           id?: string
-          event_id: string
+          event_id?: string | null
           work_item_id: string
           event_type: string
           payload: Json
@@ -2968,10 +3051,16 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          lease_token?: string | null
+          lease_until?: string | null
+          last_error?: string | null
+          delivered_at?: string | null
+          dispatch_version?: number
+          reminder_key?: string | null
         }
         Update: {
           id?: string
-          event_id?: string
+          event_id?: string | null
           work_item_id?: string
           event_type?: string
           payload?: Json
@@ -2983,6 +3072,12 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          lease_token?: string | null
+          lease_until?: string | null
+          last_error?: string | null
+          delivered_at?: string | null
+          dispatch_version?: number
+          reminder_key?: string | null
         }
         Relationships: [
           {
@@ -5503,6 +5598,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      claim_notification_jobs: {
+        Args: {
+          p_limit?: number | null
+        }
+        Returns: Json | null
+      }
       create_deliverable: {
         Args: {
           p_term_id: string
@@ -5601,6 +5702,19 @@ export type Database = {
           p_request_id: string
         }
         Returns: Json | null
+      }
+      deliver_notification_job: {
+        Args: {
+          p_job_id: string
+          p_lease: string
+        }
+        Returns: Json | null
+      }
+      enqueue_notification_reminders: {
+        Args: {
+          p_limit?: number | null
+        }
+        Returns: number | null
       }
       explain_access: {
         Args: {
@@ -5862,6 +5976,19 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_notification_failures: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_notifications: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       read_overview: {
         Args: {
           p_term_id: string
@@ -6093,6 +6220,16 @@ export type Database = {
         }
         Returns: Json | null
       }
+      retry_notification_job: {
+        Args: {
+          p_term_id: string
+          p_job_id: string
+          p_expected_version: number
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       revise_comment: {
         Args: {
           p_comment_id: string
@@ -6191,6 +6328,24 @@ export type Database = {
           p_sha256: string
           p_size: number
           p_mime: string
+        }
+        Returns: Json | null
+      }
+      set_notification_preference: {
+        Args: {
+          p_term_id: string
+          p_mode: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      set_notification_read: {
+        Args: {
+          p_notification_id: string
+          p_read: boolean
+          p_expected_version: number
+          p_request_id: string
         }
         Returns: Json | null
       }

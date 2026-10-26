@@ -1,0 +1,87 @@
+{
+  "step": "P30",
+  "status": "blocked_external",
+  "scope": "Independent local deduplicated in-app notification/leased dispatch implementation delivered; external activation gates remain open",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "4e0f302d5f8bd92338f44de43ef9f6e8c2fc5718",
+  "startedFromTree": "2b957730c178dd6be58ab4d4c73eaef08c995b64",
+  "startClean": true,
+  "startLocalFetchedLiveRemoteMatch": true,
+  "schema": {
+    "migration": "20261026013040_notifications.sql",
+    "ordinal": 38,
+    "tables": 89,
+    "columns": 975,
+    "publicFunctions": 125
+  },
+  "checks": {
+    "P30_A1": "local PASS expired lease/stale worker/lost response/dedup/late insert rollback",
+    "P30_A2": "local PASS committed business state/backoff/five failures/redacted custody/retry",
+    "P30_A3": "local PASS revoked typed row/count and actual destination denial; member suspended denies inbox",
+    "frontend": "46files165tests PASS",
+    "frontendAndEdgeTypechecks": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing large chunk warning",
+    "catalog": "89/975/125 PASS",
+    "sqlRegressions": [
+      "P15",
+      "P17",
+      "P23",
+      "P28",
+      "P29"
+    ],
+    "browserRegressions": [
+      "P29"
+    ],
+    "evidence": [
+      "P30-domain.json",
+      "P30-browser.json",
+      "P30-inbox-desktop.png",
+      "P30-inbox-mobile.png"
+    ],
+    "commandsFailuresLimitations": "docs/build/steps/P30.md"
+  },
+  "review": "One assistant review of current source scope/counts, raw/RPC grants, non-head contribution isolation, typed review guards, lease/late rollback, bounded worker/secret handling. Council perspectives simulated; no independent reviewer or agents claimed.",
+  "usage": {
+    "baselineUsedPercent": 35,
+    "baselineWeeklyUsedPercent": 33,
+    "baselineResetTimestamp": 1792993691,
+    "effectiveBudgetPoints": 40,
+    "windDownUsedPercent": 70,
+    "softCeilingUsedPercent": 75,
+    "observations": [
+      49,
+      59,
+      64,
+      71
+    ],
+    "lastObservedUsedPercent": 71,
+    "lastWeeklyUsedPercent": 38,
+    "lastResetTimestamp": 1792993692,
+    "interpretation": "Shared-account observations, not exact task attribution. Wind-down reached between observations; final custody/Git only. One-second timestamp drift; no reset credit/purchase/provider/billing/cap change/wait/allocation restart."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/notifications",
+    "command": "node scripts/preview-p30.cjs",
+    "pid": 76140,
+    "vitePid": 28428,
+    "loopbackPorts": [
+      5178,
+      5173
+    ],
+    "visible": true,
+    "retainedTab": true,
+    "observedAX": [
+      "Your updates",
+      "Notifications \u00b7 3 unread",
+      "Handoff update",
+      "Delivery preferences",
+      "Notification delivery custody",
+      "fictional notification custodian; manual seeded dispatcher; no external delivery"
+    ],
+    "target": "Isolated synthetic SQL/subjects/fictional policy and custody; not actual provider or institutional authority"
+  },
+  "remaining": "All inherited STATE gates plus actual worker deployment/approved gateway+dedicated secret/invocation cadence, real JWT/provider/revocation, independent concurrent/crash/clock/retry sessions, custody mapping/least privilege/monitoring/privacy/retention and human acceptance. No external adapters, real role seed, schedule, deployment or messages.",
+  "nextAction": "P31 build-prompts/31-calendar-local.md is next dependency-eligible code prompt, not executed automatically.",
+  "finalVerification": "This receipt is included in the reviewed implementation checkpoint. After commit/push, local/fetched/live remote commit and tree equality and empty porcelain status are verified. The resulting final SHA/tree are reported in the response; no recursive self-hash claimed."
+}
