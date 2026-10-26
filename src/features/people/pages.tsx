@@ -29,7 +29,7 @@ export function PeoplePage({ api, termId }: { api: PeopleGateway; termId: string
     <p className="muted">Affiliation and personal contact details are optional. You can find help and continue your work with these fields blank.</p>
     {error ? <ErrorState title="Directory unavailable" description="Your access may have changed, or the service could not respond." action={<button className="button" onClick={() => { setError(false); setData(null); setAttempt(attempt + 1) }}>Try again</button>} /> : !data ? <LoadingState /> : <>
       <Panel title="Who to ask">
-        {data.processes.length ? <ul className="guest-list">{data.processes.map(process => <li key={process.id}>
+        {data.processes.length ? <ul className="guest-list">{data.processes.map(process => <li key={process.id} id={`process-${process.id}`}>
           <h3>{process.name}</h3>
           <p>Primary: {process.primary.length ? process.primary.map(p => p.name).join(', ') : 'Not assigned — ask your unit head to confirm a contact.'}</p>
           <p>Backup: {process.backup.length ? process.backup.map(p => p.name).join(', ') : 'Not assigned — ask the primary contact for cover.'}</p>

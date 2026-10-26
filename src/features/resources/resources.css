@@ -1,0 +1,9 @@
+.resource-checklist li{margin-block:var(--space-3,12px)}
+.resource-progress{display:flex;flex-wrap:wrap;gap:12px;margin-block:16px}
+.resource-article{border-top:1px solid var(--divider,#dedfd8);padding-block:16px;overflow-wrap:anywhere;scroll-margin-top:24px}
+.resource-body{white-space:pre-wrap;overflow-wrap:anywhere}
+.resource-author fieldset{display:grid;gap:12px;border:0;padding:0;min-width:0}
+.resource-author textarea,.resource-author select{font:inherit;min-height:44px;max-width:100%;width:100%;padding:10px;border:1px solid #62665f;border-radius:6px;box-sizing:border-box}
+.resource-author textarea{min-height:120px}
+.resource-author input[type=checkbox]{min-width:24px;min-height:24px}
+.resource-author label:has(input[type=checkbox]){display:flex;align-items:center;gap:12px;min-height:44px}

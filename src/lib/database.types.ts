@@ -3007,6 +3007,41 @@ export type Database = {
           },
         ]
       }
+      onboarding_progress: {
+        Row: {
+          term_membership_id: string
+          item: string
+          revision: number
+          state: string
+          version: number
+          updated_at: string
+        }
+        Insert: {
+          term_membership_id: string
+          item: string
+          revision: number
+          state: string
+          version: number
+          updated_at?: string
+        }
+        Update: {
+          term_membership_id?: string
+          item?: string
+          revision?: number
+          state?: string
+          version?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "onboarding_progress_term_membership_id_fkey"
+            columns: ["term_membership_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       org_units: {
         Row: {
           id: string
@@ -4369,6 +4404,145 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "request_revisions"
             referencedColumns: ["request_id","id","revision_no"]
+          },
+        ]
+      }
+      resource_aliases: {
+        Row: {
+          term_id: string
+          alias: string
+          resource_id: string
+        }
+        Insert: {
+          term_id: string
+          alias: string
+          resource_id: string
+        }
+        Update: {
+          term_id?: string
+          alias?: string
+          resource_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_aliases_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "resources"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "resource_aliases_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resource_versions: {
+        Row: {
+          resource_id: string
+          version: number
+          label: string
+          body: string
+          alias: string
+          owner_id: string
+          review_on: string
+          service_id: string | null
+          targets: Json
+          published: boolean
+          actor_id: string
+          created_at: string
+        }
+        Insert: {
+          resource_id: string
+          version: number
+          label: string
+          body: string
+          alias: string
+          owner_id: string
+          review_on: string
+          service_id?: string | null
+          targets: Json
+          published: boolean
+          actor_id: string
+          created_at?: string
+        }
+        Update: {
+          resource_id?: string
+          version?: number
+          label?: string
+          body?: string
+          alias?: string
+          owner_id?: string
+          review_on?: string
+          service_id?: string | null
+          targets?: Json
+          published?: boolean
+          actor_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_versions_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_versions_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "resources"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "resource_versions_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      resources: {
+        Row: {
+          work_item_id: string
+          visibility: string
+          published_version: number | null
+          kind: string
+          essential: boolean
+        }
+        Insert: {
+          work_item_id: string
+          visibility: string
+          published_version?: number | null
+          kind: string
+          essential?: boolean
+        }
+        Update: {
+          work_item_id?: string
+          visibility?: string
+          published_version?: number | null
+          kind?: string
+          essential?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resources_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "resources_work_item_id_published_version_fkey"
+            columns: ["work_item_id","published_version"]
+            isOneToOne: true
+            referencedRelation: "resource_versions"
+            referencedColumns: ["resource_id","version"]
           },
         ]
       }
@@ -6160,6 +6334,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_resources: {
+        Args: {
+          p_term_id: string
+          p_alias?: string | null
+        }
+        Returns: Json | null
+      }
       read_synergy: {
         Args: {
           p_agreement_id: string
@@ -6421,6 +6602,16 @@ export type Database = {
         }
         Returns: Json | null
       }
+      save_resource: {
+        Args: {
+          p_term_id: string
+          p_id?: string | null
+          p_values?: Json | null
+          p_expected_version?: number | null
+          p_request_id?: string | null
+        }
+        Returns: Json | null
+      }
       save_working_link: {
         Args: {
           p_work_item_id: string
@@ -6456,6 +6647,17 @@ export type Database = {
         Args: {
           p_notification_id: string
           p_read: boolean
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      set_onboarding_progress: {
+        Args: {
+          p_term_id: string
+          p_item: string
+          p_revision: number
+          p_state: string
           p_expected_version: number
           p_request_id: string
         }

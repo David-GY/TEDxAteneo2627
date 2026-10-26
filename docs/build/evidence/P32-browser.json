@@ -1,0 +1,16 @@
+{
+  "target": "Isolated PGlite + compiled Vite UI; synthetic subjects/authority only; no real provider/JWT/concurrency/human proof",
+  "checks": [
+    "P32_A1 compiled local PASS",
+    "P32_A2 compiled local PASS",
+    "P32_A3 compiled local PASS",
+    "320px, focus, 44px, safe text, exact retry/conflict PASS"
+  ],
+  "hashes": {
+    "src/features/resources/Resources.tsx": "4aa670ce67c2a99b26ff5b01ffdb12b393712556e22df308e52b6cd36b5efa12",
+    "src/features/resources/api.ts": "b2cc8e97d79437ce4777c704800a6666ed4c21009c5f48f0a0e0106dcc8e9d40",
+    "src/features/onboarding/Practice.tsx": "ed921888fc9e7f73ba74f35235240d8c999f594110b4a8ba11674d4b075c9b90",
+    "scripts/verify-p32.cjs": "66f9f94710a4dc308f45a7438a124b7a92672911dc5453f6ba9b4e16e6fec861",
+    "scripts/resources-preview-fixtures.cjs": "15e32a7e1986f5afc508aeb58785d7139a5af66390ebb21249f27e5b030a731f"
+  }
+}

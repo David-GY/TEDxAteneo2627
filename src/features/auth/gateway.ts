@@ -1,3 +1,4 @@
+import {createResourcesApi,type ResourcesApi} from '../resources/api'
 import {createCalendarApi,type CalendarApi} from '../calendar/api'
 import {createNotificationsApi,type NotificationsApi} from '../notifications/api'
 import {createReadinessApi,type ReadinessApi} from '../deliverables/readiness-api'
@@ -41,6 +42,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  resources?: ResourcesApi
   calendar?: CalendarApi
   notifications?: NotificationsApi
   readiness?: ReadinessApi
@@ -96,6 +98,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    resources: createResourcesApi(clientReady),
     calendar: createCalendarApi(clientReady),
     notifications: createNotificationsApi(clientReady),
     readiness: createReadinessApi(clientReady),
