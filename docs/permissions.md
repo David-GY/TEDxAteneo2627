@@ -1,5 +1,7 @@
 # Identity permissions — P03
 
+Current-status note (October27,2026): the P03/P04 text below is historical. P05/P07 scoped guest invitations/record grants and P33 organization commands now exist locally; P34 permission mutation remains unfinished. Later contracts and docs/build/STATE.md govern the current boundary. Historical pre-P04 test suites do not prove current provider/JWT access. See docs/build/P00-P34-REVIEW.md.
+
 **P04 supersedes the admission prerequisite below:** current_term_membership now also requires canonical confirmed school email and matching verified Google identity, and accepts core membership only. Guests are closed until P05. See `docs/integrations.md`. The P03 regression script preserves its earlier migration boundary; current admission regressions use test:google-auth.
 
 This contract describes implemented SQL boundaries, not a live login or provider verification. All source tables retain forced RLS. Client navigation is presentation only. Tests execute as non-superuser, non-BYPASSRLS `authenticated` and `anon`, using distinct synthetic subject claims. Full Supabase/PostgreSQL 17/PostgREST/JWT validation is still blocked by the absent container runtime.

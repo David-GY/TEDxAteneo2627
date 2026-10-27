@@ -1,0 +1,506 @@
+{
+  "review": "P00-P34 goal/omissions checkpoint",
+  "date": "2026-10-27",
+  "timezone": "Asia/Manila",
+  "status": "ready_for_review",
+  "auditedCommit": "ee2493eb43bcc7ab1821eaa361d5f159bbaedda3",
+  "auditedTree": "7eb447ba9bf54766f842b3f3bcb4893a5e9c57ff",
+  "startClean": true,
+  "startLocalFetchedLiveMatch": true,
+  "coverage": {
+    "entries": 36,
+    "missingCheckpointIds": [],
+    "completeLocal": [
+      "P00",
+      "P01"
+    ],
+    "partialCode": [
+      "P34"
+    ],
+    "externalBlockedCount": 33,
+    "notDeployment": true,
+    "notIndependentCertification": true
+  },
+  "stepLedger": [
+    {
+      "step": "P00",
+      "status": "complete",
+      "checkpoint": "docs/build/steps/P00.md",
+      "checkpointSha256": "ffaa299d8324bfb28d24fdaf5c9eb59410fb830d5d9ce3f506b66005dff5d4b0"
+    },
+    {
+      "step": "P01",
+      "status": "complete",
+      "checkpoint": "docs/build/steps/P01.md",
+      "checkpointSha256": "6f80efba162c07a898052b5821a460ee9fdcd60b29fef8968ee2f2f0d75dae61"
+    },
+    {
+      "step": "P02",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P02.md",
+      "checkpointSha256": "cb6054bccebeb8d19220194691a4b911945a7ad8f8b5ef6cdab1c7d5d38d3d22"
+    },
+    {
+      "step": "P03",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P03.md",
+      "checkpointSha256": "f31af3e9590cf67ad4b08ac9f6680ba9a6018aedbd32988b312cf50244eb3ba0"
+    },
+    {
+      "step": "P04",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P04.md",
+      "checkpointSha256": "4f7230bf8f5956ea77ff01a07bf09a1506b5b23db9dc9538ae2b64a47811f49a"
+    },
+    {
+      "step": "P05",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P05.md",
+      "checkpointSha256": "550d9e618d9ac050a8ce6b21811629ba267a70ac1ea7a4735e4de934210c08a1"
+    },
+    {
+      "step": "P06",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P06.md",
+      "checkpointSha256": "c7fc9a576e36a17c4cfd482fe6637df3a6bf03ff0d9f6c6c65a57df27610ff81"
+    },
+    {
+      "step": "P07",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P07.md",
+      "checkpointSha256": "bbe0159f0215711e767d2ccd247c0b90f969da9f75071e6c1378404734a9e4d5"
+    },
+    {
+      "step": "P08",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P08.md",
+      "checkpointSha256": "d8bf5507ed261a44a6f5792fdd1d274c06919f1fff4f92fcc8d4a4b50f5a3789"
+    },
+    {
+      "step": "P09",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P09.md",
+      "checkpointSha256": "3c115c6d0636cb783ba335993b63fce3992e45b2bec8d8225a9e9c347a5f2791"
+    },
+    {
+      "step": "P10",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P10.md",
+      "checkpointSha256": "31d425344ecbc6c7904d4b9e7d6e511ecfa95955af10157e2097f355036f9d80"
+    },
+    {
+      "step": "P11",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P11.md",
+      "checkpointSha256": "8c811424a344a9fc5cf86cb6e870758fff020f9016932c4e9530e6042f98dc74"
+    },
+    {
+      "step": "P12",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P12.md",
+      "checkpointSha256": "5a510d3719968146d88a0493cee6a82a47e70b9abc70deb1dd8e79fb547c18b4"
+    },
+    {
+      "step": "P13",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P13.md",
+      "checkpointSha256": "f6f3c5dda2a756dcdf1158aae07cafbb692d9c47f2b537bff3040e3856790eee"
+    },
+    {
+      "step": "P14",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P14.md",
+      "checkpointSha256": "1422bd5f3f5712d3385de26901f40d79fb39048e060e734cb7bf0353c3a4685c"
+    },
+    {
+      "step": "P15",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P15.md",
+      "checkpointSha256": "65a8450dd2a7452273868be5457e9219bd0cda31863e479b50ab10cfb44a25cb"
+    },
+    {
+      "step": "P16",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P16.md",
+      "checkpointSha256": "bb01cd269206d0558f968e73aa403787107b2f7e572385aad17433b783677783"
+    },
+    {
+      "step": "P17",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P17.md",
+      "checkpointSha256": "f73b1bf3d4144696a743368a44a67622eaa715fe5c4e2c55a465b0d4be9240df"
+    },
+    {
+      "step": "P18",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P18.md",
+      "checkpointSha256": "880797a823822580d8d255d9b3e8273163b6d8e5d715328146a9c10267b665e1"
+    },
+    {
+      "step": "P19",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P19.md",
+      "checkpointSha256": "e0b5984d21eeac1a509cc65402d4f477a5a008b5c8f4316a9f2cff38ba457ec2"
+    },
+    {
+      "step": "P20",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P20.md",
+      "checkpointSha256": "7b848ed69786ed71a309d76fb3cb9503f84cf3e9fc9dda2bef7d822a95034fb1"
+    },
+    {
+      "step": "P21",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P21.md",
+      "checkpointSha256": "7caa8fe5039fd67cab361733f0a980822cab226d8cc5154ab4e388a84ea6c460"
+    },
+    {
+      "step": "P22",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P22.md",
+      "checkpointSha256": "5a07d4affcb7739e5bc89326dd15e554679b5078f87e9effb7ca9e40bf3a8418"
+    },
+    {
+      "step": "P23",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P23.md",
+      "checkpointSha256": "a881996d6e815c784962a1af83020f137f13a13571ed0dc129cc79affedc9609"
+    },
+    {
+      "step": "P24",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P24.md",
+      "checkpointSha256": "e42df01a3797bdf66d0a3880ca19f02bdc2045fa57aa10ea7d7015fc9ab3fe99"
+    },
+    {
+      "step": "P25",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P25.md",
+      "checkpointSha256": "c7673a42629d5c9955e9ae0c85a4a179d461c2b405dc18f50eeb77babb65ca24"
+    },
+    {
+      "step": "P26",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P26.md",
+      "checkpointSha256": "696a3f542d283b559a8bbc47654ab0fda38d2811b6876a72596fb2ff3d65c112"
+    },
+    {
+      "step": "P27",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P27.md",
+      "checkpointSha256": "ef625819c70c9c7c7c4d7625ba9e5397fb806234864c16ee7a339976d63d7689"
+    },
+    {
+      "step": "P28",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P28.md",
+      "checkpointSha256": "1dc7eb29147c31aee9b727dbb55b25841f3cc7da6f5c4d609190623121a70d0b"
+    },
+    {
+      "step": "P29",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P29.md",
+      "checkpointSha256": "b8568110aa09c213c68b16b073bfee601ae546b17c0d3d0c10427b2756134755"
+    },
+    {
+      "step": "P30",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P30.md",
+      "checkpointSha256": "6e6c0eaf634df36badfca5f6c848d56881c3976fbf8aec4e0cfaa6d35b6d738c"
+    },
+    {
+      "step": "P31",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P31.md",
+      "checkpointSha256": "df0376ad5e64532ba6ccfd97a495e1e651dc59c1bc44c2058cc4282bde3ad94a"
+    },
+    {
+      "step": "P32",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P32.md",
+      "checkpointSha256": "66b770275db566481a6645dfdf4b90bc0de19ef60da95f63413ba04c7d836488"
+    },
+    {
+      "step": "P33",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P33.md",
+      "checkpointSha256": "a467d6605934f7a78eb98f1422efca1058029066a4e3606cc29c3bf05af049cb"
+    },
+    {
+      "step": "P34",
+      "status": "in_progress",
+      "checkpoint": "docs/build/steps/P34.md",
+      "checkpointSha256": "e1025c118d2a26baeb52dfaefba79021b3b7345a29dd0e407725c8b8c7c6abce"
+    },
+    {
+      "step": "P16A",
+      "status": "blocked_external",
+      "checkpoint": "docs/build/steps/P16A.md",
+      "checkpointSha256": "71d45dc98d52ba8e42e642b5b4267a5f8c43abca4cb37206fe4881620d8d3407"
+    }
+  ],
+  "promptHashes": [
+    {
+      "path": "build-prompts/00-foundation.md",
+      "sha256": "1ed39ef71416bd8347a4b126e17fb1d39a6d12c10e9f2d261f59f3f606d9bfa6"
+    },
+    {
+      "path": "build-prompts/01-accessible-shell.md",
+      "sha256": "96c50a0bc7a89d1b1a7ebcc6c25bc7e0f0ed986684592424c0f2f4560cb7b9b9"
+    },
+    {
+      "path": "build-prompts/02-identity-schema.md",
+      "sha256": "4ccd08710c15de39a904314b3d9d628b240754ca54871d9dfce4a2b762708fbc"
+    },
+    {
+      "path": "build-prompts/03-authorization-foundation.md",
+      "sha256": "c587d750ddbc761d703b5e98b85dec36e40de48639af51dd2668b3d923e74e3f"
+    },
+    {
+      "path": "build-prompts/04-google-login.md",
+      "sha256": "d6dfff42dc9709f1e410d002ddb95be7aebf9343eae04f8ef329ff83099f5716"
+    },
+    {
+      "path": "build-prompts/05-guest-invitations.md",
+      "sha256": "c087bec0a50780c9c921f148970b1577e97e4ecd1ae728c11c56970d1145e887"
+    },
+    {
+      "path": "build-prompts/06-people-directory.md",
+      "sha256": "4581ae975747b441263fa6c86492fa0fb6177460415d30a12860d36e6f455210"
+    },
+    {
+      "path": "build-prompts/07-work-record-spine.md",
+      "sha256": "fe1ce325f8194492ac43ef200c45b187f207c43612b1b4c459fa9fc8f0d2c6bc"
+    },
+    {
+      "path": "build-prompts/08-deliverables-reading.md",
+      "sha256": "7b52eb0a0c2fa04230b2ebe026c0b0d1a5f57625b34b9b10d6db88587ae8bb64"
+    },
+    {
+      "path": "build-prompts/09-deliverable-authoring.md",
+      "sha256": "d09a37169ddb51be23ade75a718b4c26e8c2983fa58bdbaf6d05ecd832ce4d4a"
+    },
+    {
+      "path": "build-prompts/10-tasks.md",
+      "sha256": "7631c7d4ffbeaf029c0889727c9f5656e86fdac68eb97d1d615d9ab4b5758072"
+    },
+    {
+      "path": "build-prompts/11-comments.md",
+      "sha256": "e2da0263bd3b15e6a3af693916429b2841577cc4376c913f87f6b7a543079cf5"
+    },
+    {
+      "path": "build-prompts/12-private-files.md",
+      "sha256": "1f28ca183992d9fd2a7084b539addbd9b85d65a6797343c8cf392a298e9dfd4d"
+    },
+    {
+      "path": "build-prompts/13-personal-overview.md",
+      "sha256": "5bcc4db7b59b25c49787662d08742503757d34e589bd96a237708028c6d449a3"
+    },
+    {
+      "path": "build-prompts/14-synergy-domain.md",
+      "sha256": "1bcc4290f0bac463623adca51436538e67d759ca511dc3b3d376afea1344bc6a"
+    },
+    {
+      "path": "build-prompts/15-synergy-interface.md",
+      "sha256": "89ac21459c27769a6c1277e1d4939152e1c10664756a57d8a5a255669fc5745d"
+    },
+    {
+      "path": "build-prompts/16-dependencies.md",
+      "sha256": "481f91cc7da4852497fb6648bb70f4f9ce8ee2852a76236b813149a0f67ee445"
+    },
+    {
+      "path": "build-prompts/16A-committee-gantt.md",
+      "sha256": "961b4a76055e74d6c997cd9efac30a2ea16ca2abd2f387de42b19d7e5e5d3579"
+    },
+    {
+      "path": "build-prompts/17-handoff-domain.md",
+      "sha256": "8d16d854ec6db1c185ebe642fa4ac03143fc3100f2e9f3ac733faeb60954bae9"
+    },
+    {
+      "path": "build-prompts/18-handoff-interface.md",
+      "sha256": "5d52a79e5240661d46264307cc2f49f38c7e667c907bc46eece88a53add2a9eb"
+    },
+    {
+      "path": "build-prompts/19-request-definitions.md",
+      "sha256": "30d4cb18050a4ebabcd5221d87db34ecd9bae096fd3acff2450d968996f3a39b"
+    },
+    {
+      "path": "build-prompts/20-form-renderer.md",
+      "sha256": "07b59184900483294cbad6b5c7d89f4f3b7d65690f24e34c7f25d29e37512ce3"
+    },
+    {
+      "path": "build-prompts/21-request-submission.md",
+      "sha256": "bede6e1c095173155b4e4ff0c634a47b648c0e07810fbeb240c47ddf169dcea9"
+    },
+    {
+      "path": "build-prompts/22-workflow-engine.md",
+      "sha256": "10fef0ada803e60d7df0d68cea3f4bb1918887a8217feb8709271ff6531e2570"
+    },
+    {
+      "path": "build-prompts/23-review-inboxes.md",
+      "sha256": "e1375b60091a0609edba188d9e518ef02ce59038b091e073455887a6a780a299"
+    },
+    {
+      "path": "build-prompts/24-finance-payload.md",
+      "sha256": "f2eee891f96433ad8aca13d84a7ae33d1dc6f8ef21c3bb04d9efde0909020aad"
+    },
+    {
+      "path": "build-prompts/25-finance-intake.md",
+      "sha256": "e841fda726e8a03cbb2cea337b24821f1168504a4ebd31f7a28b8d244d9e9172"
+    },
+    {
+      "path": "build-prompts/26-finance-authorization.md",
+      "sha256": "bb8ce924c52ba4eb287b9460b840d71a1d5b79603cf5adebf298837445bb0bdd"
+    },
+    {
+      "path": "build-prompts/27-finance-reconciliation.md",
+      "sha256": "a370f6c8e44b14ab35801a3b2885806696088021cee918e0a213933e9c98fada"
+    },
+    {
+      "path": "build-prompts/28-mcd-final-review.md",
+      "sha256": "2bb46238b4b190d0d3b72a124f77e3bef2407a29fd8b59e77430c1dcc93d847c"
+    },
+    {
+      "path": "build-prompts/29-readiness-gates.md",
+      "sha256": "20da730cf74490ca49c1271533bd46760ebe18706b8ccd126cdd9eac30931f5e"
+    },
+    {
+      "path": "build-prompts/30-notifications-inapp.md",
+      "sha256": "555dbfd0c412eae6485d99be6d3ecc0ce8e45fd0f58d2e385d026ac18efc0545"
+    },
+    {
+      "path": "build-prompts/31-calendar-local.md",
+      "sha256": "66e24c9b25a789a5489ade53babb38416f8709f427b66b3883284b1d6a4c8889"
+    },
+    {
+      "path": "build-prompts/32-resources-onboarding.md",
+      "sha256": "a492f22f12462b5f0ee89443b1ad11f0a28397c1ea472c428befe1fe64ef8d9c"
+    },
+    {
+      "path": "build-prompts/33-organization-admin.md",
+      "sha256": "fe1e84f88385b91df27cbcd0e4b251852a5ad99bea6a14f21964373aeb19ccef"
+    },
+    {
+      "path": "build-prompts/34-permission-admin.md",
+      "sha256": "513a89e2b4193684b44c54b52fc19eda14d65aae4c135de9207fcd83de5f5a8e"
+    }
+  ],
+  "checks": {
+    "unit": "53files/180tests PASS",
+    "frontendTypes": "PASS",
+    "edgeTypes": "PASS",
+    "lint": "PASS",
+    "build": "PASS;243modules;747.19kB main chunk;existing >500kB warning",
+    "catalog": "42migrations/102tables/1060columns/138functions PASS",
+    "targetedSql": [
+      {
+        "suite": "access",
+        "exitCode": 0,
+        "output": [
+          "P34_A1_preflight ceiling/sensitive/self-escalation deny PASS; mutation acceptance UNVERIFIED",
+          "P34_A2_preflight last custodian removal deny PASS; verified replacement/mutation path UNVERIFIED",
+          "P34_A3_preflight source expiry/current own-only/synthetic no-impersonation PASS; full mutation/provider acceptance UNVERIFIED"
+        ],
+        "logSha256": "772f6babf8d99d5cbcb034aa09bb63ddad5ebfd95bc34ce4f576ea3c2e0ab5a3"
+      },
+      {
+        "suite": "organization",
+        "exitCode": 0,
+        "output": [
+          "P33_A1 rename preserves UUID/tracking/deep links/old aliases PASS",
+          "P33_A2 merge creates no deployment/role/record grant or restricted content transfer PASS",
+          "P33_A3 active ownership/unit archive and current assigned-reviewer service archive are blocked until resolved; no orphaning PASS",
+          "P33 explicit ordinary remap/original unit, approved roster without identity link, scoped deployment, self-admin/head blockers, exact retry/stale impact/immutable history/freeze/late rollback/raw-RLS PASS"
+        ],
+        "logSha256": "d5e27b755a2f606c12ec12ea1fa36039c8c94b0ed08e283ab1751309840788ee"
+      },
+      {
+        "suite": "resources",
+        "exitCode": 0,
+        "output": [
+          "P32_A1 essential checklist completes without affiliation/course; empty work does not gate access PASS",
+          "P32_A2 permanent old alias, immutable published draft isolation, stable IDs, version acknowledgment PASS",
+          "P32_A3 independently denied targets, no file bytes/URLs, raw-denied RLS, progress creates no real task/request/FIN PASS",
+          "P32 regression exact replay/stale versions/immutable history/form stability/current target+unit revocation/private helper+raw denial/guest denial/late rollback/frozen writes PASS"
+        ],
+        "logSha256": "3d7fb87b3c0902ac3ea3effcf9bda1c305d8ad0e37d4a57bda1b72317f6b6fd0"
+      },
+      {
+        "suite": "readiness",
+        "exitCode": 0,
+        "output": [
+          "P29_A1 all tasks Done with pending exact handoff cannot submit/accept; P29_A2 protected change requires re-review and preserves prior acceptance despite label changes",
+          "P29_A3 clean owner submission/independent acceptance, safe blockers, external evidence, bounded scope exceptions, stale fingerprint, current authority and atomic rollback pass locally; actual independent concurrency remains unverified"
+        ],
+        "logSha256": "e0f393dc95a12475975161ccca37f3bc29a0434bc94eca84e33800bcd1800e77"
+      },
+      {
+        "suite": "financial-authorization",
+        "exitCode": 0,
+        "output": [
+          "P26_A1/A3 sole requester FIN pauses; unapproved PM denied; explicit official alternate records one exact partial decision/retry and preserves original request",
+          "P26_A2 explicit governed revision invalidates old readiness; original decision/hash/amount remain immutable; excluded contact metadata does not reauthorize or rewrite evidence",
+          "P26 current role/beneficiary independence, explicit revocation, external required/not-required gate, late transactional rollback and forced-RLS tables pass locally; actual independent concurrency remains unverified"
+        ],
+        "logSha256": "f6e9214798dc3fc5bd4e302baaae0bebf15b8c77c9797536f67aafff76834554"
+      },
+      {
+        "suite": "workflow-engine",
+        "exitCode": 0,
+        "output": [
+          "ok 1 - P22_A2 all quorum waits for both current reviewers, duplicate retry is one vote, then sequential one-reviewer terminal outcome",
+          "ok 2 - P22_A1 self/unassigned/revoked/direct status/stale revision denied; effective pause and authorized fresh generation replace lost authority",
+          "ok 3 - P22_A3 late outbox failure rolls back state/decision/outcome; pinned old workflow still approves after new rejected publication"
+        ],
+        "logSha256": "e32bc245660dccbd4588948e153b916efbcac30830f5261312d5911d4ef14cd7"
+      },
+      {
+        "suite": "files",
+        "exitCode": 0,
+        "output": [
+          "1..2",
+          "ok 1 - P12_A1: anonymous/unrelated/revoked/direct Storage reads denied; receipt retries reauthorize; extra links never widen origin access (real signing API remains external)",
+          "ok 2 - P12_A3: source replacement cannot rewrite finalized asset/manifest or captured source version; hashes, exact retry and redacted audit stable"
+        ],
+        "logSha256": "345ac307c2b71fb37a3606290758f1d6e4abcb1bdeb8a30ee5a8d69f633af5d7"
+      }
+    ],
+    "historicalLedgers": "Byte-for-byte originals restored after fresh runner output",
+    "browser": "Fresh visible synthetic access tab; not a full browser-suite rerun",
+    "provider": "NOT VERIFIED; no Docker/Podman command,.env.local absent,loopback-only auth origins,Google disabled",
+    "production": "No actual deployment receipt/URL verified"
+  },
+  "findings": [
+    "P34 real role/assignment/revoke/version/provenance/custodian-replacement/mutation-history path absent; full A1-A3 unverified",
+    "Real provider/JWT/Storage/official schema verification unresolved from P02-P05/P12",
+    "Independent concurrent-session acceptance unresolved",
+    "P26/P28 typed routing limited to confirmed single-stage/one-reviewer terminal mapping",
+    "P30 worker deployment/approved invocation/operational proof unresolved",
+    "Institutional authority/privacy/custody/retention and actual human/assistive UAT unresolved",
+    "Historical documentation stale statements now prefaced by current-status pointers"
+  ],
+  "preview": {
+    "oldProcessesStopped": true,
+    "portsInitiallyUnbound": true,
+    "command": "node scripts/preview-p34.cjs",
+    "previewPid": 83904,
+    "vitePid": 88768,
+    "url": "http://127.0.0.1:5178/admin/access",
+    "http": 200,
+    "loopbackOnly": true,
+    "emptyStderr": true,
+    "visibleRetained": true,
+    "tabId": "1",
+    "syntheticOnly": true
+  },
+  "usage": {
+    "baselineUsedPercent": 6,
+    "baselineWeeklyUsedPercent": 32,
+    "resetTimestamp": 1793118571,
+    "observedUsedPercent": 12,
+    "observedWeeklyUsedPercent": 33,
+    "note": "Shared-account observations; no reset action/credit/wait/purchase; no fresh P34 allocation inferred"
+  },
+  "nextAction": "Finish P34 existing Batch2; close identified provider/institutional/concurrency/human gates before activation. P35/P36 remain documentation checkpoints. No new feature/deployment performed.",
+  "finalGitProtocol": "Push reviewed documentation checkpoint, compare local/fetched/live commit/tree, require clean worktree, report actual SHA in final response"
+}

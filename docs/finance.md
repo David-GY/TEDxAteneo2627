@@ -1,5 +1,7 @@
 # Restricted finance payloads (P24)
 
+Current-status note (October27,2026): this document accumulates historical contracts. P25 intake UI, P26 bounded typed FIN authorization, P27 reconciliation and P28 independent MCD are implemented locally; later paragraphs supersede earlier “not implemented/closed/not started” statements. Actual provider/institutional/privacy/concurrent-session/human gates remain open. See docs/build/STATE.md and docs/build/P00-P34-REVIEW.md; no live financial authority or deployment is implied.
+
 Migration032 adds `finance_cases`, `finance_revisions` and `finance_lines`. All are forced-RLS, append-only and denied direct access to public/anon/authenticated/service_role. No finance joins were added to ordinary requests, search, counts, Overview or department inboxes. Existing independently authorized triage envelope metadata remains governed by P23; it confers no typed payload or evidence access.
 
 ## Submission contract

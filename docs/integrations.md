@@ -1,5 +1,7 @@
 # Identity integration — P04
 
+Current-status note (October27,2026): this document retains historical integration boundaries. P05/P07 scoped guests and later local modules now exist; earlier “until P05” statements are historical. Real Google/Supabase/JWT/Storage verification and identified HTTPS deployment targets remain unverified. Current implementation status and exact gates are in docs/build/STATE.md and docs/build/P00-P34-REVIEW.md; GitHub backup and loopback preview are not deployment receipts.
+
 Implemented locally; real Google OAuth, Supabase PostgreSQL 17 and HTTP/API verification remain blocked. No provider credentials/project target were supplied. Docker/Podman are absent. Google is deliberately disabled in local config until its secret references and an approved provider project are supplied. No Drive/Calendar scopes or guest invitations are implemented here.
 
 ## Client flow and protected routes
