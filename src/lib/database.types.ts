@@ -5,6 +5,272 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      access_assignment_sources: {
+        Row: {
+          assignment_id: string
+          capability: string
+          ceiling_id: string
+          source_assignment_id: string
+          source_assignment_version: number
+          source_role_version: number
+        }
+        Insert: {
+          assignment_id: string
+          capability: string
+          ceiling_id: string
+          source_assignment_id: string
+          source_assignment_version: number
+          source_role_version: number
+        }
+        Update: {
+          assignment_id?: string
+          capability?: string
+          ceiling_id?: string
+          source_assignment_id?: string
+          source_assignment_version?: number
+          source_role_version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_assignment_sources_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_assignment_sources_ceiling_id_fkey"
+            columns: ["ceiling_id"]
+            isOneToOne: false
+            referencedRelation: "delegation_ceilings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_assignment_sources_source_assignment_id_fkey"
+            columns: ["source_assignment_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      access_changes: {
+        Row: {
+          control_id: string
+          version: number
+          action: string
+          target_id: string
+          actor_id: string
+          reason: string
+          created_at: string
+        }
+        Insert: {
+          control_id: string
+          version: number
+          action: string
+          target_id: string
+          actor_id: string
+          reason: string
+          created_at?: string
+        }
+        Update: {
+          control_id?: string
+          version?: number
+          action?: string
+          target_id?: string
+          actor_id?: string
+          reason?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_changes_control_id_fkey"
+            columns: ["control_id"]
+            isOneToOne: false
+            referencedRelation: "access_control"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      access_control: {
+        Row: {
+          term_id: string
+          work_item_id: string
+        }
+        Insert: {
+          term_id: string
+          work_item_id: string
+        }
+        Update: {
+          term_id?: string
+          work_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_control_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: true
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_control_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      access_custody_nominations: {
+        Row: {
+          id: string
+          term_id: string
+          assignment_id: string
+          assignment_version: number
+          role_version: number
+          nominated_by: string
+          nominator_assignment_id: string
+          nominator_assignment_version: number
+          reference: string
+          created_at: string
+          expires_at: string
+          accepted_at: string | null
+          acknowledgment: string | null
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          assignment_id: string
+          assignment_version: number
+          role_version: number
+          nominated_by: string
+          nominator_assignment_id: string
+          nominator_assignment_version: number
+          reference: string
+          created_at?: string
+          expires_at: string
+          accepted_at?: string | null
+          acknowledgment?: string | null
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          assignment_id?: string
+          assignment_version?: number
+          role_version?: number
+          nominated_by?: string
+          nominator_assignment_id?: string
+          nominator_assignment_version?: number
+          reference?: string
+          created_at?: string
+          expires_at?: string
+          accepted_at?: string | null
+          acknowledgment?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_custody_nominations_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_custody_nominations_nominated_by_fkey"
+            columns: ["nominated_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_custody_nominations_nominator_assignment_id_fkey"
+            columns: ["nominator_assignment_id"]
+            isOneToOne: false
+            referencedRelation: "role_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_custody_nominations_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      access_role_versions: {
+        Row: {
+          role_id: string
+          term_id: string
+          family_id: string
+          revision: number
+          scope_type: string
+          unit_id: string | null
+          work_id: string | null
+          publisher_id: string
+          published_at: string
+        }
+        Insert: {
+          role_id: string
+          term_id: string
+          family_id: string
+          revision: number
+          scope_type: string
+          unit_id?: string | null
+          work_id?: string | null
+          publisher_id: string
+          published_at?: string
+        }
+        Update: {
+          role_id?: string
+          term_id?: string
+          family_id?: string
+          revision?: number
+          scope_type?: string
+          unit_id?: string | null
+          work_id?: string | null
+          publisher_id?: string
+          published_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_role_versions_publisher_id_fkey"
+            columns: ["publisher_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_role_versions_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: true
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_role_versions_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_role_versions_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "org_units"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_role_versions_work_id_fkey"
+            columns: ["work_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       actual_finance_events: {
         Row: {
           id: string
@@ -5730,6 +5996,7 @@ export type Database = {
           verified_at: string
           effective_to: string
           revoked_at: string | null
+          independent_root: boolean
         }
         Insert: {
           assignment_id: string
@@ -5740,6 +6007,7 @@ export type Database = {
           verified_at: string
           effective_to: string
           revoked_at?: string | null
+          independent_root?: boolean
         }
         Update: {
           assignment_id?: string
@@ -5750,6 +6018,7 @@ export type Database = {
           verified_at?: string
           effective_to?: string
           revoked_at?: string | null
+          independent_root?: boolean
         }
         Relationships: [
           {
@@ -6435,6 +6704,14 @@ export type Database = {
         }
         Returns: Json | null
       }
+      preview_access_change: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_values: Json
+        }
+        Returns: Json | null
+      }
       preview_organization_change: {
         Args: {
           p_term_id: string
@@ -6465,6 +6742,18 @@ export type Database = {
       publicity_options: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      publish_access_change: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_values: Json
+          p_expected_version: number
+          p_fingerprint: string
+          p_reason: string
+          p_request_id: string
         }
         Returns: Json | null
       }

@@ -1,5 +1,7 @@
 # TEDx continuation prompts and deployment order
 
+October28 update: P34's local mutation Batch2 is delivered; actual provider/institutional/concurrency/human gates remain. Read current STATE/P34 before using the historical resume prompt below; do not rebuild delivered role/assignment/custody code. P35/P36 still have no implementation. The next requested cleanup among review gaps is actual approved provider/JWT/Storage/concurrent verification, not an automatic new numbered builder.
+
 Prepared October27,2026. Workspace C:/Users/david/OneDrive/Documents/ChatGPT/TEDx; branch codex/core-build-checkpoints; remote https://github.com/David-GY/TEDxAteneo2627. Current build before this guide: f7d59ab1ced82131884a73e92207d0ead693737b, remotely verified. Always discover the latest branch head; do not reset to this historical SHA.
 
 ## What is saved and what is deployed

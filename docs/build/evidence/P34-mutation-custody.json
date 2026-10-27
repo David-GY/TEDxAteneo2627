@@ -1,0 +1,122 @@
+{
+  "step": "P34",
+  "status": "blocked_external",
+  "date": "2026-10-28",
+  "branch": "codex/core-build-checkpoints",
+  "startedFromCommit": "1db0c837c0d58b4daf661386d2097d65ffc5b5d5",
+  "startedFromTree": "1e1e7e42c80db129b3d2d652b592380fe151b970",
+  "startClean": true,
+  "startLocalFetchedLiveMatch": true,
+  "schema": "migrations001-043;107tables/1098columns/140public functions",
+  "scope": "Local role/assignment/expiry/revoke/version/provenance/two-party app-custody/audit-history mutation slice delivered; no real authority provisioned",
+  "acceptance": {
+    "P34_A1": "Actual local mutation/ceiling/self/sensitive/stale/exact-retry/immutable-role/late-rollback PASS",
+    "P34_A2": "Local last-custodian refusal, nomination + candidate acknowledgment + independently rooted replacement/revoke PASS; actual custody/provider acceptance UNVERIFIED",
+    "P34_A3": "Local source expiry/current own explanation/synthetic real-user input rejection PASS; actual provider/concurrency/human acceptance UNVERIFIED"
+  },
+  "checks": {
+    "sql": "node scripts/test-access-mutations.cjs PASS; access_publication.test.sql RLS/private-view/helper guards PASS",
+    "browser": "node scripts/verify-p34.cjs PASS actual compiled role + dated assignment + history + confirmation + synthetic +320px/focus/44px; expiry/revoke/custody paths SQL-tested separately",
+    "frontend": "53files/181tests PASS; final access UI2tests PASS",
+    "typechecks": "frontend and Edge PASS",
+    "lint": "PASS including final changes",
+    "build": "PASS;244modules;756.74kB main chunk;existing >500kB warning",
+    "catalog": "107/1098/140 PASS",
+    "regressions": [
+      {
+        "suite": "access",
+        "exitCode": 0
+      },
+      {
+        "suite": "organization",
+        "exitCode": 0
+      },
+      {
+        "suite": "readiness",
+        "exitCode": 0
+      },
+      {
+        "suite": "financial-authorization",
+        "exitCode": 0
+      },
+      {
+        "suite": "publicity-review",
+        "exitCode": 0
+      },
+      {
+        "suite": "workflow-engine",
+        "exitCode": 0
+      },
+      {
+        "suite": "guests",
+        "exitCode": 0
+      }
+    ],
+    "generator": "29 authority readers/four raw lock-fingerprint exceptions; repeat generation hash equality PASS after fixing stale preflight notice substitution",
+    "historicalEvidence": "Original JSON restored byte-for-byte after regression harness output",
+    "expectedRed": "Full mutation RPC missing and UI Role name absent before implementation",
+    "corrections": "Trigger record field handling, ambiguous status name, recipient fixture isolation, expected type count, generator notice reproducibility corrected and relevant checks rerun",
+    "provider": "Not run; inherited absent runtime/config/identified target/actual JWT/Storage/institutional/concurrency/human gates remain"
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/admin/access",
+    "command": "node scripts/preview-p34.cjs",
+    "pid": 83172,
+    "vitePid": 88768,
+    "syntheticOnly": true,
+    "http": 200,
+    "loopbackOnly": true,
+    "tabId": "1",
+    "visibleRetained": true,
+    "custody": "Prior83904 verified then replaced7232;7232 verified then final banner refresh83172. Vite88768 reused."
+  },
+  "usage": {
+    "baseline": 18,
+    "baselineWeekly": 34,
+    "resetTimestamp": 1793118571,
+    "effectiveBudgetPoints": 40,
+    "windDown": 53,
+    "ceiling": 58,
+    "observedPairs": [
+      [
+        39,
+        37
+      ],
+      [
+        46,
+        38
+      ],
+      [
+        49,
+        38
+      ],
+      [
+        51,
+        39
+      ],
+      [
+        55,
+        39
+      ]
+    ],
+    "finalObserved": 55,
+    "note": "Shared-account observations; no reset action/credit/purchase/wait or fresh allocation within this execution. Final checkpoint operations only after55."
+  },
+  "hashes": {
+    "supabase/migrations/20261028000100_access_publication.sql": "98d226e795a65f9607c657b5fe5259419d28ba9aca8d8dc1ec2bb210adac4afe",
+    "supabase/tests/access_publication.test.sql": "25e108880a27d2b7f3f3d6171de2bcfc4c384988f1af5915623b4d7c4ade5b9f",
+    "scripts/generate-access-authority.cjs": "ce2681cab00ccd03da45db7370f55fbec6fae3e994dffcc2e04c4a643b82c604",
+    "scripts/test-access-mutations.cjs": "b49ef3eae0effdf18194a8cd77c7941514d797496a2ef62505ee6cda970e3db9",
+    "scripts/verify-p34-mutations.cjs": "a3e51a6cc933cb822ca672e957e04c9801dbbeee6a45c616003e77e6f56b1451",
+    "scripts/preview-p08.cjs": "2148a024b59fb28ba608e7445a83f93ac4777814ce5cb3bd0f109657608b2321",
+    "src/features/admin/access/Access.tsx": "18169d690cd5ff25f7e4b56f9e307eca3fabd38cfda02263ad2d71ca2d18c2f4",
+    "src/features/admin/access/AccessEditor.tsx": "ae0ac8bc73219f5f53122ffb1f685755e09fb6eda4e0b2726ede2923e441e88a",
+    "src/features/admin/access/api.ts": "6b313f2fd5e51f7a3760b72ec18915acd1447c3ced5ec8179b2c9ad07f8a1de7",
+    "src/features/admin/access/Access.test.tsx": "eba5dc7e6c63d194e06a787ba36c1c693e686ecb5feb963f2bc93b8d2a5b55e0",
+    "src/lib/database.types.ts": "cf0e00f836f3ee94c1e36a11c6f81d702121c2d7c8cc7ac534320e3a0633a016"
+  },
+  "remaining": "Actual approved Supabase/Google/Storage environment/access, institutional grantor/sensitive/custody/privacy/retention mappings, independent concurrent sessions and human/assistive acceptance. Other review gaps remain open.",
+  "nextAction": "Provider baseline/readiness checks on explicitly identified approved synthetic targets; no automatic P35/P36. Keep P34 blocked_external until actual gates pass.",
+  "restrictions": "No agents/chats/worktrees/deployment/provider/billing/cap changes/remote resets/external messages/automation/schedules",
+  "finalGitProtocol": "After reviewed commit/push verify local/fetched/live SHA/tree equality and clean worktree; actual final SHA reported in response"
+}

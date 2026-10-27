@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "Compiled explicit role and dated assignment publication PASS",
+    "Current SQL rows/history, fixed synthetic preview/no impersonation PASS",
+    "320px/focus/44px PASS"
+  ],
+  "target": "Isolated synthetic PGlite/compiled browser; not actual provider/human proof"
+}

@@ -1,5 +1,7 @@
 # P00–P34 consistency and omissions checkpoint
 
+October28 update: P34's local mutation gap listed in this historical review is now implemented and locally verified by migration043. See steps/P34.md and evidence/P34-mutation-custody.json. Other external/provider/institutional/concurrent/human findings remain open; this does not retroactively alter the reviewed October27 source or its evidence.
+
 Reviewed October27,2026 (Asia/Manila). Audited branch codex/core-build-checkpoints at ee2493eb43bcc7ab1821eaa361d5f159bbaedda3/tree7eb447ba9bf54766f842b3f3bcb4893a5e9c57ff. Source/checkpoints were clean and matched the fetched/live GitHub branch before review. This report is a ledger/source/targeted-regression review by one assistant, not independent certification or a complete provider/security audit.
 
 ## Verdict

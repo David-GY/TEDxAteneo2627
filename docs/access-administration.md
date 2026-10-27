@@ -1,4 +1,18 @@
-# P34 Access administration — inspection/preflight foundation
+# P34 Access administration
+
+Current status October28,2026: **blocked_external**. The local mutation slice is implemented in migration043 (`20261028000100_access_publication.sql`),107tables/1098columns/140public functions. The historical foundation below is superseded where it says mutation is unavailable.
+
+`preview_access_change(term,action,values)` validates a closed typed role publication, assignment grant/expiry/revoke or custodian nomination/acceptance. It returns the control version and current source/authority fingerprint. `publish_access_change(term,action,values,expectedVersion,fingerprint,reason,key)` reauthorizes under the existing readiness lock, locks current authority rows, rejects stale/changed retries, and commits immutable history plus canonical redacted audit/outbox/receipt atomically. No raw table write grants were opened.
+
+Published role revisions create distinct immutable role/permission snapshots with a stable family ID. Existing assignments retain their role ID/permissions. Assignments pin every capability to an independently provisioned exact scope/date/sensitive ceiling and source role/assignment version. Recursive bounded lineage checks invalidate delegated authority when source membership/role/assignment/deployment/ceiling changes or expires. Twenty-nine current authority consumers use a private filtered relation; four lock/fingerprint routines retain raw rows so invalidated rows still affect locks and snapshots. The reviewed generator inventory is reproducible.
+
+App custody replacement requires a currently verified custodian's dated nomination and the independently authenticated candidate's acknowledgment against current assignment/role versions. Only an exact term admin.configure+roles.manage assignment may become an independently attested application custody root; the two confirmed capabilities receive their explicit nomination-approved ceilings. This preserves the replacement after predecessor revocation without rooting FIN/feedback permissions. Self-privilege mutation is denied; a dependent unacknowledged replacement cannot satisfy removal. Initial custody/ceilings still require trusted approved provisioning; no bootstrap bypass or actual authority is seeded. Application acknowledgment is **not** proof of provider-console ownership or institutional approval.
+
+The UI now exposes supported controls, exact review/confirmation, immutable revisions, scoped current assignments, own publication history and identical uncertain-result retry using existing identity-bound memory. No arbitrary JSON editor/impersonation/read-all endpoint. Work options/revision metadata are independently authorized. Preflight still changes nothing. Emergency recovery remains closed.
+
+Named local A1–A3 mutation tests pass; browser automation verifies actual role/assignment publication/history/synthetic preview/reflow/focus, while expiry/revoke/custody paths are additionally tested in SQL. Actual Supabase/JWT/Storage, independent concurrent sessions, approved real ceilings/custody and human/privacy/retention/assistive gates remain open. Full release acceptance is not complete; no deployment occurred.
+
+## Historical inspection/preflight foundation (migration042)
 
 Status: in_progress. Migration042 (`20261026231636_delegation.sql`);102tables/1060columns/138public functions. This contract describes the delivered read/validation batch, not completed role mutation administration.
 
