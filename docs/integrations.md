@@ -1,5 +1,7 @@
 # Identity integration — P04
 
+October28 hosted baseline supersedes the historical no-target/no-PostgreSQL statements below: the owner-identified Supabase project now runs unchanged migrations001–043 on PostgreSQL17.11; provider catalog/types and anonymous HTTP permissions were checked. Google remains disabled, zero Auth users, Site URL localhost:3000 with no redirects; no approved HTTPS frontend origin or actual PKCE/member/guest/current-old-token/file-byte acceptance yet. See [actual provider facts and next inputs](verification/PROVIDER-BASELINE.md). No Google credential, token or private roster is stored here.
+
 Current-status note (October27,2026): this document retains historical integration boundaries. P05/P07 scoped guests and later local modules now exist; earlier “until P05” statements are historical. Real Google/Supabase/JWT/Storage verification and identified HTTPS deployment targets remain unverified. Current implementation status and exact gates are in docs/build/STATE.md and docs/build/P00-P34-REVIEW.md; GitHub backup and loopback preview are not deployment receipts.
 
 Implemented locally; real Google OAuth, Supabase PostgreSQL 17 and HTTP/API verification remain blocked. No provider credentials/project target were supplied. Docker/Podman are absent. Google is deliberately disabled in local config until its secret references and an approved provider project are supplied. No Drive/Calendar scopes or guest invitations are implemented here.

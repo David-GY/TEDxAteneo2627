@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "environment": "isolated-synthetic",
+  "projectRef": "",
+  "supabaseUrl": "",
+  "appOrigin": "",
+  "targetApprovalReference": "",
+  "termId": null,
+  "publishableKeyEnv": "TEDX_VERIFY_PUBLISHABLE_KEY",
+  "profiles": [
+    {"case":"member","tokenEnv":"TEDX_VERIFY_MEMBER_JWT","subjectId":null,"membershipId":null},
+    {"case":"nonmember","tokenEnv":"TEDX_VERIFY_NONMEMBER_JWT","subjectId":null,"membershipId":null},
+    {"case":"suspended","tokenEnv":"TEDX_VERIFY_SUSPENDED_OLD_JWT","subjectId":null,"membershipId":null,"scopeEndedAt":null,"changeEvidenceReference":""},
+    {"case":"otherUnit","tokenEnv":"TEDX_VERIFY_OTHER_UNIT_JWT","subjectId":null,"membershipId":null},
+    {"case":"activeGuest","tokenEnv":"TEDX_VERIFY_GUEST_JWT","subjectId":null,"membershipId":null},
+    {"case":"revokedGuest","tokenEnv":"TEDX_VERIFY_REVOKED_GUEST_OLD_JWT","subjectId":null,"membershipId":null,"scopeEndedAt":null,"changeEvidenceReference":""},
+    {"case":"expiredGuest","tokenEnv":"TEDX_VERIFY_EXPIRED_GUEST_OLD_JWT","subjectId":null,"membershipId":null,"scopeEndedAt":null,"changeEvidenceReference":""}
+  ]
+}

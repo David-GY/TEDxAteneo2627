@@ -1,28 +1,28 @@
 # TEDx continuation prompts and deployment order
 
-October28 update: P34's local mutation Batch2 is delivered; actual provider/institutional/concurrency/human gates remain. Read current STATE/P34 before using the historical resume prompt below; do not rebuild delivered role/assignment/custody code. P35/P36 still have no implementation. The next requested cleanup among review gaps is actual approved provider/JWT/Storage/concurrent verification, not an automatic new numbered builder.
+October28 update: P34's local mutation Batch2 is delivered. Subsequent owner-authorized provider work applied migrations001–043 to TEDxBackend (`wyurosneoxfqqrrvstke`); hosted schema/private bucket/type inventory and anonymous API checks are verified. Frontend/Google/Edge/worker deployment and authenticated/independent-session/institutional/human/recovery gates remain open. Read [provider baseline](../verification/PROVIDER-BASELINE.md), STATE and P34; do not rebuild delivered mutation code. P35/P36 still have no implementation. The next requested cleanup is actual Google/JWT/Storage verification, not an automatic numbered builder.
 
 Prepared October27,2026. Workspace C:/Users/david/OneDrive/Documents/ChatGPT/TEDx; branch codex/core-build-checkpoints; remote https://github.com/David-GY/TEDxAteneo2627. Current build before this guide: f7d59ab1ced82131884a73e92207d0ead693737b, remotely verified. Always discover the latest branch head; do not reset to this historical SHA.
 
 ## What is saved and what is deployed
 
-Code, migrations, tests, evidence and checkpoints are committed/pushed to GitHub. Git is source backup; it does not deploy the frontend, apply database migrations, configure Auth, upload Storage policies or install Edge Functions/jobs. The existing http://127.0.0.1:5178/admin preview is local synthetic development, not a remotely deployed product. No verified Cloudflare/Supabase deployment or production URL is recorded. Only .env.example is tracked; no deployment credential availability is established. Never put secrets in these prompts or Git.
+Code, migrations, tests, evidence and checkpoints are committed/pushed to GitHub. The Supabase database schema and private bucket are now actually deployed, with43migration records and107/1098/140hosted catalog counts. Git source backup is separate. The existing http://127.0.0.1:5178/admin/access preview is local synthetic development. No Cloudflare frontend/HTTPS app origin, Google OAuth or Edge Functions/worker deployment is verified. CLI login is available outside Git; never put secrets in these prompts or source.
 
-P34 has an inspection/preflight implementation only; actual permission mutation remains unfinished. P35 and P36 have context checkpoints only and no implementation. P00–P33 local checks do not discharge their provider, authority, privacy, concurrent-session, restore or human gates. STATE retains exact blockers. Do not skip ahead just because a numbered checkpoint exists.
+P34 role/assignment/revoke/custody mutation is locally delivered, with actual authenticated provider acceptance still pending. P35 and P36 have context checkpoints only. Earlier local checks and the hosted schema baseline do not discharge authority/privacy/concurrent-session/restore/human gates. STATE retains exact blockers.
 
 ## How to use
 
 Send one prompt at a time in this existing chat/checkout. Select the model/effort recommended by each numbered file using the app controls. When a step is partial, repeat its resume prompt until the local acceptance work is finished; carry external gates forward explicitly. Do not advance a dependent step with missing code/interfaces. Read the checkpoint after every run. No background waiting, reset credits, extra chats, agents or worktrees. Usage at preparation was91% in the same five-hour window, so no new implementation/deployment was opened here. On later execution observe then-current usage and follow BUILD-CONTRACT without assuming a reset.
 
-## 1. Resume P34 first
+## 1. Continue the open provider checks first
 
 ```text
-Resume P34 using build-prompts/CONTINUE.md and build-prompts/34-permission-admin.md.
+Continue docs/verification/PROVIDER-BASELINE.md and OPEN-DECISIONS.md from the smallest unfinished provider check. Read STATE, the provider evidence and relevant P02–P05/P12/P34 contracts. P34's local mutation slice is delivered; do not rebuild it.
 Workspace: C:/Users/david/OneDrive/Documents/ChatGPT/TEDx.
 Reuse codex/core-build-checkpoints; verify latest local/fetched/live commit/tree and clean status before editing, preserving newer work.
 Use skill-orchestrator-pro and proportional council-review with simulated perspectives labeled. No agents/chats/worktrees.
-Read STATE, docs/build/steps/P34.md, P34-custody.json and the existing P34 plan. Complete its Batch2 from the smallest unfinished item; do not rebuild verified inspection/preflight. Actual role/assignment/revoke/custody mutation and full A1-A3 are unverified. Write named failing mutation tests first. Keep the preview visibly running; verify owned processes before replacements.
-Follow BUILD-CONTRACT usage limits and exact provider/human gates. Commit/push reviewed checkpoints to the existing branch, verify final local/fetched/live SHA/tree equality and clean status, and report implemented versus blocked work. Do not advance to P35 automatically. No provider/billing/cap changes, external messages, remote resets or schedules.
+The owner authorized provider changes only on wyurosneoxfqqrrvstke. Its43migrations are already applied; do not reset or reapply the empty-target rollback bundle. Google is disabled and no HTTPS app origin/client/test users are ready. Discover organization-owned hosting/OAuth resources first, use secure credential entry, then approve exact callbacks and synthetic participant/roster fixtures before live verification. Keep the owned synthetic preview visible and distinct from the hosted backend. Never count fixture tests as provider/independent-session/human proof.
+Follow BUILD-CONTRACT usage limits without restarting the prior allocation after a window change. Commit/push reviewed checkpoints to the existing branch, verify final local/fetched/live SHA/tree equality and clean status, and report verified versus blocked work. No billing/cap changes, external messages, remote resets or schedules. No automatic P35/P36.
 ```
 
 ## 2. Implement P35 after P34's required interfaces exist

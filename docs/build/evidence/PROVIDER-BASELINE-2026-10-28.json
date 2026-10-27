@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "status": "blocked_external",
+  "date": "2026-10-28",
+  "checkedAt": "2026-10-27T17:24:54.595Z",
+  "branch": "codex/core-build-checkpoints",
+  "sourceApplicationCommit": "a37ea8f8a5e3c63282c08dc40c9930a7e4084129",
+  "sourceApplicationTree": "d9740da3bea43cab2e5ffe8f03b89d6407a1334a",
+  "startClean": true,
+  "startLocalFetchedLiveMatch": true,
+  "authorization": "Owner David Yu identified this target, authorized provider changes and CLI login in this conversation. No secrets recorded.",
+  "target": {
+    "projectRef": "wyurosneoxfqqrrvstke",
+    "name": "TEDxBackend",
+    "dashboardBranchLabel": "PRODUCTION",
+    "plan": "FREE",
+    "use": "Only inspected empty target and deployed schema/private bucket; no real participants or policy activated."
+  },
+  "deployment": {
+    "postgresVersion": "17.11",
+    "cliVersion": "2.122.0",
+    "migrations": 43,
+    "sourceManifest": "docs/verification/migration-plan.json",
+    "rollbackBundleSha256": "cf11d68a3f73e6bc426aa53792b3013d40999ad44c8d8d7b722dd246e0918575",
+    "before": {
+      "auth_users": 0,
+      "migration_tracker_present": false,
+      "postgres_version": "17.11",
+      "public_api_functions": 0,
+      "public_columns": 0,
+      "public_tables": 0,
+      "storage_buckets": 0,
+      "storage_objects": 0
+    },
+    "rollbackRehearsal": "All43 migrations passed hosted BEGIN/ROLLBACK catalog/RLS assertions",
+    "afterRollback": {
+      "auth_users": 0,
+      "migration_tracker_present": false,
+      "postgres_version": "17.11",
+      "public_api_functions": 0,
+      "public_columns": 0,
+      "public_tables": 0,
+      "storage_buckets": 0,
+      "storage_objects": 0
+    },
+    "apply": "pnpm exec supabase db push --linked --skip-vault --yes --output-format text; dry-run first; no --include-seed",
+    "finalInventory": {
+      "auth_users": 0,
+      "migration_tracker_present": true,
+      "postgres_version": "17.11",
+      "public_api_functions": 140,
+      "public_columns": 1098,
+      "public_tables": 107,
+      "storage_buckets": 1,
+      "storage_objects": 0
+    }
+  },
+  "security": {
+    "catalog": {
+      "anonymous_access_publication_execute": false,
+      "anonymously_selectable_tables": 0,
+      "applied_migrations": 43,
+      "authenticated_raw_finance_select": false,
+      "authenticated_raw_lineage_view_select": false,
+      "private_bucket_guard": true,
+      "tables_without_forced_rls": 16,
+      "tables_without_rls": 0
+    },
+    "advisorFindings": 136,
+    "advisorCounts": {
+      "WARN:authenticated_security_definer_function_executable": 136
+    },
+    "nonforcedTables": [
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "approval_assignments"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "approval_decisions"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "form_versions"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_assignment_shells"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_drafts"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_events"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_finance_values"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_revisions"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_triage_events"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_types"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_workflow_events"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "request_workflow_outcomes"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "restricted_request_payloads"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "tracking_counters"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "workflow_instances"
+      },
+      {
+        "owner_bypasses_rls": true,
+        "table_name": "workflow_versions"
+      }
+    ],
+    "interpretation": "No security waiver or certification; authenticated guarded definer API and owner/BYPASSRLS boundary require review and real negative user tests."
+  },
+  "officialTypes": {
+    "projectRef": "wyurosneoxfqqrrvstke",
+    "source": "Official CLI export from actual PostgreSQL17.11",
+    "tables": 107,
+    "columns": 1098,
+    "functions": 140,
+    "tableColumnFunctionNamesMatch": true,
+    "argumentNameMismatches": [],
+    "representationDifferences": [],
+    "localSha256": "cf0e00f836f3ee94c1e36a11c6f81d702121c2d7c8cc7ac534320e3a0633a016",
+    "officialSha256": "533c6850626b42eabb31a85d9803bc288817f06296509317eaae5ead63165d21",
+    "limit": "Structural inventory comparison; not a claim that all runtime RPC/64-bit SDK transports are verified"
+  },
+  "http": {
+    "authHealth": 200,
+    "anonymousCapability": 401,
+    "anonymousPublication": {
+      "http": 401,
+      "sqlCode": "42501"
+    },
+    "anonymousFinance": {
+      "check": "anonymous_finance_cases_raw_read",
+      "http": 401,
+      "sqlCode": "42501",
+      "pass": true,
+      "correctedProbe": "Uses actual request_id column; prior id/work_item_id probes were invalid, not security passes"
+    },
+    "limit": "Public publishable key only; no user JWT or populated row/byte isolation proof."
+  },
+  "actualDashboard": {
+    "googleEnabled": false,
+    "siteUrl": "http://localhost:3000",
+    "redirectUrls": [],
+    "edgeFunctions": 0,
+    "hostedFrontendOrigin": null
+  },
+  "toolVerification": {
+    "tests": "pnpm test:provider-tools PASS11tests",
+    "lint": "pnpm lint PASS after preserving caught-error cause in rollback test",
+    "providerRunner": "Prepared; missing inputs BLOCKED exit2; injected fixtures always test_only",
+    "raceRunner": "Prepared only; no remote mutation/race executed; does not prove backend PID/lock overlap",
+    "frontendTests": "Prior P34 53files/181tests remain historical; no app/schema changes or new frontend certification in this phase"
+  },
+  "failuresAndCorrections": [
+    "CLI noninteractive login required explicit text/agent-no mode; authenticated successfully without exposing token",
+    "db query requires linked plus exact project override",
+    "rollback catalog excludes trigger functions; scanner preserves SQL comments/quoted bodies",
+    "initial finance id/work_item_id probes returned42703; corrected request_id denied401/42501; malformed publication arity404 excluded from passes",
+    "all-FORCE assumption rejected:16tables are RLS-enabled/non-FORCE; recorded owner boundary",
+    "final lint initially failed preserve-caught-error in test; cause preserved and lint passed"
+  ],
+  "review": {
+    "kind": "Single assistant manual review with simulated security, evidence and operational perspectives; no independent reviewer or agent",
+    "result": "Bounded empty-target rollback followed by normal tracked migrations; no secret logs or invented authenticated/human acceptance. Full release remains blocked."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/admin/access",
+    "previewPid": 83172,
+    "vitePid": 88768,
+    "addresses": "127.0.0.1 only",
+    "retainedTab": true,
+    "limit": "Synthetic local P34 fixture; not connected hosted application"
+  },
+  "open": [
+    "Google OAuth client and exact approved app callback/origin",
+    "Approved synthetic real Google identities/roster and scoped test fixtures; current/old valid JWT checks",
+    "Actual upload/finalize/private Edge bytes/hash/revoke; files Edge deployment",
+    "Independent sessions and business race outcomes including locks/backend IDs where required",
+    "FIN/MCD mapping and privacy/retention/custody inputs deferred by owner; expansion contract prepared",
+    "P30 Edge worker/runtime/secret/manual invocation/event delivery/retry evidence; no schedule authorized",
+    "Actual human mobile/keyboard/assistive UAT and isolated restore rehearsal",
+    "P35/P36 implementation not started beyond context checkpoints"
+  ],
+  "usage": {
+    "start": {
+      "fiveHourUsedPercent": 57,
+      "reset": 1793118571,
+      "weeklyUsedPercent": 40,
+      "effectivePoints": 33,
+      "windDown": 85,
+      "ceiling": 90
+    },
+    "windowChanged": {
+      "fiveHourUsedPercent": 6,
+      "reset": 1793136576,
+      "weeklyUsedPercent": 41
+    },
+    "later": [
+      {
+        "fiveHourUsedPercent": 52,
+        "reset": 1793136576,
+        "weeklyUsedPercent": 48
+      },
+      {
+        "fiveHourUsedPercent": 65,
+        "reset": 1793136576,
+        "weeklyUsedPercent": 50
+      }
+    ],
+    "priorWindowFinalConsumption": "unknown",
+    "interpretation": "Shared account observations; original bounded scope retained, no fresh40point allocation. Closing checkpoint; no reset action/credit/purchase/wait."
+  },
+  "next": "Continue provider baseline prerequisites before real Auth/Storage tests. Do not automatically implement P35/P36 or open another provider subsystem in this checkpoint.",
+  "custody": "Source hashes below; final commit/fetched/live remote SHA/tree equality and clean worktree verified after reviewed commit/push and reported in final response.",
+  "sha256": {
+    "package.json": "2c06e2a52c3818d3e12f2b88f667b25f44648e14f21255ec6d213e1220d57f36",
+    "scripts/provider-verification.cjs": "1be6b42be8ab5a25fd41d130893610c1b1f0fce34726a2fe6390b296c3302c90",
+    "scripts/provider-race.cjs": "1f34eb21d758f18c6eac0a0581caa83b936f209c9d8af099f4322c81e09fd23d",
+    "scripts/provider-migrations.cjs": "a5dd789c7a169089dd1f0c7c7292d090d27d6627888424dec15190e76361f851",
+    "scripts/test-provider-verification.cjs": "50ddd625de33c94207caa848b0e63f8b78645e785ae74e5c575e81aeb51093c8",
+    "scripts/test-provider-race.cjs": "0e1c5584f3e112e27536acde86b1e60cebca2bb6f776eea69888d4e5e448b201",
+    "scripts/test-provider-migrations.cjs": "6ba5d686aa2008a6f23ddab2706a966c85b8d40f4d021ab3f8d467168d5d08bb",
+    "docs/verification/PROVIDER-BASELINE.md": "23d49cf4a13dbd5eafa2e0cb866b6feafbd4d80a814e4d6f0feb33c45d2e10a1",
+    "docs/verification/OPEN-DECISIONS.md": "b7ef50c26d5824031f80faf6a257c8042f190a5c6ffa7ad17685ce748f5414b4",
+    "docs/verification/migration-plan.json": "3a078791e9bd42564a4f55338b5a97b0df67606934af6cfc6795c53de6a694f7",
+    "docs/verification/provider-inventory.sql": "db62ab50db3bc00c039ce31a1cefd6f9aec2c6de0bc5b37cbfbf1fe0fe73b60d",
+    "docs/verification/provider-security-inventory.sql": "a93a625d5392f75dad504d20ef9b00c621cb95f5e3274db41205cdb47e35e878",
+    "docs/verification/provider-target.example.json": "7cc79ff3933929bf31329a375afab689427342462495f84d0cfec23fc1d6e060"
+  }
+}
