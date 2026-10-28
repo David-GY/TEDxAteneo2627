@@ -36,7 +36,7 @@ it('P35_U1 R1 task: deliberate editing keeps inputs across disclosure and still 
  const execute=vi.fn(),api:TasksApi={read:vi.fn(),detail:async()=>item,options:async()=>({actorId:id,members:[],units:[]}),execute}
  render(<RouterProvider router={createMemoryRouter([{id:'workspace',path:'/tasks/:taskId',loader:()=>({termId:id,memberId:id}),element:<TaskDetail api={api}/>}],{initialEntries:['/tasks/'+id]})}/>)
  await screen.findByRole('heading',{name:item.title})
- const disclosure=screen.getByText('Edit task',{exact:true}).closest('details')!
+ const disclosure=(await screen.findByText('Edit task',{exact:true})).closest('details')!
  expect(disclosure.open).toBe(false)
  fireEvent.click(screen.getByText('Edit task',{exact:true}))
  const notes=await screen.findByLabelText('Task notes')
@@ -45,4 +45,23 @@ it('P35_U1 R1 task: deliberate editing keeps inputs across disclosure and still 
  fireEvent.click(screen.getByText('Edit task',{exact:true}))
  expect((screen.getByLabelText('Task notes') as HTMLTextAreaElement).value).toBe('Safe in-memory edit')
  expect(execute).not.toHaveBeenCalled()
+})
+
+it('P35_U1: named task progress uses the current authorized projection and existing version-bound command',async()=>{
+ const execute=vi.fn<NonNullable<TasksApi['execute']>>().mockResolvedValue({ok:false,error:mapCommandError({code:'40001'})})
+ render(<TaskEditor focused termId={id} item={{...item,progressActions:['in_progress','blocked']}} onSaved={vi.fn()} api={{read:vi.fn(),options:async()=>({actorId:id,members:[],units:[]}),execute}}/>)
+ await screen.findByRole('button',{name:'Start work'})
+ expect(screen.queryByLabelText('Task status')).toBeNull()
+ expect(screen.getByText('Edit task',{exact:true}).closest('details')?.open).toBe(false)
+ fireEvent.change(screen.getByLabelText('Change or action reason (required)'),{target:{value:'Begin the assigned work'}})
+ fireEvent.click(screen.getByRole('button',{name:'Start work'}))
+ await screen.findByRole('alert')
+ expect(execute.mock.calls[0][0]).toMatchObject({command:'transition',id,version:3,data:{state:'in_progress',reason:'Begin the assigned work'}})
+ expect(screen.queryByRole('button',{name:'Complete task'})).toBeNull()
+})
+it('P35_U1: malformed review/action projections cannot grant apparent task approval',async()=>{
+ for(const addition of [{reviewGates:{finance:'approved',publicity:'not_required'}},{progressActions:['approve_finance']}]){
+  const rpc=vi.fn().mockResolvedValue({data:{...item,...addition},error:null}),api=createTasksApi(Promise.resolve({rpc})as unknown as ReturnType<typeof createSupabaseClient>)
+  await expect(api.detail!(id)).rejects.toThrow('Tasks unavailable')
+ }
 })
