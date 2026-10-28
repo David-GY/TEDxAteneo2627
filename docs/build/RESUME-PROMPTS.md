@@ -1,5 +1,7 @@
 # TEDx continuation prompts and deployment order
 
+Midway adoption checkpoint October28: read [ADOPTION-AUDIT.md](ADOPTION-AUDIT.md) and [newcomer-experience.md](../newcomer-experience.md) before further UI work. All remaining prompts inherit these criteria through BUILD-CONTRACT. A bounded existing-flow usability cleanup is recommended before expanding editors/modules; no fixes or new short-ID allocator have been implemented by the audit. Current provider blockers remain independently open. P35–P63 feature completion alone is not newcomer acceptance.
+
 October28 update: P34's local mutation Batch2 is delivered. Subsequent owner-authorized provider work applied migrations001–043 to TEDxBackend (`wyurosneoxfqqrrvstke`); hosted schema/private bucket/type inventory and anonymous API checks are verified. Frontend/Google/Edge/worker deployment and authenticated/independent-session/institutional/human/recovery gates remain open. Read [provider baseline](../verification/PROVIDER-BASELINE.md), STATE and P34; do not rebuild delivered mutation code. P35/P36 still have no implementation. The next requested cleanup is actual Google/JWT/Storage verification, not an automatic numbered builder.
 
 Prepared October27,2026. Workspace C:/Users/david/OneDrive/Documents/ChatGPT/TEDx; branch codex/core-build-checkpoints; remote https://github.com/David-GY/TEDxAteneo2627. Current build before this guide: f7d59ab1ced82131884a73e92207d0ead693737b, remotely verified. Always discover the latest branch head; do not reset to this historical SHA.

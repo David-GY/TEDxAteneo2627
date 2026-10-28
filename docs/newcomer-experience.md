@@ -1,0 +1,47 @@
+# Newcomer experience contract
+
+October28,2026 midway checkpoint. This applies to existing-screen remediation and every remaining build prompt through P63. It records the owner's requirement for easy adoption. It does not certify the current UI or authorize a schema change, policy change, provider configuration, rollout or optional module by itself. Evidence and open findings: [adoption audit](build/ADOPTION-AUDIT.md).
+
+## Everyday member experience
+
+The system should answer four questions without a manual: What do I need to do? By when? Who is waiting for it? Who can help me? Keep deliverables, committee help and cross-committee tasks central. Preserve separate submission, commitment, approval and acceptance events while explaining each in ordinary language.
+
+- Home leads with the next action and a named owner/contact; a new or empty account gets a direct first-work/help route. A process steward assigns first work before live onboarding. Missing contacts remain explicitly missing and block the affected live rollout; never invent a person or expose a private contact.
+- Use a small stable set of everyday destinations. As a design target, keep roughly four or five primary choices, with additional tools grouped by purpose and authorized role. This is a product preference to validate, not a universal usability law. Mobile already has four primary routes plus More; preserve orientation across sizes. Hiding navigation never replaces API authorization.
+- Give a work detail one clear next-step area: title, short reference if issued, owner, due date, state, specific blocker and permitted next action. Keep editing, full activity, verification details and advanced tools in deliberate sections. Do not hide a required review, error, deadline or recovery action inside a collapsed section.
+- Use outcome-specific buttons: Start work, Save changes, Send for review, Request changes, Accept handoff. Do not require members to choose raw state-machine verbs from a generic action selector. Preserve meaningful confirmation for consequential actions; avoid repeating it for routine low-impact updates.
+- Ask only for fields relevant to the selected task/request and state. A short ordinary task must not require FIN/MCD settings, form version IDs, money, provider connections or optional profile details. Group longer forms into named steps with safe back/change/review behavior, rather than putting every possible field on one page or splitting every trivial field onto a separate page.
+- Explain an acronym at the point of use. Prefer Ask another committee for help, Finance review (FIN), and Final publicity review (MCD). Keep actual institution-approved names where required. MEA expansion is still unconfirmed; do not copy the specification's unconfirmed A1 assumption as approved glossary content.
+- Treat Start Here as quick assistance, not a compliance course: Open my work, Find help, Try a safe example. Required process information stays available to everyone; course/affiliation/phone may stay blank. Tours can be skipped/revisited. Guide acknowledgments do not become an access gate. Publishing controls belong in a distinct authorized editor area.
+- Empty/error/denied states explain the safe next action and offer the corresponding permitted control or contact route. Do not reveal whether inaccessible records exist. Distinguish an empty list, missing connection, missing configuration and permission loss.
+- Refresh must preserve safe edits where feasible; warn and obtain explicit discard intent before losing entered work. After a timeout, offer Check whether saved / Try again in plain language while preserving existing idempotency and duplicate prevention. Never persist private drafts into an unapproved browser cache to achieve convenience.
+
+## References and technical details
+
+An internal database identifier and a member-facing reference serve different purposes.
+
+1. Keep UUIDs, immutable keys, hashes, idempotency keys and versioned relationships intact. A short reference never grants access or substitutes for an independently authorized lookup.
+2. Lead lists and links with the item's title. Show an issued short reference beside it with Copy link / Copy reference where useful. Members must never transcribe UUIDs, hashes or permission keys to perform ordinary work. Keep those available in appropriately scoped verification/support details.
+3. Preserve issued `FIN-027` / `MCD-027` request references and historical aliases. Existing allocation is term/namespace scoped and shared across forms. Do not renumber old records or change a reference when a unit/title/status label changes.
+4. For new ordinary request namespaces, propose short recognizable prefixes (roughly2–6letters) rather than a whole organizational hierarchy. Validate uniqueness and preserve existing long references. Do not silently truncate or alias a code into a collision. A prefix policy needs a reviewed implementation/configuration decision; this document does not change the deployed allocator.
+5. Tasks and deliverables currently need a consistent display-reference design. Illustrative candidates are `TASK-027` and `DEL-012`; these are examples, not implemented IDs. Before issuing them, define server allocation/backfill/immutability/term uniqueness, exact search, copy behavior and safe retry/concurrency tests. Never use the first few characters of a UUID as a supposedly unique identifier.
+6. Show the term separately in cross-term search, exports and copied context, for example `FIN-027 · 2026–27`. Current-term pages can remain concise. A draft without an issued number says Draft; it does not pretend a practice item is a real request.
+7. Replace visible Immutable manifest with Submitted file version or Final files for this submission, with verification details available when needed. Use human names/dates in access-change review; raw key/value serialization is not the confirmation UI. Keep the underlying immutable proof.
+
+## Administrator and future-feature boundaries
+
+Administrators also need understandable tools. Use a common pattern: choose the change, edit a bounded draft, preview in plain language, review who/what changes, publish, and view history. Distinguish an actual publication from a simulation. Use safe templates and named selectors, not SQL/JSON consoles or raw capability strings as the only explanation. Explain scope as This committee / This record / This term / My own records while keeping stable security keys behind the controls.
+
+P35–P40 must reuse this pattern; no separate editor conventions for every configuration kind. Preserve immutable versions, exact scope/expiry, no self-approval and independent custody. P41–P45 must reduce work through useful notifications/search/safe imports, without extra queues, duplicate entry or dashboards full of equal-weight widgets. P46–P49 keep custody/recovery/setup complexity in authorized operational tools; show members only actionable service health.
+
+P51–P61 are optional and separately gated. Disabled modules add no empty member navigation, setup prompts, connection nags or mandatory fields. Choosing one integration package does not commit to the entire backlog. Reuse the established request/status/help patterns for rooms, borrowing and mentoring. Separate confidential feedback and consent from ordinary work; never simplify by widening access or misrepresenting anonymity. Turnover tools in P62 belong to custodians and successors rather than everyday member navigation.
+
+## Review and human acceptance
+
+For each changed flow record actor, starting page/state, action, expected outcome, steps, wrong turns, terminology/ID exposure, empty/error/conflict path and relevant mobile/keyboard checks. Prefer one testable user journey over a new screen-count metric. A shorter journey is not an improvement if it removes an important decision or recovery step.
+
+Before broad rollout, P50 and P63 must use actual representative first-time and experienced members under their own intended scope, including members who withhold optional affiliation/course and late joiners. Follow the original section14 target: identify first work, owner, date and next action within two minutes after basic orientation; at least90% essential assigned flows completed unassisted after onboarding. These are proposed project targets to validate with the responsible owner, not observed results. Track task success, time, wrong turns and help needed; do not substitute logins, guide checkboxes or automated test counts for learnability. Affiliation need not be collected to use the product or prove an individual can complete a task; any research grouping remains optional and consented.
+
+Include finding-specific tests from the audit: distinguish submitted from approved, identify the precise blocker, find a current contact, use/copy a short reference, recover without duplicate submission, skip/revisit practice and complete an essential mobile/keyboard task. Apply the existing44CSS-pixel house control target and relevant accessibility checks throughout development; P48 is a cross-system check, not permission to defer barriers until then. Automated/browser inspection is not human UAT or full WCAG certification.
+
+This checkpoint adds review criteria only. Current adoption findings remain open until implementation and actual verification are recorded. Preserve every provider, security, institutional, privacy and recovery gate already in STATE.

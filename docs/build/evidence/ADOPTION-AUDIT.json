@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "checkedAt": "2026-10-28T13:27:04.052Z",
+  "kind": "Midway newcomer-adoption source/live-fixture/future-plan audit",
+  "sourceCommit": "935df248c8777328c68d92138a660793fdb84238",
+  "sourceTree": "a2516905a3bba4057961008a2151a2943174bf7b",
+  "branch": "codex/core-build-checkpoints",
+  "startClean": true,
+  "startLocalFetchedLiveEqual": true,
+  "auditStatus": "review_delivered",
+  "productAdoption": "unverified_pending_remediation_and_actual_human_uat",
+  "verdict": "Purpose aligned; existing UI needs focused simplification; future plan needs shared adoption acceptance",
+  "scope": {
+    "source": "Original selected principles/personas/IA/F14/configuration/rollout/roadmap/UAT sections; current navigation/work/task/request/files/resources/admin/ID allocation;29future prompts",
+    "applicationChanges": false,
+    "migrationChanges": false,
+    "providerChanges": false,
+    "humanParticipants": 0,
+    "independentReviewers": 0
+  },
+  "live": {
+    "environment": "Owned local synthetic P34 requesting-head/admin fixture; not deployed frontend/provider sessions",
+    "url": "http://127.0.0.1:5178/resources",
+    "vitePid": 88820,
+    "previewPid": 5888,
+    "ports": [
+      5173,
+      5178
+    ],
+    "loopbackOnly": true,
+    "visibleRetained": true,
+    "viewports": [
+      [
+        1280,
+        800
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        800
+      ]
+    ],
+    "routes": [
+      {
+        "path": "/",
+        "mainCharacters": 1068
+      },
+      {
+        "path": "/deliverables",
+        "mainCharacters": 1346
+      },
+      {
+        "path": "/deliverables/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8",
+        "mainCharacters": 6396,
+        "visibleHeadings": 21,
+        "mainControls": 45
+      },
+      {
+        "path": "/tasks",
+        "mainCharacters": 193,
+        "fixtureGateway": "not installed; source TasksPage/TaskDetail exist"
+      },
+      {
+        "path": "/working-together",
+        "mainCharacters": 482
+      },
+      {
+        "path": "/requests",
+        "mainCharacters": 2460
+      },
+      {
+        "path": "/resources",
+        "mainCharacters": 2520
+      },
+      {
+        "path": "/admin",
+        "mainCharacters": 3014
+      },
+      {
+        "path": "/admin/access",
+        "mainCharacters": 5293,
+        "visibleHeadings": 14,
+        "mainControls": 39
+      }
+    ],
+    "desktopNavigationLinksObserved": 13,
+    "ordinaryCoreNavigationFromSource": 11,
+    "emptyFixtureUuidAndHashOccurrencesObserved": 0,
+    "sourceConfirmsTechnicalDetails": [
+      "Files manifest/file UUID and SHA-256 output",
+      "Request package hash output",
+      "Access change raw review.values keys and internal IDs"
+    ],
+    "mobile": {
+      "onboardingOverflow390": false,
+      "onboardingOverflow320": false,
+      "moreWidth320": 42.921875,
+      "moreHeight320": 63,
+      "houseTarget": 44,
+      "WCAGFailureClaimed": false,
+      "tabSpotCheck": "Open account received3px accent outline; More opening focused Close pages, closing returned focus to More",
+      "viewportOverrideReset": true
+    },
+    "screenshots": "Desktop detail and mobile onboarding visually inspected in tool; no saved full screenshot archive"
+  },
+  "findings": [
+    {
+      "id": "AD01",
+      "severity": "major",
+      "state": "open",
+      "subject": "Dense work detail without focused working surface"
+    },
+    {
+      "id": "AD02",
+      "severity": "major",
+      "state": "open",
+      "subject": "Technical language and verification details in routine UI"
+    },
+    {
+      "id": "AD03",
+      "severity": "major",
+      "state": "open",
+      "subject": "Incomplete display-reference policy and long general prefixes"
+    },
+    {
+      "id": "AD04",
+      "severity": "major",
+      "state": "open",
+      "subject": "Conflicting applicability and generic blockers"
+    },
+    {
+      "id": "AD05",
+      "severity": "major",
+      "state": "open",
+      "subject": "Refresh discards safe unsaved work"
+    },
+    {
+      "id": "AD06",
+      "severity": "moderate",
+      "state": "open",
+      "subject": "Growing navigation and onboarding choices"
+    },
+    {
+      "id": "AD07",
+      "severity": "major",
+      "state": "open",
+      "subject": "Administrator tools require developer vocabulary"
+    },
+    {
+      "id": "AD08",
+      "severity": "major",
+      "state": "open",
+      "subject": "Current demo cannot prove coherent first-task path"
+    },
+    {
+      "id": "AD09",
+      "severity": "minor",
+      "state": "open",
+      "subject": "More is below44px house width at320px"
+    }
+  ],
+  "planCoverage": [
+    {
+      "step": "P35",
+      "file": "build-prompts/35-config-publication.md",
+      "sha256": "c12873bf144b1971403c6909c2646d1baae830fc35eb47f9c883eae6f820480d",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P36",
+      "file": "build-prompts/36-form-builder.md",
+      "sha256": "434728fb4d048e3f6dfd49a44287401f1ba9fe8f38da89d917f32a68f34943e1",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P37",
+      "file": "build-prompts/37-workflow-builder.md",
+      "sha256": "cd72933b781fbb4e674a6a21934daace209bda80237ba4354a47d1e8a57ddf91",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P38",
+      "file": "build-prompts/38-statuses-phases-services.md",
+      "sha256": "1b9af390ab365e1f97e77fe0b7a4b1373549d7a4287d5703fdc355556ccfb83d",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P39",
+      "file": "build-prompts/39-site-edit-branding.md",
+      "sha256": "d03190ab3af52a578b4395244635aadf5fda559418066e0647d6b6e9d0f5e7e2",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P40",
+      "file": "build-prompts/40-dashboard-layouts.md",
+      "sha256": "617d8457a06726272ecb961e08108b10959ed13473f055bd45c118f96e419296",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P41",
+      "file": "build-prompts/41-notification-rules.md",
+      "sha256": "0780010f69a173aca91770e6bc97e4217ff9e12906250e26213821809e7d01ab",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P42",
+      "file": "build-prompts/42-announcements.md",
+      "sha256": "83c4300d5abb001a1039c42c03cf044dba746b1e1c1124a659c205dae5dbba29",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P43",
+      "file": "build-prompts/43-global-search.md",
+      "sha256": "8b7e980b014858e52e2b3050715ea21f4127e025bb86ea0b59fed44873d9ba6e",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P44",
+      "file": "build-prompts/44-reports-metrics.md",
+      "sha256": "2b0eaa06042d4541b1d2bd244e4d580711dfcae5bdb78d0683f40496702a4644",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P45",
+      "file": "build-prompts/45-csv-interoperability.md",
+      "sha256": "94a9be525f283a9d38e4b32f746c527c222bc94b47a7e07a2389a1b1f98af150",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P46",
+      "file": "build-prompts/46-privacy-controls.md",
+      "sha256": "e10f710400f7f690297f5104d06c78848182ce123a4950a47bd018b5a4338f0a",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P47",
+      "file": "build-prompts/47-backup-recovery.md",
+      "sha256": "7b41543224a3d60f55b1c6473fea377fe2759e2a4386aa8bd10bf784fb14578f",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P48",
+      "file": "build-prompts/48-mobile-pwa-accessibility.md",
+      "sha256": "fdc9b13e94c494e956bd494c75cadc932f9abf1a78880e958fa06001e7db1a42",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P49",
+      "file": "build-prompts/49-deployment-candidate.md",
+      "sha256": "375b9a12a3b7f19bd44586a6d56f63332840a451166ad617328d78c8f7975349",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P50",
+      "file": "build-prompts/50-pilot-uat.md",
+      "sha256": "7b5a4f94132eb469aa58a2e2970824a8d227b5b531864c18194fe69684248e5a",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P51",
+      "file": "build-prompts/51-drive-picker.md",
+      "sha256": "c58ebbc829e6932f9b5f7dd54e4b3a6e17118100a4c42f3291ac22c1ad24d3b8",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P52",
+      "file": "build-prompts/52-drive-approved-exports.md",
+      "sha256": "70c0035c8fb30b22516da7aee5821a0d7c5bd2de5cdda701592772cc0d08e5f3",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P53",
+      "file": "build-prompts/53-google-calendar-sync.md",
+      "sha256": "6d34845ff4dba74d4efee820526fc79ac5a5e794e7bd476e09cb5b6d39b289c7",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P54",
+      "file": "build-prompts/54-telegram-alerts.md",
+      "sha256": "81396766a28d39405212ea2e5b12232f240aece7e84c1f75567f03055a42576a",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P55",
+      "file": "build-prompts/55-email-and-nongoogle-guests.md",
+      "sha256": "71ee773766d4b07305bfeaee9f08b0492ffe3db61a7354b6540aab865deb05b9",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P56",
+      "file": "build-prompts/56-room-booking-domain.md",
+      "sha256": "40da8116119eef7278c33ea1e17638ffd249a86ad18d4c8cdd5283ae7fa22c15",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P57",
+      "file": "build-prompts/57-room-booking-interface.md",
+      "sha256": "2cd0ba9ccaa846035a75c9885edeb9f376e6732fb519d3b308fab05fc48cd2d6",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P58",
+      "file": "build-prompts/58-inventory-borrowing.md",
+      "sha256": "12e0854e7016af91c50f0667422f96e13c1aedda1fa48cf085c9049925f67a27",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P59",
+      "file": "build-prompts/59-mentoring-goals.md",
+      "sha256": "68b037289d364c5647635d6d682ce72a0dc72fe06a0269eb64b9d6a62d380ad2",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P60",
+      "file": "build-prompts/60-prism-private-domain.md",
+      "sha256": "5a08a8c3ebadb03ec18f88d2e3cd14709f6ce947f3bebc5bc7db846abc3c03d2",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P61",
+      "file": "build-prompts/61-prism-interface.md",
+      "sha256": "ab7dd7186b1164b7ae21f7cc90de42ad3a2142a7d3bd01755aec952eec5a0b96",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P62",
+      "file": "build-prompts/62-turnover-archive.md",
+      "sha256": "72faaa53c39403a09708bf11a0872616d0ebadfbffa19bf2f7ec55ab39d6b57d",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    },
+    {
+      "step": "P63",
+      "file": "build-prompts/63-final-audit-release-handover.md",
+      "sha256": "f3dd9d2dbecbb514f2fccb84c26d3e6ae0c79cfdaa16e997c79e1cedc5442ba0",
+      "sharedContractRequired": true,
+      "adoptionMatrixEntry": true
+    }
+  ],
+  "simulatedCouncil": {
+    "mode": "One assistant; simulated newcomer/accessibility/operations/skeptical-maintenance lenses; no agents",
+    "recommendation": "Focused existing-flow cleanup and bounded admin conventions before optional expansion; preserve immutable approvals/security/custody",
+    "alternative": "Finish roadmap then train around complexity rejected as default; radical one-page redesign also unnecessary"
+  },
+  "changes": [
+    "Audit report",
+    "Newcomer experience contract",
+    "BUILD-CONTRACT shared adoption criteria inherited by29remaining prompts",
+    "STATE/continuation audit references"
+  ],
+  "notPerformed": [
+    "UI fixes",
+    "New ID allocator or migration/backfill",
+    "Provider/hosting/OAuth changes",
+    "Real participant UAT",
+    "Full accessibility certification or bundled exhaustive probe suite",
+    "New numbered build step",
+    "Optional module activation",
+    "Messages/schedules/agents/chats/worktrees"
+  ],
+  "measurementCorrections": [
+    "Initial control-count probe overcounted closed-details children; list/control counts from that version excluded",
+    "Dynamic string compilation and checkVisibility unavailable in browser read-only scope; discarded; corrected DOM-only probe excludes closed details",
+    "Long P34 preview fixture banner affects first-screen geometry; no unassisted-time claim derived from it"
+  ],
+  "usage": {
+    "start": {
+      "fiveHourUsedPercent": 5,
+      "reset": 1793211098,
+      "weeklyUsedPercent": 4,
+      "effectivePoints": 40,
+      "windDown": 40,
+      "ceiling": 45
+    },
+    "afterInspection": {
+      "fiveHourUsedPercent": 16,
+      "reset": 1793211098,
+      "weeklyUsedPercent": 6
+    },
+    "priorProviderWindowFinalConsumption": "Historical uncertainty preserved; this is a separately user-requested bounded audit, not a restart of unfinished provider execution",
+    "resetActionsOrCreditsConsumed": false,
+    "finalObserved": {
+      "fiveHourUsedPercent": 19,
+      "reset": 1793211098,
+      "weeklyUsedPercent": 6
+    }
+  },
+  "sourceSha256": {
+    "TEDx-Core-Dashboard-Implementation-Plan.md": "256ec367d8b409d5fe522aa7989f0bd79783face02205fe0633a7bf9f068e199",
+    "src/app/navigation.ts": "06d6158e1d5bbd41dbee6ebdfe275c78ac091773390f8d45258aebfc902ad9e8",
+    "src/app/AppShell.tsx": "b224158ebfaaf99b4a027c4ae7eb937dd682201c28daccdf0784ae20c37a9c41",
+    "src/app/router.tsx": "b67232a880f115a41da88ba13513e7c5f9cf7a81e6964064c9c2f750d82432a4",
+    "src/features/overview/Overview.tsx": "e10919406b666a80cb9a625228146d6ef81054747e09b08f3f276b56eba1f4b0",
+    "src/features/deliverables/DeliverablePage.tsx": "f5023f214bf1293dbec1051971200452d4777c20f6d349bd55afb879b6734bce",
+    "src/features/deliverables/Readiness.tsx": "f170bd9dd177b4574b31b2c04a79c745ea054839ed6cf06a61b38f444b6e7190",
+    "src/features/tasks/TasksPage.tsx": "ecfa76d8949720e60101f77c3ee7c92520bd399c70522e05ca803c0eb9c88be8",
+    "src/features/tasks/TaskDetail.tsx": "0a6500bd5da3f183295669c46bcaffab56cf834671511c8d28a2f9087497afe9",
+    "src/features/files/Files.tsx": "550b0f476c31244423b1c0de065a8248616229df043f1cba26c72b5fae4d0d93",
+    "src/features/requests/RequestPages.tsx": "266772bb4ee748cd157590ed0d49c38fa6dc0fcdb1bbd7ac11717cc5459b0d3c",
+    "src/features/resources/Resources.tsx": "4aa670ce67c2a99b26ff5b01ffdb12b393712556e22df308e52b6cd36b5efa12",
+    "src/features/admin/access/AccessEditor.tsx": "ae0ac8bc73219f5f53122ffb1f685755e09fb6eda4e0b2726ede2923e441e88a",
+    "supabase/migrations/20261025002900_request_submission.sql": "9e3f136cb357e469ccb2d7542b13793f55623f9e5f170b44960e784444ac277c",
+    "scripts/preview-p34.cjs": "b2b566e6345277968a155560bd33c5fdcfa28b2ea64dc2522e3657a940df9f60",
+    "scripts/preview-p08.cjs": "2148a024b59fb28ba608e7445a83f93ac4777814ce5cb3bd0f109657608b2321"
+  },
+  "verification": {
+    "futureMatrix": "All29 P35-P63 rows present; each numbered prompt requires shared BUILD-CONTRACT",
+    "relativeLinks": "All13 relative links in five changed/new Markdown documents resolve",
+    "sourceHashes": "All audited application/spec/prompt source hashes unchanged",
+    "applicationDiff": "No application/schema/script/dependency changes",
+    "frontendTests": "Not rerun for this documentation-only audit; prior results remain historical",
+    "finalGit": "Reviewed commit/push followed by local/fetched/live commit/tree equality and clean-worktree checks"
+  }
+}

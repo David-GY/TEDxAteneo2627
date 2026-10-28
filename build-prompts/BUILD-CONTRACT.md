@@ -37,6 +37,12 @@ Record readings as shared-account observations, not exact attribution to this pr
 
 ## Consistent interfaces and files
 
+### Newcomer adoption requirement
+
+Follow [docs/newcomer-experience.md](../docs/newcomer-experience.md) for existing-screen remediation and every remaining step through P63. Review the mapped open findings in [docs/build/ADOPTION-AUDIT.md](../docs/build/ADOPTION-AUDIT.md) when touching those flows. Keep ordinary work focused on a named next action, owner/date and help; plain-language labels, stable concise display references, safe edit/retry recovery, contextual required fields and progressive disclosure. Preserve all approval/privacy/access/history invariants. Internal UUIDs/hashes/capability keys must not be required knowledge for ordinary members; do not silently renumber existing references or truncate UUIDs into collision-prone IDs.
+
+For each UI change record the affected role/journey and empty/error/conflict/mobile/keyboard behavior in its checkpoint. No automatic adoption pass from feature completion or automation. P50/P63 must record actual representative newcomer task success, time, wrong turns and assistance against the original section14 targets, plus current adoption findings resolved/deferred with impact. Optional P51–P61 remain separately selected/gated and add no everyday navigation/setup burden while disabled. This adds acceptance discipline, not authorization for unrelated implementation or a wholesale redesign.
+
 Paths in numbered prompts are proposed ownership boundaries. If earlier implementation established an equivalent path, use it and record the mapping; do not create duplicate modules to match a filename. P00 establishes scripts and `docs/build/CONTRACTS.md`; every later step updates only contracts it owns.
 
 Database business commands are snake_case RPCs deriving actor identity from the authenticated session, never caller-supplied actor IDs. Mutations that need retry/concurrency safety accept expected version and idempotency key. Record structured validation/permission/conflict errors, immutable revisions/decisions, and transactional audit/outbox where relevant. Generate Supabase types after schema changes. No code can merely claim success for an unimplemented RPC.
