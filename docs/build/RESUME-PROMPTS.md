@@ -1,5 +1,7 @@
 # TEDx continuation prompts and deployment order
 
+For a new chat, use [NEW-CHAT-HANDOFF.md](NEW-CHAT-HANDOFF.md): copy-ready first message, current source/provider/preview boundaries, continuation template and exact revised P35–P63 commands. Start P35-R1; do not run the whole sequence in one turn.
+
 Midway adoption revision October28: read [ADOPTION-DELIVERY.md](ADOPTION-DELIVERY.md), [ADOPTION-AUDIT.md](ADOPTION-AUDIT.md) and [newcomer-experience.md](../newcomer-experience.md). P35 now starts with required existing-flow repair batches R1/R2 before admin/config expansion R3. P36 implements missing compact task/deliverable references before the form editor. All29remaining prompts have explicit adoption work/U checks in addition to original A1–A3. These are updated instructions, not implemented fixes. Current provider blockers remain independently open; feature completion alone is not newcomer acceptance.
 
 October28 update: P34's local mutation Batch2 is delivered. Subsequent owner-authorized provider work applied migrations001–043 to TEDxBackend (`wyurosneoxfqqrrvstke`); hosted schema/private bucket/type inventory and anonymous API checks are verified. Frontend/Google/Edge/worker deployment and authenticated/independent-session/institutional/human/recovery gates remain open. Read [provider baseline](../verification/PROVIDER-BASELINE.md), STATE and P34; do not rebuild delivered mutation code. P35/P36 still have no implementation. The next requested cleanup is actual Google/JWT/Storage verification, not an automatic numbered builder.
