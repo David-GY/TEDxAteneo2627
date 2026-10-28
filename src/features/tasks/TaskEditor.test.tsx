@@ -1,3 +1,4 @@
+import {TaskDetail} from './TaskDetail'
 import{fireEvent,render,screen,waitFor}from'@testing-library/react'
 import{it,expect,vi}from'vitest'
 import{TaskEditor}from'./TaskEditor'
@@ -30,3 +31,18 @@ it('task UUID deep links survive login while unsafe paths and query secrets are 
 it('progress cannot silently discard unsaved checklist or note edits',async()=>{const execute=vi.fn<NonNullable<TasksApi['execute']>>();setup(execute);await screen.findByLabelText('Task title (required)');fireEvent.change(screen.getByLabelText('Task notes'),{target:{value:'Unsaved progress note'}});fireEvent.change(screen.getByLabelText('Change or action reason (required)'),{target:{value:'Start work'}});fireEvent.click(screen.getByRole('button',{name:'Apply progress'}));await screen.findByRole('alert');expect(execute).not.toHaveBeenCalled();expect((screen.getByLabelText('Task notes')as HTMLTextAreaElement).value).toBe('Unsaved progress note')})
 it('a guest may return through login to an exact task link without entering My Tasks or authoring',async()=>{const detail=vi.fn(async()=>null);const read=vi.fn();const options=vi.fn();const gateway:AuthGateway={tasks:{read,detail,options},readContext:async()=>({state:'authorized',audience:'guest',guestAccessId:id,organizationId:id,termId:id,displayName:'Fictional guest',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:[]}),onChange:()=>()=>{},beginGoogle:async()=>{},exchange:async()=>{},signOut:async()=>{}};render(<RouterProvider router={createMemoryRouter(createAppRoutes(readClientEnvironment({}),gateway),{initialEntries:['/login?returnTo='+encodeURIComponent('/tasks/'+id)]})}/>);await screen.findByRole('heading',{name:'Task cannot be shown'});expect(detail).toHaveBeenCalledWith(id);expect(read).not.toHaveBeenCalled();expect(options).not.toHaveBeenCalled();expect(screen.getByRole('link',{name:'Back to permitted tasks'}).getAttribute('href')).toBe('/shared')})
 it('malformed detail cannot masquerade as checked completion evidence',async()=>{const rpc=vi.fn().mockResolvedValue({data:{...item,checklist:[{id,text:'Check',done:'true'}]},error:null});const api=createTasksApi(Promise.resolve({rpc})as unknown as ReturnType<typeof createSupabaseClient>);await expect(api.detail!(id)).rejects.toThrow('Tasks unavailable')})
+
+it('P35_U1 R1 task: deliberate editing keeps inputs across disclosure and still requires server edit authority',async()=>{
+ const execute=vi.fn(),api:TasksApi={read:vi.fn(),detail:async()=>item,options:async()=>({actorId:id,members:[],units:[]}),execute}
+ render(<RouterProvider router={createMemoryRouter([{id:'workspace',path:'/tasks/:taskId',loader:()=>({termId:id,memberId:id}),element:<TaskDetail api={api}/>}],{initialEntries:['/tasks/'+id]})}/>)
+ await screen.findByRole('heading',{name:item.title})
+ const disclosure=screen.getByText('Edit task',{exact:true}).closest('details')!
+ expect(disclosure.open).toBe(false)
+ fireEvent.click(screen.getByText('Edit task',{exact:true}))
+ const notes=await screen.findByLabelText('Task notes')
+ fireEvent.change(notes,{target:{value:'Safe in-memory edit'}})
+ fireEvent.click(screen.getByText('Edit task',{exact:true}))
+ fireEvent.click(screen.getByText('Edit task',{exact:true}))
+ expect((screen.getByLabelText('Task notes') as HTMLTextAreaElement).value).toBe('Safe in-memory edit')
+ expect(execute).not.toHaveBeenCalled()
+})

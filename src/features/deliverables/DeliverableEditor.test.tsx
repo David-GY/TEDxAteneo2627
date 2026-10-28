@@ -52,7 +52,7 @@ it('P09_A3: acceptance sends the displayed criteria revision and explicit eviden
   fireEvent.click(screen.getByLabelText(/I verified every criterion/))
   fireEvent.change(screen.getByLabelText('Action reason (required)'),{target:{value:'Criteria independently checked'}})
   fireEvent.change(screen.getByLabelText('Final evidence or criteria verification notes'),{target:{value:'Verified the final checklist reference'}})
-  fireEvent.click(screen.getByRole('button',{name:'Apply workflow action'}))
+  fireEvent.click(screen.getByRole('button',{name:'Accept deliverable'}))
   await screen.findByRole('alert')
   expect(execute.mock.calls[0][0]).toMatchObject({command:'transition',action:'accept',criteriaRevision:2,version:3,evidence:'Verified the final checklist reference'})
   expect(screen.queryByText('Saved. The database confirmed this change.')).toBeNull()

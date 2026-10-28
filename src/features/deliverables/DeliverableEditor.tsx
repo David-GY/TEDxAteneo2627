@@ -67,7 +67,7 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload,timeline,onPen
         <div className="form-field"><label htmlFor="deliverable-evidence">Final evidence or criteria verification notes</label><textarea id="deliverable-evidence" name="evidence" maxLength={4000}/></div>
         {(action==='none'?context.actions[0]:action)==='accept'?<label className="editor-check"><input name="confirmed" type="checkbox" required/>I verified every criterion in revision {context.criteriaRevision} against the final evidence.</label>:null}
         <p className="muted">Final evidence is required to submit. File verification and governed approvals remain separate checks.</p>
-        <button className="button" type="submit">{busy?'Applying…':'Apply workflow action'}</button>
+        <button className="button" type="submit">{busy?'Applying…':labels[action==='none'?context.actions[0]:action]}</button>
       </fieldset></form>:null}
     </>}
     {id&&timeline?<ScheduleEditor key={id} api={timeline} id={id} disabled={busy||uncertain} onPendingChange={setSchedulePending}/>:null}

@@ -1,0 +1,19 @@
+{
+  "target": "Compiled UI with isolated PGlite and fictional roles; no real Auth/JWT/independent concurrency or human usability proof",
+  "checks": [
+    "Owner/title/date/next action before closed editors",
+    "Authorized nonfinancial deliverable reviews say Not required",
+    "Associate cannot see private task body or accept",
+    "Task edit disclosure preserves in-memory inputs",
+    "320px task/resources no overflow; task disclosure 44px and visible keyboard focus",
+    "Member direct first-work entry"
+  ],
+  "errors": [],
+  "remaining": [
+    "Task-level authorized applicability projection and specific next-action controls",
+    "Request populated-status visual coverage",
+    "R2 recovery/role-coherent preview/More sizing",
+    "R3 configuration publication",
+    "Actual human/provider gates"
+  ]
+}
