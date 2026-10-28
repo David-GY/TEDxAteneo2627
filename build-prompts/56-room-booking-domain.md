@@ -22,6 +22,12 @@ supabase/migrations/*room_booking.sql; supabase/tests/room_booking.test.sql; src
 Interfaces / invariants:
 confirm_booking enforces official evidence and database exclusion over room/buffered half-open range for confirmed/persisted active holds.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD03, AD04.
+- Model explicit Requested/Held/Officially confirmed/Cancelled outcomes and safe alternative/conflict reasons that the later UI can present without database terminology. Reuse stable qualified short-reference conventions.
+- Keep buffers/exclusion/hold expiry and institutional evidence authoritative; do not flatten submission or a calendar event into reservation confirmation.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Model rooms/accessibility/equipment and requests, expiring holds, confirmation and cancellation with Logistics authority.
 2. Expire stale holds in confirmation transaction and serialize competing transitions; a worker is not sole protection against stuck holds.
@@ -31,6 +37,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P56_A1: Two concurrent overlapping confirmations cannot both succeed; adjacent nonbuffered slots behave correctly.
 - P56_A2: Expired hold cannot block indefinitely if scheduler is down; setup/cleanup buffers count.
 - P56_A3: Request submission or a calendar event alone cannot masquerade as official room reservation.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P56_U1: Domain responses carry a safe human-actionable pending/conflict/confirmed distinction and immutable ref/evidence version, without revealing another private meeting.
+- P56_U2: Concurrency/expiry/retry preserve one valid confirmation; a short ref or requested slot cannot bypass official confirmation authority.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P56.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.

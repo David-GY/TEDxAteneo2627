@@ -22,6 +22,12 @@ src/features/evaluations/*; src/features/reports/*; tests/e2e/evaluations.spec.t
 Interfaces / invariants:
 UI consumes restricted P60 APIs; author/assigned-reviewer/subject-release views distinct; aggregation suppresses groups below five and reconstructive filters.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD04, AD05, AD06.
+- Use separate focused author, assigned-reviewer and subject-release journeys, each with one clear next action and plain privacy/help text. Keep raw/released material unmistakably distinct.
+- Reuse safe revision/input/recovery controls and scoped export confirmation; formal complaints point to the approved process and no required ordinary-work setup is added.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build feedback submission, assigned PRISM queue, attributable reviewer notes, controlled summary review/release and subject-visible results.
 2. Add explicit export control and minimum-group reporting; prevent differencing/drilldown that reconstructs identities.
@@ -31,6 +37,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P61_A1: Subject sees only released summary; author edits produce a revision, not overwritten submitted evidence.
 - P61_A2: Groups under five and difference-of-filters reconstruction cannot expose individuals.
 - P61_A3: Real sensitive activation stays blocked without actual owner/policy/UAT; screenshots and test fixtures contain synthetic data only.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P61_U1: A subject sees and understands only the released summary; authors can append a revision without silently overwriting evidence, and failure/retry preserves safe inputs.
+- P61_U2: Clear labels/filter choices cannot reconstruct suppressed groups or widen raw access; actual sensitive privacy/UAT remains required, not satisfied by synthetic screenshots.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P61.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.

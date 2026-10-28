@@ -99,12 +99,27 @@ def body(task):
         "Interfaces / invariants:",
         task["interface"],
         *(["", task["execution_notes"]] if task.get("execution_notes") else []),
+        *(["", "Newcomer adoption work (required, in the listed order):",
+           "Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. "
+           + "Mapped findings: " + ", ".join(task["adoption"]["findings"]) + ".",
+           *[f"- {item}" for item in task["adoption"]["work"]],
+           "These additions are part of this step, not a request to finish every batch in one execution. "
+           "Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. "
+           "Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code."]
+          if task.get("adoption") else []),
         "",
         "Implement and verify this bounded slice:",
     ]
     lines += [f"{i}. {s}" for i, s in enumerate(task["steps"], 1)]
     lines += ["", "Acceptance checks (implement named regression assertions for nontrivial behavior; record actual results):"]
     lines += [f"- {step}_A{i}: {check}" for i, check in enumerate(task["checks"], 1)]
+    if task.get("adoption"):
+        lines += ["", "Additional adoption acceptance (preserve A1-A3 above):",
+                  "Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. "
+                  "Do not add tests that only mirror wording or mark human UAT passed from automation."]
+        lines += [f"- {step}_U{i}: {check}" for i, check in enumerate(task["adoption"]["checks"], 1)]
+        lines += ["Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. "
+                  "A plan or new label does not close an adoption finding."]
     lines += [
         "",
         f"Update docs/build/steps/{step}.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.",
@@ -117,6 +132,10 @@ for task in tasks:
     assert task["effort"] in {"low", "medium", "high", "xhigh"}
     assert all(n in by_id and step_order(n) < step_order(task["id"]) for n in task["needs"]), task
     assert len(task["steps"]) == 3 and len(task["checks"]) == 3
+    if step_order(task["id"])[0] >= 35:
+        assert task.get("adoption"), f"Missing adoption scope: {label(task)}"
+        assert task["adoption"]["work"] and task["adoption"]["checks"]
+        assert all(re.fullmatch(r"AD0[1-9]", item) for item in task["adoption"]["findings"])
     text = f"# {label(task)} — {task['title']}\n\n**Select before sending:** {settings(task)}\n\n**Phase:** {task['phase']}\n\nCopy the prompt below into the project chat, or ask Codex to execute this file.\n\n```text\n{body(task)}\n```\n"
     (PACK / filename(task)).write_text(text, encoding="utf-8")
 
@@ -125,6 +144,8 @@ intro = """# TEDx app: sequential build prompts
 Prepared October 24, 2026. This pack contains **65 implementation prompts: P00–P63 plus P16A**, and a continuation prompt. Current implementation status is recorded in docs/build/STATE.md.
 
 ## Start here
+
+October28 midway revision: P35 now begins with bounded repairs to existing member screens before configuration expansion. P36 adds the missing compact display-reference implementation before the form editor. Every P35–P63 prompt includes concrete adoption work and named U checks alongside its unchanged A1–A3. See [adoption delivery map](../docs/build/ADOPTION-DELIVERY.md), [audit](../docs/build/ADOPTION-AUDIT.md) and [experience contract](../docs/newcomer-experience.md). These are planned fixes, not completed application work. Current P34 mutation code is delivered locally; do not rebuild it. P35/P36 remain unimplemented; begin at the current checkpoint, not P00.
 
 1. Use this TEDx workspace. Open P00 below, select the listed model/effort, and paste its text block into the project chat. Alternatively send: `Execute build-prompts/00-foundation.md and follow build-prompts/BUILD-CONTRACT.md.`
 2. Run one numbered step at a time. Continue a partial step with [CONTINUE.md](CONTINUE.md) before moving on. Later steps reuse the code/contracts already built.
@@ -177,7 +198,7 @@ Prompt P49 prepares deployment and an identified synthetic preview. P50 records 
 - [Complete prompt book](../docs/superpowers/plans/2026-10-24-tedx-build-prompts.md): same sequence in one document, with shared constraints rather than duplicated specification text.
 - `_source/*.json` and `_source/generate.py`: editable authoring source. Regeneration overwrites generated numbered files, this README and the complete book; edit the source catalog if changes should persist.
 
-The pack was checked for 65 unique ordered IDs (including P16A between P16/P17), earlier-only dependencies, model/effort on every step, three bounded actions and three acceptance checks per prompt, and coverage of all 26 feature IDs. This validates prompt structure, not application acceptance. P16A's approved scope addendum is docs/committee-timeline-spec.md.
+The pack was checked for 65 unique ordered IDs (including P16A between P16/P17), earlier-only dependencies, model/effort on every step, three original actions and A1–A3 per prompt, concrete adoption work/U checks on all29 remaining prompts, and coverage of all26 feature IDs. This validates prompt structure, not application acceptance. P16A's approved scope addendum is docs/committee-timeline-spec.md.
 """
 (PACK / "README.md").write_text(intro + table + coverage_text + tail, encoding="utf-8")
 
@@ -196,6 +217,8 @@ header = """# TEDx Dashboard Build Prompts Implementation Plan
 ## Global Constraints
 
 Read and follow `build-prompts/BUILD-CONTRACT.md`: exact school domain `student.ateneo.edu`, event April 17, 2027, Asia/Manila, ₱0 hosting target, Karla/calm interface, FIN/MCD authority, RLS/private evidence, descriptive affiliation, versioned configuration, no invented policy, targeted checks and honest checkpoints. Budget targets are observational soft ceilings, never wall-clock or token guarantees.
+
+October28 adoption revision: required P35 repair batches precede editor expansion; P36 implements missing display references. P35–P63 carry explicit adoption scope/U acceptance in addition to original A1–A3. Read docs/build/ADOPTION-DELIVERY.md and docs/newcomer-experience.md. No current finding is fixed merely by these plan changes.
 
 ## Review Focus
 
@@ -231,7 +254,10 @@ PLAN.write_text(header + "".join(sections), encoding="utf-8")
 
 # Include approved additions and their spec in a reproducible portable prompt pack.
 archive_paths = [*PACK.glob("*.md"), *HERE.glob("*.json"), HERE / "generate.py",
-                 PLAN, ROOT / SPEC_NAME, ROOT / "docs/committee-timeline-spec.md"]
+                 PLAN, ROOT / SPEC_NAME, ROOT / "docs/committee-timeline-spec.md",
+                 ROOT / "docs/newcomer-experience.md", ROOT / "docs/build/ADOPTION-AUDIT.md",
+                 ROOT / "docs/build/ADOPTION-DELIVERY.md",
+                 ROOT / "docs/build/evidence/ADOPTION-AUDIT.json"]
 with ZipFile(ROOT / "TEDx-Build-Prompts.zip", "w", compression=ZIP_DEFLATED) as archive:
     for path in sorted(archive_paths, key=lambda p: p.relative_to(ROOT).as_posix()):
         info = ZipInfo(path.relative_to(ROOT).as_posix(), date_time=(2026, 10, 24, 0, 0, 0))

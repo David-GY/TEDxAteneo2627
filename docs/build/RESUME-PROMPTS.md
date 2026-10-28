@@ -1,6 +1,6 @@
 # TEDx continuation prompts and deployment order
 
-Midway adoption checkpoint October28: read [ADOPTION-AUDIT.md](ADOPTION-AUDIT.md) and [newcomer-experience.md](../newcomer-experience.md) before further UI work. All remaining prompts inherit these criteria through BUILD-CONTRACT. A bounded existing-flow usability cleanup is recommended before expanding editors/modules; no fixes or new short-ID allocator have been implemented by the audit. Current provider blockers remain independently open. P35–P63 feature completion alone is not newcomer acceptance.
+Midway adoption revision October28: read [ADOPTION-DELIVERY.md](ADOPTION-DELIVERY.md), [ADOPTION-AUDIT.md](ADOPTION-AUDIT.md) and [newcomer-experience.md](../newcomer-experience.md). P35 now starts with required existing-flow repair batches R1/R2 before admin/config expansion R3. P36 implements missing compact task/deliverable references before the form editor. All29remaining prompts have explicit adoption work/U checks in addition to original A1–A3. These are updated instructions, not implemented fixes. Current provider blockers remain independently open; feature completion alone is not newcomer acceptance.
 
 October28 update: P34's local mutation Batch2 is delivered. Subsequent owner-authorized provider work applied migrations001–043 to TEDxBackend (`wyurosneoxfqqrrvstke`); hosted schema/private bucket/type inventory and anonymous API checks are verified. Frontend/Google/Edge/worker deployment and authenticated/independent-session/institutional/human/recovery gates remain open. Read [provider baseline](../verification/PROVIDER-BASELINE.md), STATE and P34; do not rebuild delivered mutation code. P35/P36 still have no implementation. The next requested cleanup is actual Google/JWT/Storage verification, not an automatic numbered builder.
 
@@ -16,7 +16,7 @@ P34 role/assignment/revoke/custody mutation is locally delivered, with actual au
 
 Send one prompt at a time in this existing chat/checkout. Select the model/effort recommended by each numbered file using the app controls. When a step is partial, repeat its resume prompt until the local acceptance work is finished; carry external gates forward explicitly. Do not advance a dependent step with missing code/interfaces. Read the checkpoint after every run. No background waiting, reset credits, extra chats, agents or worktrees. Usage at preparation was91% in the same five-hour window, so no new implementation/deployment was opened here. On later execution observe then-current usage and follow BUILD-CONTRACT without assuming a reset.
 
-## 1. Continue the open provider checks first
+## Open provider verification track (separate from the revised build sequence)
 
 ```text
 Continue docs/verification/PROVIDER-BASELINE.md and OPEN-DECISIONS.md from the smallest unfinished provider check. Read STATE, the provider evidence and relevant P02–P05/P12/P34 contracts. P34's local mutation slice is delivered; do not rebuild it.
@@ -27,21 +27,21 @@ The owner authorized provider changes only on wyurosneoxfqqrrvstke. Its43migrati
 Follow BUILD-CONTRACT usage limits without restarting the prior allocation after a window change. Commit/push reviewed checkpoints to the existing branch, verify final local/fetched/live SHA/tree equality and clean status, and report verified versus blocked work. No billing/cap changes, external messages, remote resets or schedules. No automatic P35/P36.
 ```
 
-## 2. Implement P35 after P34's required interfaces exist
+## 1. Next numbered build: P35-R1, then R2/R3 through continuation
 
 ```text
 Resume P35 using build-prompts/CONTINUE.md and build-prompts/35-config-publication.md.
 Reuse C:/Users/david/OneDrive/Documents/ChatGPT/TEDx and codex/core-build-checkpoints. Verify current local/fetched/live state; preserve newer changes. Read STATE and P34/P35 checkpoints: P35 has no implementation yet. Require P34's necessary authority interfaces; never turn preflight into mutation authority.
-Implement the bounded private draft/validation/synthetic preview/immutable publication/rollback transaction with named failing A1-A3 tests, including current capability ceilings, mandatory FIN/MCD gates, editor conflicts, atomic audit/outbox and preserved pinned requests.
+Read docs/build/ADOPTION-DELIVERY.md. Begin P35-R1 existing member-page next-action/applicability/plain-language repairs; continue R2 safe edit/retry recovery, coherent synthetic tasks/help and mobile repair. Only then execute R3 understandable admin/common editor and the original configuration publication slice. Keep original A1-A3 and new P35_U checks; checkpoint each coherent batch within the existing budget and do not rebuild P34's delivered security engine. Missing actual provider/human evidence stays open rather than blocking independent local repairs or being fabricated.
 Use the required skills, retain an owned visible live preview, run required verification, leave the mandatory truthful checkpoint, commit/push reviewed changes, and verify final local/fetched/live commit/tree equality and clean status. Follow BUILD-CONTRACT usage limits. No agents/chats/worktrees, deployment, provider/billing/cap changes, external messages, remote resets or schedules. Do not advance automatically.
 ```
 
-## 3. Implement P36 after verified P35 publication exists
+## 2. P36-R1 display references, then R2 form editor after P35 local prerequisites
 
 ```text
 Resume P36 using build-prompts/CONTINUE.md and build-prompts/36-form-builder.md.
 Reuse C:/Users/david/OneDrive/Documents/ChatGPT/TEDx and codex/core-build-checkpoints; verify current remote/local custody and preserve newer changes. Read STATE and P35/P36 checkpoints. P36 has no implementation yet. Reuse P20 FormDefinition/validation; publish only through the verified P35 interface.
-Implement the bounded typed form editor/keyboard controls/synthetic preview/validation and explicit draft-migration impact, preserving stable field/option IDs and historical pinned submissions. Write named failing A1-A3 tests; confidential fields cannot publish into ordinary broad JSON and finance/approval fields remain protected.
+First execute P36-R1's reviewed server-allocated compact TASK/DEL references, safe resumable backfill and scoped list/detail/copy behavior; preserve old request IDs and UUID deep links. Verify new P36_U1/U2 concurrency/retry/term/rename/denial assertions. Then R2 implements the bounded form editor/relevant requester steps with safe Back/Review/recovery and original A1-A3 plus U3; protect stable field/option IDs, historical pinned submissions and confidential/finance storage. Continue partial batches through CONTINUE.md; do not open P37 automatically.
 Use required skills, retain an owned visible preview, run required checks, leave the mandatory checkpoint, commit/push reviewed changes and verify final local/fetched/live SHA/tree equality and clean status. Follow BUILD-CONTRACT. No agents/chats/worktrees, deployment/provider/billing/cap changes, external messages, remote resets or schedules. Do not advance automatically.
 ```
 

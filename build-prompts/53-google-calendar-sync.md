@@ -22,6 +22,12 @@ src/features/integrations/calendar/*; supabase/functions/calendar-sync/*; supaba
 Interfaces / invariants:
 App remains authoritative; explicit core-safe app events map to one approved core calendar, with source version, remote IDs, tombstones and durable token lifecycle.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD04, AD05, AD06.
+- Distinguish Add a copy from verified automatic sync; show the last successful update and plain repair status. Connection is optional, with useful local app calendar when disabled/revoked.
+- Use readable event titles and named authorized calendar selection; keep external edits/conflicts understandable without implying private events are shared.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement separately authorized connection and explicit app-to-Google publish/update/cancel jobs; document external-edit conflict policy.
 2. Add idempotent mapping, retry/backoff, revoked-auth repair, last-sync/error view, and safe token storage. No private task/mentee/finance data in general calendar.
@@ -31,6 +37,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P53_A1: Create/update/retry/cancel results in one correctly timed remote event, no resurrection after tombstone.
 - P53_A2: Expired/testing/revoked token shows stale state and fallback; never claims synced after failure.
 - P53_A3: Private event/export preferences cannot leak through shared calendar title/description/location.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P53_U1: A failed/revoked sync cannot say current/synced, and retry/cancellation cannot duplicate or resurrect the event; the local next-action calendar remains usable.
+- P53_U2: Declining sync adds no mandatory member setup, and private event/ref/title cannot leak through a broad calendar or repair preview.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P53.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.

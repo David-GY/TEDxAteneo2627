@@ -14,6 +14,8 @@
 
 Read and follow `build-prompts/BUILD-CONTRACT.md`: exact school domain `student.ateneo.edu`, event April 17, 2027, Asia/Manila, ₱0 hosting target, Karla/calm interface, FIN/MCD authority, RLS/private evidence, descriptive affiliation, versioned configuration, no invented policy, targeted checks and honest checkpoints. Budget targets are observational soft ceilings, never wall-clock or token guarantees.
 
+October28 adoption revision: required P35 repair batches precede editor expansion; P36 implements missing display references. P35–P63 carry explicit adoption scope/U acceptance in addition to original A1–A3. Read docs/build/ADOPTION-DELIVERY.md and docs/newcomer-experience.md. No current finding is fixed merely by these plan changes.
+
 ## Review Focus
 
 - Same-domain nonmember, expired guest and revoked deployment: denied even with a valid token. Owned by P03–P05/P34; assert negative database and route behavior.
@@ -1653,7 +1655,7 @@ Run targeted checks and required typecheck/lint/build. Do not expand into the ne
 If budget requires a partial checkpoint, keep this step active and name build-prompts/CONTINUE.md; otherwise name the next dependency-eligible step. Finish with a short result, verification and material limitation.
 ```
 
-### Task P35: Implement shared configuration draft, validation and publication
+### Task P35: Repair everyday workflows and implement shared configuration publication
 
 **Model / effort:** GPT-6.1 Sol · High
 
@@ -1668,13 +1670,14 @@ If budget requires a partial checkpoint, keep this step active and name build-pr
 - [ ] Run checks, record actual evidence/blockers, and leave the mandatory checkpoint.
 
 ```text
-Implement P35: Implement shared configuration draft, validation and publication.
+Implement P35: Repair everyday workflows and implement shared configuration publication.
 Recommended setting: GPT-6.1 Sol · High.
 The human selects the model/effort in the picker; do not spawn another agent or chat to change it.
 
 Read build-prompts/BUILD-CONTRACT.md and follow it, including the best-effort 40-percentage-point usage ceiling and mandatory resumable checkpoint.
 Read docs/build/STATE.md and this step's checkpoint if present; P00 creates them initially.
 Read only these relevant parts of TEDx-Core-Dashboard-Implementation-Plan.md: F22; section 6 configuration contract.
+Also read docs/build/ADOPTION-DELIVERY.md, docs/readiness.md, docs/tasks.md, docs/resources-onboarding.md and docs/access-administration.md for the current equivalent interfaces; P34 mutation is delivered locally, not an absent prerequisite.
 Code/interface prerequisites: P34, P19. Carry real provider/human blockers forward as the contract specifies.
 
 Files (use existing equivalent paths if already established; record mappings):
@@ -1682,6 +1685,13 @@ src/features/admin/config/*; supabase/migrations/*config_versions.sql; supabase/
 
 Interfaces / invariants:
 publish_configuration(expectedVersion, idempotencyKey) creates immutable version; rollback creates a new version and revalidates privilege/invariants.
+
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD04, AD05, AD06, AD07, AD08, AD09.
+- Batch35-R1, before new configuration screens: simplify the existing Overview, deliverable/task detail, request status and Resources entry paths. Show a specific permitted next action/owner/date/blocker first; open editing deliberately, group files/activity/verification separately, and reconcile Not required versus Pending versus Unavailable across readiness and FIN/MCD panels. Explain routine actions in plain language; retain applicable warnings and immutable evidence. Use existing src/features/{overview,deliverables,tasks,requests,resources,files} and scoped gate APIs; change a projection only if needed to carry authorized applicability, never infer permission from a hidden panel.
+- Batch35-R2: repair safe in-memory edit preservation or explicit discard confirmation across refresh/conflict/uncertain retry; retain idempotency and account/scope clearing. Restore one coherent synthetic member/head/guest first-work preview using existing components, with tasks gateway enabled and fictional assigned work/process contacts. Keep the fixture banner and no-real-provider limitation. Provide direct first-work/help actions, separate publisher tools, and repair the320px More target to the44CSS-pixel house minimum without overflow.
+- Batch35-R3, only after R1/R2 local checks: reuse P34 security commands, give their UI understandable permission/scope/name/date and impact-review language, and separate real publication from inspection/simulation. Do not rebuild lineage/custody enforcement. Then implement the original shared configuration draft/validate/preview/publish/history slice below using the same bounded editor pattern. P35 may require several CONTINUE executions; record R1/R2/R3 separately.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
 
 Implement and verify this bounded slice:
 1. Establish supported configuration kinds and draft storage, version history, diff, validation, synthetic preview and explicit publish.
@@ -1693,12 +1703,20 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P35_A2: Two administrators cannot overwrite each other's published version silently.
 - P35_A3: Rollback preserves intervening history and never rewrites open cases' pinned workflow/schema.
 
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P35_U1: An ordinary member and a head can locate title, owner/date and the actual permitted next action without traversing unrelated editors; nonfinancial work consistently says review not required while governed/pending/unavailable work remains distinct. Hidden case titles/counts are never exposed.
+- P35_U2: Edit then refresh/back/conflict/timeout keeps safe inputs or obtains explicit discard intent; identical retry cannot duplicate an effect, and sign-out/scope loss clears the prior account state. Verify existing security/state tests still pass.
+- P35_U3: The coherent synthetic preview supports assigned-task discovery, scoped help and sandbox practice with the real components; guest cannot browse the roster, and practice creates no task/request/FIN/outbox. Record desktop/mobile role coverage, not a human usability pass.
+- P35_U4: Plain-language named access-impact review preserves exact scope/expiry/ceilings and independently acknowledged custody. At320px the five mobile primary targets meet44px house sizing without horizontal overflow; technical proofs remain available through scoped details rather than required member knowledge.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
+
 Update docs/build/steps/P35.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
 If budget requires a partial checkpoint, keep this step active and name build-prompts/CONTINUE.md; otherwise name the next dependency-eligible step. Finish with a short result, verification and material limitation.
 ```
 
-### Task P36: Build the no-code request form editor
+### Task P36: Add readable work references and build the request form editor
 
 **Model / effort:** GPT-6.1 Sol · High
 
@@ -1713,13 +1731,14 @@ If budget requires a partial checkpoint, keep this step active and name build-pr
 - [ ] Run checks, record actual evidence/blockers, and leave the mandatory checkpoint.
 
 ```text
-Implement P36: Build the no-code request form editor.
+Implement P36: Add readable work references and build the request form editor.
 Recommended setting: GPT-6.1 Sol · High.
 The human selects the model/effort in the picker; do not spawn another agent or chat to change it.
 
 Read build-prompts/BUILD-CONTRACT.md and follow it, including the best-effort 40-percentage-point usage ceiling and mandatory resumable checkpoint.
 Read docs/build/STATE.md and this step's checkpoint if present; P00 creates them initially.
 Read only these relevant parts of TEDx-Core-Dashboard-Implementation-Plan.md: F22; section 6 Form builder.
+Also read docs/build/ADOPTION-DELIVERY.md, docs/work-items.md, docs/tasks.md and the existing request-submission contract discovered under docs for stable UUIDs, current creation commands and request tracking.
 Code/interface prerequisites: P35, P20. Carry real provider/human blockers forward as the contract specifies.
 
 Files (use existing equivalent paths if already established; record mappings):
@@ -1727,6 +1746,12 @@ src/features/admin/forms/*; src/features/forms/*; supabase/tests/form_publicatio
 
 Interfaces / invariants:
 Editor produces the same FormDefinition accepted by P20, preserving stable keys/options and routing confidential payloads correctly.
+
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD05, AD07.
+- Batch36-R1 before the form editor: implement the missing member-facing references for existing tasks and deliverables, using TASK-027 and DEL-012 as default display formats, with the term separate where needed. Keep UUID primary keys/deep links and existing FIN/MCD/general request IDs unchanged. Add a reviewed migration for server-only per-term/per-kind allocation and deterministic resumable backfill, serialized with new creation and existing idempotent commands; no UUID truncation, recycled sequence or mutation of issued IDs. Extend existing authorized list/detail selectors with display references, title-first labels and Copy reference/Copy link. Reference lookup must authorize before revealing existence; exact global search remains P43.
+- Batch36-R2: build the original bounded form editor from useful templates with named field/section controls, readable confidentiality help and optional advanced conditions. Group longer requester forms into relevant steps with Back/Change/Review and safe in-memory input retention. Simple tasks/requests must not acquire irrelevant finance/provider/profile fields. Stable field/option keys stay internal and unchanged when labels move or rename.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
 
 Implement and verify this bounded slice:
 1. Implement field/section add/edit/reorder/remove-draft, supported types, help, required conditions, options and repeatable lines with keyboard controls.
@@ -1737,6 +1762,13 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P36_A1: Renaming a label does not change stored field key/old answer meaning.
 - P36_A2: A confidential custom field cannot publish into broad ordinary JSON.
 - P36_A3: Published old form submissions remain readable under their version; unsafe condition/code and excessive schema size fail.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P36_U1: Concurrent creation, identical retry and interrupted/resumed backfill produce one immutable reference per record and no duplicate qualified(term,kind,sequence) reference; numbering grows past999 without truncation. Renames/revisions preserve issued refs and old UUID links; existing request refs are byte-for-byte unchanged.
+- P36_U2: Short reference never grants access: another unit/expired guest cannot resolve a hidden title/count/record by guessing a ref. Cross-term display/copy includes unambiguous term context; failed/unsaved creation is not falsely announced as issued.
+- P36_U3: A representative short requester form can be completed without keys/codes or irrelevant sections; Back/validation/conflict preserves safe fields, conditional hidden values cannot bypass server rules, and published forms remain compatible with P20/P35 and historical submissions.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P36.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -1773,6 +1805,12 @@ src/features/admin/workflows/*; supabase/tests/workflow_publication.test.sql
 Interfaces / invariants:
 Workflow editor emits P22-compatible sequential stable stages, one/all eligible reviewers, revision routes and bounded conditions; publication uses P35.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD04, AD07.
+- Use a bounded stage-list editor with useful service templates, named eligible people/roles and ordinary decision labels. Put required gate/conflict explanations at the affected stage; keep technical operators/keys in advanced details. Reuse P35 draft/impact/review/publish/history and edit-recovery behavior.
+- Preview the requester journey and next person/action for happy, revision, missing-reviewer and self-conflict cases; do not expose a general BPM canvas or imply that a new workflow expands the installed single-stage FIN/MCD typed adapters. Unsupported institutional mappings remain paused.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement stage ordering, reviewer/role/scope resolution, required evidence, decision routes, authorized delegates and reminder settings.
 2. Preview synthetic cases including requester conflict and missing authority; show open cases pinned to previous versions.
@@ -1782,6 +1820,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P37_A1: Head can configure a service review without editing source code.
 - P37_A2: Removing a required financial/creative authority or assigning only requester as reviewer fails publication.
 - P37_A3: New version applies to new instances; an active old case continues or explicitly migrates with audited authority.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P37_U1: A scoped head configures an ordinary sequential service using named controls and can see who handles each step and why an invalid stage is blocked; old active cases retain their pinned routing and current server authority.
+- P37_U2: Back/preview/validation and a stale-editor conflict preserve the draft; unsupported protected routing cannot publish, and ordinary members cannot enter configuration or gain reviewer authority from its labels.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P37.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -1818,6 +1862,12 @@ src/features/admin/phases/*; src/features/admin/statuses/*; src/features/admin/s
 Interfaces / invariants:
 Admin controls edit display labels/order, phase dates and service contacts while stable IDs/semantic categories remain authoritative.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD04, AD06.
+- Use one consistent display model for Not required, Waiting for review, Approved for this revision and Unavailable; named statuses cannot override authoritative semantics. Show active phase dates and actual permitted primary/backup help routes in member-facing process pages.
+- For newly configured ordinary tracking namespaces, require a unique recognizable short prefix(default2-6uppercase letters); separate it from mutable unit labels and retain old long prefixes/issued references permanently. Validate the existing allocator namespace, alias and collision rules rather than renumbering historical requests.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Add phase management and current-phase display; validate active phase selection and date order without assuming prototype phase names.
 2. Add status-label/color/order editor with protected semantics and accessible contrast; cannot turn a pending state into an approved decision.
@@ -1827,6 +1877,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P38_A1: Renamed PRISM/status/phase does not change authority, routes or historical meaning.
 - P38_A2: Invalid phase date range or inactive required contact is reported before publish.
 - P38_A3: A status called Approved without a valid decision still fails readiness; published copy updates through versioned config.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P38_U1: Changing a display status/phase/service name cannot change required approvals, reference or old pinned meaning; all relevant cards agree on gate applicability without revealing private cases.
+- P38_U2: New short prefix collisions/unsafe reserved FIN-MCD namespaces are refused; old long refs and renamed-unit aliases still resolve only within current access. Missing contacts provide a concrete permitted repair route and cannot appear live-ready.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P38.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -1863,6 +1919,12 @@ src/features/admin/site/*; src/features/admin/branding/*; src/app/*; src/styles/
 Interfaces / invariants:
 Site pages use safe block catalog and label/theme config via P35; approved-logo asset separate from interface font/accent.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD05, AD06, AD07.
+- Keep a stable small everyday navigation grouped by member task; role-only tools stay separate, and disabled optional modules have no links/setup nags. Contextual Edit Mode is visibly different from using the app; use the common P35 save/preview/publish pattern with safe unsaved-change recovery.
+- Allow approved wording changes with preview on ordinary member, head and guest layouts; retain deep links, first-use acronym explanations, approved identity text and access enforcement. Fix the no-space mobile text identity without inventing a licensed logo.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement authenticated contextual Edit Mode for supported text/link/card blocks, navigation wording/order, guide copy and branding tokens.
 2. Add draft/preview/diff/publish/revert and role-aware synthetic previews. Keep licensed logo shape/name/color protected by approved-asset selection and MCD review record.
@@ -1872,6 +1934,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P39_A1: Typing in Edit Mode is private until publish and rollback records a new version.
 - P39_A2: Renaming labels does not break deep links, workflow semantics or permission keys.
 - P39_A3: Unsafe block content or inaccessible token combination is rejected/warned with a concrete repair; ordinary members cannot enter editor.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P39_U1: A navigation/wording publication preserves current short refs, old deep links, restricted destinations and an obvious first-work/help route for the intended role.
+- P39_U2: Leaving/refreshing editor mode cannot silently discard or publish a draft; an ordinary member cannot enter editor mode, and disabled modules stay absent from both navigation and mandatory setup.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P39.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -1908,6 +1976,12 @@ src/features/admin/layouts/*; src/features/overview/*; src/app/widgetCatalog.ts
 Interfaces / invariants:
 Role/unit layout config selects fixed widget IDs and supported options; each widget independently queries authorized data.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD04, AD06, AD09.
+- Provide a useful default home prioritizing next action, owner/date and blockers, with optional secondary widgets behind purposeful groups. No member must personalize a dashboard before work; do not show all widgets at equal emphasis.
+- Layout preview must cover a late joiner/no work, a current assignee, a head and a guest using coherent fixtures. Preserve required actions/help,320px/zoom/keyboard behavior and independently authorized widget queries.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement role layouts, responsive placement/order/size, saved operational views and preview. Provide keyboard Move Up/Down, not drag-only controls.
 2. Offer existing task/waiting/deliverables/synergy/review/calendar/resource widgets only; optional-module widgets appear only when enabled.
@@ -1917,6 +1991,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P40_A1: A member cannot obtain FIN data by adding a FIN widget to a layout.
 - P40_A2: Same layout remains usable on 320px screen and with keyboard reordering.
 - P40_A3: Missing/retired widget produces a clear safe fallback and configuration validation, not a broken dashboard.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P40_U1: Fresh/no-work and retired-widget layouts retain a direct current contact/assigned-work path; adding/reordering widgets cannot hide all next actions or manufacture FIN/guest access.
+- P40_U2: The same representative next-action journey remains discoverable across default/custom/mobile layouts with44px controls; saved configuration does not require member setup or duplicate authoritative work.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P40.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -1953,6 +2033,12 @@ src/features/admin/notifications/*; src/features/notifications/preferences/*; su
 Interfaces / invariants:
 Rules select fixed events/audiences/channels with dedup, bounded schedule and Manila quiet hours; delivery preference does not remove required work.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD04, AD06.
+- Explain each rule as event, audience, channel and time with a no-send recipient preview. Group useful updates and link directly to the permitted action; use clear saved/muted/delivery-unavailable states rather than another task queue.
+- Keep scheduling code/test proposals separate from live cadence activation. Existing no-schedule/no-external-message instructions remain unless separately authorized; mute and missing channels never hide the authoritative in-app obligation.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Add admin rules, recipient dry-run, safe templates, due/overdue reminders, digest/mute choices and channel availability.
 2. Implement default two-days-before/due-day/daily-overdue scheduling and 20:00–08:00 quiet period as editable proposals, using tested Manila dates.
@@ -1962,6 +2048,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P41_A1: Scheduler retry/window overlap creates no duplicate digest or reminder.
 - P41_A2: Muted external delivery does not hide the in-app pending obligation.
 - P41_A3: Recipient preview respects access; private payload cannot be inserted into external-message templates.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P41_U1: A permitted recipient can identify the actual next action from a grouped in-app alert; mute/retry/quiet-hour overlap cannot duplicate obligations or obscure still-pending work.
+- P41_U2: Rule preview sends nothing and reveals no hidden recipients/payload; unconfigured channels show a useful fallback and do not generate connection nags for ordinary members.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P41.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -1998,6 +2090,12 @@ src/features/announcements/*; supabase/migrations/*announcements.sql; supabase/t
 Interfaces / invariants:
 Published announcement has audience, immutable revisions, pin/expiry, publisher and acknowledgments against material revision.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD05, AD06.
+- Keep announcements subordinate to current work; use concise audience/publisher/expiry and a clear Read or Acknowledge action. Only material required revisions renew acknowledgment; do not turn routine announcement reading into a repeated onboarding course.
+- Use P35 authoring/review/unsaved-input behavior in a distinct authorized publisher area; opening an announcement must not look like accepting a task, legal waiver or financial approval.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build draft/publish/edit/pin/expire and core/committee audience selection for authorized publishers.
 2. Add acknowledgment and material-edit renewed acknowledgment without treating it as a legal waiver.
@@ -2007,6 +2105,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P42_A1: Other committee/guest cannot enumerate unshared announcement contents or counts.
 - P42_A2: Materially edited announcement does not reuse prior acknowledgment silently.
 - P42_A3: Narrower attachment remains restricted even when announcement audience is wider.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P42_U1: A new member can distinguish reading/acknowledgment from an assigned task/approval; material revision resets only the appropriate acknowledgment and an expired pin no longer crowds the home.
+- P42_U2: Publisher conflict preserves safe input, and a broader announcement never widens attachment or guest scope; hidden announcements reveal no content/count.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P42.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2043,6 +2147,12 @@ src/features/search/*; supabase/migrations/*search.sql; supabase/tests/search_ac
 Interfaces / invariants:
 search_workspace(query, filters, cursor) applies authorization before snippets/counts across operational titles/IDs, guides and allowed contacts.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD06.
+- Add title-first search and exact short-reference lookup for current request/task/deliverable formats, qualified by term and stable namespace. Show readable result context, copy/open links and old-unit aliases; members need not know an ID to find work.
+- Keep categorized results/filters progressive and keyboard/mobile friendly. Treat no match, connection failure and lost permission distinctly without exposing whether a restricted match exists.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Add suitable PostgreSQL full-text/trigram indexes and exact term-aware tracking lookup; support renamed-unit aliases.
 2. Build categorized accessible results, empty/error states and safe restricted-result behavior.
@@ -2052,6 +2162,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P43_A1: Searching a known private title/amount/contact or restricted ID reveals no existence/count/snippet.
 - P43_A2: Exact ID distinguishes terms and maps renamed unit aliases without collisions.
 - P43_A3: Typeahead/keyboard/mobile behavior works; SQL parameters and pagination cannot widen scope.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P43_U1: Exact ref and title searches reach the same permitted record; duplicate short refs in different terms are disambiguated and renamed/old aliases never return the wrong item.
+- P43_U2: Guessing an inaccessible reference/title yields no existence/count/snippet; keyboard selection, clear search and retry preserve the intended scope/context without long-code entry.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P43.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2088,6 +2204,12 @@ src/features/reports/*; supabase/migrations/*reports.sql; docs/analytics.md
 Interfaces / invariants:
 Scoped SQL reports use documented event allowlist and Monday–Sunday Manila periods; minimal first-party events, no sensitive bodies.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD06.
+- Separate manager reports from the everyday next-action home. Place concise metric definitions/time period/denominator beside the report; prefer actionable scoped summaries over dense default charts or rankings.
+- Use readable titles/refs and authorized drill-through for a manager investigation. Keep usage telemetry minimal; learnability results are actual UAT records, not a score inferred from login/activity.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement readiness, overdue/original dates, blocked duration, queue age, handoff/approval turnaround and assigned workload with clear definitions.
 2. Add meaningful weekly active numerator/eligible-core denominator, excluding guests/tests/bots; instrument safe work views/actions and retention for usage events.
@@ -2097,6 +2219,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P44_A1: At 89 eligible members, at least 72 meaningful active members meets 80%; logins/bot pings alone do not.
 - P44_A2: Multi-unit users are counted once and Manila week boundary is correct.
 - P44_A3: Changing deadline does not erase original overdue history; small/private groups do not reveal protected records.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P44_U1: A scoped head can explain a representative blocked/overdue metric and open only its permitted source work; no raw payload, small-group identity or public member ranking leaks.
+- P44_U2: Zero data, stale data and unsupported filters produce an understandable safe state rather than fake percentages; operational activity is never relabeled newcomer task success.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P44.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2133,6 +2261,12 @@ src/features/imports/*; src/features/exports/*; supabase/functions/imports/*; sr
 Interfaces / invariants:
 Import preview/mapping/validation commits through authorized existing commands with stable IDs; export uses effective scope and spreadsheet-safe values.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD05, AD07.
+- Provide a small example CSV template, named column mapping, readable row-specific repair messages and exact before/after confirmation. Ordinary task import uses known people/refs rather than requiring UUIDs or permission codes.
+- Preserve old/issued short refs and UUID relationships across import/export. A resumable failed import retains mapping/input context safely and must not duplicate work or require manual numbering.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Support roster/tasks import templates, row-level error report, deduplication, dry-run and confirmation of exact mapped changes.
 2. Do not turn role columns or imported identity fields into unreviewed privileges; sensitive financial imports use separate authorized template/reconciliation.
@@ -2142,6 +2276,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P45_A1: Repeated import does not duplicate records and partial errors are reported consistently with chosen atomicity.
 - P45_A2: CSV containing =,+,-,@ formula payloads cannot execute when opened in a spreadsheet as exported user content.
 - P45_A3: Unauthorized export/import changes fail; role field cannot grant admin and unrelated private rows never appear.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P45_U1: A malformed/duplicate row can be repaired and retried without duplicating a task, changing its issued ref, assigning implicit authority or losing the remaining review context.
+- P45_U2: Export contains permitted title/ref/term context and safe spreadsheet values; unauthorized lookups/import mapping cannot disclose hidden roster or case details.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P45.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2178,6 +2318,12 @@ src/features/admin/privacy/*; supabase/migrations/*retention.sql; supabase/funct
 Interfaces / invariants:
 Versioned privacy notice, category retention_rules, legal_holds, auditable access/export and timed emergency grants; routine private reads use audited restricted endpoints.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD06, AD07.
+- Give members plain-purpose privacy choices and a real permitted help/request route, separate from custodian retention/emergency tools. Optional profile data remains optional; guide/notice acknowledgment cannot become a fabricated legal waiver.
+- Use a guided custodian impact review for holds/disposition/emergency expiry; keep technical ledger details available separately. Simplification may not widen sensitive access or invent deferred institutional decisions.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build notice/optional sharing acknowledgments, custodian request intake, authorized access/correction/export handling, retention policy configuration and hold review.
 2. Implement dry-run disposition/purge planning without running live deletion; distinguish archive from erasure, preserve necessary minimal ledger and restore replay.
@@ -2187,6 +2333,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P46_A1: Legal hold prevents scheduled disposal and dry-run lists affected records/files without exposing their contents.
 - P46_A2: Admin cannot silently self-grant indefinite raw FIN/PRISM access through UI.
 - P46_A3: All normal restricted reads/exports are logged through authorized endpoints; raw sensitive payloads/tokens do not enter telemetry.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P46_U1: A member with blank optional affiliation/course can use essential work/help and request access/correction through the approved route; they cannot browse other requests or custodian-only raw content.
+- P46_U2: A custodian can identify category/hold/action/expiry from a safe dry run; no purge executes or indefinite self-grant arises from the review flow, and pending policy inputs stay visibly blocked.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P46.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2223,6 +2375,12 @@ scripts/backup/*; scripts/restore/*; docs/recovery.md; src/features/admin/health
 Interfaces / invariants:
 Backup manifest covers app data/config, schema, file bytes/hashes, identity linkage recovery, retention/purge replay and separate key custody; freshness visible to custodians.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD05, AD07.
+- Provide a stepwise custodian recovery runbook with clear prerequisites, last verified backup and actionable failure/retry status. Keep encryption, hashes and full manifests in scoped operational details rather than ordinary member pages.
+- Have a second custodian follow the documented isolated restore sample when actual access/keys/target are available. Record observed completion and missing steps; do not replace a real rehearsal with a generated checklist.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement documented encrypted export and verify tools' actual Auth/Storage inclusion/exclusion. Keep backups/secrets out of Git artifacts and ordinary member folders.
 2. Add restoration into an explicitly verified isolated local/authorized recovery target; preserve stable member IDs or test verified provider re-linking.
@@ -2232,6 +2390,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P47_A1: Restored user can log in to correct scope; unauthorized user cannot read recovered private files.
 - P47_A2: Manifest counts/file hashes match and expired/purged data does not silently resurrect.
 - P47_A3: Stale/failed backup appears in health; missing device/provider/key makes verification blocked, not green.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P47_U1: An interrupted/stale/missing backup or failed restore cannot show healthy/complete; retry is resumable and verifies counts, bytes, identity scope and purge replay.
+- P47_U2: A second custodian can locate the next recovery action and evidence without author assistance when actually observed; otherwise that human/operational result remains pending.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P47.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2268,6 +2432,12 @@ src/app/*; public/manifest.webmanifest; service-worker configuration; tests/e2e/
 Interfaces / invariants:
 Installable shell caches public assets only; responsive and keyboard behavior applies to implemented work/review/admin flows.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD04, AD05, AD06, AD09.
+- Reaudit and repair current essential work/request/review/onboarding/admin journeys, including open AD findings, at320px,200%zoom,keyboard and relevant assistive technology. Audit hierarchy/labels/error recovery as well as geometry; do not defer barriers from earlier steps until now.
+- Install/offline states explain a useful next step without caching private APIs/files/drafts. Verify the complete mobile navigation including More and long renamed labels meets the44CSS-pixel house target without overflow.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Add manifest/install affordance and useful offline state without caching authenticated APIs, files, OAuth callbacks or private drafts.
 2. Audit 320px/zoom, visible focus/contrast, modal focus, labels/errors, screen-reader updates and keyboard alternatives in actual essential flows.
@@ -2277,6 +2447,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P48_A1: Signing out/offline cannot expose previous user's finance/task payload or service-worker cache.
 - P48_A2: Keyboard-only user completes task, handoff and review; mobile controls remain 44px and usable at 200% zoom.
 - P48_A3: Automated axe plus manual evidence recorded; no blanket WCAG certification based only on an automated scan.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P48_U1: Representative member/guest/head essential journeys remain understandable and operable with keyboard/mobile/zoom; record open failures by AD ID rather than claiming certification from axe alone.
+- P48_U2: No required action/help is clipped, hidden behind optional setup or dependent on drag; all five bottom targets meet the house target and offline/sign-out cannot expose the previous account.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P48.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2313,6 +2489,12 @@ Cloudflare build/headers config; .env.example; docs/deployment.md; docs/integrat
 Interfaces / invariants:
 Reproducible static build plus explicit environment matrix/redirects/secrets references, verified migration plan and rollback; preview and production remain isolated.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD03, AD04, AD05, AD06, AD08, AD09.
+- Deploy the coherent synthetic ordinary-member/head/guest/admin scenario using real components and current scoped identities on the identified eligible preview target. Provide assigned first work, fictional current contacts, short refs and configured/unavailable services; no placeholders mistaken for completed features.
+- Run fresh-account/deep-link/empty/error/conflict/retry and mobile first-action smoke checks against the actual deployed revision. Label simulated data and provider/human limitations separately from genuine hosted observations.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Prepare Cloudflare Pages static build/routing/headers/CSP and Supabase environment/provider settings, migration order, capacity check, credential custody and rollback instructions.
 2. Deploy synthetic preview only to an existing explicitly identified organization-controlled preview target when access is available. This prompt authorizes that named preview deployment; request missing target selection rather than guessing.
@@ -2322,6 +2504,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P49_A1: Fresh clean build runs on preview; SPA deep links and correct OAuth return work or exact provider block is recorded.
 - P49_A2: Preview contains synthetic data only; client bundle has no elevated credentials and private APIs remain protected.
 - P49_A3: Production target and backup/migration/rollback prerequisites are documented without running destructive remote commands.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P49_U1: The hosted synthetic first-work path reaches a real implemented task, contact and permitted detail, including preserved login return and short-reference identity; unavailable services explain repair rather than falsely accepting submission.
+- P49_U2: No simulated sign-in or missing gateway is counted as live scoped acceptance; member/guest/admin fixtures remain separate, no real roster is seeded and no production release follows automatically.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P49.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2358,6 +2546,13 @@ tests/e2e/core-pilot.spec.ts; docs/uat/*; docs/build/release-gate.md; feature fi
 Interfaces / invariants:
 Reproducible synthetic core slice and a human-test checklist with separate observed/automated/human-pending results.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD03, AD04, AD05, AD06, AD07, AD08, AD09.
+- Use the original representative first-time/experienced/guest/head cohort and intended scopes. Observe finding-specific journeys: first work/owner/date/action within two minutes after basic orientation, contact discovery, correct service selection, short-ref use, review versus submission, safe retry and optional disclosure/tour behavior.
+- Record actual per-task success/time/wrong turns/help, environment/revision and defects; target at least90%essential assigned flows unassisted after onboarding as the original proposed project threshold. Repair essential/high-impact friction before optional expansion; research affiliation groups are optional/consented and never product eligibility.
+- Close each AD finding only with implementation plus its observed/automated evidence as appropriate; give unresolved findings owner/impact/next action. Missing participants/provider setup keeps human acceptance pending, not simulated green.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Exercise school member/head/FIN/MCD/guest flows: deliverable -> synergy -> task/dependency -> handoff -> versioned reviews -> acceptance, including required denials.
 2. Prepare role-specific UAT scripts for both MEAn and non-MEAn participants, first-task guidance, steward instructions, privacy gate and defect triage.
@@ -2367,6 +2562,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P50_A1: Core happy path and negative access/revision/self-approval cases pass with release revision recorded.
 - P50_A2: Human results remain pending until observed; zero open P0/P1 is required for a green release gate.
 - P50_A3: Actual restore, relevant school authority/privacy decisions and named custodians are verified or explicitly listed as blockers.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P50_U1: Actual newcomer records distinguish observed success from assisted/failed/not-run tasks; automation, login counts and guide checkboxes cannot satisfy the two-minute/90%human targets.
+- P50_U2: Unresolved essential usability/accessibility failures cannot be waived by completing all feature prompts. A blank-affiliation late joiner and an off-domain scoped guest have appropriate work/help without learning internal codes.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P50.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2403,6 +2604,12 @@ src/features/integrations/drive/*; supabase/functions/google-oauth/*; docs/integ
 Interfaces / invariants:
 Separate Drive OAuth connection and Picker use drive.file or least necessary scope; server-only refresh-token storage, revoke/reconnect and selected-file metadata.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD05, AD06.
+- Keep Connect Drive optional and distinct from sign-in; explain selected-file access and revocation plainly. Preserve usable link/private-upload fallback and no setup nags/blank navigation while disabled.
+- Use readable filenames/owners and recoverable consent/denied/expired states; member work does not require provider IDs or a connection just to continue unrelated tasks.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement explicit Connect Drive consent separate from login, approved redirect/state checks and provider-owner custody. No all-drive crawling.
 2. Add Picker-based selected files for authorized work, validating provider IDs, current record permission and selected file access.
@@ -2412,6 +2619,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P51_A1: Client receives no refresh token/client secret and cannot nominate arbitrary unselected Drive files for broad reads.
 - P51_A2: Different dashboard member cannot use connection to bypass their record/file access.
 - P51_A3: Real selected-file flow verified if school/provider setup exists; otherwise adapter code/local tests marked external-blocked, not fully integrated.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P51_U1: Declining/revoking/losing Drive consent leaves essential work and the fallback usable without broadening another member file access.
+- P51_U2: A genuine configured selected-file flow uses named controls and safe retry, with provider-denied behavior recorded honestly; no connection state is falsely shown successful.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P51.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2448,6 +2661,12 @@ src/features/integrations/drive/exports/*; supabase/functions/drive-export/*; do
 Interfaces / invariants:
 User-triggered rendition/export creates new immutable app asset/Drive copy with manifest and destination classification; source and approved snapshot stay distinct.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD05.
+- Explain which final revision/copy goes to which approved destination in plain language; show readable filename/ref and progress before/after export. Keep original/approved snapshot distinct and technical manifest details scoped.
+- Use resumable error/retry and duplicate prevention; no provider-folder code entry for normal selection and no broad sensitive mirroring.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Export explicitly selected Google-native final rendition into private app evidence, hashing bytes and binding caption/use in the submitted revision.
 2. Implement authorized selected-file/data copy into approved Drive folder with current destination-permission check and audit. Separate FIN/PRISM destinations; no membership-wide sensitive mirroring.
@@ -2457,6 +2676,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P52_A1: Changed Drive/Canva source cannot rewrite approved app snapshot or retained decision hash.
 - P52_A2: Private FIN/PRISM file cannot be copied into broader folder without explicit authorized reclassification/policy; deny unsafe destination.
 - P52_A3: Retry does not create endless duplicate files; revoked destination access yields clear recoverable failure.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P52_U1: A user can distinguish original working file from submitted immutable copy and recover an interrupted export without duplicate files or rewritten approvals.
+- P52_U2: Renamed source/destination/ref labels preserve bindings; lost or overly broad destination access fails with a safe repair path and no private payload leak.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P52.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2493,6 +2718,12 @@ src/features/integrations/calendar/*; supabase/functions/calendar-sync/*; supaba
 Interfaces / invariants:
 App remains authoritative; explicit core-safe app events map to one approved core calendar, with source version, remote IDs, tombstones and durable token lifecycle.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD04, AD05, AD06.
+- Distinguish Add a copy from verified automatic sync; show the last successful update and plain repair status. Connection is optional, with useful local app calendar when disabled/revoked.
+- Use readable event titles and named authorized calendar selection; keep external edits/conflicts understandable without implying private events are shared.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement separately authorized connection and explicit app-to-Google publish/update/cancel jobs; document external-edit conflict policy.
 2. Add idempotent mapping, retry/backoff, revoked-auth repair, last-sync/error view, and safe token storage. No private task/mentee/finance data in general calendar.
@@ -2502,6 +2733,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P53_A1: Create/update/retry/cancel results in one correctly timed remote event, no resurrection after tombstone.
 - P53_A2: Expired/testing/revoked token shows stale state and fallback; never claims synced after failure.
 - P53_A3: Private event/export preferences cannot leak through shared calendar title/description/location.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P53_U1: A failed/revoked sync cannot say current/synced, and retry/cancellation cannot duplicate or resurrect the event; the local next-action calendar remains usable.
+- P53_U2: Declining sync adds no mandatory member setup, and private event/ref/title cannot leak through a broad calendar or repair preview.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P53.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2538,6 +2775,12 @@ src/features/integrations/telegram/*; supabase/functions/telegram-webhook/*; sup
 Interfaces / invariants:
 One-time account-link code binds started bot chat to authenticated member; webhook secret validation and minimal outbox adapter.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD05, AD06.
+- Make opt-in link/unlink and failure/relink states understandable; Telegram remains a supplemental alert channel, never necessary to find authoritative work.
+- Keep generic scoped deep links, digest/quiet-hour explanations and no disabled-module navigation or automatic account messaging.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build opt-in link/unlink flow after member starts bot; hash short-lived binding code and prevent chat takeover/reuse.
 2. Implement authenticated provider webhook handling and dispatch safe generic restricted alerts with deep links, quiet-hours/digest preferences and bounded retries.
@@ -2547,6 +2790,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P54_A1: Stolen/expired/reused linking code cannot attach another member; invalid webhook source rejected.
 - P54_A2: Revoked member or removed channel stops new deliveries and cannot open protected deep link.
 - P54_A3: Repeated dispatch deduplicates logically and carries no private financial/evaluation contents.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P54_U1: Unlink/revocation stops delivery without hiding in-app pending work; failed/expired link codes have a clear safe restart and cannot bind another member.
+- P54_U2: Retry cannot create duplicate logical alerts or leak restricted titles/content; no unrequested message is sent while testing the UI.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P54.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2583,6 +2832,12 @@ src/features/integrations/email/*; supabase/functions/email-adapter/*; src/featu
 Interfaces / invariants:
 Approved sender with tested quota/domain and server-only credentials; optional guest OTP identity must still redeem exact invite and scope.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD04, AD05, AD06.
+- Give guests one clear current entry route with exact-invite/expiry/wrong-account help and safe return; do not require understanding SMTP, tokens or identity-link internals.
+- Keep provider-unavailable entry/fallback honest and optional; no activation on untested sender and no guest connection/setup burden for unrelated work.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Connect existing approved free/organization sender only; implement minimal digest/transactional adapter with rate caps, dedup, retry and delivery health. No assumed Supabase default SMTP production service.
 2. If provider delivery is verified, add email OTP/magic-link guest entry with verified address, single-use exact invitation and safe return URL. Do not activate it on an untested sender.
@@ -2592,6 +2847,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P55_A1: Wrong email/expired invite/OTP replay cannot gain guest access; unverified email cannot link to existing school member.
 - P55_A2: Sensitive email is generic with authenticated link and never contains receipt/feedback text.
 - P55_A3: Missing sender/DNS/quota blocks external verification and activation rather than returning fake sent messages.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P55_U1: A guest can recognize expired/wrong-account/undelivered entry and use a permitted recovery route without leaking invite existence or taking over a school identity.
+- P55_U2: Missing sender/quota keeps activation visibly blocked, not Sent; safe retry cannot redeem an invite twice or expose private mail contents.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P55.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2628,6 +2889,12 @@ supabase/migrations/*room_booking.sql; supabase/tests/room_booking.test.sql; src
 Interfaces / invariants:
 confirm_booking enforces official evidence and database exclusion over room/buffered half-open range for confirmed/persisted active holds.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD03, AD04.
+- Model explicit Requested/Held/Officially confirmed/Cancelled outcomes and safe alternative/conflict reasons that the later UI can present without database terminology. Reuse stable qualified short-reference conventions.
+- Keep buffers/exclusion/hold expiry and institutional evidence authoritative; do not flatten submission or a calendar event into reservation confirmation.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Model rooms/accessibility/equipment and requests, expiring holds, confirmation and cancellation with Logistics authority.
 2. Expire stale holds in confirmation transaction and serialize competing transitions; a worker is not sole protection against stuck holds.
@@ -2637,6 +2904,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P56_A1: Two concurrent overlapping confirmations cannot both succeed; adjacent nonbuffered slots behave correctly.
 - P56_A2: Expired hold cannot block indefinitely if scheduler is down; setup/cleanup buffers count.
 - P56_A3: Request submission or a calendar event alone cannot masquerade as official room reservation.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P56_U1: Domain responses carry a safe human-actionable pending/conflict/confirmed distinction and immutable ref/evidence version, without revealing another private meeting.
+- P56_U2: Concurrency/expiry/retry preserve one valid confirmation; a short ref or requested slot cannot bypass official confirmation authority.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P56.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2673,6 +2946,12 @@ src/features/rooms/*; src/features/calendar/*; src/features/requests/*
 Interfaces / invariants:
 Room UI uses P56 commands, showing desired vs confirmed slot, evidence and conflict/alternative negotiation.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD04, AD05, AD09.
+- Build one room-request journey with named room/requirements, readable alternatives and explicit desired versus official confirmed slot. Reuse requester Back/Change/Review and current owner/contact patterns.
+- Preserve safe entries on stale availability/conflict; show the permitted next response and clear cancelled/confirmed details on mobile/keyboard without a separate generic control console.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build accessible room/time/requirements request, Logistics availability/conflict view and alternative-slot acceptance.
 2. Add official reference/evidence, confirmed/cancelled details and linked calendar entry. Initial recurring sessions are separate explicit instances.
@@ -2682,6 +2961,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P57_A1: Mobile/keyboard requester can submit and distinguish pending from confirmed.
 - P57_A2: Change/cancel updates actual reservation/calendar without stale duplicates.
 - P57_A3: Unauthorized role cannot confirm, and private meeting details remain scoped despite room availability display.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P57_U1: A requester can choose an alternative after conflict without reentering safe information or mistaking a held/requested slot for confirmed.
+- P57_U2: Named action/confirmation,44px mobile controls and keyboard operation retain private-meeting boundaries and idempotent calendar updates.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P57.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2718,6 +3003,12 @@ src/features/inventory/*; supabase/migrations/*inventory.sql; supabase/tests/inv
 Interfaces / invariants:
 Item master, custodians and immutable quantity/condition movements; atomic reserve/issue/partial-return/cancel, FIN linkage for costs.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD03, AD04, AD05.
+- Present borrowing as item/quantity/dates then request, physical issue and return, with a compact stable reference; use readable balances and condition messages instead of ledger machinery.
+- Reuse safe request/retry/partial-return patterns, named custodian/help and departed-owner repair. Keep purchase/loss costs in the independent FIN path.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Add stock/borrower/dates/condition/location schema and authorized request/custodian screens with simple ledger rather than overwritable available count.
 2. Implement concurrent reservation, physical issue confirmation, returns, partial returns and loss/damage notes with evidence.
@@ -2727,6 +3018,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P58_A1: Simultaneous borrowers cannot reserve more than available and repeat return cannot inflate stock.
 - P58_A2: Partial return/lost item yields consistent balance/condition/audit rather than silent negative inventory.
 - P58_A3: Replacement expense cannot be approved by inventory role without FIN authority; unauthorized borrower details stay private.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P58_U1: A borrower/custodian can distinguish Reserved from Physically issued and Partial return from Complete, using one stable ref across retry/history.
+- P58_U2: Concurrent shortage/duplicate return/conflict preserves safe inputs and stock; neither a short ref nor inventory role exposes another borrower or authorizes FIN costs.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P58.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2763,6 +3060,12 @@ src/features/growth/*; supabase/migrations/*mentoring.sql; supabase/tests/mentor
 Interfaces / invariants:
 mentorships have approved effective dates; owned goals/sharing and author-attributed check-ins are separate from evaluations.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD05, AD06.
+- Keep goals/check-ins a small optional experience with clear sharing/withdrawal and current named mentor, separate from evaluations and core work navigation when disabled.
+- Use attributable notes, readable next check-in and safe unsaved-change recovery; avoid mandatory personal disclosure or calendar connection.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build goals, target/progress and sharing choice, assigned-mentor list, check-in schedule/actions and attributable notes.
 2. Enforce relationship expiry/reassignment and withdrawal of sharing; mentor cannot edit mentee's goal wording or read evaluation cases.
@@ -2772,6 +3075,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P59_A1: Former mentor with live session loses access after relationship expiry/revoke.
 - P59_A2: Head/PM/PRISM roles have no automatic raw goal access unless explicit appropriate grant.
 - P59_A3: Private check-in title/notes do not leak through core calendar/search/reports.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P59_U1: A member can identify who sees a goal and withdraw sharing without losing unrelated work; former mentor loses access even with a live session.
+- P59_U2: Empty goals/disconnected calendar offer a useful optional path and no onboarding block; private check-in content remains absent from broad search/reports/calendar.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P59.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2808,6 +3117,12 @@ supabase/migrations/*evaluations.sql; supabase/tests/evaluations.test.sql; src/f
 Interfaces / invariants:
 feedback_rounds/submissions/revisions/reviewer notes and separate evaluation_releases; audited restricted RPC reads, no broad table SELECT.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD04, AD06.
+- Provide the UI with plain-purpose author/assigned-reviewer/released-summary states and explicit anonymity/retention limits, preserving the fixed sensitive boundary.
+- Keep optional module activation gated on actual recorded custodian/basis/retention; no mandatory feedback or new ordinary member navigation while disabled.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Implement round purpose/template/subject/reviewer/retention/release policy with explicit conflicts and reviewer assignments.
 2. Keep author's submitted record immutable, append amendments, separate raw third-party feedback from released subject summary and apply holds/dispositions.
@@ -2817,6 +3132,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P60_A1: Subject, mentor, PM and ordinary admin cannot read raw third-party feedback by knowing IDs or querying joins.
 - P60_A2: Revoked/conflicted reviewer cannot submit/release; wrong-subject summary cannot be published.
 - P60_A3: Restricted reads/downloads/export audit without raw text, and retention respects hold and backup replay.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P60_U1: Safe status/projection distinguishes submitted feedback from released subject summary without allowing subject/mentor/admin raw access by ref.
+- P60_U2: Missing policy keeps the module inactive with actionable custodian prerequisites; no invented approval/anonymous guarantee or private text reaches telemetry.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P60.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2853,6 +3174,12 @@ src/features/evaluations/*; src/features/reports/*; tests/e2e/evaluations.spec.t
 Interfaces / invariants:
 UI consumes restricted P60 APIs; author/assigned-reviewer/subject-release views distinct; aggregation suppresses groups below five and reconstructive filters.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD04, AD05, AD06.
+- Use separate focused author, assigned-reviewer and subject-release journeys, each with one clear next action and plain privacy/help text. Keep raw/released material unmistakably distinct.
+- Reuse safe revision/input/recovery controls and scoped export confirmation; formal complaints point to the approved process and no required ordinary-work setup is added.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build feedback submission, assigned PRISM queue, attributable reviewer notes, controlled summary review/release and subject-visible results.
 2. Add explicit export control and minimum-group reporting; prevent differencing/drilldown that reconstructs identities.
@@ -2862,6 +3189,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P61_A1: Subject sees only released summary; author edits produce a revision, not overwritten submitted evidence.
 - P61_A2: Groups under five and difference-of-filters reconstruction cannot expose individuals.
 - P61_A3: Real sensitive activation stays blocked without actual owner/policy/UAT; screenshots and test fixtures contain synthetic data only.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P61_U1: A subject sees and understands only the released summary; authors can append a revision without silently overwriting evidence, and failure/retry preserves safe inputs.
+- P61_U2: Clear labels/filter choices cannot reconstruct suppressed groups or widen raw access; actual sensitive privacy/UAT remains required, not satisfied by synthetic screenshots.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P61.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2898,6 +3231,12 @@ src/features/admin/turnover/*; supabase/migrations/*term_closure.sql; supabase/f
 Interfaces / invariants:
 freeze_term and run_archive create resumable scoped manifests, records/files dispositions and verification; new-term roles are explicitly regranted.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD04, AD05, AD07.
+- Provide a stepwise custodian/successor checklist with named responsibility, unresolved item/ref, classification/disposition and understandable resumable progress. Keep technical counts/hashes in scoped evidence details, not ordinary member navigation.
+- Use explicit successor acceptance and outgoing-scope transfer; retain refs/old links/history across term closure and distinguish archive from disposal. Rehearse synthetically without freezing/purging the live term.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Build closure checklists per unit/deliverable, unresolved obligation resolution/carry-forward, freeze, classified archive plan and legal holds.
 2. Implement resumable records/config/file export with counts/hashes/errors and actual restore sample, plus successor acceptance/custody checklist.
@@ -2907,6 +3246,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P62_A1: Missing file/failed hash/unfinished export cannot show turnover complete.
 - P62_A2: Frozen term rejects ordinary mutation while controlled correction/retention operations remain audited.
 - P62_A3: Successor gets explicitly granted records, not automatic raw evaluations; every record has archive/dispose/hold/carry disposition.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P62_U1: A failed export/hash/unresolved carry item identifies the next responsible action and cannot show Complete; resume preserves refs and avoids duplicate archive effects.
+- P62_U2: A successor follows the actual scoped handover tasks with recorded acknowledgment when observed; missing custody/human/recovery proof stays pending and raw FIN/PRISM never transfers implicitly.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P62.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
@@ -2943,6 +3288,13 @@ docs/build/release-gate.md; docs/uat/*; docs/admin-guide.md; docs/deployment.md;
 Interfaces / invariants:
 Final report names exact release revision, enabled/disabled/externally-blocked modules, security/UAT/recovery evidence, verified production target and successor operations.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD01, AD02, AD03, AD04, AD05, AD06, AD07, AD08, AD09.
+- Reconcile every adoption finding and P35-P62 U result against the exact eligible release revision: implemented evidence, observed human result, owner/impact for residual issues, or deliberately disabled optional scope. Recheck the real enabled ordinary-member/guest/head/custodian experience, not a feature count.
+- Require actual representative newcomer first-work/contact/service/status/ref/recovery journeys and the original two-minute/90%essential-flow proposed targets, with task results/time/wrong turns/help. Repeat affected checks after material fixes; no green gate from a generated guide or simulated council.
+- Prepare short role-specific operating/fallback instructions that match the released screens; include actual second-custodian/successor operation. Essential/high adoption barriers join existing security/privacy/restore/provider blockers before release; if blocked, deliver an honest candidate, not a false deployment claim.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Read current state/contracts and targeted high-risk code, not all files indiscriminately. Audit transitive access, same-term/guest revocation, stale approvals, config privilege changes, outbox, recovery and private exports; add focused regression tests for genuine findings.
 2. Reconcile all required F01–F26 coverage against implemented or deliberately disabled optional scope. Verify actual mixed-background human UAT, authority/privacy decisions and restore evidence; do not pretend simulated review is independent security certification.
@@ -2952,6 +3304,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P63_A1: Zero open critical/high release blockers and required checks pass on the actual release revision; no skipped optional module is misreported as complete.
 - P63_A2: Production smoke tests, privacy boundaries and OAuth verified if released; otherwise final status explicitly remains candidate/blocked.
 - P63_A3: Second-custodian/successor tasks and account custody are recorded; handover requires real acknowledgment, not a generated claim.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P63_U1: Every AD finding has a truthful disposition and supporting release-revision evidence; unfinished essential usability/accessibility work or missing actual newcomer UAT blocks a green release.
+- P63_U2: Production smoke/role instructions agree on readable IDs, applicable review states, working help/first action, disabled modules and safe error recovery; no optional connection or affiliation disclosure is required for essential work.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P63.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.

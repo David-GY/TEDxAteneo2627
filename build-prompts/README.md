@@ -4,6 +4,8 @@ Prepared October 24, 2026. This pack contains **65 implementation prompts: P00�
 
 ## Start here
 
+October28 midway revision: P35 now begins with bounded repairs to existing member screens before configuration expansion. P36 adds the missing compact display-reference implementation before the form editor. Every P35–P63 prompt includes concrete adoption work and named U checks alongside its unchanged A1–A3. See [adoption delivery map](../docs/build/ADOPTION-DELIVERY.md), [audit](../docs/build/ADOPTION-AUDIT.md) and [experience contract](../docs/newcomer-experience.md). These are planned fixes, not completed application work. Current P34 mutation code is delivered locally; do not rebuild it. P35/P36 remain unimplemented; begin at the current checkpoint, not P00.
+
 1. Use this TEDx workspace. Open P00 below, select the listed model/effort, and paste its text block into the project chat. Alternatively send: `Execute build-prompts/00-foundation.md and follow build-prompts/BUILD-CONTRACT.md.`
 2. Run one numbered step at a time. Continue a partial step with [CONTINUE.md](CONTINUE.md) before moving on. Later steps reuse the code/contracts already built.
 3. P00–P50 build and verify the core pilot/v1. P51–P61 cover all planned optional modules/integrations. P62 is required turnover functionality and P63 is the final audit/release/handover, even if optional modules are deferred.
@@ -66,8 +68,8 @@ The table is the execution order; optional modules have explicit prerequisites i
 | [P32](32-resources-onboarding.md) | Publish guides, glossary and an inclusive onboarding hub | GPT-6.1 Sol | Medium | Core |
 | [P33](33-organization-admin.md) | Manage roster, deployments, unit rename/merge/archive | GPT-6.1 Sol | High | Core |
 | [P34](34-permission-admin.md) | Build safe role editing and access explanations | GPT-6.1 Sol | High | Core |
-| [P35](35-config-publication.md) | Implement shared configuration draft, validation and publication | GPT-6.1 Sol | High | Core |
-| [P36](36-form-builder.md) | Build the no-code request form editor | GPT-6.1 Sol | High | Core |
+| [P35](35-config-publication.md) | Repair everyday workflows and implement shared configuration publication | GPT-6.1 Sol | High | Core |
+| [P36](36-form-builder.md) | Add readable work references and build the request form editor | GPT-6.1 Sol | High | Core |
 | [P37](37-workflow-builder.md) | Build the bounded workflow and approval editor | GPT-6.1 Sol | High | Core |
 | [P38](38-statuses-phases-services.md) | Edit phases, semantic statuses and service routing | GPT-6.1 Sol | Medium | Core |
 | [P39](39-site-edit-branding.md) | Implement general site Edit Mode, labels and branding | GPT-6.1 Sol | Medium | Core |
@@ -142,4 +144,4 @@ Prompt P49 prepares deployment and an identified synthetic preview. P50 records 
 - [Complete prompt book](../docs/superpowers/plans/2026-10-24-tedx-build-prompts.md): same sequence in one document, with shared constraints rather than duplicated specification text.
 - `_source/*.json` and `_source/generate.py`: editable authoring source. Regeneration overwrites generated numbered files, this README and the complete book; edit the source catalog if changes should persist.
 
-The pack was checked for 65 unique ordered IDs (including P16A between P16/P17), earlier-only dependencies, model/effort on every step, three bounded actions and three acceptance checks per prompt, and coverage of all 26 feature IDs. This validates prompt structure, not application acceptance. P16A's approved scope addendum is docs/committee-timeline-spec.md.
+The pack was checked for 65 unique ordered IDs (including P16A between P16/P17), earlier-only dependencies, model/effort on every step, three original actions and A1–A3 per prompt, concrete adoption work/U checks on all29 remaining prompts, and coverage of all26 feature IDs. This validates prompt structure, not application acceptance. P16A's approved scope addendum is docs/committee-timeline-spec.md.

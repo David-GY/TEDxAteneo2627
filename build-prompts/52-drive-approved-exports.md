@@ -22,6 +22,12 @@ src/features/integrations/drive/exports/*; supabase/functions/drive-export/*; do
 Interfaces / invariants:
 User-triggered rendition/export creates new immutable app asset/Drive copy with manifest and destination classification; source and approved snapshot stay distinct.
 
+Newcomer adoption work (required, in the listed order):
+Read docs/newcomer-experience.md and docs/build/ADOPTION-AUDIT.md. Mapped findings: AD02, AD03, AD05.
+- Explain which final revision/copy goes to which approved destination in plain language; show readable filename/ref and progress before/after export. Keep original/approved snapshot distinct and technical manifest details scoped.
+- Use resumable error/retry and duplicate prevention; no provider-folder code entry for normal selection and no broad sensitive mirroring.
+These additions are part of this step, not a request to finish every batch in one execution. Checkpoint each coherent batch within BUILD-CONTRACT usage limits; carry actual provider/human gates forward. Do not advance with missing required local adoption behavior. Do not rebuild verified preceding code.
+
 Implement and verify this bounded slice:
 1. Export explicitly selected Google-native final rendition into private app evidence, hashing bytes and binding caption/use in the submitted revision.
 2. Implement authorized selected-file/data copy into approved Drive folder with current destination-permission check and audit. Separate FIN/PRISM destinations; no membership-wide sensitive mirroring.
@@ -31,6 +37,12 @@ Acceptance checks (implement named regression assertions for nontrivial behavior
 - P52_A1: Changed Drive/Canva source cannot rewrite approved app snapshot or retained decision hash.
 - P52_A2: Private FIN/PRISM file cannot be copied into broader folder without explicit authorized reclassification/policy; deny unsafe destination.
 - P52_A3: Retry does not create endless duplicate files; revoked destination access yields clear recoverable failure.
+
+Additional adoption acceptance (preserve A1-A3 above):
+Automate meaningful state/security/recovery assertions; use recorded visual/manual checks for presentation. Do not add tests that only mirror wording or mark human UAT passed from automation.
+- P52_U1: A user can distinguish original working file from submitted immutable copy and recover an interrupted export without duplicate files or rewritten approvals.
+- P52_U2: Renamed source/destination/ref labels preserve bindings; lost or overly broad destination access fails with a safe repair path and no private payload leak.
+Record A and U results separately, open AD findings and batch completion in the mandatory checkpoint. A plan or new label does not close an adoption finding.
 
 Update docs/build/steps/P52.md and docs/build/STATE.md with delivered behavior, exact commands/results, remaining acceptance items, observed usage and next smallest action.
 Run targeted checks and required typecheck/lint/build. Do not expand into the next prompt, fabricate external verification, or commit/push without authorization.
