@@ -1,0 +1,70 @@
+{
+  "recordedAt": "2026-10-28T16:03:29.250183+00:00",
+  "localDate": "2026-10-29",
+  "status": "in_progress",
+  "step": "P35",
+  "slice": "R2 recovery/preview/mobile; R1 and R2 remain partial",
+  "implementationCommit": "1367eceb904e374bc71f4b966909441c4e964d0f",
+  "implementationTree": "65bc795add10006ff03d22ca97cef76245b2deb7",
+  "implementationLocalFetchedLiveEqual": true,
+  "implementationWorktreeClean": true,
+  "finalReceiptCustody": "Final local/fetched/live SHA/tree and clean verification repeated after this receipt push; reported in chat.",
+  "checks": {
+    "allTests": "56files/188tests PASS",
+    "finalGuardAuthRequesterTests": "4files/7tests PASS",
+    "frontendAndEdgeTypes": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing large-chunk warning",
+    "catalog": "107tables/1098columns/140functions unchanged PASS",
+    "compiledR2": "PASS member/head/guest/recovery/exact retry/sandbox/320px five44px targets",
+    "detector": "[]",
+    "diffCheck": "PASS"
+  },
+  "acceptance": {
+    "A1": "unverified",
+    "A2": "unverified",
+    "A3": "unverified",
+    "U1": "partial R1",
+    "U2": "partial: record-specific scope loss and remaining editors/native unload/Back coverage open",
+    "U3": "partial: direct shared-record guest entry; general shared index remains unconnected",
+    "U4": "mobile five targets local PASS; admin review unverified"
+  },
+  "usage": {
+    "start": 61,
+    "startReset": 1793211099,
+    "weeklyStart": 13,
+    "effectiveBudgetPp": 29,
+    "ceiling": 90,
+    "windDown": 85,
+    "lastObserved": 84,
+    "lastReset": 1793211098,
+    "weeklyLast": 16,
+    "sharedAccountOnly": true,
+    "priorWindowUncertaintyRetained": true,
+    "resetOrWaitUsed": false
+  },
+  "preview": {
+    "pid": 39676,
+    "vitePid": 88820,
+    "port": 5178,
+    "tab": "2 retained; actual AX and screenshot inspected",
+    "url": "http://127.0.0.1:5178/tasks/1c44ba55-152f-432d-927e-de662b9e9c3b",
+    "syntheticOnly": true,
+    "temporary5199Closed": true,
+    "guestBytes": "403; no fallback to core file subject"
+  },
+  "remaining": "Continue P35 R1 task applicability/actions/requester role coverage and R2 record-specific scope-loss/remaining editor recovery. R3 remains gated; no P36.",
+  "noProviderChanges": true,
+  "noAgentsChatsWorktrees": true,
+  "noHumanUatClaim": true,
+  "externalGates": "All STATE provider/JWT/Storage/independent concurrency/institutional/privacy/retention/human/restore gates retained.",
+  "sha256": {
+    "docs/build/steps/P35.md": "f4198ce31ff23525bb4c89b864e41d2278beba77d14e3910702ad14371eae0b8",
+    "docs/build/STATE.md": "272b497727330849f0c28390cb94977764e15c764160a6a25e889ba367d97e95",
+    "docs/build/evidence/P35-R2-browser.json": "573ceefecdf2999394f14321711d56709c1a5ecc14dba5c6d679e12b9f594004",
+    "src/components/EditSafety.tsx": "dbeb90914ea7b8ee782909de6c4a40e13596e4bd114fa2b7c4427b7189d92916",
+    "src/features/auth/pages.tsx": "34b3baa54dc9fa206f12f636688064ea0fb3486406920871384dd7c2b10d4bce",
+    "scripts/preview-p35.cjs": "df97ba68baea5af8ab3efd63c168721c976d3aca84e4d56525695198cc468bc6",
+    "scripts/verify-p35-r2.cjs": "208afeb9093a7c36211a98a116c6e4763f6283e6598e7156b87f053cf6ab371f"
+  }
+}
