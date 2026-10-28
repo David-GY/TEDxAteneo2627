@@ -68,7 +68,7 @@ export function AppShell({ context = setupNavigation, identity, preview = true }
         </aside>
         <div className="workspace-body">
           <header className="workspace-header">
-            <div className="location-heading"><span className="mobile-identity">TEDxAteneodeManilaU</span><span>{current?.label ?? 'Core workspace'}</span></div>
+            <div className="location-heading"><span className="mobile-identity">TEDx Ateneo de Manila U</span><span>{current?.label ?? 'Core workspace'}</span></div>
             <div className="account-summary">
               {identity ? <div className="identity-details"><strong>{identity.displayName}</strong>{identity.unitName ? <span>{identity.unitName}</span> : null}</div> : <span className="muted">Not signed in</span>}
               <NotificationBadge/><Link className="button button--secondary" to="/account">Account</Link>

@@ -1,3 +1,4 @@
+import {EditSafety} from '../../components/EditSafety'
 import {NotificationCenter} from '../notifications/Notifications'
 import type {NotificationsApi} from '../notifications/api'
 import {FinDecisionMemory} from '../finance/DecisionMemory'
@@ -22,7 +23,7 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
   const { revalidate, state } = useRevalidator()
   const location = useLocation()
   const workspace=useRouteLoaderData('workspace') as WorkspaceContext|undefined
-  const draftIdentity=workspace?workspace.termId+':'+(isGuest(workspace)?'guest:'+workspace.guestAccessId:'core:'+workspace.memberId):'signed-out'
+  const draftIdentity=workspace?JSON.stringify([workspace.termId,isGuest(workspace)?'guest:'+workspace.guestAccessId:'core:'+workspace.memberId,[...(workspace.capabilities??[])].sort()]):'signed-out'
   useEffect(() => {
     const refresh = () => { if (document.visibilityState === 'visible' && window.location.pathname !== '/auth/callback') void revalidate() }
     const stop = gateway.onChange(refresh)
@@ -31,7 +32,7 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
     const timer = window.setInterval(refresh, 30_000)
     return () => { stop(); clearInterval(timer); window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh) }
   }, [gateway, revalidate])
-  return <FinDecisionMemory identity={draftIdentity}><FinanceMemory identity={draftIdentity}><ReviewMemory identity={draftIdentity}><RequestMemory identity={draftIdentity}><FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}>{state === 'loading' && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</HandoffDrafts></ScheduleDrafts></FormDrafts></RequestMemory></ReviewMemory></FinanceMemory></FinDecisionMemory>
+  return <FinDecisionMemory identity={draftIdentity}><FinanceMemory identity={draftIdentity}><ReviewMemory identity={draftIdentity}><RequestMemory identity={draftIdentity}><FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}><EditSafety key={draftIdentity}>{state==='loading'&&workspace?<p role="status">Checking current access. Your edits stay here while actions are paused.</p>:null}<div inert={state==='loading'&&!!workspace}>{state === 'loading' && !workspace && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</div></EditSafety></HandoffDrafts></ScheduleDrafts></FormDrafts></RequestMemory></ReviewMemory></FinanceMemory></FinDecisionMemory>
 }
 
 export function ProtectedShell({notifications}:{notifications?:NotificationsApi}) {

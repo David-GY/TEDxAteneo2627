@@ -37,7 +37,7 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload,timeline,onPen
   const d=context?.data;const canManage=context?.units.find(u=>u.id===lead)?.canManage
   const content=<>
     {error?<p role="alert">{error}</p>:null}{notice?<p role="status">{notice}</p>:null}
-    <button className="button button--secondary" disabled={busy||schedulePending} onClick={()=>refresh()}>Reload latest (discard unsaved edits)</button>
+    <button className="button button--secondary" data-discard-edits disabled={busy||uncertain||schedulePending} onClick={()=>refresh()}>Reload latest (discard unsaved edits)</button>
     {uncertain?<button className="button" disabled={busy||schedulePending} onClick={()=>pending.current&&void run(pending.current.input)}>Retry same request</button>:null}
     {context===undefined?!error?<LoadingState title="Checking authoring access"/>:null:<>
       {context.queue.length?<div><h3>Owners needing reassignment</h3><ul>{context.queue.map(q=><li key={q.id}><Link to={'/deliverables/'+q.id}>{q.title}</Link></li>)}</ul></div>:null}
@@ -60,7 +60,7 @@ export function DeliverableEditor({api,termId,id,onSaved,onReload,timeline,onPen
           <button className="button" disabled={busy||uncertain||schedulePending} type="submit">{busy?'Saving…':id?'Save deliverable':canManage&&!propose?'Create deliverable':'Propose commitment'}</button>
         </fieldset>
       </form>:null}
-      {id&&context.actions.length?<form onSubmit={transition} className="deliverable-editor"><fieldset disabled={busy||uncertain||schedulePending}>
+      {id&&context.actions.length?<form data-edit-form data-pending-command={busy||uncertain} onSubmit={transition} className="deliverable-editor"><fieldset disabled={busy||uncertain||schedulePending}>
         <h3>Workflow action</h3><p>Acceptance checks current evidence and mandatory gates on the server. Unresolved gates block acceptance.</p>
         <div className="form-field"><label htmlFor="deliverable-action">Action</label><select id="deliverable-action" name="action" value={action==='none'?context.actions[0]:action} onChange={e=>setAction(e.target.value as DeliverableAction)}>{context.actions.map(a=><option key={a} value={a}>{labels[a]}</option>)}</select></div>
         <TextField id="transition-reason" name="reason" label="Action reason" required maxLength={2000}/>
