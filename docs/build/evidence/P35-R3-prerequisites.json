@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-10-28T16:06:25.270051+00:00",
+  "status": "in_progress",
+  "R3": "not_started; R1/R2 local prerequisites partial",
+  "startCommit": "c2843d444952af0e7bc114ddb13a467c93bf65fc",
+  "startTree": "c48e24c02e3ab1d31edce056130546b69afd461d",
+  "startLocalFetchedLiveEqualAndClean": true,
+  "newCheck": "Actual router history Back cancel retains input; explicit discard reaches original previous route",
+  "checks": [
+    "2files4tests PASS",
+    "typecheck PASS",
+    "lint PASS",
+    "build PASS; existing chunk warning",
+    "diff check PASS"
+  ],
+  "usage": {
+    "start": 86,
+    "last": 88,
+    "resetStart": 1793211099,
+    "resetLast": 1793211098,
+    "weekly": 17,
+    "effectivePp": 4,
+    "ceiling": 90
+  },
+  "applicationSchemaProviderChanges": false,
+  "previewRetained": {
+    "previewPid": 39676,
+    "vitePid": 88820
+  },
+  "next": "Finish R1 task applicability/actions/requester roles and R2 record scope-loss/recovery before R3. No P36.",
+  "externalGatesRetained": true,
+  "finalCustody": "Verify local/fetched/live commit/tree and clean worktree after checkpoint push; report result in chat."
+}

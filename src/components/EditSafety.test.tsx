@@ -1,4 +1,4 @@
-import {fireEvent,render,screen,waitFor} from '@testing-library/react'
+import {act,fireEvent,render,screen,waitFor} from '@testing-library/react'
 import {createMemoryRouter,RouterProvider,Link} from 'react-router'
 import {it,expect,vi} from 'vitest'
 import {EditSafety} from './EditSafety'
@@ -19,4 +19,16 @@ it('P35_U2: uncertain command cannot lose its retry key through refresh or navig
  fireEvent.click(screen.getByRole('link',{name:'Other page'}));await screen.findByRole('button',{name:'Keep editing'})
  expect(screen.queryByRole('button',{name:'Discard edits and leave'})).toBeNull()
  await waitFor(()=>expect(s.router.state.location.pathname).toBe('/'))
+})
+it('P35_U2: history Back cancellation retains inputs; explicit discard permits the original history destination',async()=>{
+ const router=createMemoryRouter([{path:'/',element:<EditSafety><form data-edit-form><input aria-label="Back recovery notes"/></form></EditSafety>},{path:'/previous',element:<p>Previous permitted page</p>}],{initialEntries:['/previous','/'],initialIndex:1})
+ render(<RouterProvider router={router}/>);fireEvent.change(screen.getByLabelText('Back recovery notes'),{target:{value:'Keep this on Back'}})
+ await act(async()=>{await router.navigate(-1)})
+ fireEvent.click(await screen.findByRole('button',{name:'Keep editing'}))
+ expect(router.state.location.pathname).toBe('/')
+ expect((screen.getByLabelText('Back recovery notes') as HTMLInputElement).value).toBe('Keep this on Back')
+ await act(async()=>{await router.navigate(-1)})
+ fireEvent.click(await screen.findByRole('button',{name:'Discard edits and leave'}))
+ await screen.findByText('Previous permitted page')
+ expect(screen.queryByLabelText('Back recovery notes')).toBeNull()
 })
