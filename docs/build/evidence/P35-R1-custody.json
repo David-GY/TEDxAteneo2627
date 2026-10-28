@@ -1,0 +1,73 @@
+{
+  "recordedAt": "2026-10-28T15:39:46.854938+00:00",
+  "status": "in_progress",
+  "step": "P35",
+  "batch": "first R1 slice; R1 incomplete; no R2/R3/configuration/P36",
+  "implementationCommit": "bc5685ea19e503591c297a293962cbfbb329aa6e",
+  "implementationTree": "8162e9dc6b0934f5277c6a803812669a57913bc8",
+  "implementationLocalFetchedLiveEqual": true,
+  "implementationWorktreeClean": true,
+  "finalReceiptCustody": "Repeat local/fetched/live commit/tree and clean verification after publishing this receipt; final result reported in chat.",
+  "checks": {
+    "vitest": "54 files /185 tests PASS; final affected detail/editor rerun11 PASS",
+    "typecheck": "PASS",
+    "typecheckFiles": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing chunk warning",
+    "catalog": "107tables/1098columns/140functions PASS",
+    "sql": [
+      "readiness PASS",
+      "tasks PASS",
+      "work-access PASS",
+      "access-mutations PASS"
+    ],
+    "compiledBrowser": [
+      "verify-p29 PASS",
+      "verify-p35-r1 PASS"
+    ],
+    "detector": "[]",
+    "diffCheck": "PASS"
+  },
+  "acceptance": {
+    "A1": "unverified",
+    "A2": "unverified",
+    "A3": "unverified",
+    "U1": "partial",
+    "U2": "unverified overall",
+    "U3": "partial",
+    "U4": "unverified overall"
+  },
+  "usage": {
+    "startingUsedPercent": 41,
+    "startingReset": 1793211098,
+    "lastUsedPercent": 59,
+    "lastReset": 1793211099,
+    "weeklyUsedPercent": 12,
+    "sharedAccountObservation": true,
+    "priorWindowFinalUnknown": true,
+    "resetCreditOrWaitUsed": false
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5178/deliverables/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8",
+    "tab": "1 retained deliverable; actual screenshot inspected",
+    "previewPid": 5888,
+    "vitePid": 88820,
+    "syntheticOnly": true,
+    "tasksGatewayInRetainedPreview": false,
+    "testPreview5199Closed": true
+  },
+  "remaining": "Finish R1 authorized task applicability/specific permitted progress and populated requester role checks, then R2 recovery/coherent fixture/More, then R3 configuration. Resume CONTINUE.md; no P36.",
+  "providerChanges": false,
+  "agentsChatsWorktreesCreated": false,
+  "externalGates": "All current STATE provider/JWT/Storage/independent concurrency/institutional/privacy/retention/human/restore gates retained.",
+  "review": "Single-assistant diff and simulated-lens review only; no independent agent reviewer under no-agents instruction.",
+  "sha256": {
+    "docs/build/STATE.md": "0d14038cf3b2ba52a2c509451d3ed55194749b48a4141338f7434771619dc947",
+    "docs/build/steps/P35.md": "3e14981cdde9382ed1ba1ef0cfa102731f3fdab27af1ecb811dbfed82642ebc5",
+    "docs/build/evidence/P35-R1-browser.json": "8349574e6682d3148975cf3205087dd4982322c00a64579186ddeabdf0dbf87a",
+    "src/components/ReviewGate.tsx": "9d6cda2cfdfbca7dbc68e7fe8beceebc72eaafb696241994679509babc794ddd",
+    "src/features/deliverables/DeliverablePage.tsx": "8fecbe972150248ce78c2443130115edbdb806ebd8c76522ee400d8f16e6f3fc",
+    "src/features/tasks/TaskDetail.tsx": "ffef14bb48da1c348c9fb0ead4824584e1038b9221ca5a716d56aca38c92fed1",
+    "scripts/verify-p35-r1.cjs": "2a600e9c15f91753be488274298adb64b0a90b0a61eba389788cca7e657675f0"
+  }
+}
