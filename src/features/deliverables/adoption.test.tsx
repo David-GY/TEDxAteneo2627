@@ -11,7 +11,7 @@ import type {DeliverableDetail} from './api'
 const id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8'
 it('P35_U1: protected requirement without a submitted case is pending, never not required',()=>{
  render(<ReviewGate title="Finance review (FIN)" status="not_verified" applicability="pending" loading={false}/>)
- expect(screen.getByText('Finance review (FIN): Pending')).toBeTruthy()
+ expect(screen.getByText('Finance review (FIN): Waiting for review')).toBeTruthy()
 })
 const item:DeliverableDetail={id,termId:id,title:'Prepare first output',summary:'A permitted summary',owner:{id,name:'River',active:true},leadUnit:null,supportingUnits:[],phase:null,dueAt:null,dueOn:'2027-04-10',originalDueAt:null,originalDueOn:null,overdue:false,blocked:true,blocker:'Waiting for agreed scope',readiness:'blocked',nextAction:'Confirm scope with River',gates:{finance:'not_required',publicity:'not_required',acceptance:'blocked'},updatedAt:'2026-10-28T00:00:00Z',archivedAt:null,version:1,details:{outcome:'Agreed output',acceptanceCriteria:'Reviewed scope',body:'Working notes'}}
 function show(element:React.ReactNode){return render(<RouterProvider router={createMemoryRouter([{id:'workspace',path:'/deliverables/:deliverableId',loader:()=>({termId:id,memberId:id}),element}],{initialEntries:['/deliverables/'+id]})}/>)}
@@ -39,8 +39,8 @@ it('P35_U1 R1: only authorized applicability can say not required; pending, unkn
  view.unmount()
  finance.gate=vi.fn(async()=>({state:'pending' as const}));publicity.gate=vi.fn(async()=>({state:'pending' as const}))
  const view2=show(<><FinanceGate api={finance} term={id} id={id} applicability="not_required"/><PublicityGate api={publicity} term={id} id={id} applicability="not_required"/></>)
- await screen.findByText('Finance review (FIN): Pending')
- await screen.findByText('Final publicity review (MCD): Pending')
+ await screen.findByText('Finance review (FIN): Waiting for review')
+ await screen.findByText('Final publicity review (MCD): Waiting for review')
  view2.unmount()
  show(<><FinanceGate api={{...finance,gate:async()=>null}} term={id} id={id} applicability="not_required"/><PublicityGate api={{...publicity,gate:async()=>{throw Error('PRIVATE case title')}}} term={id} id={id} applicability="not_required"/></>)
  await screen.findByText('Finance review (FIN): Unavailable')
