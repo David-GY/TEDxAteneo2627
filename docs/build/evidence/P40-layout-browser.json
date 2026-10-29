@@ -1,0 +1,111 @@
+{
+  "target": "Vite-compiled real components, isolated SQL and fictional member; not provider/human UAT",
+  "checks": [
+    "Real assigned task stable link and current contact",
+    "320px default/custom/fallback and four fictional scenarios no horizontal overflow",
+    "Real keyboard Enter reorders and retains enabled visible focus",
+    "44px observed controls",
+    "Reload preserves presentation only",
+    "Forged FIN widget safely falls back; no finance/ledger RPC requested",
+    "1280px head preview and 640px reflow (not native browser zoom)"
+  ],
+  "calls": [
+    "read_process_summary",
+    "read_overview",
+    "read_notifications"
+  ],
+  "controls": [
+    {
+      "label": "Prepare your first event checklist",
+      "w": 242,
+      "h": 72.15625
+    },
+    {
+      "label": "My tasks",
+      "w": 97.46875,
+      "h": 44
+    },
+    {
+      "label": "Resources & Start Here",
+      "w": 202.765625,
+      "h": 44
+    },
+    {
+      "label": "Find a permitted contact",
+      "w": 213.078125,
+      "h": 44
+    },
+    {
+      "label": "Full widthCompact on wide screens",
+      "w": 254,
+      "h": 44
+    },
+    {
+      "label": "Move up",
+      "w": 93.40625,
+      "h": 44
+    },
+    {
+      "label": "Move down",
+      "w": 113.828125,
+      "h": 44
+    },
+    {
+      "label": "Remove",
+      "w": 89.984375,
+      "h": 44
+    },
+    {
+      "label": "Full widthCompact on wide screens",
+      "w": 254,
+      "h": 44
+    },
+    {
+      "label": "Move up",
+      "w": 93.40625,
+      "h": 44
+    },
+    {
+      "label": "Move down",
+      "w": 113.828125,
+      "h": 44
+    },
+    {
+      "label": "Remove",
+      "w": 89.984375,
+      "h": 44
+    },
+    {
+      "label": "Add My tasks",
+      "w": 129.421875,
+      "h": 44
+    },
+    {
+      "label": "Add Core deliverables",
+      "w": 188.6875,
+      "h": 44
+    },
+    {
+      "label": "Add Working together",
+      "w": 190.234375,
+      "h": 44
+    },
+    {
+      "label": "Add Department requests and reviews",
+      "w": 254,
+      "h": 68
+    },
+    {
+      "label": "Add Resources & Start Here",
+      "w": 234.71875,
+      "h": 44
+    },
+    {
+      "label": "Restore default view",
+      "w": 179.578125,
+      "h": 44
+    }
+  ],
+  "rolePublication": "UNIMPLEMENTED; device personal views only",
+  "guestScope": "Fictional safe-layout preview only; actual guest route remains /shared"
+}

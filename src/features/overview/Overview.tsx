@@ -1,25 +1,46 @@
-import {WorkReference} from '../work-references/WorkReference'
 import {useEffect,useState} from 'react'
-import {Link,useRouteLoaderData} from 'react-router'
-import {PageHeading,Panel} from '../../components/Page'
-import {LoadingState,ErrorState,EmptyState} from '../../components/FeedbackState'
-import type {WorkspaceContext} from '../auth/gateway'
+import {useRouteLoaderData} from 'react-router'
+import {PageHeading} from '../../components/Page'
+import {LoadingState,ErrorState} from '../../components/FeedbackState'
+import {isGuest,type WorkspaceContext} from '../auth/gateway'
 import {dateLabel} from '../deliverables/DeliverableFacts'
 import type {OverviewApi,OverviewResult} from './api'
+import {defaultLayout,resolveLayout,validateLayout,viewStorageKey,type Layout} from './layout'
+import {LayoutControls} from './LayoutControls'
+import {LayoutPreview} from './LayoutPreview'
+import {OverviewLane,SecondaryViews,WorkHelp} from './OverviewViews'
+import './overview.css'
+
 export function Overview({api}:{api:OverviewApi}){
- const context=useRouteLoaderData('workspace')as WorkspaceContext,subject='memberId'in context?context.memberId:context.guestAccessId
- return <OverviewBody key={context.termId+subject} api={api} termId={context.termId}/>
+ const context=useRouteLoaderData('workspace')as WorkspaceContext,subject=isGuest(context)?'guest:'+context.guestAccessId:'member:'+context.termMembershipId
+ return <OverviewBody key={context.organizationId+context.termId+subject} api={api} context={context} subject={subject}/>
 }
-function OverviewBody({api,termId}:{api:OverviewApi;termId:string}){
+function OverviewBody({api,context,subject}:{api:OverviewApi;context:WorkspaceContext;subject:string}){
+ const termId=context.termId,guest=isGuest(context),audience=guest?'guest':'member',storageKey=viewStorageKey(context.organizationId,termId,subject)
  const[result,setResult]=useState<OverviewResult|null>(null),[error,setError]=useState(false),[reload,setReload]=useState(0)
+ const[view,setView]=useState(()=>{try{
+  const raw=localStorage.getItem(storageKey)
+  if(raw&&raw.length>10000)throw Error('Saved view too large')
+  const resolved=resolveLayout(raw===null?null:JSON.parse(raw),audience)
+  return{...resolved,message:resolved.repaired?'Saved view is no longer supported. Default view restored; use Restore default view to repair the saved setting.':raw?'Your view is saved on this device.':'Using the default view. No setup needed.'}
+ }catch{return{...resolveLayout(null,audience),repaired:true,message:'Saved view could not be loaded. Default view is available; use Restore default view to repair the saved setting.'}}})
+ function changeLayout(layout:Layout){
+  if(!validateLayout(layout,audience))return
+  let message='Your view is saved on this device.'
+  try{localStorage.setItem(storageKey,JSON.stringify(layout))}catch{message='Your current view could not be saved on this device. It remains available until you leave this page.'}
+  setView({layout,repaired:false,message})
+ }
  useEffect(()=>{let live=true;void api.read(termId).then(r=>{if(live){setResult(r);setError(false)}}).catch(()=>{if(live){setResult(null);setError(true)}});return()=>{live=false}},[api,termId,reload])
  useEffect(()=>{const refresh=()=>{setResult(null);setReload(n=>n+1)},visible=()=>{if(document.visibilityState==='visible')refresh()};window.addEventListener('focus',refresh);document.addEventListener('visibilitychange',visible);return()=>{window.removeEventListener('focus',refresh);document.removeEventListener('visibilitychange',visible)}},[])
- return <><PageHeading title="Overview" description="Your next actions and work waiting on someone else."/><p>Open a work title below to act. Task completion and independent approval stay separate.</p><button className="button button--secondary" onClick={()=>{setResult(null);setReload(n=>n+1)}}>Refresh overview</button>
+ return <><PageHeading title="Overview" description="Your next actions and work waiting on someone else."/><p>Open a work title below to act. Task completion and independent approval stay separate.</p>
+ <button className="button button--secondary" onClick={()=>{setResult(null);setReload(n=>n+1)}}>Refresh overview</button>
  {error?<ErrorState title="Overview unavailable" description="Check access or connection, then refresh the overview."/>:!result?<LoadingState title="Loading next actions"/>:<>
  <p>Refreshed {dateLabel(result.refreshedAt,null)}. Dates and overdue cutoff use Manila time.{result.hasMore?' Showing the first 50 permitted records; open Department inbox, My tasks or Core deliverables for more.':''}</p>
- {(['actionable','waiting']as const).map(lane=>{const rows=result.items.filter(i=>i.lane===lane);return <Panel key={lane} title={lane==='actionable'?`Who is waiting on you · ${rows.length}`:`Waiting on someone else · ${rows.length}`}>
- <p>{lane==='actionable'?'Actions assigned to you or owned outcomes you can advance.':'Blocked or submitted work needing follow-up or independent review. Reviewers are not invented when no assignment exists.'}</p>
- {rows.length===0?<EmptyState title={lane==='actionable'?'No next actions in this view':'No waiting work in this view'} description="Only current permitted records are counted." action={<Link className="button button--secondary" to="/resources">Resources & Start Here</Link>}/>:<ul className="guest-list">{rows.map(i=><li key={i.source+':'+i.id}><h3><Link to={(i.source==='review'?'/reviews/'+i.termId+'/':i.source==='request'?'/requests/'+i.termId+'/':i.source==='task'?'/tasks/':i.source==='handoff'?'/working-together/handoffs/':'/deliverables/')+i.id}>{i.title}</Link></h3>{i.source==='task'||i.source==='deliverable'?<WorkReference compact reference={i.reference} id={i.id} kind={i.source}/>:null}<p>Owner: {i.owner} · Committee: {i.committee??'Not assigned'}</p><p>Next action: {i.action} · Next person: {i.person}</p>{i.source==='review'||i.source==='request'?<p>Requested: {dateLabel(null,i.requestedOn??null)} · Accepted: {i.dueOn?dateLabel(null,i.dueOn):'Not agreed'}{i.overdue?' · Accepted date overdue':''} · {i.state.replaceAll('_',' ')}</p>:<p>Due: {dateLabel(i.dueAt,i.dueOn)} · {i.overdue?'Overdue':i.dueOn||i.dueAt?'Due date recorded':'No target recorded'} · {i.state.replaceAll('_',' ')}</p>}</li>)}</ul>}</Panel>})}
+ <OverviewLane items={result.items} lane="actionable"/>
  </>}
- <p><Link to="/reviews">Department inbox</Link> · <Link to="/tasks">My tasks</Link> · <Link to="/deliverables">Core deliverables</Link> · <Link to="/working-together?view=contributions">Contributions / assigned work</Link> · <Link to="/people">Find a permitted contact</Link></p></>
+ <WorkHelp guest={guest}/>
+ {view.repaired?<p role="alert">{view.message}</p>:null}
+ <LayoutControls layout={view.layout} audience={audience} message={view.repaired?'Use Restore default view to replace the unsupported saved setting.':view.message} onChange={changeLayout} onReset={()=>changeLayout(defaultLayout(audience))}/>
+ {result&&!error?<SecondaryViews layout={view.layout} items={result.items}/>:null}
+ <LayoutPreview layout={view.layout}/></>
 }

@@ -1,0 +1,63 @@
+{
+  "step": "P40",
+  "status": "in_progress",
+  "baseline": {
+    "commit": "ad9326a17fe8b2c91f25abd68ce458094b1ccd0b",
+    "tree": "85b64e86ec0fe139d52d7ab90c8fa29995c626dc",
+    "localFetchedLiveEqual": true,
+    "clean": true
+  },
+  "checks": {
+    "build": "PASS; existing >500kB chunk warning",
+    "browser": "PASS",
+    "lint": "PASS after empty-catch repair",
+    "fullSuite": "67 files /229 tests PASS",
+    "typecheck": "PASS",
+    "provider": "UNVERIFIED; unchanged",
+    "targeted": "3 files /11 tests PASS"
+  },
+  "acceptance": {
+    "U1": "Personal default/custom/fallback and fictional scenarios PASS; actual role/guest publication unverified",
+    "A2": "Personal device320px/keyboard PASS; role publication/native zoom/human unverified",
+    "A1": "Bounded model/client no-FIN-query PASS; full provider/server publication unverified",
+    "A3": "Personal fallback/visible repair PASS; server unimplemented",
+    "U2": "Personal next action/44px/reload PASS; named server saved views/human unverified"
+  },
+  "schemaChanged": false,
+  "usage": {
+    "ceiling": 51,
+    "nearReview": [
+      21,
+      52
+    ],
+    "reset": 1793309301,
+    "windDown": 46,
+    "effectivePoints": 40,
+    "sharedAccount": true,
+    "start": [
+      11,
+      51
+    ],
+    "afterBatch": [
+      15,
+      51
+    ]
+  },
+  "preview": {
+    "visibleAndRetained": true,
+    "tab": 8,
+    "pid": 17576,
+    "url": "http://127.0.0.1:5178/?synthetic=associate",
+    "vitePid": 22032
+  },
+  "next": "CONTINUE P40: repair shared site/layout server publication prerequisite, then role/unit layouts and named saved views. No P41.",
+  "hashes": {
+    "src/app/widgetCatalog.ts": "78be632079d677fae00308f8e3e19e83052b603d971f6c8f6a71eccef75ad8d2",
+    "src/features/overview/layout.ts": "dccada876588e653081f3f5665435252b61d1c6a852a6edd1e7934da34ecb096",
+    "src/features/overview/Overview.tsx": "5927592ed989ff80e59cca2886e4d98e16dacc061a875d2cd4b3e7e55c31d505",
+    "src/features/overview/OverviewViews.tsx": "f2c654da32d17e8ba19fbb8ce5a1f777f81fc6148ff08257f345172672a7f834",
+    "src/features/overview/LayoutControls.tsx": "6cf5ccd949a86bc9e76e60297f2e9770afe39f46f5964abf9686f1d78a16e269",
+    "src/features/overview/LayoutPreview.tsx": "1f81b63f9a6378d469dfe7e3fd7efc1a1f69f21807582a088e3d20648e48145a",
+    "scripts/verify-p40-layout.cjs": "3ae5f3b56053bb149077a8dcf0036361fc6fbbbb621b532b758f3bb23c1a7162"
+  }
+}

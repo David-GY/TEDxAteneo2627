@@ -1,0 +1,16 @@
+.overview-help, .overview-move { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 16px; }
+.overview-arrangement { margin-block: 24px; }
+.overview-arrangement fieldset { min-width: 0; border: 1px solid var(--color-line); padding: 12px; }
+.overview-widget-control { border-bottom: 1px solid var(--color-line); padding-block: 12px; }
+.overview-widget-control label { display: grid; gap: 8px; margin-top: 8px; }
+.overview-widget-control select { min-height: 44px; min-width: 0; width: 100%; padding: 8px; font: inherit; }
+.overview-secondary { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.overview-widget { min-width: 0; }
+.overview-widget .panel { margin-bottom: 0; height: 100%; }
+.overview-widget a { overflow-wrap: anywhere; }
+.overview-work-link { display: block; min-height: 44px; padding-block: 8px; }
+.overview-example { display: block; min-height: 44px; max-width: 100%; width: 100%; padding: 8px; font: inherit; margin-block: 12px; }
+@media (min-width: 900px) {
+ .overview-secondary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ .overview-widget--wide { grid-column: 1 / -1; }
+}
