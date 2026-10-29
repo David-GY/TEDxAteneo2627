@@ -1,7 +1,9 @@
+import {optionalWorkReference,type WorkReferenceValue} from '../work-references/api'
 import {readinessCategories,type ReadinessCategory} from './readiness-api'
 import type { createSupabaseClient } from '../../lib/supabase'
 export type Named = { id: string; name: string }
 export type Deliverable = {
+  reference?: WorkReferenceValue|null
   workflowState?: 'proposed'|'draft'|'in_progress'|'submitted'|'accepted'|'cancelled'
   id: string; termId: string; title: string; summary: string; owner: Named & { active: boolean }; leadUnit: Named | null
   supportingUnits: Named[]; phase: string | null; dueAt: string | null; dueOn: string | null; originalDueAt: string | null; originalDueOn: string | null
@@ -31,7 +33,7 @@ function row(v: unknown): v is Deliverable {
   const r = object(v); if (!r) return false
   const gates = object(r.gates); const owner = object(r.owner)
   if(r.workflowState!==undefined&&!['proposed','draft','in_progress','submitted','accepted','cancelled'].includes(r.workflowState as string))return false
-  return typeof r.id === 'string' && uuid.test(r.id) && typeof r.termId === 'string' && uuid.test(r.termId)
+  return optionalWorkReference(r.reference,'deliverable',r.termId as string)&&typeof r.id === 'string' && uuid.test(r.id) && typeof r.termId === 'string' && uuid.test(r.termId)
     && ['title','summary','nextAction','updatedAt'].every(k => typeof r[k] === 'string') && Number.isFinite(Date.parse(r.updatedAt as string))
     && ['phase','dueAt','dueOn','originalDueAt','originalDueOn','blocker','archivedAt'].every(k => r[k] === null || typeof r[k] === 'string')
     && named(r.owner) && !!owner && typeof owner.active === 'boolean' && (r.leadUnit === null || named(r.leadUnit))

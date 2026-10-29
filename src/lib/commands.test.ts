@@ -6,6 +6,11 @@ const workId='11111111-1111-4111-8111-111111111111'
 const grantId='22222222-2222-4222-8222-222222222222'
 const requestId='33333333-3333-4333-8333-333333333333'
 function ready(rpc: ReturnType<typeof vi.fn>) { return Promise.resolve({rpc}) as unknown as ReturnType<typeof createSupabaseClient> }
+it('P36_U2: incomplete reference setup explains the safe next action without claiming creation or exposing SQL details',()=>{
+ const result=mapCommandError({code:'55000',message:'work_reference_backfill_pending',details:'PRIVATE legacy record count'})
+ expect(result).toEqual({kind:'dependency_blocked',message:'Work references are being prepared for this term. Your inputs are kept. Ask the workspace maintainer to finish setup, then try again.',retryable:false})
+ expect(JSON.stringify(result)).not.toContain('PRIVATE')
+})
 it('P07_A2: create preserves request key and explicit parent version; no actor/owner/status input is forwarded',async()=>{
   const rpc=vi.fn(async()=>({data:{workItemId:workId,version:1,kind:'task'},error:null}))
   const commands=createWorkCommands(ready(rpc))

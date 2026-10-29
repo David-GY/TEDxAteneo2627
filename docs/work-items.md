@@ -1,5 +1,7 @@
 # P07 work-record and command contract
 
+P36-R1 local extension: [task/deliverable references](work-references.md) adds immutable server-issued TASK/DEL numbers in separate raw-denied tables and authorized read/copy metadata. UUIDs, existing command receipts/work versions and request tracking remain unchanged. Source045 is not hosted.
+
 Local implementation delivered; real Supabase17/JWT/parallel-session checks remain blocked. Scope is common **draft** records and access infrastructure, not deliverable acceptance, request submission, approval, publishing or notification delivery.
 
 ## Storage and integrity

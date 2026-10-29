@@ -1,5 +1,7 @@
 # Build contracts
 
+P36-R1 October29 local extension: source045 adds server-only immutable term/kind TASK/DEL references, resumable ordered backfill and authorized resolve_work_reference(term,kind,reference). Existing UUIDs/links/receipts/work versions and request tracking remain unchanged. Local schema109tables/1110columns/141public functions; hosted remains43migrations/107tables/1098columns/140functions. See docs/work-references.md. P35 shared configuration publication and P36 form editing remain unfinished.
+
 P34 October28 continuation supersedes the historical foundation-only entry: migration043,107/1098/140, public preview_access_change/publish_access_change. See docs/access-administration.md for immutable role snapshots, exact ceiling/source provenance across29 authority consumers, two-party acknowledged app-custody replacement and version/fingerprint/idempotent audit/outbox. Scoped editing/history UI is implemented; preflight remains validation-only. Provider ownership/authority/privacy/concurrency/human gates remain unverified; no deployment.
 
 Established by P00, October 24, 2026. This file records agreed interfaces, not a claim that future features are implemented. Reuse these boundaries and update only the section owned by a step.

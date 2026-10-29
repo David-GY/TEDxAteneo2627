@@ -1,3 +1,4 @@
+import {WorkReference} from '../work-references/WorkReference'
 import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useLocation, useNavigate, useRouteLoaderData, useSearchParams } from 'react-router'
 import { PageHeading, Panel } from '../../components/Page'
@@ -44,6 +45,7 @@ export function DeliverablesPage({ api, commands, termId }: { api: DeliverablesA
       <p role="status">{data.total} permitted {data.total===1?'deliverable':'deliverables'} · Page {data.page}</p>
       {data.items.length ? <div className="deliverable-list">{data.items.map(item=><article className="panel deliverable-row" key={item.id}>
         <h2><Link to={`/deliverables/${item.id}`} state={{from:location.search}}>{item.title}</Link></h2>
+        <WorkReference compact reference={item.reference} id={item.id} kind="deliverable"/>
         <p className="muted">Phase: {item.phase ?? 'Not set'}</p><p>{item.summary}</p><DeliverableFacts item={item}/>
       </article>)}</div> : <EmptyState title={data.total?'No deliverables on this page':'No deliverables match'} description={data.total?'Records may have changed. Return to the first page.':'Clear filters or check with a process contact. Only permitted deliverables are counted.'} action={<button className="button button--secondary" onClick={()=>data.total?move(1):setParams('')}>{data.total?'Go to first page':'Clear filters'}</button>} />}
       <nav className="deliverable-pagination auth-actions" aria-label="Deliverable pages"><button className="button button--secondary" disabled={data.page<=1} onClick={()=>move(data.page-1)}>Previous page</button><button className="button button--secondary" disabled={data.page*data.pageSize>=data.total} onClick={()=>move(data.page+1)}>Next page</button></nav>

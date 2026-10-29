@@ -55,7 +55,8 @@
     "test:task-commands": "node scripts/test-task-commands.cjs",
     "db:types": "node scripts/generate-identity-types.cjs",
     "db:types:check": "node scripts/generate-identity-types.cjs --check",
-    "build": "vite build"
+    "build": "vite build",
+    "test:work-references": "node scripts/test-work-references.cjs"
   },
   "dependencies": {
     "@fontsource-variable/karla": "5.3.0",

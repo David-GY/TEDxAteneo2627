@@ -10,6 +10,21 @@ import { safeReturnPath } from '../auth/redirects'
 const id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8'
 const item:Deliverable={id,termId:id,title:'Fictional output',summary:'Safe summary',owner:{id,name:'Fictional owner',active:true},leadUnit:null,supportingUnits:[],phase:null,dueAt:null,dueOn:null,originalDueAt:null,originalDueOn:null,overdue:false,blocked:false,blocker:null,readiness:'pending_gate_verification',nextAction:'Confirm required reviews.',gates:{finance:'pending_assessment',publicity:'pending_assessment',acceptance:'pending_definition'},updatedAt:'2026-10-24T00:00:00Z',archivedAt:null,version:1}
 const core:WorkspaceContext={state:'authorized',memberId:id,organizationId:id,termId:id,termMembershipId:id,displayName:'Fictional viewer',expiresAt:new Date(Date.now()+3600000).toISOString(),capabilities:['workspace.read']}
+it('P36_U2: an authorized title keeps its UUID link while copy reference includes the term; failed copying never reports success',async()=>{
+ const writeText=vi.fn(async()=>{});Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText}})
+ const referenced={...item,reference:{value:'DEL-012',termId:id,termLabel:'2026–27'}}
+ const router=setup({list:async()=>({items:[referenced],total:1,page:1,pageSize:20,options:{phases:[],units:[],owners:[]}}),read:async()=>({...referenced,details:null})})
+ const title=await screen.findByRole('link',{name:'Fictional output'});expect(title.getAttribute('href')).toBe('/deliverables/'+id);await screen.findByText('DEL-012');fireEvent.click(title)
+ await screen.findByRole('heading',{name:'Fictional output'});fireEvent.click(await screen.findByRole('button',{name:'Copy reference'}));await screen.findByText('Reference copied.');expect(writeText).toHaveBeenLastCalledWith('DEL-012 · 2026–27')
+ fireEvent.click(screen.getByRole('button',{name:'Copy link'}));await screen.findByText('Link copied.');expect(writeText).toHaveBeenLastCalledWith(new URL('/deliverables/'+id,window.location.origin).href);expect(router.state.location.pathname).toBe('/deliverables/'+id)
+ writeText.mockRejectedValueOnce(Error('Clipboard unavailable'));fireEvent.click(screen.getByRole('button',{name:'Copy reference'}));await screen.findByText('Copy unavailable. Select the reference or link below to copy.');expect(screen.queryByText('Reference copied.')).toBeNull()
+})
+it('P36_U2: malformed or wrong-term references cannot masquerade as an issued deliverable reference',async()=>{
+ for(const reference of [{value:'TASK-012',termId:id,termLabel:'2026–27'},{value:'DEL-012',termId:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbb2',termLabel:'Another term'}]){
+  const api=createDeliverablesApi(Promise.resolve({rpc:vi.fn(async()=>({data:{...item,details:null,reference},error:null}))}) as unknown as ReturnType<typeof createSupabaseClient>)
+  await expect(api.read(id)).rejects.toThrow()
+ }
+})
 function setup(api:DeliverablesApi,path='/deliverables',context=core){
   const gateway:AuthGateway={deliverables:api,readContext:async()=>context,onChange:()=>()=>{},exchange:async()=>{},signOut:async()=>{},beginGoogle:async()=>{}}
   const router=createMemoryRouter(createAppRoutes(readClientEnvironment({}),gateway),{initialEntries:[path]})

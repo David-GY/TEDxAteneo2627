@@ -6151,6 +6151,76 @@ export type Database = {
           },
         ]
       }
+      work_reference_counters: {
+        Row: {
+          organization_id: string
+          term_id: string
+          kind: string
+          last_number: number
+          backfill_complete: boolean
+        }
+        Insert: {
+          organization_id: string
+          term_id: string
+          kind: string
+          last_number?: number
+          backfill_complete?: boolean
+        }
+        Update: {
+          organization_id?: string
+          term_id?: string
+          kind?: string
+          last_number?: number
+          backfill_complete?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "work_reference_counters_organization_id_term_id_fkey"
+            columns: ["organization_id","term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["organization_id","id"]
+          },
+        ]
+      }
+      work_references: {
+        Row: {
+          organization_id: string
+          term_id: string
+          work_item_id: string
+          kind: string
+          sequence_no: number
+          reference_text: string | null
+          issued_at: string
+        }
+        Insert: {
+          organization_id: string
+          term_id: string
+          work_item_id: string
+          kind: string
+          sequence_no: number
+          reference_text?: never
+          issued_at?: string
+        }
+        Update: {
+          organization_id?: string
+          term_id?: string
+          work_item_id?: string
+          kind?: string
+          sequence_no?: number
+          reference_text?: never
+          issued_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "work_references_organization_id_term_id_work_item_id_kind_fkey"
+            columns: ["organization_id","term_id","work_item_id","kind"]
+            isOneToOne: true
+            referencedRelation: "work_items"
+            referencedColumns: ["organization_id","term_id","id","kind"]
+          },
+        ]
+      }
       work_unit_origins: {
         Row: {
           work_item_id: string
@@ -7134,6 +7204,14 @@ export type Database = {
       }
       resolve_auth_context: {
         Args: Record<string, never>
+        Returns: Json | null
+      }
+      resolve_work_reference: {
+        Args: {
+          p_term_id: string
+          p_kind: string
+          p_reference: string
+        }
         Returns: Json | null
       }
       respond_to_handoff: {

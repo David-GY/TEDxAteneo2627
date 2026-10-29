@@ -12,6 +12,13 @@ import{readClientEnvironment}from'../../lib/env'
 import type{AuthGateway}from'../auth/gateway'
 const id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8'
 const item:TaskItem={id,version:3,updatedAt:'2026-10-24T00:00:00Z',archivedAt:null,title:'Fictional task',summary:'Safe summary',body:'Private notes',ownerId:id,ownerName:'Fictional owner',leadUnitId:null,parentId:null,dueOn:'2027-04-10',dueAt:null,originalDueOn:'2027-04-10',originalDueAt:null,classification:'restricted',assigneeId:id,assigneeName:'Fictional assignee',assignedUnitId:null,collaborators:[],checklist:[{id,text:'Review notes',done:false}],state:'in_progress',taskType:'ordinary',blockedReason:null,evidence:null,overdue:false,canManage:false,canEdit:true}
+it('P36_U2: task detail shows only a server-issued task reference and retains the UUID copy link',async()=>{
+ const writeText=vi.fn(async()=>{});Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText}})
+ const api={read:vi.fn(),detail:async()=>({...item,canEdit:false,reference:{value:'TASK-1000',termId:id,termLabel:'2027–28'}})}
+ render(<RouterProvider router={createMemoryRouter([{id:'workspace',path:'/tasks/:taskId',loader:()=>({termId:id,memberId:id}),element:<TaskDetail api={api}/>}],{initialEntries:['/tasks/'+id]})}/>);
+ await screen.findByText('TASK-1000');fireEvent.click(screen.getByRole('button',{name:'Copy reference'}));await screen.findByText('Reference copied.');expect(writeText).toHaveBeenLastCalledWith('TASK-1000 · 2027–28')
+ fireEvent.click(screen.getByRole('button',{name:'Copy link'}));await screen.findByText('Link copied.');expect(writeText).toHaveBeenLastCalledWith(new URL('/tasks/'+id,window.location.origin).href)
+})
 function setup(execute:NonNullable<TasksApi['execute']>,existing=true){const saved=vi.fn();render(<TaskEditor termId={id} item={existing?item:undefined} onSaved={saved} api={{read:vi.fn(),options:async()=>({actorId:id,members:[{id,name:'Fictional member'}],units:[]}),execute}}/>);return saved}
 it('uncertain create freezes inputs and retries the exact original command/key, without false success',async()=>{
  const execute=vi.fn<NonNullable<TasksApi['execute']>>().mockResolvedValueOnce({ok:false,error:mapCommandError({code:'ETIMEDOUT'})}).mockResolvedValueOnce({ok:true,value:{workItemId:id,version:1}});const saved=setup(execute,false)

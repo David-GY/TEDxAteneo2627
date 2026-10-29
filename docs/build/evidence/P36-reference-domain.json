@@ -1,0 +1,26 @@
+{
+  "target": "Isolated PGlite upgrade 044 to 045; queued client calls, not independent PostgreSQL/JWT sessions",
+  "checks": [
+    "Deterministic initial100/interrupted/resumed31 backfill; repeated batch zero and earlier refs unchanged",
+    "Incomplete legacy namespace closes new creation without effect; same key succeeds after completion",
+    "All old work UUID/title/version and existing general/FIN/MCD issued request tracking/pinned definition rows unchanged",
+    "Pre-migration command receipt identical after migration; new identical key one reference; changed payload denied",
+    "Outbox failure rolls back work/reference/counter; identical retry succeeds",
+    "Rename/version advance and all primary summary/detail projections retain issued reference",
+    "Missing/other-unit guesses return identical null; raw tables and private backfill closed",
+    "Queued simultaneous client submissions unique; TASK-999/1000/1001 untruncated",
+    "Separate term restartsTASK-001 and requires explicit correct term for resolution",
+    "Issued refs immutable; counter rewind rejected; anonymous resolver denied"
+  ],
+  "legacyTasks": 206,
+  "retainedRequestReferences": [
+    "LOCAL_DUAL-001",
+    "MCD-001",
+    "FIN-001"
+  ],
+  "migrationSha256": "75a75c1834c383196edc70c316b70206baf532d9146adf6c2da1bbd39d3feff2",
+  "remaining": [
+    "Actual independent Supabase sessions/concurrency",
+    "Actual old/current guest JWT/provider/Storage and institutional/privacy/human gates"
+  ]
+}

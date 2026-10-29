@@ -1,0 +1,81 @@
+{
+  "branch": "codex/core-build-checkpoints",
+  "startCommit": "c2c6381453d3e8b277351fdc919cb9eca0e5894e",
+  "startTree": "4ff28b648cfdd4b8d50e0c7dfc70f52ab4959f5e",
+  "status": "in_progress",
+  "batch": "P36-R1 local implementation delivered; R2 not started",
+  "schema": {
+    "localMigrations": 45,
+    "localTables": 109,
+    "localColumns": 1110,
+    "localPublicFunctions": 141,
+    "hostedMigrationsUnchanged": 43
+  },
+  "checks": {
+    "frontend": "59 files / 206 tests PASS",
+    "typecheck": "PASS",
+    "typecheckFiles": "PASS",
+    "lint": "PASS",
+    "build": "PASS; original large-chunk warning",
+    "catalog": "PASS",
+    "referencesDomain": "PASS isolated upgrade/backfill/transaction/lookup/namespace tests",
+    "referencesBrowser": "PASS compiled member/head/guest/clipboard/expiry/retry/mobile",
+    "taskCommands": "PASS",
+    "readiness": "PASS",
+    "recoveryBrowser": "PASS",
+    "impeccableDetector": []
+  },
+  "acceptance": {
+    "U1": "Local PASS; independent provider concurrency unverified",
+    "U2": "Local PASS; actual JWT/provider/human gates open",
+    "U3": "UNVERIFIED; R2 not implemented",
+    "A1": "UNVERIFIED",
+    "A2": "UNVERIFIED",
+    "A3": "UNVERIFIED"
+  },
+  "usage": {
+    "startFiveHour": 38,
+    "startWeekly": 26,
+    "reset": 1793270394,
+    "lastFiveHour": 70,
+    "lastWeekly": 31,
+    "windDown": 73,
+    "ceiling": 78,
+    "sharedAccountObservations": true,
+    "priorWindowFinalConsumption": "unknown; retained"
+  },
+  "preview": {
+    "pid": 12100,
+    "vitePid": 22032,
+    "url": "http://127.0.0.1:5178/tasks/b3bce19c-e2c8-4199-bc58-8923464b6bcb",
+    "visibleRetainedTab": "3",
+    "synthetic": true
+  },
+  "next": "Preserve R1; repair missing P35-R3 publication interface before P36-R2 publication. No P37.",
+  "external": "All inherited provider/JWT/Storage/independent races/institutional/privacy/retention/human/restore gates remain open",
+  "sourceHashes": {
+    "scripts/generate-identity-types.cjs": "1b147714ee08cf1d4bcda6622e84a0ecb1dc57e6a26b353b0c887586dc0465b0",
+    "scripts/preview-p08.cjs": "4c64184080e38011cdf5d127a09488dcc08d37e1f27d85c5942ba90fac4e9971",
+    "src/features/deliverables/DeliverablePage.tsx": "1187ff1d76335d14a173174918b663087bfa98e0d8e61879772cb5c061bb662c",
+    "src/features/deliverables/DeliverablesPage.tsx": "631b36a312ce7c8bd1b21ce6cee1ef3927fa09afe6e79a0679691403afa3fe34",
+    "src/features/deliverables/api.ts": "549d6d2678c6173133b4fd35d545649d520addc82a048071621200665ce124eb",
+    "src/features/deliverables/deliverables.test.tsx": "febf8f4b3b5d4b6f9a38c6cb04a46ccb0603016ab60c335a343fa8886bc005f7",
+    "src/features/overview/Overview.tsx": "53dc99bd5ea26d46135712276b8673caaae54b5ebd2abc0c6f310bf98333ddbc",
+    "src/features/overview/api.ts": "c075612889ee31e0ca132de1d7f867dc3b7c0d27d6ceb6633d0ae4cef57ae712",
+    "src/features/overview/overview.test.tsx": "1d2b5b507d269ccdb65acfebba1c32715bc787340c196113d89812050b248e0e",
+    "src/features/tasks/TaskDetail.tsx": "3a99c3fbc7c3eb87cfc57ccc3b4b5383870957940dfb4d81c08d1183aab75084",
+    "src/features/tasks/TaskEditor.test.tsx": "710b1071e1b7a7bf4fbf9bd1fd324e134dfc64795d7df311a71094054834e8a9",
+    "src/features/tasks/TasksPage.tsx": "825166d621444c0eae6366565fba941b4a0f8b0bed29b56594940c0538e6867a",
+    "src/features/tasks/api.ts": "0f577325d20bb0fa660b3a89f016a995663544f80b5c1c61abbdf396db141f92",
+    "src/lib/commands.test.ts": "3791388e7c3c8dd567c24d41235c88496c3f7b9a55ae92ab57895cc0c265edfd",
+    "src/lib/commands.ts": "dc63f8bb58a3682dabe0268176f3ad2279431a75651a287f8ea3e22da9fb90b3",
+    "src/lib/database.types.ts": "9d878c7b167e9ee2a9d52e6b2994c808aab22a4b438c959d739cb038cfb228ea",
+    "scripts/test-work-references.cjs": "91f75445cfc8b22be3961bd0bb90aae05f9cb019aa77370d5e7d8146054d077c",
+    "scripts/verify-p36-references.cjs": "d58a3e5ccec1a8f1e63dedfe64fb64d6e2471dbd38d68e39aba40e819b2e5eea",
+    "src/features/work-references/WorkReference.tsx": "3ce2bfb3e8ec2913b4eea415247ae8c66c80fa6dc4a180847e65aafb9f288f8b",
+    "src/features/work-references/api.ts": "f87652bbbb0d8aaf1a77532d2af4ebaf84a70ab23a173a53008dcbb7f3d1f0bd",
+    "src/features/work-references/references.css": "1becdc7e664a6865f9a71a836568c5e8cb494d9e6542cde5680eafb2b4696191",
+    "src/features/work-references/references.test.tsx": "bf6ace4915df7be5e759d5a39c0a828e976de89e8b161d9bffdbb9064d725924",
+    "supabase/migrations/20261029004500_work_references.sql": "75a75c1834c383196edc70c316b70206baf532d9146adf6c2da1bbd39d3feff2"
+  }
+}

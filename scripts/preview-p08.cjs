@@ -162,6 +162,7 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
             if(name==='respond_to_synergy')return tx.query('select public.respond_to_synergy($1,$2,$3,$4,$5,$6,$7,$8) as value',[a.p_agreement_id,a.p_action,a.p_expected_version,a.p_expected_revision,a.p_owner_id,a.p_terms,a.p_reason,a.p_request_id])
             if(name==='resolve_auth_context')return tx.query('select public.resolve_auth_context()as value')
             if(name==='read_guest_contacts')return tx.query('select public.read_guest_contacts($1)as value',[a.p_term_id])
+            if(name==='resolve_work_reference')return tx.query('select public.resolve_work_reference($1,$2,$3) as value',[a.p_term_id,a.p_kind,a.p_reference])
             if(name==='read_overview')return tx.query('select public.read_overview($1) as value',[a.p_term_id])
             if(name==='read_files')return tx.query('select public.read_files($1) as value',[a.p_work_item_id])
             if(name==='finalize_upload')return tx.query('select public.finalize_upload($1,$2,$3,$4) as value',[a.p_work_item_id,a.p_asset_ids,a.p_expected_version,a.p_request_id])
