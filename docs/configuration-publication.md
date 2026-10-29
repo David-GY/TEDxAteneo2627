@@ -1,3 +1,7 @@
+Latest October29 P37 continuation: source047 now supplies evaluated synthetic answer/evidence cases, named stage blockers/actions, bounded group/membership controls, cursor history and independently requester-readable pinned-case links. Explicit eligible head reassignment remains the supported delegation policy and is linked from the editor. Local112tables/1135columns/148functions/47migrations; hosted unchanged. Earlier unfinished statements below are historical; see the latest P37 checkpoint for current limits and external gates.
+
+---
+
 # Configuration publication and bounded service workflows
 
 Local source046 repairs the shared P35 publication boundary consumed by P37. It is not deployed. Catalog112tables/1135columns/146public functions/46migrations; hosted remains43/107/1098/140. Source044–046 require separate target-specific provider verification.

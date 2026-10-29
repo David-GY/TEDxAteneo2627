@@ -6972,6 +6972,15 @@ export type Database = {
         }
         Returns: Json | null
       }
+      preview_workflow_cases: {
+        Args: {
+          p_draft_id: string
+          p_requester_id: string
+          p_values: Json
+          p_has_evidence: boolean
+        }
+        Returns: Json | null
+      }
       propose_synergy: {
         Args: {
           p_parent_id: string
@@ -7073,6 +7082,13 @@ export type Database = {
       read_configuration: {
         Args: {
           p_type_id: string
+        }
+        Returns: Json | null
+      }
+      read_configuration_history: {
+        Args: {
+          p_type_id: string
+          p_before?: number | null
         }
         Returns: Json | null
       }

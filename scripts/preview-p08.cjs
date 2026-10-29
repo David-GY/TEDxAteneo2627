@@ -94,6 +94,8 @@ async function createPreview({port=5174,authoring=false,tasks=false,synergies=fa
             if(name==='publish_access_change')return tx.query('select public.publish_access_change($1,$2,$3,$4,$5,$6,$7)as value',[a.p_term_id,a.p_action,a.p_values,a.p_expected_version,a.p_fingerprint,a.p_reason,a.p_request_id])
             if(name==='read_access_admin')return tx.query('select public.read_access_admin($1)as value',[a.p_term_id])
             if(name==='read_configurations')return tx.query('select public.read_configurations($1)as value',[a.p_term_id])
+            if(name==='read_configuration_history')return tx.query('select public.read_configuration_history($1,$2)as value',[a.p_type_id,a.p_before])
+            if(name==='preview_workflow_cases')return tx.query('select public.preview_workflow_cases($1,$2,$3,$4)as value',[a.p_draft_id,a.p_requester_id,a.p_values,a.p_has_evidence])
             if(name==='read_configuration')return tx.query('select public.read_configuration($1)as value',[a.p_type_id])
             if(name==='save_configuration_draft')return tx.query('select public.save_configuration_draft($1,$2,$3,$4,$5,$6,$7,$8)as value',[a.p_type_id,a.p_kind,a.p_definition,a.p_base_form_version_id,a.p_base_workflow_version_id,a.p_expected_version,a.p_request_id,a.p_rollback_version_id])
             if(name==='preview_configuration')return tx.query('select public.preview_configuration($1,$2)as value',[a.p_draft_id,a.p_requester_id??null])

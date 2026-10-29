@@ -4,15 +4,12 @@
     "Scoped head configuration and member direct-route denial",
     "Save/refresh safe input preservation",
     "Explicit review/reason/ack publication; lost success plus refresh retries identical key/payload once",
-    "Old active case retains pinned workflow and can complete; new case takes new version",
+    "Old active case retains pinned workflow and can complete; new case executes new version",
+    "Evaluated form answers return named reviewers, happy/revision/missing/conflict results",
     "Server requester-conflict example blocks publication",
-    "Stale private editor keeps local input",
-    "320px no overflow, 44px controls and real Tab focus",
-    "Confirmed scoped head denial clears unsaved client memory; recovery starts from authorized saved state",
-    "Cancelled navigation preserves entered text; UI restored draft appends history"
+    "Stale private editor keeps local input; cancelled navigation preserves it",
+    "Confirmed scope loss clears memory; UI restoration appends history",
+    "320px no overflow, 44px controls and real Tab focus; expanded condition groups fit mobile"
   ],
-  "errors": [],
-  "sourceHashes": {
-    "script": "c6028e0f75a32942fa1729948777b26876b412718c4b12bce33911c183fce1e9"
-  }
+  "errors": []
 }

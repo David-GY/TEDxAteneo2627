@@ -1,3 +1,7 @@
+P37 continuation source047: preview_workflow_cases is read-only/own-draft/current-scope/base-pair-bound; reuses P20 field validation/P22 condition checks with explicit counterfactual authority/evidence assumptions. read_configuration_history provides immutable cursor pages; read_configuration wraps existing request_readable for pinned open-case summaries.112/1135/148/47local; hosted43/107/1098/140 unchanged. Bounded conditions and supported explicit eligible reassignment UI reuse delivered. No typed FIN/MCD, role, live activation or old-case migration changes. P37 local status ready_for_review; actual external gates open.
+
+---
+
 # Build contracts
 
 P37 October29 prerequisite repair supersedes the absent-publication note below: source046,112tables/1135columns/146public functions/46local migrations. Closed form/workflow configuration drafts, private own reads, immutable publication history, stale draft/both-pointer/review checks, atomic exact-key publication and rollback-as-new-version. Existing P20/P22 definitions and P34 current authority reused; new publication changes no live activation, role/grant, FIN/MCD mapping or pinned open case. /admin/config plus bounded StageEditor delivered; evaluated case preview/full condition/delegate/older-history UI remains partial. Contract: docs/configuration-publication.md. P35/P36/P37 remain unfinished; hosted43/107/1098/140 unchanged.

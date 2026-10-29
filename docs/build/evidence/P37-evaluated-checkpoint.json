@@ -1,0 +1,89 @@
+{
+  "step": "P37",
+  "status": "ready_for_review",
+  "date": "2026-10-29",
+  "baseline": {
+    "commit": "5ca3a8ef8748319d84dbc1d5dc12dfc3d106464e",
+    "tree": "5dfd17ca42dc77c20f6b4fc8c8716f7ec52654c8",
+    "clean": true,
+    "localFetchedLiveEqual": true
+  },
+  "checks": {
+    "suite": "63 files / 217 tests PASS",
+    "sql": "Evaluated form/condition/evidence cases; preview no effects; 51 publications/cursor uniqueness; preserved A1-A3 and privacy PASS",
+    "browser": "Evaluated typed form values, named actions/blockers, requester-readable pinned link, old/new case execution, recovery/exact retry/scope loss/restoration/mobile expanded groups PASS",
+    "types": "Frontend/Edge/catalog PASS",
+    "lint": "PASS",
+    "build": "PASS; existing chunk-size warning",
+    "P22": "PASS; historical receipt restored",
+    "acceptance": "P37 A1-A3/U1-U2 local bounded slice PASS; provider/human proof unverified"
+  },
+  "schema": {
+    "local": [
+      47,
+      112,
+      1135,
+      148
+    ],
+    "hosted": [
+      43,
+      107,
+      1098,
+      140
+    ]
+  },
+  "preview": {
+    "pid": 36272,
+    "vitePid": 22032,
+    "retainedTab": 5,
+    "url": "http://127.0.0.1:5178/admin/config/e7d0e8b7-7835-4ed2-877f-cb74a437b81c",
+    "synthetic": true,
+    "actualAXObserved": true
+  },
+  "usage": {
+    "baseline": [
+      48,
+      42
+    ],
+    "observations": [
+      [
+        52,
+        42
+      ],
+      [
+        55,
+        43
+      ],
+      [
+        59,
+        43
+      ],
+      [
+        62,
+        44
+      ]
+    ],
+    "reset": 1793291065,
+    "effectivePoints": 40,
+    "windDownAt": 83,
+    "ceilingAt": 88,
+    "sharedAccount": true,
+    "resetOrCreditAction": false
+  },
+  "limitations": [
+    "Counterfactual evidence presence is an assumption, not uploaded bytes or external authority",
+    "Each real case rechecks its own authority/requester/evidence",
+    "No new automatic delegation; existing current eligible head reassignment reused",
+    "Actual provider/JWT/independent races/institutional/privacy/retention/human/assistive/restore gates open",
+    "P35/P36/P38 are not marked complete; no P38 advancement"
+  ],
+  "hashes": {
+    "supabase/migrations/20261029004700_workflow_case_preview.sql": "f90c93a63a0f31b3282f5a9b25cfeed75f01715a566bc033a19daa4b09ad4908",
+    "src/features/admin/workflows/EvaluatedJourneys.tsx": "61b0b3e14d0701d703c8321e12207ef3f95f895667beea77407e69472aa1c1fd",
+    "src/features/admin/workflows/ConditionEditor.tsx": "8b9260e790088da23032c968a9550568bfc93177abc81e97d485a5b359fd7eb0",
+    "src/features/admin/config/HistoryBrowser.tsx": "2a65fe38833f51165f02e667efe8dd08fafef967d8cc43c3427c3d7d885a68d0",
+    "src/features/admin/config/api.ts": "090e4d6b50d4637c441e8b5831b82acfbf86f4637f73b977e47dcfeb542dbd2f",
+    "scripts/test-config-publication.cjs": "2f7f95752be21fd13436e5e9765df95e164231ba40554712095e27da548818f9",
+    "scripts/verify-p37-config.cjs": "a53fcab7c1adf22b4d98e842b7740935ea647ea031826054c33f71a43a009d56"
+  }
+}

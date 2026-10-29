@@ -9,7 +9,7 @@
     "P37_A3": "server pinning/append-only rollback PASS; active/new execution evidence separate"
   },
   "hashes": {
-    "scripts/test-config-publication.cjs": "3464fbbc1a826c7065aaa078162e50b74f31d9ec479a7df5e0a2f7e50f14e202",
+    "scripts/test-config-publication.cjs": "2f7f95752be21fd13436e5e9765df95e164231ba40554712095e27da548818f9",
     "supabase/tests/config_publish.test.sql": "9006cc9a76ed3cccc099988782abd5462652c1070379b401033e50895a256102",
     "supabase/migrations/20261024000100_identity.sql": "d78d5503cd7be1d526362c6a1c6688417cf97cfabf001cbe2a46765b586840f1",
     "supabase/migrations/20261024000200_authorization.sql": "6a0ebb7b9dda5764876459c69b6134d28f2a967249d09d6aa6eb602763892613",
@@ -56,6 +56,7 @@
     "supabase/migrations/20261028000100_access_publication.sql": "98d226e795a65f9607c657b5fe5259419d28ba9aca8d8dc1ec2bb210adac4afe",
     "supabase/migrations/20261029004400_task_review_applicability.sql": "9850bb7e3917641785e0162c315dc300f5ac603d7d9bb019471386c424a941ea",
     "supabase/migrations/20261029004500_work_references.sql": "75a75c1834c383196edc70c316b70206baf532d9146adf6c2da1bbd39d3feff2",
-    "supabase/migrations/20261029004600_config_publication.sql": "f71cca2694027a8f65806efcc9638c8ba7d52858ff1268a12250a20c7aa48e9b"
+    "supabase/migrations/20261029004600_config_publication.sql": "f71cca2694027a8f65806efcc9638c8ba7d52858ff1268a12250a20c7aa48e9b",
+    "supabase/migrations/20261029004700_workflow_case_preview.sql": "f90c93a63a0f31b3282f5a9b25cfeed75f01715a566bc033a19daa4b09ad4908"
   }
 }
