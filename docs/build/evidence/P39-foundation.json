@@ -1,0 +1,55 @@
+{
+  "step": "P39",
+  "status": "in_progress",
+  "baseline": {
+    "commit": "bdfc3895134184f6faa3c30e7762ce780ac258e0",
+    "tree": "26ba8e02b69c129473cbb82b0e638cdc1d8312d6",
+    "clean": true,
+    "localFetchedLiveEqual": true
+  },
+  "checks": {
+    "fullSuite": "65 files/221 tests PASS",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing bundle warning",
+    "compiledShell": "PASS; no actual Edit Mode/publication evidence"
+  },
+  "acceptance": {
+    "A1": "UNVERIFIED",
+    "A2": "client route/permission presentation foundation only",
+    "A3": "client unsafe-content/token foundation only; server/editor unverified",
+    "U1": "partial",
+    "U2": "partial"
+  },
+  "schemaChanged": false,
+  "usage": {
+    "start": [
+      1,
+      49
+    ],
+    "observed": [
+      6,
+      50
+    ],
+    "reset": 1793309301,
+    "effectivePoints": 40,
+    "windDown": 36,
+    "ceiling": 41,
+    "sharedAccount": true
+  },
+  "preview": {
+    "pid": 17576,
+    "vitePid": 22032,
+    "tab": 7,
+    "url": "http://127.0.0.1:5178/admin/process",
+    "synthetic": true
+  },
+  "next": "CONTINUE P39 server private-draft/publication adapter, then contextual editor and role previews; no P40",
+  "hashes": {
+    "src/features/admin/site/presentation.ts": "cf7fb50a5b8c93e9d33a22c043e1aec9015f4f2ada9ecb65293758ebbefae953",
+    "src/features/admin/site/presentation.test.ts": "58702fb2053ab7c75ce926db3ab20e0d6c059387f640759953533e9c4f3bf296",
+    "src/app/AppShell.tsx": "8d007716e836c78f4f24927bed42bb51a1a06e0f542eebde814dce23e20faaca",
+    "src/app/navigation.ts": "b54556f5dd4783be0e98c069b0b047124072fe28b84e15d8ab299c5c1650ff0a",
+    "scripts/verify-p39-shell.cjs": "2e7f9b1904f3fd11bc86f1b3a20d6d659403244acd94ab111a490f9875daecb2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "target": "Compiled local shell/isolated SQL/fictional identity; not actual provider or human UAT",
+  "checks": [
+    "Mobile text identity has explicit accessible separator",
+    "320px no overflow",
+    "Disabled optional navigation absent",
+    "Real keyboard focus remains visible"
+  ],
+  "publication": "Site Edit Mode/publication not implemented in this batch"
+}

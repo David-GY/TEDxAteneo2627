@@ -1,4 +1,5 @@
 import {NotificationBadge} from '../features/notifications/Notifications'
+import {applyNavigationPresentation,type SitePresentation} from '../features/admin/site/presentation'
 import { useEffect, useRef, useState, type ReactNode, type KeyboardEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigation } from 'react-router'
 import { LoadingState } from '../components/FeedbackState'
@@ -9,6 +10,7 @@ type AppShellProps = {
   identity?: { displayName: string; unitName?: string }
   content?: ReactNode
   preview?: boolean
+  sitePresentation?: SitePresentation
 }
 
 function PageLink({ item, compact = false }: { item: NavigationItem; compact?: boolean }) {
@@ -16,7 +18,7 @@ function PageLink({ item, compact = false }: { item: NavigationItem; compact?: b
   return <NavLink className="nav-link" to={item.href} end={item.href === '/'}>{label}</NavLink>
 }
 
-export function AppShell({ context = setupNavigation, identity, content, preview = true }: AppShellProps) {
+export function AppShell({ context = setupNavigation, identity, content, preview = true,sitePresentation }: AppShellProps) {
   const location = useLocation()
   const navigation = useNavigation()
   const [moreOpen, setMoreOpen] = useState(false)
@@ -24,8 +26,10 @@ export function AppShell({ context = setupNavigation, identity, content, preview
   const moreButtonRef = useRef<HTMLButtonElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const previousPath = useRef(location.pathname)
-  const items = getVisibleNavigation(context)
-  const primary = getMobilePrimaryNavigation(context)
+  const visible = getVisibleNavigation(context)
+  const items = sitePresentation?applyNavigationPresentation(visible,sitePresentation):visible
+  const mobile = getMobilePrimaryNavigation(context)
+  const primary = mobile.map(item=>items.find(x=>x.id===item.id)??item)
   const more = items.filter((item) => !primary.some((entry) => entry.id === item.id))
   const current = items.find((item) => item.href === location.pathname)
 
@@ -69,7 +73,7 @@ export function AppShell({ context = setupNavigation, identity, content, preview
         </aside>
         <div className="workspace-body">
           <header className="workspace-header">
-            <div className="location-heading"><span className="mobile-identity">TEDx Ateneo de Manila U</span><span>{current?.label ?? 'Core workspace'}</span></div>
+            <div className="location-heading"><span className="mobile-identity">TEDx Ateneo de Manila U</span>{' '}<span>{current?.label ?? 'Core workspace'}</span></div>
             <div className="account-summary">
               {identity ? <div className="identity-details"><strong>{identity.displayName}</strong>{identity.unitName ? <span>{identity.unitName}</span> : null}</div> : <span className="muted">Not signed in</span>}
               <NotificationBadge/><Link className="button button--secondary" to="/account">Account</Link>

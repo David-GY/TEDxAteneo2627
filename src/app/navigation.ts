@@ -54,6 +54,7 @@ export const navigationItems: readonly NavigationItem[] = [
 // Presentation only. Database/route authorization must be enforced separately.
 export function getVisibleNavigation(context: NavigationContext): NavigationItem[] {
   return navigationItems.filter((item) => item.audiences.includes(context.audience)
+    && !['feedback','mentoring'].includes(item.id)
     && (!item.capability || context.capabilities.includes(item.capability)))
 }
 
