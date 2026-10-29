@@ -1,0 +1,24 @@
+# Configuration publication and bounded service workflows
+
+Local source046 repairs the shared P35 publication boundary consumed by P37. It is not deployed. Catalog112tables/1135columns/146public functions/46migrations; hosted remains43/107/1098/140. Source044–046 require separate target-specific provider verification.
+
+Only `form` and `workflow` are supported. Existing P20/P22 `form_versions` and `workflow_versions` remain immutable definitions. New `configuration_drafts`, `configuration_controls` and `configuration_publications` force RLS and deny raw access to all API roles. History is append-only. No JSON/SQL/script console or permission bypass is installed.
+
+Current term `admin.configure`, or receiving-unit `committee.manage` plus current head deployment, controls configuration. Existing membership, term state, P34 provenance/ceilings and exact scope remain authoritative. Lists authorize each type. Own drafts are private; other eligible heads can read published history, not those drafts. Reviewer names/roles resolve through existing same-service current P22 authority.
+
+- `read_configurations(term)` lists permitted types. `read_configuration(type)` returns current definitions, current eligible reviewers, own drafts and latest50 publication entries. Older history remains stored; pagination is unfinished.
+- `save_configuration_draft(type,kind,definition,baseForm,baseWorkflow,expectedVersion,key,rollbackVersion?)` stores a bounded private draft and exact retry receipt, without a publication outbox. Both base pointers and own draft version must match. Deliberately saving retained input against newly inspected pointers rebases it; no silent merge.
+- `preview_configuration(draft,requester?)` validates definitions/limits, current same-term service/reviewer/field references, sequential one/all routing and bounded conditions. Requester defaults to the actor; alternatives are already-resolved service reviewers. An example requester included among required reviewers blocks publication. Every actual case still checks its own requester and current authority; the example is not universal authority.
+- Preview hash binds saved revision, both pointers, definition, receiving service, current authority revision/expiry metadata and requester. `publish_configuration(draft,expectedVersion,reviewHash,reason,key,requester?)` rechecks publisher authority before replay, serializes through the existing readiness lock and type row, revalidates, inserts immutable definition/history, moves only its published pointer and writes redacted canonical audit/outbox/receipt atomically. Late failure rolls everything back.
+
+Open cases' pinned schemas/workflows/answers, UUIDs, links, tracking refs and roles/grants are not rewritten. Restoring an exact published same-type/kind definition prepares a draft and publishes a new version after current validation. Intervening history remains. Service activation/contacts/guest eligibility/classification/capabilities do not change. Frozen terms are readable but reject writes.
+
+FIN/MCD publication remains closed here: installed typed adapters support separately verified single-stage/one-reviewer mappings only. General definitions with currency or protected finance/workflow storage also fail. No institutional exception or authority is invented.
+
+`src/features/admin/config` owns `/admin/config/:configurationType?`, common review/publish/history/recovery and existing form label/help editing. `src/features/admin/workflows/StageEditor.tsx` owns stable sequential stages, a simple service template, named reviewers, evidence/field requirements, revision returns, reminders and scalar equality/numeric conditions. Existing bounded group/membership conditions are preserved; full authoring is unfinished. Delegation remains P22's explicit current eligible head reassignment; no automatic delegate policy. Reminder days feed existing review-inbox aging; no external transport/schedule is enabled.
+
+P36-R2 structural field/section/option editing and grouped requester steps remain unfinished. P20's delivered schema/validation interface supports this workflow batch; that does not complete P36.
+
+Safe input, selected editor and exact uncertain commands remain in identity/scope-bound process memory. View switching is disabled while uncertain. Transient reads hide the editor but retain input; confirmed denial clears unsaved client memory. Saved drafts remain private behind current authorization. Button-only edits participate in the shared leave/reload guard. No unapproved browser cache is used.
+
+The fictional journey panel currently explains happy/revision/missing-authority/requester-conflict behavior. It does not evaluate supplied synthetic answers/evidence through every proposed stage or compute stage-specific next people/actions/blockers. That remains the next P37 batch. Provider/JWT/independent races/institutional/privacy/retention/human/assistive/restore gates remain open.

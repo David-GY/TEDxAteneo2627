@@ -1355,6 +1355,174 @@ export type Database = {
           },
         ]
       }
+      configuration_controls: {
+        Row: {
+          request_type_id: string
+          work_item_id: string
+        }
+        Insert: {
+          request_type_id: string
+          work_item_id: string
+        }
+        Update: {
+          request_type_id?: string
+          work_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "configuration_controls_request_type_id_fkey"
+            columns: ["request_type_id"]
+            isOneToOne: true
+            referencedRelation: "request_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "configuration_controls_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      configuration_drafts: {
+        Row: {
+          id: string
+          request_type_id: string
+          kind: string
+          actor_id: string
+          version: number
+          definition: Json
+          base_form_version_id: string
+          base_workflow_version_id: string
+          rollback_version_id: string | null
+          published_version_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          request_type_id: string
+          kind: string
+          actor_id: string
+          version: number
+          definition: Json
+          base_form_version_id: string
+          base_workflow_version_id: string
+          rollback_version_id?: string | null
+          published_version_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          request_type_id?: string
+          kind?: string
+          actor_id?: string
+          version?: number
+          definition?: Json
+          base_form_version_id?: string
+          base_workflow_version_id?: string
+          rollback_version_id?: string | null
+          published_version_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "configuration_drafts_request_type_id_base_form_version_id_fkey"
+            columns: ["request_type_id","base_form_version_id"]
+            isOneToOne: false
+            referencedRelation: "form_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "configuration_drafts_request_type_id_base_workflow_version_fkey"
+            columns: ["request_type_id","base_workflow_version_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "configuration_drafts_request_type_id_fkey"
+            columns: ["request_type_id"]
+            isOneToOne: false
+            referencedRelation: "request_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      configuration_publications: {
+        Row: {
+          id: string
+          request_type_id: string
+          kind: string
+          definition_version_id: string
+          base_form_version_id: string
+          base_workflow_version_id: string
+          rollback_version_id: string | null
+          control_id: string
+          control_version: number
+          actor_id: string
+          reason: string
+          published_at: string
+        }
+        Insert: {
+          id?: string
+          request_type_id: string
+          kind: string
+          definition_version_id: string
+          base_form_version_id: string
+          base_workflow_version_id: string
+          rollback_version_id?: string | null
+          control_id: string
+          control_version: number
+          actor_id: string
+          reason: string
+          published_at?: string
+        }
+        Update: {
+          id?: string
+          request_type_id?: string
+          kind?: string
+          definition_version_id?: string
+          base_form_version_id?: string
+          base_workflow_version_id?: string
+          rollback_version_id?: string | null
+          control_id?: string
+          control_version?: number
+          actor_id?: string
+          reason?: string
+          published_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "configuration_publications_control_id_fkey"
+            columns: ["control_id"]
+            isOneToOne: false
+            referencedRelation: "configuration_controls"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "configuration_publications_request_type_id_base_form_versi_fkey"
+            columns: ["request_type_id","base_form_version_id"]
+            isOneToOne: false
+            referencedRelation: "form_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "configuration_publications_request_type_id_base_workflow_v_fkey"
+            columns: ["request_type_id","base_workflow_version_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_versions"
+            referencedColumns: ["request_type_id","id"]
+          },
+          {
+            foreignKeyName: "configuration_publications_request_type_id_fkey"
+            columns: ["request_type_id"]
+            isOneToOne: false
+            referencedRelation: "request_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contributions: {
         Row: {
           work_item_id: string
@@ -6782,6 +6950,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      preview_configuration: {
+        Args: {
+          p_draft_id: string
+          p_requester_id?: string | null
+        }
+        Returns: Json | null
+      }
       preview_organization_change: {
         Args: {
           p_term_id: string
@@ -6824,6 +6999,17 @@ export type Database = {
           p_fingerprint: string
           p_reason: string
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      publish_configuration: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
+          p_review_hash: string
+          p_reason: string
+          p_request_id: string
+          p_requester_id?: string | null
         }
         Returns: Json | null
       }
@@ -6881,6 +7067,18 @@ export type Database = {
           p_filters?: Json | null
           p_page?: number | null
           p_page_size?: number | null
+        }
+        Returns: Json | null
+      }
+      read_configuration: {
+        Args: {
+          p_type_id: string
+        }
+        Returns: Json | null
+      }
+      read_configurations: {
+        Args: {
+          p_term_id: string
         }
         Returns: Json | null
       }
@@ -7304,6 +7502,19 @@ export type Database = {
           p_values?: Json | null
           p_expected_version?: number | null
           p_request_id?: string | null
+        }
+        Returns: Json | null
+      }
+      save_configuration_draft: {
+        Args: {
+          p_type_id: string
+          p_kind: string
+          p_definition: Json
+          p_base_form_version_id: string
+          p_base_workflow_version_id: string
+          p_expected_version: number
+          p_request_id: string
+          p_rollback_version_id?: string | null
         }
         Returns: Json | null
       }

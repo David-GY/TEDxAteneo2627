@@ -56,7 +56,8 @@
     "db:types": "node scripts/generate-identity-types.cjs",
     "db:types:check": "node scripts/generate-identity-types.cjs --check",
     "build": "vite build",
-    "test:work-references": "node scripts/test-work-references.cjs"
+    "test:work-references": "node scripts/test-work-references.cjs",
+    "test:configuration": "node scripts/test-config-publication.cjs"
   },
   "dependencies": {
     "@fontsource-variable/karla": "5.3.0",

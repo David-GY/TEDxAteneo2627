@@ -1,0 +1,8 @@
+.configuration-controls,.configuration-stages{display:grid;gap:24px;min-width:0}
+.configuration-controls label,.configuration-stage>label{display:grid;gap:8px;min-width:0}
+.configuration-stage{border-top:1px solid var(--color-line);padding-top:24px;min-width:0;overflow-wrap:anywhere}
+.configuration-stage>h3{margin:0 0 16px}
+.configuration-stage>fieldset{margin:24px 0;min-width:0}
+.configuration-check{display:flex!important;align-items:center;gap:12px;min-height:44px;overflow-wrap:anywhere}
+.configuration-controls select,.configuration-stage select{min-height:44px;width:100%;max-width:100%}
+.configuration-stages .auth-actions{margin:16px 0}

@@ -1,0 +1,101 @@
+{
+  "step": "P37",
+  "status": "in_progress",
+  "date": "2026-10-29",
+  "timezone": "Asia/Manila",
+  "start": {
+    "commit": "cc3058cb920c2029a11e6a4826b27f74947965b5",
+    "tree": "2d6a4c70a63456b7c2b2f5afcdfda4cd2072fd2c",
+    "branch": "codex/core-build-checkpoints",
+    "localFetchedLiveEqual": true,
+    "clean": true
+  },
+  "checks": {
+    "fullSuite": "PASS 60 files / 213 tests",
+    "configurationAndEditSafety": "PASS 2 files / 10 tests",
+    "typecheck": "PASS",
+    "typecheckFiles": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing >500kB chunk warning",
+    "catalog": "PASS 112 tables / 1135 columns / 146 public functions / 46 migrations",
+    "configurationSQL": "PASS; synthetic serialized PGlite; not independent concurrency",
+    "compiledBrowser": "PASS publication/exact retry/pinning/new-case execution/restoration/conflict/cancel-navigation/real scoped head loss/recovery/member denial/320px/44px/Tab",
+    "browserLimit": "Final shared button-only dirty-marker change covered by failing-to-passing focused regression and final full suite after browser run",
+    "P22Regression": "PASS A1-A3; historical receipt restored",
+    "diff": "PASS after EOF correction"
+  },
+  "acceptance": {
+    "P37_A1": "local supported sequential slice PASS; broader editor incomplete",
+    "P37_A2": "local protected mapping/requester-example rejection PASS; real cases recheck requester",
+    "P37_A3": "local old/new execution and history PASS",
+    "P37_U1": "PARTIAL: explained fictional cases are not evaluated synthetic values/evidence",
+    "P37_U2": "bounded recovery/security PASS; full condition/delegate/evaluated-preview work incomplete",
+    "P35": "in_progress; bounded common publication delivered, evaluated preview/history gaps remain",
+    "P36": "in_progress; R1 retained, structural R2/requester grouping unfinished"
+  },
+  "usage": {
+    "reset": 1793291065,
+    "startFiveHour": 4,
+    "startWeekly": 35,
+    "observations": [
+      [
+        10,
+        36
+      ],
+      [
+        17,
+        37
+      ],
+      [
+        22,
+        38
+      ],
+      [
+        26,
+        38
+      ],
+      [
+        30,
+        39
+      ],
+      [
+        36,
+        40
+      ],
+      [
+        37,
+        40
+      ]
+    ],
+    "effectivePoints": 40,
+    "windDownAt": 39,
+    "softCeilingAt": 44,
+    "sharedAccount": true,
+    "resetOrCreditAction": false
+  },
+  "preview": {
+    "pid": 25784,
+    "vitePid": 22032,
+    "url": "http://127.0.0.1:5178/admin/config/f2cebd8b-7090-49a8-bef2-ebd8029442da",
+    "command": "node scripts/preview-p37.cjs",
+    "retainedTab": "3",
+    "actualAXAndScreenshotObserved": true,
+    "synthetic": true
+  },
+  "externalGates": "Actual Supabase/JWT/Storage/independent races/provider custody/institutional/privacy/retention/human/assistive/restore remain open; hosted43/107/1098/140 unchanged",
+  "next": "CONTINUE P37: evaluated synthetic answers/evidence and per-stage named blockers/actions; then remaining bounded condition/delegate controls/history. No P38.",
+  "hashes": {
+    "supabase/migrations/20261029004600_config_publication.sql": "f71cca2694027a8f65806efcc9638c8ba7d52858ff1268a12250a20c7aa48e9b",
+    "supabase/tests/config_publish.test.sql": "9006cc9a76ed3cccc099988782abd5462652c1070379b401033e50895a256102",
+    "scripts/test-config-publication.cjs": "3464fbbc1a826c7065aaa078162e50b74f31d9ec479a7df5e0a2f7e50f14e202",
+    "scripts/verify-p37-config.cjs": "c6028e0f75a32942fa1729948777b26876b412718c4b12bce33911c183fce1e9",
+    "scripts/preview-p37.cjs": "30b5633e39953dcd521f3fb5993eed6353f1a3ee574bad0595d9add7d2854f64",
+    "src/features/admin/config/api.ts": "33fa90897ea0a980b6a1c2200e477941b452b0da05c9c125532d414812547066",
+    "src/features/admin/config/ConfigurationEditor.tsx": "315bee80dd717e16dca541dd8f2c7cba5a796ecf1afa596a7c4283f28089529e",
+    "src/features/admin/config/ConfigurationPage.tsx": "1227e476294f6de75273259e8338e52ca1ac8a8f154173d4fab2b5cf762e9e69",
+    "src/features/admin/config/config.test.tsx": "a5b1ee3fa393e2951c03b7b0173730c9e2bd0ab88c0493c5ad5ea26d02618a52",
+    "src/features/admin/workflows/StageEditor.tsx": "c8629dc2a3ccf3ade01e309091feb7305593d6d48f2bfe2c699d7fa283a049a2",
+    "src/components/EditSafety.tsx": "1a1c2accf7b1fe8811ccd0e480902354c910fbba2af0ea59e77d0d31c09e1f2a",
+    "src/components/EditSafety.test.tsx": "fe7104ebb4f4319b4dc26b4948304fc66f31aeb3b86b39ee5ddec12deb4621e0"
+  }
+}
