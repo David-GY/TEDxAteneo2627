@@ -1,0 +1,78 @@
+{
+  "step": "P38",
+  "status": "ready_for_review",
+  "baselineCommit": "71852db6888435a926adfc63471717c1861f62d0",
+  "checks": {
+    "frontend": "64 files/218 tests PASS; later targeted process/People PASS",
+    "sql": "Process config/readiness/semantic/prefix/pinned references/exact retry/stale/rollback/privacy PASS",
+    "compiled": "See P38-process-browser.json",
+    "types": "Frontend/Edge/catalog PASS",
+    "lint": "PASS",
+    "build": "PASS; existing chunk warning"
+  },
+  "schema": {
+    "local": [
+      48,
+      115,
+      1156,
+      153
+    ],
+    "hosted": [
+      43,
+      107,
+      1098,
+      140
+    ]
+  },
+  "usage": {
+    "start": [
+      67,
+      45
+    ],
+    "observations": [
+      [
+        74,
+        46
+      ],
+      [
+        78,
+        47
+      ],
+      [
+        85,
+        48
+      ],
+      [
+        92,
+        49
+      ]
+    ],
+    "reset": 1793291065,
+    "effectivePoints": 23,
+    "windDownAt": 85,
+    "ceilingAt": 90,
+    "sharedAccount": true,
+    "overrun": "Final shared reading92 exceeded soft ceiling90 during verification/documentation; no further implementation"
+  },
+  "preview": {
+    "pid": 17576,
+    "vitePid": 22032,
+    "tab": 6,
+    "url": "http://127.0.0.1:5178/admin/process",
+    "synthetic": true,
+    "actualAXObserved": true
+  },
+  "externalGates": "Actual provider/JWT/races/institutional/privacy/retention/human/assistive/restore remain open; no deployment/P39",
+  "hashes": {
+    "supabase/migrations/20261029004800_process_configuration.sql": "47ad464a1d8d99a62c06377d1235389e276d66790ec857d928bb7279de1a085a",
+    "src/features/admin/process/ProcessPage.tsx": "74b15be713de4a6540bd6533e8aa2f959eb687c5de4e6c222430e9f48f7efd91",
+    "src/features/admin/process/api.ts": "54b65333b24b445f9670f78a39d7b96b12694dcb1a05bf8be0a5a820b1016f2d",
+    "scripts/test-process-config.cjs": "fa1e7e30848572c4befc2e78ac86161d4fee810407ff31c9b42d841d0746916b",
+    "scripts/verify-p38-process.cjs": "cfa2328d7032535cd32c7be7463a10ae68b83a7882e5b62bf1a5799aa471972a"
+  },
+  "paletteContrastOnWhite": {
+    "#252624": 15.202153795684037,
+    "#b82320": 6.364911213948241,
+    "#62665f": 5.857532735951422
+  }
+}

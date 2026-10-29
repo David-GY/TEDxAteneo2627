@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useRouteLoaderData } from 'react-router'
+import { Link, useRouteLoaderData, useSearchParams } from 'react-router'
 import type { WorkspaceContext } from '../auth/gateway'
 import { PageHeading, Panel } from '../../components/Page'
 import { EmptyState, ErrorState, LoadingState } from '../../components/FeedbackState'
@@ -7,11 +7,11 @@ import { TextField } from '../../components/TextField'
 import type { PeopleGateway } from './gateway'
 
 export function DirectoryPage({ api }: { api: PeopleGateway }) {
-  const context = useRouteLoaderData('workspace') as WorkspaceContext
-  return <PeoplePage key={context.termId} api={api} termId={context.termId} />
+  const context = useRouteLoaderData('workspace') as WorkspaceContext; const [params]=useSearchParams()
+  return <PeoplePage key={context.termId} api={api} termId={context.termId} focusId={params.get('contact')??undefined} />
 }
 
-export function PeoplePage({ api, termId }: { api: PeopleGateway; termId: string }) {
+export function PeoplePage({ api, termId,focusId }: { api: PeopleGateway; termId: string;focusId?:string }) {
   const [data, setData] = useState<Awaited<ReturnType<PeopleGateway['read']>> | null>(null)
   const [error, setError] = useState(false)
   const [attempt, setAttempt] = useState(0)
@@ -22,13 +22,13 @@ export function PeoplePage({ api, termId }: { api: PeopleGateway; termId: string
     return () => { active = false }
   }, [api, termId, attempt])
   const query = search.trim().toLocaleLowerCase()
-  const people = data?.people.filter(person => [person.name, ...person.units, ...person.roles].some(text => text.toLocaleLowerCase().includes(query))) ?? []
+  const people = data?.people.filter(person => (!focusId||person.id===focusId)&&[person.name, ...person.units, ...person.roles].some(text => text.toLocaleLowerCase().includes(query))) ?? []
   return <>
     <PageHeading title="People" description="Find a process contact or a member by name, unit or role. Optional details appear only when shared." />
     <p><Link to="/resources">Resources & Start Here</Link> · <Link to="/tasks">My tasks</Link></p>
     <p className="muted">Affiliation and personal contact details are optional. You can find help and continue your work with these fields blank.</p>
     {error ? <ErrorState title="Directory unavailable" description="Your access may have changed, or the service could not respond." action={<button className="button" onClick={() => { setError(false); setData(null); setAttempt(attempt + 1) }}>Try again</button>} /> : !data ? <LoadingState /> : <>
-      <Panel title="Who to ask">
+      {focusId?<p><Link to="/people">Show all permitted people</Link></p>:null}<Panel title="Who to ask">
         {data.processes.length ? <ul className="guest-list">{data.processes.map(process => <li key={process.id} id={`process-${process.id}`}>
           <h3>{process.name}</h3>
           <p>Primary: {process.primary.length ? process.primary.map(p => p.name).join(', ') : 'Not assigned — ask your unit head to confirm a contact.'}</p>

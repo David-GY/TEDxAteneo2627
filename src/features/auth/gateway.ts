@@ -1,3 +1,4 @@
+import {createProcessApi,type ProcessApi} from '../admin/process/api'
 import {createConfigurationApi,type ConfigurationApi} from '../admin/config/api'
 import {createAccessApi,type AccessApi} from '../admin/access/api'
 import {createOrganizationApi,type OrganizationApi} from '../admin/organization/api'
@@ -45,6 +46,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  process?: ProcessApi
   configuration?: ConfigurationApi
   access?: AccessApi
   organization?: OrganizationApi
@@ -104,6 +106,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    process: createProcessApi(clientReady),
     configuration: createConfigurationApi(clientReady),
     access: createAccessApi(clientReady),
     organization: createOrganizationApi(clientReady),

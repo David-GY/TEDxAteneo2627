@@ -1,3 +1,5 @@
+import {PublishedStatus} from '../admin/process/ProcessPage'
+import type {ProcessApi} from '../admin/process/api'
 import {WorkReference} from '../work-references/WorkReference'
 import {ReadinessPanel,readinessLabel} from './Readiness'
 import type {ReadinessApi} from './readiness-api'
@@ -21,7 +23,7 @@ import { filterSearch, parseFilters, type DeliverablesApi, type DeliverableDetai
 import { dateLabel, DeliverableFacts } from './DeliverableFacts'
 import { DeliverableEditor } from './DeliverableEditor'
 import type { DeliverableCommands } from './commands'
-export function DeliverablePage({ api, commands, comments, files, synergies, timeline, finance, publicity, readiness }: { readiness?:ReadinessApi;publicity?:PublicityApi;finance?:FinanceApi; timeline?:TimelineApi;api: DeliverablesApi; commands?: DeliverableCommands; comments?:CommentsApi; files?:FilesApi; synergies?:SynergiesApi }) {
+export function DeliverablePage({ process, api, commands, comments, files, synergies, timeline, finance, publicity, readiness }: { process?:ProcessApi;readiness?:ReadinessApi;publicity?:PublicityApi;finance?:FinanceApi; timeline?:TimelineApi;api: DeliverablesApi; commands?: DeliverableCommands; comments?:CommentsApi; files?:FilesApi; synergies?:SynergiesApi }) {
   const {deliverableId=''}=useParams(); const location=useLocation()
   const context=useRouteLoaderData('workspace') as WorkspaceContext|undefined
   const [negotiationPending,setNegotiationPending]=useState(false);const[schedulePending,setSchedulePending]=useState(false);const [reload,setReload]=useState(0);const key=deliverableId+':'+reload+':'+(context&&'memberId'in context?context.memberId:context&&'guestAccessId'in context?context.guestAccessId:'')
@@ -35,7 +37,7 @@ export function DeliverablePage({ api, commands, comments, files, synergies, tim
     <p><Link className="button button--secondary" to={back}>{guest?'Back to shared with me':'Back to deliverables'}</Link></p>
     {!loaded?<LoadingState title="Loading deliverable"/>:state.error?<ErrorState title="Deliverable unavailable" description="Access or connection could not be checked. Try reloading." action={<button className="button" onClick={()=>setReload(reload+1)}>Try again</button>}/>:!item?<><PageHeading title="Deliverable unavailable"/><EmptyState title="This deliverable cannot be shown" description="The address may be unavailable, or your access changed. No restricted details are shown." action={<Link className="button button--secondary" to={back}>Return to permitted work</Link>}/></>:<>
       <PageHeading title={item.title} description="Readiness checks current scope, contributions and formal reviews. Task completion alone is not final acceptance."/>
-      <WorkReference reference={item.reference} id={item.id} kind="deliverable"/>
+      <PublishedStatus api={process} kind="deliverable" state={item.workflowState??item.readiness}/><WorkReference reference={item.reference} id={item.id} kind="deliverable"/>
       <Panel title="Next step"><p>{item.nextAction}</p><p>State: {readinessLabel(item.readiness)}</p><p>Owner: {item.owner.name}{!item.owner.active?' · Reassignment needed':''} · Target: {dateLabel(item.dueAt,item.dueOn)}{item.overdue?' · Overdue':''}</p><p>{item.blocked?item.blocker??'Ask the owner to clarify the blocker.':'No blocker recorded'}</p><Link to={guest?'/account':'/resources'}>Find work guidance and help</Link></Panel>
       <button className="button button--secondary" data-discard-edits disabled={negotiationPending||schedulePending} onClick={()=>setReload(reload+1)}>Reload deliverable</button><p className="muted">Reloading the whole deliverable discards unsaved forms. Finish or copy your edits before reloading.</p>
       {item.archivedAt?<p className="muted">This record is archived.</p>:null}

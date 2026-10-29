@@ -2273,6 +2273,44 @@ export type Database = {
           },
         ]
       }
+      event_phases: {
+        Row: {
+          id: string
+          term_id: string
+          title: string
+          starts_on: string
+          ends_on: string
+          active: boolean
+          sort_order: number
+        }
+        Insert: {
+          id: string
+          term_id: string
+          title: string
+          starts_on: string
+          ends_on: string
+          active: boolean
+          sort_order: number
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          title?: string
+          starts_on?: string
+          ends_on?: string
+          active?: boolean
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_phases_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       finance_authority_designations: {
         Row: {
           authority_id: string
@@ -3898,6 +3936,80 @@ export type Database = {
           },
         ]
       }
+      process_changes: {
+        Row: {
+          term_id: string
+          version: number
+          kind: string
+          target_id: string
+          previous: Json | null
+          proposed: Json
+          reason: string
+          actor_id: string
+          published_at: string
+        }
+        Insert: {
+          term_id: string
+          version: number
+          kind: string
+          target_id: string
+          previous?: Json | null
+          proposed: Json
+          reason: string
+          actor_id: string
+          published_at?: string
+        }
+        Update: {
+          term_id?: string
+          version?: number
+          kind?: string
+          target_id?: string
+          previous?: Json | null
+          proposed?: Json
+          reason?: string
+          actor_id?: string
+          published_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "process_changes_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "process_control"
+            referencedColumns: ["term_id"]
+          },
+        ]
+      }
+      process_control: {
+        Row: {
+          term_id: string
+          work_item_id: string
+        }
+        Insert: {
+          term_id: string
+          work_item_id: string
+        }
+        Update: {
+          term_id?: string
+          work_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "process_control_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: true
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "process_control_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       profile_commands: {
         Row: {
           member_id: string
@@ -4677,6 +4789,7 @@ export type Database = {
           official_url: string | null
           process_note: string
           archived_at: string | null
+          lead_time_text: string
         }
         Insert: {
           id?: string
@@ -4699,6 +4812,7 @@ export type Database = {
           official_url?: string | null
           process_note: string
           archived_at?: string | null
+          lead_time_text?: string
         }
         Update: {
           id?: string
@@ -4721,6 +4835,7 @@ export type Database = {
           official_url?: string | null
           process_note?: string
           archived_at?: string | null
+          lead_time_text?: string
         }
         Relationships: [
           {
@@ -5405,6 +5520,8 @@ export type Database = {
           updated_at: string
           updated_by: string | null
           version: number
+          display_color: string
+          display_order: number
         }
         Insert: {
           id?: string
@@ -5419,6 +5536,8 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          display_color?: string
+          display_order?: number
         }
         Update: {
           id?: string
@@ -5433,6 +5552,8 @@ export type Database = {
           updated_at?: string
           updated_by?: string | null
           version?: number
+          display_color?: string
+          display_order?: number
         }
         Relationships: [
           {
@@ -6965,6 +7086,14 @@ export type Database = {
         }
         Returns: Json | null
       }
+      preview_process_change: {
+        Args: {
+          p_term_id: string
+          p_kind: string
+          p_values: Json
+        }
+        Returns: Json | null
+      }
       preview_synthetic_access: {
         Args: {
           p_term_id: string
@@ -7026,6 +7155,18 @@ export type Database = {
         Args: {
           p_term_id: string
           p_action: string
+          p_values: Json
+          p_expected_version: number
+          p_fingerprint: string
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      publish_process_change: {
+        Args: {
+          p_term_id: string
+          p_kind: string
           p_values: Json
           p_expected_version: number
           p_fingerprint: string
@@ -7231,7 +7372,19 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_process_admin: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_process_contacts: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_process_summary: {
         Args: {
           p_term_id: string
         }
@@ -7419,6 +7572,13 @@ export type Database = {
       resolve_auth_context: {
         Args: Record<string, never>
         Returns: Json | null
+      }
+      resolve_request_reference: {
+        Args: {
+          p_term_id: string
+          p_reference: string
+        }
+        Returns: string | null
       }
       resolve_work_reference: {
         Args: {

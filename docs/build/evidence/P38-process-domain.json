@@ -1,0 +1,11 @@
+{
+  "target": "Isolated PGlite/synthetic subjects; not real provider/JWT/concurrency/institutional/human proof",
+  "checks": [
+    "P38_A1 immutable IDs/semantics/pinned labels/pairs/refs",
+    "P38_A2 phase dates/contact eligibility before publish",
+    "P38_A3 Approved label cannot mutate semantic category; versioned publication",
+    "P38_U2 fixed prefix reservation/collision/reserved/immutable lookup boundary",
+    "Exact replay/stale preview/atomic outbox failure/privacy denial"
+  ],
+  "schema": "local only"
+}
