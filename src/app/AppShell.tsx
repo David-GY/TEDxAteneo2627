@@ -1,5 +1,5 @@
 import {NotificationBadge} from '../features/notifications/Notifications'
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type ReactNode, type KeyboardEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigation } from 'react-router'
 import { LoadingState } from '../components/FeedbackState'
 import { getMobilePrimaryNavigation, getVisibleNavigation, setupNavigation, type NavigationContext, type NavigationItem } from './navigation'
@@ -7,6 +7,7 @@ import { getMobilePrimaryNavigation, getVisibleNavigation, setupNavigation, type
 type AppShellProps = {
   context?: NavigationContext
   identity?: { displayName: string; unitName?: string }
+  content?: ReactNode
   preview?: boolean
 }
 
@@ -15,7 +16,7 @@ function PageLink({ item, compact = false }: { item: NavigationItem; compact?: b
   return <NavLink className="nav-link" to={item.href} end={item.href === '/'}>{label}</NavLink>
 }
 
-export function AppShell({ context = setupNavigation, identity, preview = true }: AppShellProps) {
+export function AppShell({ context = setupNavigation, identity, content, preview = true }: AppShellProps) {
   const location = useLocation()
   const navigation = useNavigation()
   const [moreOpen, setMoreOpen] = useState(false)
@@ -75,7 +76,7 @@ export function AppShell({ context = setupNavigation, identity, preview = true }
             </div>
           </header>
           <main className="workspace-main" id="main-content" tabIndex={-1} ref={mainRef} aria-busy={navigation.state !== 'idle'}>
-            {navigation.state !== 'idle' ? <LoadingState /> : <Outlet />}
+            {navigation.state !== 'idle' ? <LoadingState /> : content ?? <Outlet />}
           </main>
         </div>
       </div>

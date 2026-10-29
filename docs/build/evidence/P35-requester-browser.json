@@ -1,0 +1,14 @@
+{
+  "target": "Isolated SQL, compiled app, synthetic subjects; no real JWT/provider/concurrent sessions or human UAT",
+  "checks": [
+    "Ordinary requester actual current next action; submitted vs approval distinction and requested vs accepted date",
+    "Required validation and actual keyboard error target",
+    "Stale version keeps entered fields; refresh preserves safe input",
+    "Same-account record edit-scope downgrade clears private inputs; regrant reads saved server draft",
+    "Lost create and submit success replies reuse exact payload/key; one submission effect",
+    "Uncertain submission prevents discard navigation",
+    "Other synthetic account cannot read title/payload",
+    "320px no overflow and visible keyboard focus"
+  ],
+  "errors": []
+}

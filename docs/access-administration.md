@@ -1,5 +1,7 @@
 # P34 Access administration
 
+P35-R3 local extension (October29): the existing commands now have named permission/action/scope selectors and a named impact review with exact unit/record, recipient, role, Manila dates and custody acknowledgment. IDs/fingerprint remain in scoped verification details. Missing names, unknown permissions and inconsistent nomination candidates disable named publication. Edits invalidate review; permission drafts survive refresh and uncertain retries retain the exact command/key. Inspection/simulation is a separate no-change disclosure. No SQL/ceiling/lineage/custody contract changed. Shared configuration publication remains the next unfinished P35-R3 slice.
+
 Current status October28,2026: **blocked_external**. The local mutation slice is implemented in migration043 (`20261028000100_access_publication.sql`),107tables/1098columns/140public functions. The historical foundation below is superseded where it says mutation is unavailable.
 
 `preview_access_change(term,action,values)` validates a closed typed role publication, assignment grant/expiry/revoke or custodian nomination/acceptance. It returns the control version and current source/authority fingerprint. `publish_access_change(term,action,values,expectedVersion,fingerprint,reason,key)` reauthorizes under the existing readiness lock, locks current authority rows, rejects stale/changed retries, and commits immutable history plus canonical redacted audit/outbox/receipt atomically. No raw table write grants were opened.

@@ -1,9 +1,10 @@
-import {createContext,useContext,useMemo,useRef,useEffect,useState,Fragment,type ReactNode} from 'react'
+import {useDraftStore} from '../auth/draftScope'
+import {createContext,useContext,useRef,useEffect,useState,Fragment,type ReactNode} from 'react'
 import type {RequestCommand,RequestReceipt,RequestsApi} from './api'
 type Pending={command:RequestCommand;key:string}
 type Draft={fields:Record<string,string>;pending:Pending|null}
 const Context=createContext<Map<string,Draft>|null>(null)
-export function RequestMemory({identity,children}:{identity:string;children:ReactNode}){const drafts=useMemo(()=>new Map<string,Draft>(),[identity]);return <Context.Provider value={drafts}><Fragment key={identity}>{children}</Fragment></Context.Provider>}
+export function RequestMemory({identity,children}:{identity:string;children:ReactNode}){const drafts=useDraftStore<Draft>(identity);return <Context.Provider value={drafts}><Fragment key={identity}>{children}</Fragment></Context.Provider>}
 export function useRequestMemory(api:RequestsApi,id:string,initial:Record<string,string>){
  const memory=useContext(Context),[fields,setFields]=useState(()=>memory?.get(id)?.fields??initial),[pending,setPending]=useState<Pending|null>(()=>memory?.get(id)?.pending??null),[busy,setBusy]=useState(false),[error,setError]=useState(''),live=useRef(true);
  useEffect(()=>{live.current=true;return()=>{live.current=false}},[]);

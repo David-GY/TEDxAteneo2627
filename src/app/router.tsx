@@ -93,7 +93,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       { path: '/auth/callback', element: <CallbackPage gateway={gateway} /> },
       { path: '/guest/redeem', loader:({request})=>gateway.readContext(request.signal), element: <RedeemPage gateway={gateway} /> },
       ...(import.meta.env.DEV ? [{ path: '/preview', element: <AppShell />, children: [{ index: true, element: <FoundationPage environment={environment} /> }] }] : []),
-      { id:'workspace', path: '/', element: <ProtectedShell notifications={gateway.notifications}/>, loader: async ({ request }) => {
+      { id:'workspace', path: '/', element: <ProtectedShell notifications={gateway.notifications} gateway={gateway}/>, loader: async ({ request }) => {
         const result = await gateway.readContext(request.signal)
         if (result.state === 'authorized') {
           const path=new URL(request.url).pathname

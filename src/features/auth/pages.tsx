@@ -1,3 +1,4 @@
+import {CurrentRecordScope} from './RecordScope'
 import {EditSafety} from '../../components/EditSafety'
 import {NotificationCenter} from '../notifications/Notifications'
 import type {NotificationsApi} from '../notifications/api'
@@ -35,14 +36,14 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
   return <FinDecisionMemory identity={draftIdentity}><FinanceMemory identity={draftIdentity}><ReviewMemory identity={draftIdentity}><RequestMemory identity={draftIdentity}><FormDrafts identity={draftIdentity}><ScheduleDrafts identity={draftIdentity}><HandoffDrafts identity={draftIdentity}><EditSafety key={draftIdentity}>{state==='loading'&&workspace?<p role="status">Checking current access. Your edits stay here while actions are paused.</p>:null}<div inert={state==='loading'&&!!workspace}>{state === 'loading' && !workspace && location.pathname !== '/auth/callback' ? <main className="standalone-page"><LoadingState /></main> : <Outlet />}</div></EditSafety></HandoffDrafts></ScheduleDrafts></FormDrafts></RequestMemory></ReviewMemory></FinanceMemory></FinDecisionMemory>
 }
 
-export function ProtectedShell({notifications}:{notifications?:NotificationsApi}) {
+export function ProtectedShell({notifications,gateway}:{notifications?:NotificationsApi;gateway?:AuthGateway}) {
   const member = useLoaderData() as WorkspaceContext
   const { revalidate } = useRevalidator()
   useEffect(() => {
     const timer = window.setTimeout(() => void revalidate(), Math.min(2_147_483_647, Math.max(0, Date.parse(member.expiresAt) - Date.now())))
     return () => clearTimeout(timer)
   }, [member.expiresAt, revalidate])
-  return <NotificationCenter api={notifications} term={member.termId} identity={'memberId'in member?member.memberId:member.guestAccessId}><AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} /></NotificationCenter>
+  return <NotificationCenter api={notifications} term={member.termId} identity={'memberId'in member?member.memberId:member.guestAccessId}><AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} content={gateway?<CurrentRecordScope gateway={gateway}><Outlet /></CurrentRecordScope>:undefined} /></NotificationCenter>
 }
 
 export function LoginPage({ gateway }: { gateway: AuthGateway }) {
