@@ -1,0 +1,54 @@
+{
+  "status": "in_progress",
+  "date": "2026-10-30 Asia/Manila",
+  "baselineCommit": "92ced7afad289609a92977d6a620780f126c0d43",
+  "baselineTree": "d42772faa8e78b7aa87293fa1f641ab21a03f9fa",
+  "checks": {
+    "pnpm db:types:check": "PASS120tables/1192columns/160functions",
+    "node scripts/test-presentation-publication.cjs": "PASS against source050",
+    "targeted notifications": "4files/9tests PASS",
+    "node scripts/test-notifications.cjs": "PASS against source050",
+    "pnpm typecheck/lint/build": "PASS existing chunk warning865.78kB",
+    "node scripts/test-p41-rules.cjs": "PASS",
+    "node scripts/verify-p41-proposals.cjs": "PASS isolated compiled fixture",
+    "pnpm test --maxWorkers=2": "73files/243tests PASS"
+  },
+  "usage": {
+    "startFiveHour": 33,
+    "latestFiveHour": 51,
+    "ceilingUsed": 73,
+    "effectiveBudget": 40,
+    "windDownUsed": 68,
+    "latestWeekly": 61,
+    "reset": 1793345382,
+    "attribution": "Shared account observations, no reset action/credit/purchase/wait",
+    "startWeekly": 58
+  },
+  "schema": {
+    "hostedUnchanged": 43,
+    "localMigrations": 50
+  },
+  "preview": {
+    "port": 5179,
+    "visibility": "Observed current in-app alerts and expanded no-send editor; retained deliverable",
+    "pid": 14988,
+    "vitePid": 29016,
+    "tab": "3",
+    "url": "http://127.0.0.1:5179/notifications"
+  },
+  "acceptance": {
+    "P41_A2": "Required work preserved in model/P30 regression; full integration UNVERIFIED",
+    "P41_U1": "Existing actions preserved; grouped configurable journey UNIMPLEMENTED",
+    "P41_U2": "Synthetic no-send/admin-only/mobile/keyboard PASS; actual recipient/human UNVERIFIED",
+    "P41_A3": "Closed client/server template schema PASS; actual recipient preview UNIMPLEMENTED",
+    "P41_A1": "Candidate overlap only PASS; configurable durable dedup UNIMPLEMENTED"
+  },
+  "deployment": {
+    "deployed": false,
+    "standingPreference": "always deploy reviewed changes",
+    "liveSchedules": false,
+    "state": "pending owner-identified target URL",
+    "externalMessages": false
+  },
+  "next": "CONTINUE P41 saved-rule API/UI, authorized recipient dry-run, durable scheduler/grouped updates; no P42"
+}

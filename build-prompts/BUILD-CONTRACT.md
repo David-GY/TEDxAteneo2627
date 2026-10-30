@@ -1,5 +1,7 @@
 # TEDx build execution contract
 
+Owner standing instruction October30: deploy reviewed changes on each execution to the owner-identified target when deployment prerequisites pass; this supersedes the default step-only deployment authorization below. Preserve explicit no-live-schedule/no-external-message restrictions. The existing deployment target/URL is currently missing and was requested during P41; do not invent a public destination or confuse local preview/Git push with deployment.
+
 This contract applies to every numbered prompt in this pack. The prompt prepares one bounded implementation session; it does not authorize running later prompts automatically.
 
 ## Start with the right context

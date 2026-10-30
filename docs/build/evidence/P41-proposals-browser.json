@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "target": "Isolated PGlite and compiled UI, synthetic custodian/member; no real JWT/recipient/provider proof",
+  "checks": [
+    "320px reflow",
+    "keyboard channel-to-mode focus",
+    "external unavailable fallback",
+    "fictional preview performs no mutation/recipient lookup",
+    "ordinary member has no admin proposal controls"
+  ],
+  "limitations": [
+    "No server rule persistence",
+    "No actual recipient dry-run",
+    "No durable digest/reminder scheduling",
+    "No live cadence or external delivery"
+  ]
+}

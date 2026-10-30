@@ -1,5 +1,7 @@
 # In-app notifications and delivery jobs
 
+P41 source050 adds term-admin-only private notification-rule proposals through the shared P40 presentation publication commands (`kind=notification`, term target). Closed schema: fixed current_assignees audience/action_link template, supported channel/mode,1–7day before/overdue values, due-day boolean and0–23whole-hour/quiet bounds. Same own-draft/version/review-hash/idempotency/immutable-history/rollback/atomic-redacted-audit contract; no activation property and no dispatcher consumes these versions. Site/layout contracts are unchanged. Admin-only no-send UI currently evaluates temporary fictional proposals; it does not yet connect to stored rule review or actual recipient dry-run. Pure canonical candidate merging is not durable scheduling. Full limits and continuation: build/steps/P41.md. Local50/120/1192/160, hosted43/107/1098/140 unchanged. No live schedules/external sends.
+
 P30 uses the existing transactional outbox. Business commands commit their state, redacted audit and event together; no dispatcher runs inside that transaction. Delivery failure cannot undo a task transition, agreement, handoff, review or acceptance. No external adapter, provider configuration, secret or schedule is installed.
 
 ## Opaque delivery and current authorization
