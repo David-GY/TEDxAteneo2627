@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-30 Asia/Manila",
+  "status": "ready_for_review",
+  "scope": "P40 local publication/scoped-layout/private-account-view continuation; all actual external acceptance remains open",
+  "baseline": {
+    "initialWorktree": "clean",
+    "branch": "codex/core-build-checkpoints",
+    "localFetchedLive": "equal before edits",
+    "tree": "9a96b1307ebf474b9078c62091b9e2cec6aa94c1",
+    "commit": "19d9f50ad87f5aa1474ea366bccaa807e3b745e7"
+  },
+  "checks": {
+    "pnpm test --maxWorkers=2": "PASS:71files/237tests, final current source",
+    "pnpm typecheck": "PASS",
+    "pnpm lint": "PASS",
+    "pnpm build": "PASS:existing >500kB warning, application858.60kB",
+    "pnpm db:types:check": "PASS:120tables/1192columns/160functions",
+    "node scripts/test-presentation-publication.cjs": "PASS:isolated current-scope/privacy/validation/stale/retry/history/rollback/atomic-audit-outbox/retired/default/named-view checks",
+    "node scripts/test-config-publication.cjs": "PASS:P35/P37 service publication regression",
+    "node scripts/test-process-config.cjs": "PASS:P38 phase/status/service regression",
+    "node scripts/verify-p40-layout.cjs": "PASS:preserved personal/keyboard/320px/fallback/four-fictional scenarios",
+    "node scripts/verify-p40-publication.cjs": "PASS:compiled scoped publication/rollback/published default/named-view reload/mobile/keyboard/forged-FIN rejection",
+    "git diff --check": "PASS"
+  },
+  "acceptance": {
+    "P40_A1": "Local PASS; actual provider/JWT scope UNVERIFIED",
+    "P40_A2": "320px/keyboard/44px local PASS; native zoom/assistive/human UNVERIFIED",
+    "P40_A3": "Server validation and historical retired fallback/repair local PASS; provider UNVERIFIED",
+    "P40_U1": "Required current work/contact path preserved across personal/published/named/four-fictional previews local PASS; actual guest/provider/newcomer UNVERIFIED",
+    "P40_U2": "No setup, named reload, device precedence, explicit return to published default/mobile/keyboard local PASS; actual discoverability/task time/wrong turns/assistance UNVERIFIED"
+  },
+  "schema": {
+    "hostedUnchanged": {
+      "columns": 1098,
+      "tables": 107,
+      "migrations": 43,
+      "functions": 140
+    },
+    "local": {
+      "columns": 1192,
+      "tables": 120,
+      "migrations": 49,
+      "functions": 160
+    }
+  },
+  "usage": {
+    "windDownUsed": 36,
+    "attribution": "shared-account observations, not exact task attribution; no reset action/credit/purchase/wait",
+    "effectiveBudgetPoints": 40,
+    "reset": 1793345382,
+    "ceilingUsed": 41,
+    "startWeekly": 53,
+    "startFiveHour": 1,
+    "observations": [
+      "6/54",
+      "10/54",
+      "13/55",
+      "16/55",
+      "19/56",
+      "25/57",
+      "29/57"
+    ]
+  },
+  "preview": {
+    "visibility": "Observed current TASK-002/Fictional Morgan/owner/date/action/help and new account controls; marked deliverable",
+    "vitePid": 29016,
+    "url": "http://127.0.0.1:5178/?synthetic=associate",
+    "pid": 13036,
+    "tab": "2"
+  },
+  "incompleteSteps": [
+    "P35",
+    "P36",
+    "P39"
+  ],
+  "gates": [
+    "Actual Supabase17/JWT/Storage current-old-token/revocation",
+    "independent concurrent sessions",
+    "approved real publisher/role/unit/roster/FIN-MCD authority",
+    "privacy/retention/logo rights/MCD",
+    "native zoom/assistive/newcomer and human UAT",
+    "restore/recovery",
+    "existing advisor136WARNs/16owner-boundary findings"
+  ],
+  "next": "CONTINUE P40 verification/review after approved external inputs; no P41 or provider/deployment change authorized by this checkpoint",
+  "hashes": {
+    "supabase/migrations/20261030004900_presentation_publication.sql": "df4ebeceffa653f9dc9572c1b8751919e125fe7d17f4a3b7836c90cb4deec2fb",
+    "scripts/test-presentation-publication.cjs": "2cfa9b6c88af8117bcbf801c54601c817ef9787e89ab52a09718f67952be7aae",
+    "scripts/verify-p40-publication.cjs": "520957f5f5294ff27d74a81fadf992fdef7147086f626d0045a01d373d447c1e",
+    "scripts/preview-p08.cjs": "7814abaf8bf49d1bfa55c5c1e7a1756b996009b4e101207d1e873c40b3455a41",
+    "src/features/admin/layouts/api.ts": "05b7312aa9caffadb8fe6b438e9cf00e724fc188238fedf267e986ca8103a730",
+    "src/features/admin/layouts/LayoutEditor.tsx": "449a625667326534492cdeb55390b4ba401a3e98a828f577f7f36a79457f6384",
+    "src/features/admin/layouts/LayoutsPage.tsx": "174f5745d7cf3f00eb8eb425e8a3b6a7f0a9e7a4faa5869cce0fbf9ae0a5f0be",
+    "src/features/overview/account-api.ts": "b358061b4bc028f242ac36f9fece330282bc472cd78acce40067677fd4698043",
+    "src/features/overview/AccountLayouts.tsx": "b4f965c2c1d7ddb87c526941aec23499b49739717816afd45849e74ffb90a726",
+    "src/features/overview/Overview.tsx": "74ffede86b0e510f77bc3f61bee7c8a23be442b6d271801fcc9021c902c498ee",
+    "src/lib/database.types.ts": "673dd30f7324efe2edabdaa8a48055a0b5155ad4451477ea2e389637aa6cccb4"
+  }
+}

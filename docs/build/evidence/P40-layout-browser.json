@@ -11,6 +11,7 @@
   ],
   "calls": [
     "read_process_summary",
+    "read_my_layout_configuration",
     "read_overview",
     "read_notifications"
   ],

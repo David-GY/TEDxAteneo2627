@@ -1,5 +1,7 @@
 # New-chat handoff and revised prompt order
 
+Current October30 continuation: **P40 is ready_for_review locally, with external acceptance open**. Resume from docs/build/STATE.md, docs/build/steps/P40.md, docs/dashboard-layouts.md and evidence/P40-publication-checkpoint.json using CONTINUE.md. Source049 repairs shared site/layout publication and adds scoped role/unit defaults/private account operational views; P35/P36/P39 remain incomplete. No P41. The older P35-start text and process IDs below are historical. Current owned synthetic preview is node scripts/preview-p37.cjs PID13036 on5178, Vite29016 on5173, retained visible member tab http://127.0.0.1:5178/?synthetic=associate. Verify ownership/listeners/actual visibility before reuse. Fetch current branch head/tree; never reset to any historical SHA. All provider/institutional/privacy/human/restore gates remain in force; no deployment or provider changes were made by P40. Final custody receipt: ignored test-results/p40-publication-custody.json.
+
 Prepared October28,2026. Latest verified implementation/plan checkpoint before this handoff:6020d226d685609cf6a849eed053a924e6f814c2, tree061c692bbd74f885f66e0dc31bb6f69c268c7cb9. This handoff will itself be committed later; the next chat must discover the latest branch head rather than reset to this SHA. No implementation has started in P35/P36.
 
 ## Paste this first in the new chat

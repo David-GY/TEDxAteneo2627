@@ -1,0 +1,28 @@
+{
+  "target": "Compiled local UI, isolated PGlite and synthetic subjects; not actual provider/JWT/concurrency/human acceptance",
+  "result": "PASS",
+  "checks": [
+    "scoped unit editor",
+    "private save / explicit preview-diff-ack-reason-publish",
+    "rollback prepared privately and published as version2",
+    "320px administrator/member reflow",
+    "named account view survives reload",
+    "required assigned-work link/contact preserved",
+    "44px named controls",
+    "keyboard saved-view action",
+    "private per-account view lists",
+    "server forged FIN widget rejected"
+  ],
+  "calls": [
+    "read_layout_targets",
+    "read_notifications",
+    "read_presentation_configuration",
+    "save_presentation_draft",
+    "preview_presentation_configuration",
+    "publish_presentation_configuration",
+    "read_process_summary",
+    "read_my_layout_configuration",
+    "read_overview",
+    "save_operational_view"
+  ]
+}

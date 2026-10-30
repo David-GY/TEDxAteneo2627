@@ -1,3 +1,5 @@
+Latest October30 P40 prerequisite repair: source049 adds the separate closed site/layout publication adapter, using the existing P35/P38 authority/version/audit patterns. See [dashboard layouts](dashboard-layouts.md) for private scoped drafts, role/unit/term targets, explicit diff/publication/history/rollback and private account operational views. Service configuration below remains bounded to form/workflow; it does not become a generic dispatcher. Local120tables/1192columns/160functions/49migrations; hosted43/107/1098/140 unchanged. P35/P36/P39 remain incomplete and all external gates persist.
+
 Latest October29 P37 continuation: source047 now supplies evaluated synthetic answer/evidence cases, named stage blockers/actions, bounded group/membership controls, cursor history and independently requester-readable pinned-case links. Explicit eligible head reassignment remains the supported delegation policy and is linked from the editor. Local112tables/1135columns/148functions/47migrations; hosted unchanged. Earlier unfinished statements below are historical; see the latest P37 checkpoint for current limits and external gates.
 
 ---

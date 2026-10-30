@@ -1,0 +1,25 @@
+{
+  "target": "Isolated in-memory PGlite with synthetic subjects; no actual JWT/provider/concurrent-session/human proof",
+  "checks": [
+    "private drafts",
+    "closed layout/site catalog and scoped targets",
+    "exact delegated unit/role/term authority",
+    "stale draft/base/review",
+    "exact retry and changed-key-payload rejection",
+    "append-only rollback",
+    "atomic late outbox failure",
+    "redacted audit",
+    "revoked retry denial",
+    "frozen writes",
+    "raw access denial",
+    "guest denial",
+    "current role/unit/term defaults and ambiguity fallback",
+    "private versioned named views and archival",
+    "retired historical widget recovery"
+  ],
+  "status": "PASS",
+  "remaining": [
+    "actual provider/JWT/independent races and human gates",
+    "P39 contextual site editing/branding remains incomplete"
+  ]
+}

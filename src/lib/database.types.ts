@@ -3614,6 +3614,77 @@ export type Database = {
           },
         ]
       }
+      operational_view_versions: {
+        Row: {
+          view_id: string
+          version: number
+          name: string
+          definition: Json
+          archived: boolean
+          saved_at: string
+        }
+        Insert: {
+          view_id: string
+          version: number
+          name: string
+          definition: Json
+          archived: boolean
+          saved_at?: string
+        }
+        Update: {
+          view_id?: string
+          version?: number
+          name?: string
+          definition?: Json
+          archived?: boolean
+          saved_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operational_view_versions_view_id_fkey"
+            columns: ["view_id"]
+            isOneToOne: false
+            referencedRelation: "operational_views"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      operational_views: {
+        Row: {
+          id: string
+          term_id: string
+          actor_id: string
+          work_item_id: string
+        }
+        Insert: {
+          id: string
+          term_id: string
+          actor_id: string
+          work_item_id: string
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          actor_id?: string
+          work_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operational_views_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operational_views_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
       org_units: {
         Row: {
           id: string
@@ -3855,6 +3926,163 @@ export type Database = {
             columns: ["work_item_id"]
             isOneToOne: false
             referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      presentation_controls: {
+        Row: {
+          term_id: string
+          kind: string
+          target_kind: string
+          target_id: string
+          work_item_id: string
+        }
+        Insert: {
+          term_id: string
+          kind: string
+          target_kind: string
+          target_id: string
+          work_item_id: string
+        }
+        Update: {
+          term_id?: string
+          kind?: string
+          target_kind?: string
+          target_id?: string
+          work_item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "presentation_controls_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "presentation_controls_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: true
+            referencedRelation: "announcements"
+            referencedColumns: ["work_item_id"]
+          },
+        ]
+      }
+      presentation_drafts: {
+        Row: {
+          id: string
+          term_id: string
+          kind: string
+          target_kind: string
+          target_id: string
+          actor_id: string
+          version: number
+          base_version: number
+          definition: Json
+          rollback_version_id: string | null
+          published_version_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          kind: string
+          target_kind: string
+          target_id: string
+          actor_id: string
+          version: number
+          base_version: number
+          definition: Json
+          rollback_version_id?: string | null
+          published_version_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          kind?: string
+          target_kind?: string
+          target_id?: string
+          actor_id?: string
+          version?: number
+          base_version?: number
+          definition?: Json
+          rollback_version_id?: string | null
+          published_version_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "presentation_drafts_published_version_id_fkey"
+            columns: ["published_version_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "presentation_drafts_rollback_version_id_fkey"
+            columns: ["rollback_version_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "presentation_drafts_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      presentation_versions: {
+        Row: {
+          id: string
+          control_id: string
+          version: number
+          definition: Json
+          previous_version: number
+          rollback_version_id: string | null
+          actor_id: string
+          reason: string
+          published_at: string
+        }
+        Insert: {
+          id?: string
+          control_id: string
+          version: number
+          definition: Json
+          previous_version: number
+          rollback_version_id?: string | null
+          actor_id: string
+          reason: string
+          published_at?: string
+        }
+        Update: {
+          id?: string
+          control_id?: string
+          version?: number
+          definition?: Json
+          previous_version?: number
+          rollback_version_id?: string | null
+          actor_id?: string
+          reason?: string
+          published_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "presentation_versions_control_id_fkey"
+            columns: ["control_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_controls"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "presentation_versions_rollback_version_id_fkey"
+            columns: ["rollback_version_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
             referencedColumns: ["id"]
           },
         ]
@@ -7086,6 +7314,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      preview_presentation_configuration: {
+        Args: {
+          p_draft_id: string
+        }
+        Returns: Json | null
+      }
       preview_process_change: {
         Args: {
           p_term_id: string
@@ -7158,6 +7392,16 @@ export type Database = {
           p_values: Json
           p_expected_version: number
           p_fingerprint: string
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      publish_presentation_configuration: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
+          p_review_hash: string
           p_reason: string
           p_request_id: string
         }
@@ -7328,6 +7572,18 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_layout_targets: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_my_layout_configuration: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_notification_failures: {
         Args: {
           p_term_id: string
@@ -7369,6 +7625,16 @@ export type Database = {
       read_people_directory: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_presentation_configuration: {
+        Args: {
+          p_term_id: string
+          p_kind: string
+          p_target_kind: string
+          p_target_id: string
+          p_before?: number | null
         }
         Returns: Json | null
       }
@@ -7700,6 +7966,32 @@ export type Database = {
           p_values: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_operational_view: {
+        Args: {
+          p_term_id: string
+          p_view_id: string
+          p_name: string
+          p_definition: Json
+          p_archived: boolean
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_presentation_draft: {
+        Args: {
+          p_term_id: string
+          p_kind: string
+          p_target_kind: string
+          p_target_id: string
+          p_definition: Json
+          p_base_version: number
+          p_expected_version: number
+          p_request_id: string
+          p_rollback_version_id?: string | null
         }
         Returns: Json | null
       }

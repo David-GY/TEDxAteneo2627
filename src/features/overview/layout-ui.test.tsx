@@ -4,13 +4,24 @@ import {afterEach,expect,it,vi} from 'vitest'
 import {Overview} from './Overview'
 import {viewStorageKey} from './layout'
 import type {OverviewRow} from './api'
+import type {AccountLayoutApi} from './account-api'
 afterEach(()=>{cleanup();localStorage.clear();vi.restoreAllMocks()})
 const key=viewStorageKey('org','term','member:membership')
 const row:OverviewRow={id:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8',source:'task',title:'Fictional assigned task',owner:'Fictional River',dueOn:'2027-04-10',dueAt:null,lane:'actionable',action:'Update task progress',person:'Fictional River',state:'todo',committee:null,overdue:false}
-function show(items:OverviewRow[]=[],subject='membership'){
+function show(items:OverviewRow[]=[],subject='membership',layouts?:AccountLayoutApi){
  const read=vi.fn().mockResolvedValue({items,hasMore:false,refreshedAt:'2026-10-29T00:00:00Z'})
- render(<RouterProvider router={createMemoryRouter([{id:'workspace',path:'/',loader:()=>({termId:'term',organizationId:'org',memberId:'actor',termMembershipId:subject,capabilities:['workspace.read']}),element:<Overview api={{read}}/>}])}/>);return read
+ render(<RouterProvider router={createMemoryRouter([{id:'workspace',path:'/',loader:()=>({termId:'term',organizationId:'org',memberId:'actor',termMembershipId:subject,capabilities:['workspace.read']}),element:<Overview api={{read,layouts}}/>}])}/>);return read
 }
+it('published role defaults apply without setup while existing device arrangements and required work retain precedence',async()=>{
+ const layouts:AccountLayoutApi={read:async()=>({source:'role',layout:{version:1,widgets:[{id:'resources',size:'wide'}]},ambiguous:false,repaired:false,views:[]}),run:vi.fn()}
+ show([row],'membership',layouts);await screen.findByText('Using the published role layout. No setup needed.')
+ expect(screen.getByRole('link',{name:row.title})).toBeTruthy();expect(screen.getByRole('link',{name:'Find a permitted contact'})).toBeTruthy()
+ expect(screen.getByRole('heading',{name:'Resources & Start Here'})).toBeTruthy()
+ cleanup();localStorage.setItem(key,JSON.stringify({version:1,widgets:[{id:'calendar',size:'wide'}]}))
+ show([row],'membership',layouts);await screen.findByRole('link',{name:row.title});await screen.findByText('Your view is saved on this device.')
+ expect(screen.getByRole('heading',{name:'Upcoming dates'})).toBeTruthy();expect(screen.queryByRole('heading',{name:'Resources & Start Here'})).toBeNull()
+ fireEvent.click(screen.getByText('Saved account views'));fireEvent.click(screen.getByRole('button',{name:'Use published default'}));expect(localStorage.getItem(key)).toBeNull();expect(screen.getByRole('heading',{name:'Resources & Start Here'})).toBeTruthy()
+})
 it('P40_U1/U2: no setup required, keyboard control changes only secondary view and persists no work data',async()=>{
  const read=show([row]);await screen.findByRole('link',{name:row.title})
  expect(screen.getByRole('link',{name:'Find a permitted contact'}).getAttribute('href')).toBe('/people')

@@ -1,4 +1,5 @@
 import {ProcessPage,CurrentPhase} from '../features/admin/process/ProcessPage'
+import {LayoutsPage} from '../features/admin/layouts/LayoutsPage'
 import {ConfigurationPage} from '../features/admin/config/ConfigurationPage'
 import {AccessPage} from '../features/admin/access/Access'
 import {OrganizationPage} from '../features/admin/organization/Organization'
@@ -109,6 +110,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
       { index: true, element: gateway.overview?<><CurrentPhase api={gateway.process}/><Overview api={gateway.overview}/></>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
       {path:'admin/process',element:gateway.process?<ProcessPage api={gateway.process}/>:<EmptyState title="Process configuration unavailable" description="Current connection unavailable."/>},
+      {path:'admin/layouts',element:gateway.layouts?<LayoutsPage api={gateway.layouts}/>:<EmptyState title="Layout settings unavailable" description="Current connection unavailable."/>},
       {path:'admin/access',element:gateway.access?<AccessPage api={gateway.access}/>:<EmptyState title="Access inspection unavailable" description="The connection is unavailable."/>},
       {path:'admin/config/:configurationType?',element:gateway.configuration?<ConfigurationPage api={gateway.configuration}/>:<EmptyState title="Configuration unavailable" description="The connection is unavailable."/>},
       {path:'reviews',element:gateway.inbox?<ReviewInbox api={gateway.inbox}/>:<EmptyState title="Reviews unavailable" description="The connection is unavailable."/>},
