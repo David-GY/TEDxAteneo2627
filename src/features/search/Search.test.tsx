@@ -15,3 +15,18 @@ it('no match and connection failure are distinct without claiming a restricted m
  show({read});fireEvent.change(await screen.findByLabelText('Search titles or references'),{target:{value:'private'}});fireEvent.click(screen.getByRole('button',{name:'Search work'}));await screen.findByText('No permitted matches. Try a title or reference in this term.')
  fireEvent.click(screen.getByRole('button',{name:'Search work'}));await screen.findByRole('alert');expect(screen.queryByText('No permitted matches. Try a title or reference in this term.')).toBeNull()
 })
+it('typing triggers bounded typeahead and clearing cancels an outstanding response',async()=>{
+ let finish:(v:unknown)=>void=()=>{}
+ const read=vi.fn().mockImplementation(()=>new Promise(resolve=>{finish=resolve}))
+ show({read});fireEvent.change(await screen.findByLabelText('Search titles or references'),{target:{value:'checklist'}})
+ await vi.waitFor(()=>expect(read).toHaveBeenCalledTimes(1))
+ fireEvent.click(screen.getByRole('button',{name:'Clear search'}));finish({items:[],total:17,nextCursor:null})
+ await new Promise(resolve=>setTimeout(resolve,0));expect(screen.queryByRole('region',{name:'Search results'})).toBeNull()
+})
+it('a late old query cannot replace the newer typeahead result',async()=>{
+ let finish:(v:unknown)=>void=()=>{}
+ const read=vi.fn().mockImplementationOnce(()=>new Promise(resolve=>{finish=resolve})).mockResolvedValue({items:[],total:0,nextCursor:null})
+ show({read});const input=await screen.findByLabelText('Search titles or references');fireEvent.change(input,{target:{value:'old query'}});await vi.waitFor(()=>expect(read).toHaveBeenCalledTimes(1))
+ fireEvent.change(input,{target:{value:'new query'}});await screen.findByText('No permitted matches. Try a title or reference in this term.')
+ finish({items:[],total:99,nextCursor:null});await new Promise(resolve=>setTimeout(resolve,0));expect(screen.queryByText('99 permitted matches in this term.')).toBeNull()
+})
