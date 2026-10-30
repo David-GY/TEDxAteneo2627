@@ -8097,6 +8097,15 @@ export type Database = {
         }
         Returns: Json | null
       }
+      search_workspace: {
+        Args: {
+          p_term_id: string
+          p_query: string
+          p_filters?: Json | null
+          p_cursor?: Json | null
+        }
+        Returns: Json | null
+      }
       set_notification_preference: {
         Args: {
           p_term_id: string

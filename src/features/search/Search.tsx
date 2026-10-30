@@ -1,0 +1,18 @@
+import {useEffect,useRef,useState} from 'react'
+import {Link,useRouteLoaderData} from 'react-router'
+import {PageHeading} from '../../components/Page'
+import {isGuest,type WorkspaceContext} from '../auth/gateway'
+import type {SearchApi,SearchResult} from './api'
+import '../overview/overview.css'
+export function Search({api}:{api:SearchApi}){const c=useRouteLoaderData('workspace')as WorkspaceContext;return isGuest(c)?<p>Use your explicitly shared work links. Global search is unavailable for guests.</p>:<SearchBody key={c.termId+c.termMembershipId} api={api} term={c.termId}/>}
+function SearchBody({api,term}:{api:SearchApi;term:string}){
+ const[q,setQ]=useState(''),[kind,setKind]=useState('all'),[result,setResult]=useState<SearchResult|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[copied,setCopied]=useState(''),generation=useRef(0)
+ function clearResults(){generation.current++;setResult(null);setError('');setCopied('');setBusy(false)}
+ async function search(cursor:SearchResult['nextCursor']=null){const current=++generation.current;setResult(null);setError('');setCopied('');setBusy(true);try{const r=await api.read(term,q.trim(),kind,cursor);if(current===generation.current)setResult(r)}catch(e){if(current===generation.current)setError((e as {denied?:boolean})?.denied?'Current search access could not be confirmed. Recheck your workspace access.':'Search connection unavailable. Your query and category are kept; try again.')}finally{if(current===generation.current)setBusy(false)}}
+ useEffect(()=>{const hide=()=>{generation.current++;setResult(null);setCopied('');setBusy(false)};window.addEventListener('focus',hide);return()=>{generation.current++;window.removeEventListener('focus',hide)}},[])
+ return <><PageHeading title="Find work" description="Search permitted task and deliverable titles or exact references in the current term."/><p>Requests, guides, contacts, announcements and old committee aliases are not included yet. Private payloads, profiles and file contents are never searched.</p>
+ <form onSubmit={e=>{e.preventDefault();void search()}}><label>Search titles or references<input className="overview-example" value={q} minLength={2} maxLength={120} onChange={e=>{clearResults();setQ(e.target.value)}}/></label><label>Work category<select className="overview-example" value={kind} onChange={e=>{clearResults();setKind(e.target.value)}}><option value="all">Tasks and deliverables</option><option value="task">Tasks</option><option value="deliverable">Deliverables</option></select></label><button className="button" disabled={busy||q.trim().length<2}>Search work</button><button type="button" className="button button--secondary" onClick={()=>{clearResults();setQ('')}}>Clear search</button></form>
+ {busy?<p role="status">Checking currently permitted matches…</p>:null}{error?<p role="alert">{error}</p>:null}
+ {result?<section aria-label="Search results"><p role="status">{result.total?`${result.total} permitted matches in this term.`:'No permitted matches. Try a title or reference in this term.'}</p><ul>{result.items.map(r=><li key={r.id}><h2><Link to={r.href}>{r.title}</Link></h2><p>{r.kind==='task'?'Task':'Deliverable'} · {r.reference??'Reference not issued'} · {r.termLabel}</p><button className="button button--secondary" onClick={()=>{void Promise.resolve().then(()=>navigator.clipboard.writeText(new URL(r.href,location.origin).href)).then(()=>setCopied('Link copied.'),()=>setCopied('Copy unavailable. Open the title link.'))}}>Copy link for {r.title}</button></li>)}</ul>{result.nextCursor?<button className="button button--secondary" onClick={()=>void search(result.nextCursor)}>Next results</button>:null}</section>:null}{copied?<p role="status">{copied}</p>:null}
+ </>
+}

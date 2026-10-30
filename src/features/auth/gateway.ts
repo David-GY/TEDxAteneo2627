@@ -1,4 +1,5 @@
 import {createProcessApi,type ProcessApi} from '../admin/process/api'
+import {createSearchApi,type SearchApi} from '../search/api'
 import {createLayoutAdminApi,type LayoutAdminApi} from '../admin/layouts/api'
 import {createConfigurationApi,type ConfigurationApi} from '../admin/config/api'
 import {createAccessApi,type AccessApi} from '../admin/access/api'
@@ -47,6 +48,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  search?: SearchApi
   layouts?: LayoutAdminApi
   process?: ProcessApi
   configuration?: ConfigurationApi
@@ -130,6 +132,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     dependencies: createDependenciesApi(clientReady),
     synergies: createSynergiesApi(clientReady),
     layouts: createLayoutAdminApi(clientReady),
+    search: createSearchApi(clientReady),
     overview: createOverviewApi(clientReady),
     files: createFilesApi(clientReady),
     comments: createCommentsApi(clientReady),

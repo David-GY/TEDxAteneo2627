@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "target": "Isolated PGlite/synthetic subjects; no real JWT/provider/concurrent proof",
+  "checks": [
+    "permitted title/ref/UUID same target",
+    "hidden title/body/ID indistinguishable from unknown",
+    "literal SQL-like query",
+    "closed filters/scope-bound cursor",
+    "other-term denial"
+  ],
+  "remaining": [
+    "request refs",
+    "guides and contacts",
+    "old unit aliases",
+    "trigram/typeahead",
+    "provider/human acceptance"
+  ]
+}

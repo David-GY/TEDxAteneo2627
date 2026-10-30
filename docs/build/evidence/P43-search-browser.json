@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "target": "Compiled isolated PGlite/synthetic member, not provider or human acceptance",
+  "checks": [
+    "320px no overflow",
+    "Enter submit/title link focus",
+    "exact title/ref same UUID link",
+    "clear removes results/input",
+    "private query no permitted match"
+  ],
+  "remaining": [
+    "requests/guides/contacts/aliases",
+    "typeahead",
+    "native zoom/assistive/human/provider gates"
+  ]
+}
