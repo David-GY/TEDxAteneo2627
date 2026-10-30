@@ -45,9 +45,9 @@
   },
   "deployment": {
     "deployed": false,
-    "standingPreference": "always deploy reviewed changes",
+    "standingPreference": "Latest owner instruction: hold off on deployment; earlier request retracted",
     "liveSchedules": false,
-    "state": "pending owner-identified target URL",
+    "state": "held off by owner instruction",
     "externalMessages": false
   },
   "next": "CONTINUE P41 saved-rule API/UI, authorized recipient dry-run, durable scheduler/grouped updates; no P42"
