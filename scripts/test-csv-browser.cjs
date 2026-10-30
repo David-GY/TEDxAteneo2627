@@ -1,0 +1,40 @@
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const {chromium}=require(process.env.TEDX_PLAYWRIGHT_PATH||'C:/Users/david/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')
+async function main(){
+ const origin=process.env.P45_PREVIEW_URL||'http://127.0.0.1:5181'
+ const target=new URL(origin);assert.equal(target.hostname,'127.0.0.1');assert.equal(target.protocol,'http:')
+ const browser=await chromium.launch({channel:'msedge',headless:true})
+ try{
+  const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message))
+  await page.goto(origin+'/admin/imports?term=22222222-2222-4222-8222-222222222221')
+  const input=page.getByLabel('CSV input');await input.waitFor()
+  let writes=0;page.on('request',r=>{if(r.method()==='POST')writes++})
+  const bad='source_key,title,assignee,committee,due_on,reference\na,"Café, signs",Ana Example,Example committee,2027-02-29,TASK-027\na,Other,Ana Example,Example committee,2027-04-17,TASK-028'
+  await input.fill(bad);await page.getByRole('button',{name:'Review mapped values'}).click()
+  assert.equal(await page.getByText(/Duplicate source key/).count(),2)
+  await input.fill(bad.replace('2027-02-29','2027-02-28').replace('\na,Other','\nb,Other'))
+  assert.equal(await page.getByRole('heading',{name:'Mapped review'}).count(),0)
+  assert.equal(await page.getByLabel('Source for title',{exact:true}).inputValue(),'title')
+  await page.getByRole('button',{name:'Review mapped values'}).click()
+  await page.getByText('Local validation passed for 2 records. No records were imported.').waitFor()
+  assert.equal(await page.getByText('TASK-027',{exact:true}).count(),1)
+  assert.equal(await page.getByRole('button',{name:'Import unavailable'}).isDisabled(),true)
+  assert.equal(writes,0,'local repair/review must not send raw CSV or mutate records')
+  await page.getByLabel('Source for title',{exact:true}).press('Tab')
+  assert.equal(await page.getByLabel('Source for person responsible').evaluate(e=>e===document.activeElement),true)
+  const dir='docs/build/evidence';fs.mkdirSync(dir,{recursive:true})
+  await page.getByRole('heading',{name:'Mapped review'}).scrollIntoViewIfNeeded()
+  await page.screenshot({path:dir+'/P45-csv-preview.png'})
+  await page.setViewportSize({width:390,height:844})
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true)
+  await page.screenshot({path:dir+'/P45-csv-mobile.png',fullPage:true})
+  await page.reload();await input.waitFor();assert.equal((await input.inputValue()).includes('TASK-027'),false)
+  await page.goto(origin+'/admin/imports?synthetic=associate&term=22222222-2222-4222-8222-222222222221')
+  await page.getByRole('heading',{name:'CSV preparation unavailable'}).waitFor();assert.equal(await page.getByLabel('CSV input').count(),0)
+  assert.deepEqual(errors,[])
+  const evidence={step:'P45',result:'PASS local preparation only',checks:['duplicate/date repair retains mappings and issued reference text','editing invalidates review','commit disabled after valid local review','zero POSTs during local preparation','keyboard Tab reaches next mapping','390px document fits viewport; table scrolls internally','reload clears raw data','ordinary member denied local admin tool','no page errors'],notVerified:['server authorization/lookup/commit','durable deduplication/stale version/idempotency','scoped record export','actual Excel/Sheets open/save/reopen','human newcomer UAT'],origin}
+  fs.writeFileSync(dir+'/P45-csv-browser.json',JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence))
+ }finally{await browser.close()}
+}
+main().catch(e=>{console.error(e);process.exitCode=1})

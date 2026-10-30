@@ -1,0 +1,8 @@
+.csv-preparation label { display: grid; gap: .4rem; margin-block: .8rem; }
+.csv-preparation select, .csv-preparation textarea { min-height: 44px; max-width: 100%; width: 100%; padding: .65rem; font: inherit; color: inherit; border: 1px solid #777; border-radius: .3rem; background: #fff; }
+.csv-preparation textarea { resize: vertical; }
+.csv-mapping { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,230px),1fr)); gap: 1rem; }
+.csv-review { overflow: auto; max-height: 32rem; }
+.csv-review th, .csv-review td { padding: .65rem; text-align: left; vertical-align: top; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 9rem; border-bottom: 1px solid #bbb; }
+.csv-review table { border-collapse: collapse; width: 100%; }
+.csv-preparation :focus-visible { outline: 3px solid #b82320; outline-offset: 3px; }

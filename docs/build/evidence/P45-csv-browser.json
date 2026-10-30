@@ -1,0 +1,23 @@
+{
+  "step": "P45",
+  "result": "PASS local preparation only",
+  "checks": [
+    "duplicate/date repair retains mappings and issued reference text",
+    "editing invalidates review",
+    "commit disabled after valid local review",
+    "zero POSTs during local preparation",
+    "keyboard Tab reaches next mapping",
+    "390px document fits viewport; table scrolls internally",
+    "reload clears raw data",
+    "ordinary member denied local admin tool",
+    "no page errors"
+  ],
+  "notVerified": [
+    "server authorization/lookup/commit",
+    "durable deduplication/stale version/idempotency",
+    "scoped record export",
+    "actual Excel/Sheets open/save/reopen",
+    "human newcomer UAT"
+  ],
+  "origin": "http://127.0.0.1:5181"
+}

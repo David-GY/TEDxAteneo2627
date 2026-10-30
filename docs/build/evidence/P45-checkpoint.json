@@ -1,0 +1,62 @@
+{
+  "step": "P45",
+  "status": "in_progress",
+  "batch": "bounded local CSV preparation only",
+  "baselineCommit": "4223034ae697d161da4993dd956a972e1ad8e450",
+  "baselineTree": "dd3b5a7cafb025b2d507573fc8292d4ffbdfac79",
+  "beforeEdits": {
+    "localFetchedLiveCommitAndTreeEqual": true,
+    "clean": true
+  },
+  "verification": {
+    "fullVitest": {
+      "files": 80,
+      "tests": 272,
+      "result": "PASS"
+    },
+    "finalTargetedVitest": {
+      "files": 2,
+      "tests": 9,
+      "result": "PASS"
+    },
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "build": "PASS with existing bundle warning",
+    "browser": "PASS local synthetic preparation; see P45-csv-browser.json"
+  },
+  "acceptance": {
+    "A1": "PARTIAL local duplicate/atomic validation only; durable imports absent",
+    "A2": "PARTIAL encoder regression only; actual spreadsheets unverified",
+    "A3": "PARTIAL local header/UI/no-send checks only; server isolation absent"
+  },
+  "adoption": {
+    "U1": "PARTIAL local context/repair/ref preservation; durable recovery and human UAT absent",
+    "U2": "UNIMPLEMENTED scoped export/lookup"
+  },
+  "schemaChanged": false,
+  "usage": {
+    "sharedAccount": true,
+    "fiveHourStart": 76,
+    "fiveHourFinalObserved": 85,
+    "weeklyStart": 78,
+    "weeklyFinalObserved": 80,
+    "resetTimestamp": 1793376137,
+    "effectiveBudgetPoints": 14,
+    "windDownAtUsedPercent": 85,
+    "ceilingUsedPercent": 90,
+    "resetCreditUsed": false,
+    "purchases": false,
+    "waitedForReset": false
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5181/admin/imports?term=22222222-2222-4222-8222-222222222221",
+    "serverPid": 2700,
+    "vitePid": 34964,
+    "ownershipVerified": true,
+    "actualIabVisibilityEnabledAndReviewObserved": true,
+    "tab": "2",
+    "markedDeliverable": true
+  },
+  "next": "CONTINUE P45: failing scoped server authorization/validation/stale-version/durable retry and atomic audit/outbox tests, then authorized existing commands",
+  "gates": "All prior institutional/privacy/provider/human/restore gates remain open. P35/P36/P39/P41/P42/P44 incomplete. No deployment, provider change, sends or live schedules. No P46."
+}
