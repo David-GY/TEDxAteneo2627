@@ -18,7 +18,7 @@ export function safeReturnPath(value: string | null): string {
   const path = value.split(/[?#]/, 1)[0]
   const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
   const requestParts=path.split('/'),requestPath=requestParts.length===4&&requestParts[1]==='requests'&&uuid.test(requestParts[2])&&uuid.test(requestParts[3])
-  if(path==='/search'||path==='/people'||path==='/resources'||isTaskPath(path)||isDeliverablePath(path)||requestPath){
+  if(path==='/search'||path==='/reports'||path==='/people'||path==='/resources'||isTaskPath(path)||isDeliverablePath(path)||requestPath){
     const input=new URLSearchParams(value.split('?')[1]?.split('#')[0]),kept=new URLSearchParams()
     const focus=path==='/resources'?'resource':path==='/people'?'contact':null
     if(focus&&input.getAll(focus).length===1&&uuid.test(input.get(focus)!))kept.set(focus,input.get(focus)!)

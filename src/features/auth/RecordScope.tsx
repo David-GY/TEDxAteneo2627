@@ -3,6 +3,7 @@ import {recordAuthority,useRecordAuthority,type RecordAuthority} from './draftSc
 import {Link,useLocation,useRouteLoaderData} from 'react-router'
 import type {AuthGateway,WorkspaceContext} from './gateway'
 import {isGuest} from './gateway'
+import{WorkView}from'../reports/WorkView'
 
 export function CurrentRecordScope({gateway,children}:{gateway:AuthGateway;children:ReactNode}){
  const {pathname}=useLocation(),workspace=useRouteLoaderData('workspace') as WorkspaceContext|undefined
@@ -22,10 +23,10 @@ export function CurrentRecordScope({gateway,children}:{gateway:AuthGateway;child
  if(parts.length===3&&parts[0]==='reviews'&&gateway.inbox)read=async()=>{const r=await gateway.inbox!.read(parts[1],id);return r?recordAuthority(r.state,['review',r.package!==null],[r.canAssign,r.canNote,r.canTriage,r.canComplete,r.actions]):null}
  const task=parts[0]==='tasks',deliverable=parts[0]==='deliverables',guest=workspace&&isGuest(workspace)
  const denied=task||deliverable?<><Link className="button button--secondary" to={guest?'/shared':task?'/tasks':'/deliverables'}>{task?'Back to permitted tasks':guest?'Back to shared with me':'Back to deliverables'}</Link><h1>{task?'Task cannot be shown':'Deliverable unavailable'}</h1></>:<h1>Record unavailable</h1>
- return read?<RecordScope key={pathname} id={id} read={read} denied={denied}>{children}</RecordScope>:children
+ return read?<RecordScope key={pathname} id={id} read={read} denied={denied} onView={(task||deliverable)&&gateway.reports&&!guest?()=>gateway.reports!.recordView(id):undefined}>{children}</RecordScope>:children
 }
 
-export function RecordScope({id,read,children,denied}:{id:string;read:()=>Promise<RecordAuthority|null>;children:ReactNode;denied?:ReactNode}){
+export function RecordScope({id,read,children,denied,onView}:{id:string;read:()=>Promise<RecordAuthority|null>;children:ReactNode;denied?:ReactNode;onView?:()=>Promise<void>}){
  const latest=useRef(read);latest.current=read
  const {observe,epoch}=useRecordAuthority(id)
  const [state,setState]=useState<'checking'|'allowed'|'denied'|'error'>('checking')
@@ -41,5 +42,5 @@ export function RecordScope({id,read,children,denied}:{id:string;read:()=>Promis
   void check();window.addEventListener('focus',refresh);const timer=setInterval(refresh,30000)
   return()=>{live=false;clearInterval(timer);window.removeEventListener('focus',refresh)}
  },[id,observe,reload])
- return <>{state==='checking'?<p role="status">Checking current record access. Your edits stay here while actions are paused.</p>:null}{state==='denied'?<>{denied}<p role="alert">This record is unavailable to your current account. Its private drafts have been cleared.</p></>:null}{state==='error'?<p role="alert">Record access could not be checked. Your inputs are kept; reconnect and check again.</p>:null}{state==='error'||state==='denied'?<button className="button button--secondary" onClick={()=>setReload(n=>n+1)}>Check record access again</button>:null}{state!=='denied'?<div key={epoch} inert={state!=='allowed'} hidden={state==='error'}>{children}</div>:null}</>
+ return <><WorkView allowed={state==='allowed'} record={onView}/>{state==='checking'?<p role="status">Checking current record access. Your edits stay here while actions are paused.</p>:null}{state==='denied'?<>{denied}<p role="alert">This record is unavailable to your current account. Its private drafts have been cleared.</p></>:null}{state==='error'?<p role="alert">Record access could not be checked. Your inputs are kept; reconnect and check again.</p>:null}{state==='error'||state==='denied'?<button className="button button--secondary" onClick={()=>setReload(n=>n+1)}>Check record access again</button>:null}{state!=='denied'?<div key={epoch} inert={state!=='allowed'} hidden={state==='error'}>{children}</div>:null}</>
 }

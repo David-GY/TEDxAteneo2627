@@ -1,0 +1,4 @@
+.report-metrics { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; }
+.report-metrics dt { font-weight: 700; }
+.report-metrics dd { margin: 0 0 12px; }
+.report-title { display: inline-flex; align-items: center; min-height: 44px; padding-block: 8px; max-width: 100%; overflow-wrap: anywhere; }

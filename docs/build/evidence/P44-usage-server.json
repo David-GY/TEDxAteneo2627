@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "target": "Synthetic local SQL; no live telemetry policy or schedule enabled",
+  "checks": [
+    "background probes excluded",
+    "explicit current authorized view deduped",
+    "bots/guests/revoked access excluded",
+    "login event rejected",
+    "only pseudonymous minimal fields",
+    "retention service-only; expired rows removed/current rows retained"
+  ]
+}

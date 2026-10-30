@@ -16,7 +16,7 @@ it('P04_A3: return paths and OAuth origins require exact permitted values', () =
 })
 it('keeps only closed term and record context on search result return links',()=>{
  const term='22222222-2222-4222-8222-222222222222',id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8'
- for(const path of ['/search','/deliverables/'+id,'/tasks/'+id,'/requests/'+term+'/'+id])expect(safeReturnPath(path+'?term='+term+'&sql=anything')).toBe(path+'?term='+term)
+ for(const path of ['/search','/reports','/deliverables/'+id,'/tasks/'+id,'/requests/'+term+'/'+id])expect(safeReturnPath(path+'?term='+term+'&sql=anything')).toBe(path+'?term='+term)
  expect(safeReturnPath('/resources?resource='+id+'&term='+term)).toBe('/resources?resource='+id+'&term='+term)
  expect(safeReturnPath('/people?contact='+id+'&term='+term)).toBe('/people?contact='+id+'&term='+term)
  expect(safeReturnPath('/search?term=https://example.invalid')).toBe('/search')

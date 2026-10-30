@@ -7405,6 +7405,12 @@ export type Database = {
         }
         Returns: Json | null
       }
+      prune_usage_events: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: number | null
+      }
       publicity_options: {
         Args: {
           p_term_id: string
@@ -7720,6 +7726,15 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_reports: {
+        Args: {
+          p_term_id: string
+          p_week: string
+          p_unit_id?: string | null
+          p_filters?: Json | null
+        }
+        Returns: Json | null
+      }
       read_request: {
         Args: {
           p_term_id: string
@@ -7835,6 +7850,12 @@ export type Database = {
           p_request_id: string
         }
         Returns: Json | null
+      }
+      record_work_view: {
+        Args: {
+          p_work_item_id: string
+        }
+        Returns: boolean | null
       }
       redeem_guest_invitation: {
         Args: {

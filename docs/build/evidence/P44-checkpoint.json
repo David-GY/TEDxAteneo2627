@@ -1,0 +1,90 @@
+{
+  "status": "in_progress",
+  "date": "2026-10-30 Asia/Manila",
+  "baseline": {
+    "commit": "e8775c40ce1e9b21a989932653e4338b70870dca",
+    "tree": "028159513a45af9cd24fed934c74e32bab1ad7f4",
+    "clean": true,
+    "localFetchedLiveEqual": true
+  },
+  "target": "Isolated PGlite18.6 and synthetic compiled browser only; no actual privacy/provider/human acceptance",
+  "delivered": [
+    "current supervised/detail-authorized ordinary work snapshots and P29 readiness",
+    "current/original overdue and recorded blocked interval",
+    "assigned/unassigned open tasks; title/ref/term drill-through",
+    "gated exact weekly denominator/80% target; cohort suppression",
+    "explicit visible work opening separated from background probes",
+    "minimal audit derivatives, exact retry/late rollback and service-only bounded retention"
+  ],
+  "catalog": {
+    "localMigrations": 54,
+    "publicTables": 121,
+    "publicColumns": 1198,
+    "publicFunctions": 166,
+    "newPrivateReportingTables": 3,
+    "hostedUnchanged": true
+  },
+  "verification": {
+    "fullSuite": "78files/263tests PASS",
+    "finalTargetedReports": "3files/6tests PASS",
+    "SQLReports": "PASS",
+    "SQLUsageRetentionRetry": "PASS",
+    "compiledBrowser": "PASS,320px/head+member/source Enter/failed refresh/unconfigured zero events",
+    "P29Readiness": "PASS",
+    "P43SearchAndSources": "PASS",
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "build": "PASS; existing883.97kB warning",
+    "generatedPublicTypes": "PASS"
+  },
+  "acceptance": {
+    "P44_A1": "PASS locally; actual population/telemetry/privacy UNVERIFIED",
+    "P44_A2": "PASS locally; actual membership-history/provider race evidence UNVERIFIED",
+    "P44_A3": "PASS locally; actual negotiation/privacy/JWT evidence UNVERIFIED",
+    "P44_U1": "PARTIAL; queue/turnaround absent, actual head/newcomer explanation UNVERIFIED",
+    "P44_U2": "PARTIAL; local empty/unknown/expired/filter/stale/retry tests PASS; actual human/provider/assistive UNVERIFIED"
+  },
+  "remaining": [
+    "queue age/unassigned review cases",
+    "handoff and approval turnaround with exact source/revision/generation authority",
+    "due-horizon/workload refinements and comprehensive typed action coverage",
+    "trusted approved population/privacy/retention policy provisioning and lifecycle/provider concurrency",
+    "institutional/provider/JWT/Storage/human/native zoom/assistive/restore gates"
+  ],
+  "usage": {
+    "startFiveHour": 38,
+    "startWeekly": 72,
+    "reset": 1793376137,
+    "effectivePoints": 40,
+    "windDownUsedPercent": 73,
+    "ceilingUsedPercent": 78,
+    "latestFiveHour": 72,
+    "latestWeekly": 78,
+    "sharedAccount": true,
+    "noResetPurchaseOrWait": true
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5181/reports",
+    "nodePid": 2700,
+    "vitePid": 34964,
+    "retainedTab": "2",
+    "actualVisibilityVerified": true,
+    "livePolicy": "absent; telemetry unconfigured"
+  },
+  "deployment": false,
+  "schedulesActivated": false,
+  "externalMessages": false,
+  "hashes": {
+    "supabase/migrations/20261030005400_reports.sql": "de3e8a70009b9a81b84b4f4f44ade64c513b33276d5c6f5e7a871c148a4493d4",
+    "src/features/reports/Reports.tsx": "e5106bf8d47c719913ad60dd0567c6b2add3bf5b661836052022d09c6b088f9d",
+    "src/features/reports/api.ts": "4cadd08a753f450947daa353de706c87839622fb901021bfe81e43065f2d7a07",
+    "src/features/reports/WorkView.tsx": "85bfaf05b18c36726d7ddea699f2a95613f7fb0e895cd84dca59ab7d152bdb2f",
+    "src/features/auth/RecordScope.tsx": "abf95af3dc8b1acde8ec312cb608f99ff80b3217673f183fb0b347e4052b766e",
+    "src/features/auth/redirects.ts": "e62055e3506b2a690fc298404915762403af3144a186bbac1ff5ec37e9068639",
+    "scripts/test-reports.cjs": "6832280988ea0449528332a04140c5c27ee2060a8725cff9d9f78e9d88ab739e",
+    "scripts/test-usage.cjs": "795bf9f2755fab2e79d110cd9e760135c9287a0bd8f21c7d72988cc0c4e9282c",
+    "scripts/verify-p44-reports.cjs": "716037cad459299b4eb49f48b7489b4c0505fccf786511e2f390d11dbfda19ad",
+    "docs/analytics.md": "53d6b749da3ab47d55e49e0ebdcbe5b117a253c8f85dc0bf8781ed23e692765c",
+    "docs/build/steps/P44.md": "d4be30143e2df45d227227645e79e4cf018fd4e5a95608b807ce1dd7c46a8d2e"
+  }
+}

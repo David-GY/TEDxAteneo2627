@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "target": "Compiled320px synthetic head/member and local SQL; no provider/human acceptance",
+  "checks": [
+    "scoped original/current deadline and blocked source",
+    "definitions/period/unconfigured no fake percent",
+    "320px no overflow",
+    "failed refresh hides stale metrics and keeps filters",
+    "Enter opens permitted task/current blocker",
+    "ordinary member denied",
+    "telemetry remains unconfigured/zero events"
+  ],
+  "remaining": [
+    "queue age",
+    "handoff and approval turnaround",
+    "actual privacy/provider/newcomer/native zoom/assistive acceptance"
+  ]
+}

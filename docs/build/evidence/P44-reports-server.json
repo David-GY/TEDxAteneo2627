@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "target": "Isolated synthetic SQL only; no actual provider/privacy/human acceptance",
+  "checks": [
+    "report and current unit authority",
+    "closed filters/Monday period",
+    "original dates preserved",
+    "P44_A1 71/89 fails72/89 passes",
+    "P44_A2 multi-unit distinct people and Manila boundaries",
+    "no private fields or subgroup usage/raw access"
+  ]
+}
