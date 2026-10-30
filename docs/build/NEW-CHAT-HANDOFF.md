@@ -1,5 +1,7 @@
 # New-chat handoff and revised prompt order
 
+Latest active step: **P42 in_progress**, superseding older no-P42 next-action notes. Source051 announcement publisher/private versioned publication foundation delivered; member scoped reads/counts/material acknowledgments/attachments/guest shares/UI remain unfinished. Resume steps/P42.md via CONTINUE.md, not P43. P41 remains unfinished. Deployment on hold; no live schedule/external messages. Keep existing preview14988/5179/Vite29016/5173 visible after ownership checks. Fetch latest head/tree; never reset to historical SHAs.
+
 Latest owner steering after P41 push: **hold off on deployment**. Earlier always-deploy/target-question notes below are historical and do not authorize deployment. Preserve no-live-schedule/no-external-message instructions.
 
 Latest October30: active step is **P41 in_progress**, superseding the older P40/no-P41 next-action text below. Resume CONTINUE.md with steps/P41.md: source050 private notification proposals and no-send editor/calculator delivered; saved-rule UI/actual recipient preview/durable scheduling remain. No live schedule/external sends. Owner requests deployment after reviewed changes, but existing deployment target/URL is missing and was requested; no guessed deployment. Visible P41 synthetic preview14988/5179; Vite29016/5173/P40 preview13036/5178 retained. Verify ownership/actual visibility again. P35/P36/P39 and all external gates remain incomplete. Fetch latest branch head/tree; never reset to historical SHAs. No P42.

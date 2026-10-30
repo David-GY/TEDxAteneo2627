@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "target": "Isolated PGlite/synthetic authority; not real provider/JWT/concurrency",
+  "checks": [
+    "admin configuration alone cannot publish",
+    "explicit trusted exact-target publisher mapping",
+    "private drafts/current scope",
+    "unsafe markup/attachments/guest fields rejected",
+    "exact retry/stale-base/revoked replay denial"
+  ],
+  "remaining": [
+    "member scoped reader/counts",
+    "material acknowledgments",
+    "explicit guest sharing",
+    "independent attachment visibility",
+    "publisher UI/overview/inbox",
+    "provider and human acceptance"
+  ]
+}

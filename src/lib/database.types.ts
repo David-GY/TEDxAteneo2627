@@ -567,6 +567,55 @@ export type Database = {
           },
         ]
       }
+      announcement_publishers: {
+        Row: {
+          term_id: string
+          membership_id: string
+          target_kind: string
+          target_id: string
+          approved_by: string
+          revoked_at: string | null
+        }
+        Insert: {
+          term_id: string
+          membership_id: string
+          target_kind: string
+          target_id: string
+          approved_by: string
+          revoked_at?: string | null
+        }
+        Update: {
+          term_id?: string
+          membership_id?: string
+          target_kind?: string
+          target_id?: string
+          approved_by?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcement_publishers_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "announcement_publishers_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "announcement_publishers_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       announcements: {
         Row: {
           work_item_id: string
