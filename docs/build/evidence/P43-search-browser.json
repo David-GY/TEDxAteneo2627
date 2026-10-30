@@ -1,15 +1,19 @@
 {
   "result": "PASS",
-  "target": "Compiled isolated PGlite/synthetic member, not provider or human acceptance",
+  "target": "Compiled isolated PGlite/synthetic member+guest, not provider or human acceptance",
   "checks": [
     "320px no overflow",
-    "Automatic typeahead plus Enter submit/title link focus",
+    "automatic typeahead plus Enter/title link focus",
     "exact title/ref same UUID link",
     "clear removes results/input",
-    "private query no permitted match"
+    "private query no permitted match",
+    "published guide typo opens same guide",
+    "request title/ref opens same request",
+    "old alias returns permitted contacts without private work",
+    "term switch clears query; DEL-001 opens correct frozen-term record/context",
+    "guest global search closed at sign-in denial"
   ],
   "remaining": [
-    "requests/guides/contacts/aliases",
     "native zoom/assistive/human/provider gates"
   ]
 }

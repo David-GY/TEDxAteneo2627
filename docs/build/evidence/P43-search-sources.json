@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "target": "Isolated synthetic SQL; no provider/JWT/human proof",
+  "checks": [
+    "request title/ref/UUID through requester-only authority",
+    "raw request bodies excluded",
+    "published guide text/alias only; draft+unit scope isolation",
+    "directory names only; private profile/email excluded",
+    "permanent exact unit alias without scope transfer/collision",
+    "current revocation before lookup"
+  ]
+}

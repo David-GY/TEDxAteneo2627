@@ -5,14 +5,11 @@
     "permitted title/ref/UUID same target",
     "hidden title/body/ID indistinguishable from unknown",
     "literal SQL-like query",
-    "closed filters/scope-bound cursor",
+    "closed filters/query+category+actor-bound cursor",
+    "20+3 nonduplicate pages",
     "other-term denial"
   ],
   "remaining": [
-    "request refs",
-    "guides and contacts",
-    "old unit aliases",
-    "trigram/typeahead",
-    "provider/human acceptance"
+    "provider/JWT/independent-session/human acceptance"
   ]
 }

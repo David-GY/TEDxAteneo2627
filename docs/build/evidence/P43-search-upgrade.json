@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "target": "Isolated local source052 to053 migration only",
+  "checks": [
+    "preexisting extension schema mismatch fails before partial installation",
+    "rollback retains source052 interface/index",
+    "explicit isolated schema repair permits atomic upgrade"
+  ],
+  "provider": "NOT applied; actual extension schema/install/index lock timing requires approved provider rehearsal"
+}

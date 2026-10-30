@@ -62,6 +62,7 @@ export function LoginPage({ gateway }: { gateway: AuthGateway }) {
   return <main className="standalone-page auth-page">
     <p className="muted">TEDx Ateneo de Manila U · Core workspace</p>
     <h1>Sign in to your workspace</h1>
+    {new URLSearchParams(safeReturnPath(new URLSearchParams(location.search).get('returnTo')).split('?')[1]).has('term')?<p>The selected term could not be opened. You can <Link to="/search">return to current workspace search</Link> or retry sign-in for the selected term below.</p>:null}
     <p>Use your approved <strong>student.ateneo.edu</strong> Google account. A school email alone does not grant access.</p>
     {new URLSearchParams(location.search).get('reason') === 'check' ? <p>Your session needs a current access check. Sign in again if it has expired.</p> : null}
     {result.state === 'unavailable' ? <section className="feedback-state"><h2>Setup needed</h2><p>Sign-in is unavailable until Supabase and Google login are configured for this address. No member records are being loaded.</p></section> : <>

@@ -1,10 +1,12 @@
 const fs = require('node:fs/promises')
 const path = require('node:path')
 const { PGlite } = require('@electric-sql/pglite')
+const { pg_trgm } = require('@electric-sql/pglite/contrib/pg_trgm')
+const { unaccent } = require('@electric-sql/pglite/contrib/unaccent')
 
 // No URL/path input: this harness can only create an isolated in-memory database.
 async function createIdentityDatabase({ through } = {}) {
-  const db = new PGlite()
+  const db = new PGlite({extensions:{pg_trgm,unaccent}})
   try {
     // Minimal Supabase platform contracts for SQL-only tests, not an Auth emulator.
     await db.exec(`

@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "target": "Explicit scoped RPC calls in isolated synthetic SQL, not a multi-term browser switcher",
+  "checks": [
+    "duplicate DEL-001 resolves separately by authorized term/label/canonical UUID",
+    "title/ref identity within both terms",
+    "missing/revoked other-term authority denies without affecting current term"
+  ]
+}

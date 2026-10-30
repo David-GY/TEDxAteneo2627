@@ -7750,6 +7750,18 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_search_term_context: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_search_terms: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_synergy: {
         Args: {
           p_agreement_id: string

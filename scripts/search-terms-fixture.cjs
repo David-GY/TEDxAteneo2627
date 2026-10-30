@@ -1,0 +1,15 @@
+const{randomUUID}=require('node:crypto')
+// In-memory synthetic fixture only; no provider URL or official authority input.
+async function setupSearchArchive(p,subject=p.ids.owner){
+ const termId='22222222-2222-4222-8222-222222222222',unit='44444444-4444-4444-8444-444444444444',role=randomUUID(),status=randomUUID(),workId=randomUUID()
+ await p.db.query("update public.terms set state='frozen',frozen_at=statement_timestamp(),starts_on='2026-10-01'where id=$1",[termId])
+ const existing=(await p.db.query('select id from public.term_memberships where term_id=$1 and member_id=$2',[termId,subject])).rows[0]?.id,membershipId=existing??randomUUID()
+ if(existing)await p.db.query("update public.term_memberships set status='active',joined_at=statement_timestamp()-interval'1 day'where id=$1",[membershipId])
+ else await p.db.query("insert into public.term_memberships(id,organization_id,term_id,member_id,status,joined_at,ends_at)values($1,$2,$3,$4,'active',statement_timestamp()-interval'1 day',statement_timestamp()+interval'30 days')",[membershipId,p.ids.org,termId,subject])
+ await p.db.query("insert into public.roles(id,organization_id,term_id,code,name)values($1,$2,$3,'archived_reader','Fictional archived term reader')",[role,p.ids.org,termId]);await p.db.query("insert into public.role_permissions(organization_id,term_id,role_id,capability,allowed_scope)values($1,$2,$3,'workspace.read','term')",[p.ids.org,termId,role])
+ await p.db.query("insert into public.role_assignments(organization_id,term_id,term_membership_id,role_id,scope_type,effective_from,effective_to,granted_by)values($1,$2,$3,$4,'term',statement_timestamp()-interval'1 day',statement_timestamp()+interval'30 days',$3)",[p.ids.org,termId,membershipId,role])
+ await p.db.query("insert into public.status_definitions(id,organization_id,term_id,resource_kind,stable_key,semantic_category,label)values($1,$2,$3,'deliverable','draft','draft','Draft')",[status,p.ids.org,termId])
+ await p.db.transaction(async tx=>{await tx.query("insert into public.work_items(id,organization_id,term_id,kind,title,classification,owner_member_id,owner_display_name,lead_unit_id,status_id)values($1,$2,$3,'deliverable','Fictional earlier-term checklist','restricted',$4,'Fictional member',$5,$6)",[workId,p.ids.org,termId,subject,unit,status]);await tx.query("insert into public.deliverables(work_item_id,organization_id,term_id,phase_key,outcome,body)values($1,$2,$3,'Fictional','Fictional','Not indexed')",[workId,p.ids.org,termId])})
+ return{termId,workId,membershipId}
+}
+module.exports={setupSearchArchive}

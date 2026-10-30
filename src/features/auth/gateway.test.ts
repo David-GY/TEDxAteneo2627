@@ -20,6 +20,18 @@ function fixture() {
   return { auth, rpc, gateway: createAuthGateway(configured, 'http://127.0.0.1:5173') }
 }
 beforeEach(() => { vi.clearAllMocks(); sessionStorage.clear() })
+it('selected-term deep links require a current server context for that exact term',async()=>{
+ const{gateway,rpc}=fixture(),term='22222222-2222-4222-8222-222222222222'
+ rpc.mockResolvedValueOnce({data:context,error:null}).mockResolvedValueOnce({data:{...context,termId:term},error:null})
+ expect((await gateway.readContext(undefined,term)as typeof context).termId).toBe(term)
+ expect(rpc).toHaveBeenCalledWith('read_search_term_context',{p_term_id:term})
+ expect(await gateway.readContext(undefined,term)).toEqual({state:'denied'})
+})
+it('an explicit shared-work link keeps a verified guest in its own term without granting core context',async()=>{
+ const{gateway,rpc}=fixture(),guest={...context,audience:'guest',guestAccessId:'g'}
+ rpc.mockResolvedValue({data:guest,error:null});expect(await gateway.readContext(undefined,'t')).toEqual(guest)
+ expect(await gateway.readContext(undefined,'other')).toEqual({state:'denied'});expect(rpc).not.toHaveBeenCalledWith('read_search_term_context',expect.anything())
+})
 
 it('P04_A1: valid session still requires a trusted context, with no submitted actor/email', async () => {
   const { gateway, rpc } = fixture()

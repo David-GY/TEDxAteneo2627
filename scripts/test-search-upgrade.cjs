@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict'),fs=require('node:fs/promises')
+;(async()=>{const p=await require('./deliverables-db.cjs').createDeliverablesDatabase({through:'20261030005200_global_search.sql'});try{
+ await p.db.exec('create extension pg_trgm with schema public')
+ const migration=await fs.readFile('supabase/migrations/20261030005300_search_sources.sql','utf8')
+ await assert.rejects(()=>p.db.exec(migration),e=>e.code==='55000')
+ await p.db.exec('rollback')
+ assert.equal((await p.db.query("select to_regprocedure('public.read_search_terms(uuid)')is null absent")).rows[0].absent,true)
+ assert.equal((await p.db.query("select to_regclass('public.search_operational_titles')is not null retained")).rows[0].retained,true)
+ await p.db.exec('create schema extensions;alter extension pg_trgm set schema extensions');await p.db.exec(migration)
+ assert.equal((await p.db.query("select to_regprocedure('public.read_search_terms(uuid)')is not null installed")).rows[0].installed,true)
+ await fs.writeFile('docs/build/evidence/P43-search-upgrade.json',JSON.stringify({result:'PASS',target:'Isolated local source052 to053 migration only',checks:['preexisting extension schema mismatch fails before partial installation','rollback retains source052 interface/index','explicit isolated schema repair permits atomic upgrade'],provider:'NOT applied; actual extension schema/install/index lock timing requires approved provider rehearsal'},null,2)+'\n');console.log('P43 atomic upgrade and extension preflight PASS')
+ }finally{await p.db.close()}})().catch(e=>{console.error(e.code,e.message);process.exitCode=1})

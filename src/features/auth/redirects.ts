@@ -16,6 +16,15 @@ export function safeReturnPath(value: string | null): string {
   if(value==='/working-together/timeline')return value
   if (!value?.startsWith('/') || value.startsWith('//') || /[\\%]/.test(value) || hasControl(value)) return '/'
   const path = value.split(/[?#]/, 1)[0]
+  const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+  const requestParts=path.split('/'),requestPath=requestParts.length===4&&requestParts[1]==='requests'&&uuid.test(requestParts[2])&&uuid.test(requestParts[3])
+  if(path==='/search'||path==='/people'||path==='/resources'||isTaskPath(path)||isDeliverablePath(path)||requestPath){
+    const input=new URLSearchParams(value.split('?')[1]?.split('#')[0]),kept=new URLSearchParams()
+    const focus=path==='/resources'?'resource':path==='/people'?'contact':null
+    if(focus&&input.getAll(focus).length===1&&uuid.test(input.get(focus)!))kept.set(focus,input.get(focus)!)
+    if(input.getAll('term').length===1&&uuid.test(input.get('term')!))kept.set('term',input.get('term')!)
+    return path+(kept.size?'?'+kept.toString():'')
+  }
   return /^\/publicity\/[0-9a-f-]{36}\/[0-9a-f-]{36}$/i.test(path) || path === '/reviews' || /^\/finance\/reviews\/[0-9a-f-]{36}\/[0-9a-f-]{36}$/i.test(path) || /^\/finance\/[0-9a-f-]{36}\/[0-9a-f-]{36}$/i.test(path) || /^\/reviews\/[0-9a-f-]{36}\/[0-9a-f-]{36}$/i.test(path) || path === '/guest/redeem' || isDeliverablePath(path) || isTaskPath(path) || isAgreementPath(path) || isHandoffPath(path) || navigationItems.some((item) => item.href === path) ? path : '/'
 }
 

@@ -1,0 +1,94 @@
+{
+  "status": "ready_for_review",
+  "date": "2026-10-30 Asia/Manila",
+  "target": "Synthetic local PGlite18.6 and compiled browser; no provider/human acceptance",
+  "baseline": {
+    "commit": "17b11de445c2455417e5407654cf87352d0a66c6",
+    "tree": "6894b920fa9d05ba63b1716c0ae95ac0635e2fd0",
+    "localFetchedLiveEqual": true,
+    "clean": true
+  },
+  "catalog": {
+    "localMigrations": 53,
+    "tables": 121,
+    "columns": 1198,
+    "publicFunctions": 163,
+    "hostedUnchanged": true
+  },
+  "verification": {
+    "fullSuite": "75 files / 257 tests PASS",
+    "targetedFrontend": "Earlier 7 files / 28 tests PASS; final suite includes term-list refresh regression",
+    "serverScripts": [
+      "test-global-search",
+      "test-search-sources",
+      "test-search-terms",
+      "test-search-upgrade",
+      "test-search-scale"
+    ],
+    "browser": "verify-p43-search PASS; real Tab/Enter opening,320px, typed categories/terms/guide/request, guest global controls closed",
+    "regressions": [
+      "google-auth",
+      "authorization",
+      "directory",
+      "resources"
+    ],
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "build": "PASS, existing873.72kB warning",
+    "generatedCatalog": "PASS"
+  },
+  "acceptance": {
+    "P43_A1": "PASS locally; actual provider/human acceptance UNVERIFIED",
+    "P43_A2": "PASS locally; actual provider/human acceptance UNVERIFIED",
+    "P43_A3": "PASS locally; actual provider/human acceptance UNVERIFIED",
+    "P43_U1": "PASS locally; actual provider/human acceptance UNVERIFIED",
+    "P43_U2": "PASS locally; actual provider/human acceptance UNVERIFIED"
+  },
+  "remaining": [
+    "provider17 extension schema/install/index timing and current/old JWT revocation",
+    "independent-session and hosted-load checks",
+    "institutional authority/content/privacy/retention and restore gates",
+    "actual newcomer time/success/wrong turns/assistance; native zoom/assistive technology",
+    "P42 announcements excluded pending member-reader interface; earlier incomplete steps remain"
+  ],
+  "usage": {
+    "startingFiveHour": 2,
+    "startingWeekly": 67,
+    "reset": 1793376137,
+    "effectivePoints": 40,
+    "windDownUsedPercent": 37,
+    "ceilingUsedPercent": 42,
+    "latestObservedFiveHour": 33,
+    "latestObservedWeekly": 72,
+    "sharedAccount": true,
+    "noResetPurchaseOrWait": true
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5180/search?synthetic=associate",
+    "nodePid": 27412,
+    "vitePid": 34964,
+    "syntheticOnly": true,
+    "actualVisibilityVerified": true,
+    "retainedTab": "1",
+    "observedResult": "Prepare event signage from signbord instructions"
+  },
+  "deployment": false,
+  "schedulesActivated": false,
+  "externalMessages": false,
+  "hashes": {
+    "supabase/migrations/20261030005300_search_sources.sql": "ddb1b961e426c7f41423fb121f97f88722cd34d3224095f6daae7bb7570a21d8",
+    "src/features/search/Search.tsx": "e66b63424d3f72c7e778af0da246606d18209206afb9c40d8666be3c4708fdf1",
+    "src/features/search/api.ts": "a888a5f28c1806c6d6596629e4392eb2cdac3d1e8800359d853c2b0b4d3e25cf",
+    "src/features/auth/gateway.ts": "845425d6108a6e28f7a4904c4a6aa4b0694cb74223b71031a57c22dd78810db4",
+    "src/features/auth/redirects.ts": "c747e5bad4c674a4b79d2c5a319441fdf79651b53b3aea6abb25940f59fd4a3f",
+    "src/app/router.tsx": "32a3027f049163438b4d26d8280c0692c97e0c3145ffb59f095b35393488a124",
+    "src/lib/database.types.ts": "363deeae8d44dad1fbafc059355c3ad8c5df07131901bb6a4fbbe75cb6b16a9a",
+    "scripts/test-search-sources.cjs": "877234805d68b037b9072aa5e7dcb474d508efda15c9ddf0cf9b62c9f6fa2d23",
+    "scripts/test-search-terms.cjs": "90b3e71331d8bf0296b50ffd2a0d0799b9ea09d72b041e4ecdd192782fdcad82",
+    "scripts/test-search-upgrade.cjs": "77808923eeecfa4a635d156e0d397bd0792a30b79bc2aec2b14a3d6b6c51ae66",
+    "scripts/test-search-scale.cjs": "d3b5bf6a38af06341edf4ccf437af88ff90d4b9e7d6ab4661fbbfb0e6dfe461b",
+    "scripts/verify-p43-search.cjs": "ea9e6efe80ebb2692f49b234cf12c99297f478ee6d6d8658911cab306fe96eaa",
+    "docs/global-search.md": "2f4c2142ca08238dd434785fa8ed642544888193511158e765d26c9260c9c34d",
+    "docs/build/steps/P43.md": "ce1170186aad816bdb0af837ce9a3d7412891a7ccfae85b78cdc1168c1f865f2"
+  }
+}

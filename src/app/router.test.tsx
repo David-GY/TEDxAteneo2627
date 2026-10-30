@@ -10,6 +10,23 @@ const member: MemberContext = { state: 'authorized', memberId: 'member', display
 function gateway(result: AuthResult): AuthGateway {
   return { readContext: vi.fn(async () => result), beginGoogle: vi.fn(async () => undefined), exchange: vi.fn(async () => undefined), signOut: vi.fn(async () => undefined), onChange: () => () => undefined }
 }
+it('term-qualified search links pass scope to the trusted workspace loader',async()=>{
+ const auth=gateway(member),term='22222222-2222-4222-8222-222222222222'
+ const router=createMemoryRouter(createAppRoutes(environment,auth),{initialEntries:['/search?term='+term]})
+ render(<RouterProvider router={router}/>);await screen.findByRole('heading',{name:'Search unavailable'})
+ expect(auth.readContext).toHaveBeenCalledWith(expect.any(AbortSignal),term)
+})
+it('sign-in recovery keeps the requested term instead of redirecting through a different authorized term',async()=>{
+ const auth=gateway({state:'denied'}),term='22222222-2222-4222-8222-222222222222'
+ const router=createMemoryRouter(createAppRoutes(environment,auth),{initialEntries:['/login?returnTo='+encodeURIComponent('/search?term='+term)]})
+ render(<RouterProvider router={router}/>);await screen.findByRole('heading',{name:'Sign in to your workspace'})
+ expect(auth.readContext).toHaveBeenCalledWith(expect.any(AbortSignal),term)
+})
+it('a guest can resume an explicitly shared work link with its own term context',async()=>{
+ const guest={...member,audience:'guest'as const,guestAccessId:'g',termId:'22222222-2222-4222-8222-222222222222',capabilities:[]},path='/deliverables/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa8?term=22222222-2222-4222-8222-222222222222'
+ const router=createMemoryRouter(createAppRoutes(environment,gateway(guest)),{initialEntries:['/login?returnTo='+encodeURIComponent(path)]})
+ render(<RouterProvider router={router}/>);await vi.waitFor(()=>expect(router.state.location.pathname+router.state.location.search).toBe(path))
+})
 
 it('P04_A1: unavailable configuration shows setup without protected navigation or a success action', async () => {
   render(<RouterProvider router={createMemoryRouter(createAppRoutes(environment))} />)

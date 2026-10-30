@@ -90,15 +90,16 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
   return [
     { element: <AuthRevalidator gateway={gateway} />, errorElement: <RouteErrorPage />, hydrateFallbackElement: <main className="standalone-page"><LoadingState /></main>, children: [
       { path: '/login', loader: async ({ request }) => {
-        const result = await gateway.readContext(request.signal)
         const returnTo=safeReturnPath(new URL(request.url).searchParams.get('returnTo'))
-        return result.state === 'authorized' ? redirect(isGuest(result)&&!isDeliverablePath(returnTo)&&!isTaskPath(returnTo)?'/shared':returnTo) : result
+        const result = await gateway.readContext(request.signal,new URL(returnTo,request.url).searchParams.get('term')??undefined)
+        const returnPath=new URL(returnTo,request.url).pathname
+        return result.state === 'authorized' ? redirect(isGuest(result)&&!isDeliverablePath(returnPath)&&!isTaskPath(returnPath)?'/shared':returnTo) : result
       }, element: <LoginPage gateway={gateway} /> },
       { path: '/auth/callback', element: <CallbackPage gateway={gateway} /> },
       { path: '/guest/redeem', loader:({request})=>gateway.readContext(request.signal), element: <RedeemPage gateway={gateway} /> },
       ...(import.meta.env.DEV ? [{ path: '/preview', element: <AppShell />, children: [{ index: true, element: <FoundationPage environment={environment} /> }] }] : []),
       { id:'workspace', path: '/', element: <ProtectedShell notifications={gateway.notifications} gateway={gateway}/>, loader: async ({ request }) => {
-        const result = await gateway.readContext(request.signal)
+        const result = await gateway.readContext(request.signal,new URL(request.url).searchParams.get('term')??undefined)
         if (result.state === 'authorized') {
           const path=new URL(request.url).pathname
           if(isGuest(result) && !isDeliverablePath(path) && !isTaskPath(path) && !navigationItems.some(item=>item.href===path && item.audiences.includes('guest')))return redirect('/shared')

@@ -81,7 +81,7 @@ export interface AuthGateway {
   profile?: ProfileGateway
   people?: PeopleGateway
   guests?: GuestGateway
-  readContext: (signal?: AbortSignal) => Promise<AuthResult>
+  readContext: (signal?: AbortSignal,termId?:string) => Promise<AuthResult>
   beginGoogle: (returnTo: string) => Promise<void>
   exchange: (code: string) => Promise<void>
   signOut: () => Promise<void>
@@ -143,7 +143,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     profile: createProfileGateway(clientReady),
     people: createPeopleGateway(clientReady),
     guests: createGuestGateway(clientReady),
-    async readContext(signal) {
+    async readContext(signal,termId) {
       const client = await clientReady
       if (!client || !redirectTo) return { state: 'unavailable' }
       try {
@@ -152,10 +152,17 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
         const { data: identity, error: identityError } = await client.auth.getUser()
         if (identityError || !identity.user) return { state: 'signed_out' }
         signal?.throwIfAborted()
-        const query = client.rpc('resolve_auth_context')
-        const { data, error } = await (signal ? query.abortSignal(signal) : query)
+        const bootstrap = client.rpc('resolve_auth_context')
+        let { data, error } = await (signal ? bootstrap.abortSignal(signal) : bootstrap)
         if (error) return { state: 'error' }
-        return parseContext(data) ?? { state: 'denied' }
+        if(termId){
+          const initial=parseContext(data);if(!initial)return{state:'denied'}
+          if(isGuest(initial))return initial.termId===termId?initial:{state:'denied'}
+          const scoped=client.rpc('read_search_term_context',{p_term_id:termId})
+          ;({data,error}=await(signal?scoped.abortSignal(signal):scoped));if(error)return{state:error.code==='42501'?'denied':'error'}
+        }
+        const context=parseContext(data)
+        return context&&(!termId||context.termId===termId)?context:{state:'denied'}
       } catch { return { state: 'error' } }
     },
     async beginGoogle(returnTo) {
