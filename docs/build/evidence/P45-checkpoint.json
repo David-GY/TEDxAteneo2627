@@ -1,62 +1,80 @@
 {
   "step": "P45",
   "status": "in_progress",
-  "batch": "bounded local CSV preparation only",
-  "baselineCommit": "4223034ae697d161da4993dd956a972e1ad8e450",
-  "baselineTree": "dd3b5a7cafb025b2d507573fc8292d4ffbdfac79",
-  "beforeEdits": {
-    "localFetchedLiveCommitAndTreeEqual": true,
-    "clean": true
+  "date": "2026-11-03 Asia/Manila",
+  "batch": "private scoped ordinary-task import; roster/export remain unavailable",
+  "baseline": {
+    "commit": "8aded00ca2eaa59331efe19fa1bcbc8768078818",
+    "tree": "065bb208dd636f28d902bc42d2dd07a1fc7177e7",
+    "clean": true,
+    "localFetchedLiveCommitAndTreeEqual": true
+  },
+  "migration": "20261102171003_task_imports.sql",
+  "catalog": {
+    "localMigrations": 56,
+    "publicTables": 121,
+    "publicColumns": 1198,
+    "publicFunctions": 170,
+    "newPrivateImportTables": 4,
+    "hostedUnchanged": "43/107/1098/140"
   },
   "verification": {
-    "fullVitest": {
-      "files": 80,
-      "tests": 272,
-      "result": "PASS"
-    },
-    "finalTargetedVitest": {
-      "files": 2,
-      "tests": 9,
-      "result": "PASS"
-    },
+    "fullVitest": "82 files/276 tests PASS",
+    "targetedImports": "4 files/12 tests included in full suite",
+    "server": "test-task-imports.cjs PASS including unrelated-delete guard regression",
+    "browser": "verify-p45-task-imports.cjs PASS actual synthetic commit with dropped response, identical retry, reload and new-session dedup",
+    "preparationBrowser": "test-csv-browser.cjs PASS; no row POSTs during local preparation",
+    "P44Regression": "test-report-operations.cjs PASS under source056",
     "typecheck": "PASS",
     "lint": "PASS",
-    "build": "PASS with existing bundle warning",
-    "browser": "PASS local synthetic preparation; see P45-csv-browser.json"
+    "catalog": "PASS121/1198/170",
+    "build": "PASS with existing bundle warning"
   },
   "acceptance": {
-    "A1": "PARTIAL local duplicate/atomic validation only; durable imports absent",
-    "A2": "PARTIAL encoder regression only; actual spreadsheets unverified",
-    "A3": "PARTIAL local header/UI/no-send checks only; server isolation absent"
+    "A1": "ordinary tasks PASS locally: whole-file atomic errors, late outbox rollback, same/new-session dedup; roster/provider races pending",
+    "A2": "existing encoder tests only; scoped export absent; actual Excel/Sheets unverified",
+    "A3": "ordinary task server/UI scope/schema/private-draft/lookup/receipt/raw-deny PASS; roster/export still pending"
   },
   "adoption": {
-    "U1": "PARTIAL local context/repair/ref preservation; durable recovery and human UAT absent",
-    "U2": "UNIMPLEMENTED scoped export/lookup"
+    "U1": "task repair/mapping/input/lost-response/reload/ref/UUID/original-date/body/checklist preservation PASS synthetically; actual human trials/roster pending",
+    "U2": "task title/ref/term links and hidden lookup denial PASS locally; scoped export absent",
+    "findings": "AD02/AD03/AD05/AD07 remain open globally"
   },
-  "schemaChanged": false,
+  "behavior": [
+    "active admin AND roster AND unit task authority; no privilege from CSV",
+    "private actor-owned immutable input history; no browser storage",
+    "server repeats bounded closed mapping/catalog validation",
+    "named scoped people/refs and exact before/after/hash/version review",
+    "ordinary To do title/untimed-date updates only; body/progress/assignment/original dates untouched",
+    "permanent unit/list/source binding and immutable commit receipt",
+    "all children/ref/bindings/receipt/redacted audit-outbox atomic",
+    "unknown response locks identical payload/key; current-scope retry and reload recovery",
+    "generic work/announcement APIs cannot change controls; unrelated delete semantics retained"
+  ],
   "usage": {
     "sharedAccount": true,
-    "fiveHourStart": 76,
-    "fiveHourFinalObserved": 85,
-    "weeklyStart": 78,
-    "weeklyFinalObserved": 80,
-    "resetTimestamp": 1793376137,
-    "effectiveBudgetPoints": 14,
-    "windDownAtUsedPercent": 85,
-    "ceilingUsedPercent": 90,
-    "resetCreditUsed": false,
-    "purchases": false,
+    "fiveHourStart": 35,
+    "weeklyStart": 87,
+    "fiveHourLastObserved": 67,
+    "weeklyLastObserved": 92,
+    "resetTimestamp": 1793652737,
+    "effectiveBudgetPoints": 40,
+    "windDownUsedPercent": 70,
+    "ceilingUsedPercent": 75,
+    "resetCreditsOrPurchases": false,
     "waitedForReset": false
   },
   "preview": {
-    "url": "http://127.0.0.1:5181/admin/imports?term=22222222-2222-4222-8222-222222222221",
-    "serverPid": 2700,
-    "vitePid": 34964,
-    "ownershipVerified": true,
-    "actualIabVisibilityEnabledAndReviewObserved": true,
-    "tab": "2",
+    "url": "http://127.0.0.1:5182/admin/imports?term=22222222-2222-4222-8222-222222222221",
+    "serverPid": 28504,
+    "vitePid": 5020,
+    "retainedP44Pid": 26328,
+    "actualIabTab": "1",
+    "ownedListenerAndCommandChecked": true,
+    "visibleSyntheticDraftPreview": "saved fictional row and unchecked exact-change confirmation; no actual import through live tab",
     "markedDeliverable": true
   },
-  "next": "CONTINUE P45: failing scoped server authorization/validation/stale-version/durable retry and atomic audit/outbox tests, then authorized existing commands",
-  "gates": "All prior institutional/privacy/provider/human/restore gates remain open. P35/P36/P39/P41/P42/P44 incomplete. No deployment, provider change, sends or live schedules. No P46."
+  "next": "CONTINUE P45: P33-authorized roster candidate import, then scoped safe operational exports; actual spreadsheet/provider/privacy/retention/institutional/human gates remain. No P46.",
+  "gates": "P44 local review only, not complete. Preserve all earlier incomplete steps and actual gates. No deployment/provider change/live schedule/external message.",
+  "custody": "post-push equality/clean receipt in ignored test-results/p45-custody.json"
 }

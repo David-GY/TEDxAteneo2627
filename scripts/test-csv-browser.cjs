@@ -2,13 +2,13 @@ const assert=require('node:assert/strict')
 const fs=require('node:fs')
 const {chromium}=require(process.env.TEDX_PLAYWRIGHT_PATH||'C:/Users/david/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')
 async function main(){
- const origin=process.env.P45_PREVIEW_URL||'http://127.0.0.1:5181'
+ const origin=process.env.P45_PREVIEW_URL||'http://127.0.0.1:5182'
  const target=new URL(origin);assert.equal(target.hostname,'127.0.0.1');assert.equal(target.protocol,'http:')
  const browser=await chromium.launch({channel:'msedge',headless:true})
  try{
   const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message))
   await page.goto(origin+'/admin/imports?term=22222222-2222-4222-8222-222222222221')
-  const input=page.getByLabel('CSV input');await input.waitFor()
+  const input=page.getByLabel('CSV input');await input.waitFor();await page.getByRole('option',{name:'Fictional delivery test unit',exact:true}).waitFor({state:'attached'})
   let writes=0;page.on('request',r=>{if(r.method()==='POST')writes++})
   const bad='source_key,title,assignee,committee,due_on,reference\na,"Café, signs",Ana Example,Example committee,2027-02-29,TASK-027\na,Other,Ana Example,Example committee,2027-04-17,TASK-028'
   await input.fill(bad);await page.getByRole('button',{name:'Review mapped values'}).click()
@@ -19,7 +19,7 @@ async function main(){
   await page.getByRole('button',{name:'Review mapped values'}).click()
   await page.getByText('Local validation passed for 2 records. No records were imported.').waitFor()
   assert.equal(await page.getByText('TASK-027',{exact:true}).count(),1)
-  assert.equal(await page.getByRole('button',{name:'Import unavailable'}).isDisabled(),true)
+  assert.equal(await page.getByRole('button',{name:'Save private task draft'}).isDisabled(),true)
   assert.equal(writes,0,'local repair/review must not send raw CSV or mutate records')
   await page.getByLabel('Source for title',{exact:true}).press('Tab')
   assert.equal(await page.getByLabel('Source for person responsible').evaluate(e=>e===document.activeElement),true)

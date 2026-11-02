@@ -7083,6 +7083,15 @@ export type Database = {
         }
         Returns: Json | null
       }
+      commit_task_import: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
+          p_review_hash: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       create_deliverable: {
         Args: {
           p_term_id: string
@@ -7381,6 +7390,13 @@ export type Database = {
         Args: {
           p_term_id: string
           p_values: Json
+        }
+        Returns: Json | null
+      }
+      preview_task_import: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
         }
         Returns: Json | null
       }
@@ -7796,6 +7812,13 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_task_import: {
+        Args: {
+          p_term_id: string
+          p_draft_id?: string | null
+        }
+        Returns: Json | null
+      }
       read_tasks: {
         Args: {
           p_term_id: string
@@ -8105,6 +8128,18 @@ export type Database = {
           p_values?: Json | null
           p_expected_version?: number | null
           p_request_id?: string | null
+        }
+        Returns: Json | null
+      }
+      save_task_import: {
+        Args: {
+          p_term_id: string
+          p_unit_id: string
+          p_list_name: string
+          p_input: Json
+          p_draft_id: string
+          p_expected_version: number
+          p_request_id: string
         }
         Returns: Json | null
       }

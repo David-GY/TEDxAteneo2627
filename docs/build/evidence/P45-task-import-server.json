@@ -1,0 +1,19 @@
+{
+  "result": "PASS local task-import server only",
+  "checks": [
+    "current admin AND roster AND unit task authority; private drafts",
+    "closed schema and server mapping/role/financial rejection",
+    "expected draft and underlying versions; exact-key payload receipts",
+    "whole-file atomicity including late audit/outbox failure",
+    "same/new session durable source binding without duplicate tasks/refs",
+    "row repair preserves context, UUID and issued ref",
+    "hidden/missing references indistinguishable",
+    "exact before/after; blank date preserves existing value",
+    "current authority checked even for successful retry"
+  ],
+  "remaining": [
+    "roster import",
+    "scoped export",
+    "actual provider races/retention/privacy/institutional/human and spreadsheet acceptance"
+  ]
+}

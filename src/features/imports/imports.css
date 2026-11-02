@@ -6,3 +6,7 @@
 .csv-review th, .csv-review td { padding: .65rem; text-align: left; vertical-align: top; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 9rem; border-bottom: 1px solid #bbb; }
 .csv-review table { border-collapse: collapse; width: 100%; }
 .csv-preparation :focus-visible { outline: 3px solid #b82320; outline-offset: 3px; }
+.csv-editor { border: 0; padding: 0; margin: 0; min-width: 0; }
+.csv-preparation input:not([type='checkbox']) { min-height: 44px; max-width: 100%; padding: .65rem; font: inherit; }
+.csv-preparation .csv-confirm { display: flex; align-items: center; min-height: 44px; }
+.csv-preparation .csv-confirm input { width: 20px; height: 20px; margin: 12px; }

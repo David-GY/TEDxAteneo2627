@@ -1,3 +1,4 @@
+import {createTaskImportsApi,type TaskImportsApi} from '../imports/task-import-api'
 import {createProcessApi,type ProcessApi} from '../admin/process/api'
 import {createSearchApi,type SearchApi} from '../search/api'
 import {createReportsApi,type ReportsApi} from '../reports/api'
@@ -49,6 +50,7 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  taskImports?: TaskImportsApi
   reports?: ReportsApi
   search?: SearchApi
   layouts?: LayoutAdminApi
@@ -136,6 +138,7 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     layouts: createLayoutAdminApi(clientReady),
     search: createSearchApi(clientReady),
     reports: createReportsApi(clientReady),
+    taskImports: createTaskImportsApi(clientReady),
     overview: createOverviewApi(clientReady),
     files: createFilesApi(clientReady),
     comments: createCommentsApi(clientReady),

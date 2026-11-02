@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "target": "Compiled synthetic local SQL; no actual provider/privacy/human acceptance",
+  "checks": [
+    "row date repair retains mapping/input and invalidates old server preview",
+    "whole-file failure creates no tasks",
+    "explicit current preview and confirmation",
+    "actual successful commit with dropped response; identical key/hash retry yields one receipt",
+    "reload resumes private saved input and immutable commit receipt",
+    "new session same list/source keys produces unchanged rows without new UUID/ref",
+    "390px no document overflow; native controls and source links",
+    "ordinary member denied; no page errors"
+  ],
+  "remaining": [
+    "roster import",
+    "scoped exports",
+    "actual provider races/privacy/retention/institutional authority",
+    "human newcomer/native zoom/assistive/spreadsheet UAT"
+  ]
+}

@@ -264,3 +264,8 @@ No schema change. docs/csv-interoperability.md owns bounded transient parsing/ma
 ## P44 — Reports continuation (source055, local review-ready)
 
 Contract docs/analytics.md. read_reports retains existing gates and adds current source-authorized general queue/immutable revision-generation turnaround, participant handoff timing, ordinary due-horizon workload and explicit unknown effort. Private payloads and restricted work remain excluded; no exports/rankings. Existing onboarding command captures only new completions with exact retries and atomic rollback; no arbitrary ping RPC or enabled policy. Current elapsed-week eligibility excludes future joins. Local55/121/1198/166; actual privacy/population/provider/human/history/retention/restore gates remain open.
+
+
+## P45 — Private ordinary-task CSV imports (source056, partial)
+
+Contract docs/csv-interoperability.md. Four private raw-denied import tables; read/save/preview/commit RPCs require current admin+roles+unit task authority and actor-owned drafts. Fixed bounded server mapping/named lookup, exact source versions/hash, permanent source bindings, explicit preview/confirmation and atomic existing task commands/receipt/redacted audit-outbox. No arbitrary queries, role grants, roster mutation or export. Local56/121/1198/170; actual provider/privacy/retention/human/spreadsheet gates open. Preserve P44 review readiness and no live activation.
