@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "target": "Synthetic transactions only; no live capture enabled",
+  "checks": [
+    "actual onboarding completion; skip/re-mark/exact retry excluded",
+    "event/progress/receipt atomic rollback and safe retry",
+    "actual P35 draft/preview/publication distinction and exact retry",
+    "late publication outbox failure rolls back event too",
+    "old retries do not enter a new policy window",
+    "minimal opaque objects; no progress/profile/private payload",
+    "no public arbitrary event RPC"
+  ],
+  "future": "archive_verified remains reserved until a verified archive command exists; never fabricate archive success"
+}

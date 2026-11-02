@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "target": "Synthetic SQL, no approved actual roster/history census",
+  "checks": [
+    "midweek joined_at clips pre-eligibility events",
+    "actual aggregate excludes next Monday and includes Sunday final second",
+    "elapsed-week denominator excludes planned future joins",
+    "unknown future classifier does not disable current coverage",
+    "disabled latest policy returns unconfigured, not a false zero"
+  ],
+  "definition": "currently approved roster states with membership interval overlap through asOf; not a reconstructed historical roster census"
+}

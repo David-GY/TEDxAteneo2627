@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "target": "Isolated synthetic SQL only",
+  "checks": [
+    "current report AND source/unit authority",
+    "requester cannot become reviewer",
+    "unassigned/assigned/approved queue boundaries",
+    "safe metadata titles and canonical term links",
+    "immutable revision/generation pairing and exact 3-day median/3.8-day p90",
+    "selected-week decision samples; current pending snapshot",
+    "restricted cases/handoff sources excluded before counts",
+    "source-role revocation removes current and historical aggregates",
+    "assigned/open/due workload and missing effort",
+    "participant-only handoffs; exact retries do not inflate samples",
+    "no bodies/reasons/files/names in metrics"
+  ]
+}

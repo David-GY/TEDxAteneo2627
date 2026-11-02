@@ -259,3 +259,8 @@ Migration042;102/1060/138. Contract docs/access-administration.md. Trusted ceili
 ## P45 — CSV preparation (partial)
 
 No schema change. docs/csv-interoperability.md owns bounded transient parsing/mapping/local validation and human-viewing encoding. /admin/imports uses current admin.configure AND roles.manage for presentation; no lookup/commit/export gateway. Server authorization, exact diff, expected versions, durable deduplication/idempotency, atomic redacted audit/outbox and scoped exports remain required before enabling operations. Actual spreadsheet and human gates remain open.
+
+
+## P44 — Reports continuation (source055, local review-ready)
+
+Contract docs/analytics.md. read_reports retains existing gates and adds current source-authorized general queue/immutable revision-generation turnaround, participant handoff timing, ordinary due-horizon workload and explicit unknown effort. Private payloads and restricted work remain excluded; no exports/rankings. Existing onboarding command captures only new completions with exact retries and atomic rollback; no arbitrary ping RPC or enabled policy. Current elapsed-week eligibility excludes future joins. Local55/121/1198/166; actual privacy/population/provider/human/history/retention/restore gates remain open.

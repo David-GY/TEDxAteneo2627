@@ -8,11 +8,12 @@
     "failed refresh hides stale metrics and keeps filters",
     "Enter opens permitted task/current blocker",
     "ordinary member denied",
-    "telemetry remains unconfigured/zero events"
+    "telemetry remains unconfigured/zero events",
+    "source-specific head queue and calendar definitions",
+    "Enter opens permitted review and current decision controls",
+    "assigned/due workload and empty turnaround sample states"
   ],
   "remaining": [
-    "queue age",
-    "handoff and approval turnaround",
     "actual privacy/provider/newcomer/native zoom/assistive acceptance"
   ]
 }
