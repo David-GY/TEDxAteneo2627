@@ -1,5 +1,5 @@
 import {NotificationBadge} from '../features/notifications/Notifications'
-import {applyNavigationPresentation,type SitePresentation} from '../features/admin/site/presentation'
+import {applyNavigationPresentation,validSitePresentation,type SitePresentation} from '../features/admin/site/presentation'
 import { useEffect, useRef, useState, type ReactNode, type KeyboardEvent } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigation } from 'react-router'
 import { LoadingState } from '../components/FeedbackState'
@@ -11,26 +11,36 @@ type AppShellProps = {
   content?: ReactNode
   preview?: boolean
   sitePresentation?: SitePresentation
+  siteEditor?: ReactNode
+  siteLogo?: ReactNode
+  siteUnavailable?: boolean
 }
 
 function PageLink({ item, compact = false }: { item: NavigationItem; compact?: boolean }) {
-  const label = compact && item.id === 'deliverables' ? 'Deliverables' : item.label
+  const label = compact && item.id === 'deliverables' && item.label === 'Core deliverables' ? 'Deliverables' : item.label
   return <NavLink className="nav-link" to={item.href} end={item.href === '/'}>{label}</NavLink>
 }
 
-export function AppShell({ context = setupNavigation, identity, content, preview = true,sitePresentation }: AppShellProps) {
+export function AppShell({ context = setupNavigation, identity, content, preview = true,sitePresentation,siteUnavailable = false,siteEditor,siteLogo }: AppShellProps) {
   const location = useLocation()
   const navigation = useNavigation()
   const [moreOpen, setMoreOpen] = useState(false)
   const mainRef = useRef<HTMLElement>(null)
   const moreButtonRef = useRef<HTMLButtonElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const morePanelRef = useRef<HTMLElement>(null)
   const previousPath = useRef(location.pathname)
   const visible = getVisibleNavigation(context)
-  const items = sitePresentation?applyNavigationPresentation(visible,sitePresentation):visible
+  const presentation=validSitePresentation(sitePresentation)?sitePresentation:undefined
+  const items = presentation?applyNavigationPresentation(visible,presentation):visible
+  const blocks= presentation?.blocks.filter(b=>b.kind==='text'||visible.some(item=>item.href===b.href))??[]
+  const showGuidance=['/','/shared','/resources'].includes(location.pathname)
   const mobile = getMobilePrimaryNavigation(context)
   const primary = mobile.map(item=>items.find(x=>x.id===item.id)??item)
-  const more = items.filter((item) => !primary.some((entry) => entry.id === item.id))
+  const mobileLabel = (item: NavigationItem) => item.label.length > 24
+    ? { ...item, label: mobile.find(entry => entry.id === item.id)!.label }
+    : item
+  const more = items.filter(item => item.label.length > 24 || !primary.some(entry => entry.id === item.id))
   const current = items.find((item) => item.href === location.pathname)
 
   useEffect(() => {
@@ -49,19 +59,20 @@ export function AppShell({ context = setupNavigation, identity, content, preview
   }
 
   function handleMoreKey(event: KeyboardEvent<HTMLElement>) {
-    if (event.key === 'Escape') { event.preventDefault(); closeMore() }
+    if (moreOpen && event.key === 'Escape') { event.preventDefault(); closeMore() }
   }
 
   return (
-    <>
+    <div className={presentation?.accent==='#252624'?'site-theme--ink':'site-theme--default'}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       {preview ? <div className="preview-notice">Development shell preview <span>Destinations require sign-in</span></div> : null}
       <div className="workspace-shell">
         <aside className="sidebar" aria-label="Workspace sidebar">
           <div className="workspace-identity">
+            {siteLogo}
             <Link to="/" className="text-identity">TEDx Ateneo de Manila U</Link>
             <p>Core workspace</p>
-            <small>Text identity; approved logo pending</small>
+            <small>{presentation?.logo?'Protected text identity; approved image shown when currently verified':'Text identity; approved logo pending'}</small>
           </div>
           <nav aria-label="Workspace navigation" className="desktop-navigation">
             {(['workspace', 'role', 'account'] as const).map((group) => {
@@ -80,18 +91,28 @@ export function AppShell({ context = setupNavigation, identity, content, preview
             </div>
           </header>
           <main className="workspace-main" id="main-content" tabIndex={-1} ref={mainRef} aria-busy={navigation.state !== 'idle'}>
+            {siteEditor}
             {navigation.state !== 'idle' ? <LoadingState /> : content ?? <Outlet />}
+            {showGuidance&&(blocks.length>0||siteUnavailable)?<details className="site-guidance"><summary>Workspace guidance</summary>
+              {siteUnavailable?<p className="muted">Published site settings could not be applied. Standard navigation and work remain available.</p>:null}
+              {blocks.map(block=><section key={block.id} className={block.kind==='card'?'panel site-guidance-card':'site-guidance-block'}>
+                <h2>{block.kind==='text'?block.title:<Link to={block.href!}>{block.title}</Link>}</h2><p>{block.body}</p>
+              </section>)}
+            </details>:null}
           </main>
         </div>
       </div>
-      <section className="mobile-more" id="mobile-more-pages" aria-label="More workspace pages" hidden={!moreOpen} onKeyDown={handleMoreKey}>
+      <section className="mobile-more" id="mobile-more-pages" ref={morePanelRef} aria-label="More workspace pages" hidden={!moreOpen} onKeyDown={handleMoreKey}
+        onBlur={event => {
+          if (event.relatedTarget && !morePanelRef.current?.contains(event.relatedTarget) && event.relatedTarget !== moreButtonRef.current) setMoreOpen(false)
+        }}>
         <div className="more-heading"><h2>More pages</h2><button className="button button--secondary" type="button" ref={closeButtonRef} onClick={closeMore}>Close pages</button></div>
         <nav aria-label="Additional workspace navigation"><ul>{more.map((item) => <li key={item.id}><PageLink item={item} /></li>)}</ul></nav>
       </section>
       <nav className="mobile-navigation" aria-label="Mobile workspace navigation" onKeyDown={handleMoreKey}>
-        {primary.map((item) => <PageLink key={item.id} item={item} compact />)}
+        {primary.map((item) => <PageLink key={item.id} item={mobileLabel(item)} compact />)}
         <button ref={moreButtonRef} className={`nav-link more-button${moreOpen ? ' active' : ''}`} type="button" aria-expanded={moreOpen} aria-controls="mobile-more-pages" onClick={() => moreOpen ? closeMore() : setMoreOpen(true)}>More</button>
       </nav>
-    </>
+    </div>
   )
 }

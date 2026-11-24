@@ -1,0 +1,21 @@
+.inventory { display: grid; gap: var(--space-4); min-width: 0; }
+.inventory .panel { margin-block: var(--space-4); min-width: 0; }
+.inventory .button { min-height: 44px; min-width: 44px; max-width: 100%; white-space: normal; }
+.inventory .inventory-list { display: grid; gap: var(--space-3); list-style: none; margin: var(--space-4) 0; padding: 0; }
+.inventory-list > li { border-top: 1px solid var(--color-line); padding-top: var(--space-3); min-width: 0; overflow-wrap: anywhere; }
+.inventory-list p { margin-block: 6px; }
+.inventory-sections { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.inventory-editor form, .inventory-editor fieldset { display: grid; gap: 12px; min-width: 0; }
+.inventory-editor form > fieldset { padding: 0; border: 0; margin: 0; }
+.inventory-editor form { max-width: 40rem; justify-items: start; }
+.inventory-editor form > fieldset { justify-self: stretch; }
+.inventory-search { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin-bottom: var(--space-4); }
+.inventory-search .form-field { flex: 1 1 12rem; min-width: 0; }
+.inventory-editor :is(input, select) { min-width: 0; max-width: 100%; }
+.inventory-editor select { min-height: 44px; padding: 8px; color: var(--color-ink); background: var(--color-surface);
+  border: 1px solid var(--color-muted); border-radius: var(--radius-control); }
+.inventory-condition label { display: flex; min-height: 44px; align-items: center; gap: 8px; cursor: pointer; }
+.inventory-balance { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.inventory-balance dd { margin: 0; font-weight: 700; }
+.inventory-result { margin-block: 0; font-weight: 600; }
+@media (max-width: 800px) { .inventory-sections { grid-template-columns: minmax(0, 1fr); } }

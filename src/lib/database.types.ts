@@ -567,6 +567,62 @@ export type Database = {
           },
         ]
       }
+      announcement_acknowledgments: {
+        Row: {
+          term_id: string
+          announcement_id: string
+          material_revision_id: string
+          actor_id: string
+          publication_id: string
+          acknowledged_at: string
+        }
+        Insert: {
+          term_id: string
+          announcement_id: string
+          material_revision_id: string
+          actor_id: string
+          publication_id: string
+          acknowledged_at?: string
+        }
+        Update: {
+          term_id?: string
+          announcement_id?: string
+          material_revision_id?: string
+          actor_id?: string
+          publication_id?: string
+          acknowledged_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcement_acknowledgments_announcement_id_fkey"
+            columns: ["announcement_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_controls"
+            referencedColumns: ["work_item_id"]
+          },
+          {
+            foreignKeyName: "announcement_acknowledgments_material_revision_id_fkey"
+            columns: ["material_revision_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "announcement_acknowledgments_publication_id_fkey"
+            columns: ["publication_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "announcement_acknowledgments_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       announcement_publishers: {
         Row: {
           term_id: string
@@ -940,6 +996,7 @@ export type Database = {
           created_at: string
           updated_at: string
           expires_at: string | null
+          room_booking_evidence: boolean
         }
         Insert: {
           id?: string
@@ -961,6 +1018,7 @@ export type Database = {
           created_at?: string
           updated_at?: string
           expires_at?: string | null
+          room_booking_evidence?: boolean
         }
         Update: {
           id?: string
@@ -982,6 +1040,7 @@ export type Database = {
           created_at?: string
           updated_at?: string
           expires_at?: string | null
+          room_booking_evidence?: boolean
         }
         Relationships: [
           {
@@ -2322,6 +2381,92 @@ export type Database = {
           },
         ]
       }
+      disposition_entries: {
+        Row: {
+          term_id: string
+          sequence: number
+          source_key: string
+          target_hash: string
+          category: string
+          action: string
+          replacement_hash: string | null
+          effective_at: string
+          receipt_hash: string
+          approved_by: string
+          previous_hash: string
+          entry_hash: string
+        }
+        Insert: {
+          term_id: string
+          sequence: number
+          source_key: string
+          target_hash: string
+          category: string
+          action: string
+          replacement_hash?: string | null
+          effective_at: string
+          receipt_hash: string
+          approved_by: string
+          previous_hash: string
+          entry_hash: string
+        }
+        Update: {
+          term_id?: string
+          sequence?: number
+          source_key?: string
+          target_hash?: string
+          category?: string
+          action?: string
+          replacement_hash?: string | null
+          effective_at?: string
+          receipt_hash?: string
+          approved_by?: string
+          previous_hash?: string
+          entry_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disposition_entries_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "disposition_entries_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      disposition_heads: {
+        Row: {
+          term_id: string
+          sequence: number
+          entry_hash: string
+        }
+        Insert: {
+          term_id: string
+          sequence: number
+          entry_hash: string
+        }
+        Update: {
+          term_id?: string
+          sequence?: number
+          entry_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disposition_heads_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: true
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       event_phases: {
         Row: {
           id: string
@@ -3498,6 +3643,94 @@ export type Database = {
           },
         ]
       }
+      legal_hold_events: {
+        Row: {
+          id: string
+          hold_id: string
+          actor_id: string
+          operation: string
+          version: number
+          occurred_at: string
+        }
+        Insert: {
+          id?: string
+          hold_id: string
+          actor_id: string
+          operation: string
+          version: number
+          occurred_at?: string
+        }
+        Update: {
+          id?: string
+          hold_id?: string
+          actor_id?: string
+          operation?: string
+          version?: number
+          occurred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legal_hold_events_hold_id_fkey"
+            columns: ["hold_id"]
+            isOneToOne: false
+            referencedRelation: "legal_holds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      legal_holds: {
+        Row: {
+          id: string
+          term_id: string
+          category: string | null
+          object_id: string | null
+          reason: string
+          owner_id: string
+          review_at: string
+          version: number
+          created_at: string
+          released_at: string | null
+          released_by: string | null
+          release_reason: string | null
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          category?: string | null
+          object_id?: string | null
+          reason: string
+          owner_id: string
+          review_at: string
+          version?: number
+          created_at?: string
+          released_at?: string | null
+          released_by?: string | null
+          release_reason?: string | null
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          category?: string | null
+          object_id?: string | null
+          reason?: string
+          owner_id?: string
+          review_at?: string
+          version?: number
+          created_at?: string
+          released_at?: string | null
+          released_by?: string | null
+          release_reason?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legal_holds_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       members: {
         Row: {
           id: string
@@ -3551,6 +3784,35 @@ export type Database = {
           },
         ]
       }
+      notification_digests: {
+        Row: {
+          id: string
+          recipient_id: string
+          logical_day: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          recipient_id: string
+          logical_day: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          recipient_id?: string
+          logical_day?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_digests_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notification_preferences: {
         Row: {
           membership_id: string
@@ -3576,6 +3838,90 @@ export type Database = {
             columns: ["membership_id"]
             isOneToOne: true
             referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_rule_reservations: {
+        Row: {
+          job_id: string
+          work_item_id: string
+          recipient_id: string
+          rule_version_id: string
+          deadline: string
+          logical_day: string
+          event: string
+          scheduled_at: string
+          optional_at: string
+          channel: string
+          mode: string
+          digest_id: string | null
+          created_at: string
+        }
+        Insert: {
+          job_id: string
+          work_item_id: string
+          recipient_id: string
+          rule_version_id: string
+          deadline: string
+          logical_day: string
+          event: string
+          scheduled_at: string
+          optional_at: string
+          channel: string
+          mode: string
+          digest_id?: string | null
+          created_at?: string
+        }
+        Update: {
+          job_id?: string
+          work_item_id?: string
+          recipient_id?: string
+          rule_version_id?: string
+          deadline?: string
+          logical_day?: string
+          event?: string
+          scheduled_at?: string
+          optional_at?: string
+          channel?: string
+          mode?: string
+          digest_id?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_rule_reservations_digest_id_fkey"
+            columns: ["digest_id"]
+            isOneToOne: false
+            referencedRelation: "notification_digests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notification_rule_reservations_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: true
+            referencedRelation: "outbox_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notification_rule_reservations_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notification_rule_reservations_rule_version_id_fkey"
+            columns: ["rule_version_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notification_rule_reservations_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
             referencedColumns: ["id"]
           },
         ]
@@ -4132,6 +4478,570 @@ export type Database = {
             columns: ["rollback_version_id"]
             isOneToOne: false
             referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_custodians: {
+        Row: {
+          term_id: string
+          membership_id: string
+          approved_by: string
+          approval_reference: string
+          approved_at: string
+          expires_at: string
+          revoked_at: string | null
+        }
+        Insert: {
+          term_id: string
+          membership_id: string
+          approved_by: string
+          approval_reference: string
+          approved_at?: string
+          expires_at: string
+          revoked_at?: string | null
+        }
+        Update: {
+          term_id?: string
+          membership_id?: string
+          approved_by?: string
+          approval_reference?: string
+          approved_at?: string
+          expires_at?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_custodians_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_custodians_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_custodians_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_emergency_access: {
+        Row: {
+          id: string
+          term_id: string
+          requester_id: string
+          work_item_id: string
+          finance_revision_id: string
+          reason: string
+          category_hash: string
+          expires_at: string
+          state: string
+          version: number
+          reviewer_membership_id: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          requester_id: string
+          work_item_id: string
+          finance_revision_id: string
+          reason: string
+          category_hash: string
+          expires_at: string
+          state?: string
+          version?: number
+          reviewer_membership_id?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          requester_id?: string
+          work_item_id?: string
+          finance_revision_id?: string
+          reason?: string
+          category_hash?: string
+          expires_at?: string
+          state?: string
+          version?: number
+          reviewer_membership_id?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_emergency_access_finance_revision_id_fkey"
+            columns: ["finance_revision_id"]
+            isOneToOne: false
+            referencedRelation: "finance_revisions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_emergency_access_reviewer_membership_id_fkey"
+            columns: ["reviewer_membership_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_emergency_access_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_emergency_access_work_item_id_fkey"
+            columns: ["work_item_id"]
+            isOneToOne: false
+            referencedRelation: "work_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_emergency_notices: {
+        Row: {
+          request_id: string
+          term_id: string
+          version: number
+          recipient_id: string
+          state: string
+          created_at: string
+        }
+        Insert: {
+          request_id: string
+          term_id: string
+          version: number
+          recipient_id: string
+          state: string
+          created_at?: string
+        }
+        Update: {
+          request_id?: string
+          term_id?: string
+          version?: number
+          recipient_id?: string
+          state?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_emergency_notices_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "privacy_emergency_access"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_emergency_notices_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_emergency_reviews: {
+        Row: {
+          id: string
+          request_id: string
+          version: number
+          actor_id: string
+          state: string
+          reason: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          version: number
+          actor_id: string
+          state: string
+          reason: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          version?: number
+          actor_id?: string
+          state?: string
+          reason?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_emergency_reviews_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "privacy_emergency_access"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_events: {
+        Row: {
+          id: string
+          term_id: string
+          actor_id: string
+          object_id: string | null
+          category: string
+          operation: string
+          request_key: string | null
+          occurred_at: string
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          actor_id: string
+          object_id?: string | null
+          category: string
+          operation: string
+          request_key?: string | null
+          occurred_at?: string
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          actor_id?: string
+          object_id?: string | null
+          category?: string
+          operation?: string
+          request_key?: string | null
+          occurred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_events_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_notice_acknowledgments: {
+        Row: {
+          term_id: string
+          subject_id: string
+          notice_version_id: string
+          acknowledged_at: string
+        }
+        Insert: {
+          term_id: string
+          subject_id: string
+          notice_version_id: string
+          acknowledged_at?: string
+        }
+        Update: {
+          term_id?: string
+          subject_id?: string
+          notice_version_id?: string
+          acknowledged_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_notice_acknowledgments_notice_version_id_fkey"
+            columns: ["notice_version_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_notice_acknowledgments_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_notice_approvals: {
+        Row: {
+          term_id: string
+          definition_hash: string
+          approved_by: string
+          approval_reference: string
+          approved_at: string
+          expires_at: string
+          revoked_at: string | null
+        }
+        Insert: {
+          term_id: string
+          definition_hash: string
+          approved_by: string
+          approval_reference: string
+          approved_at?: string
+          expires_at: string
+          revoked_at?: string | null
+        }
+        Update: {
+          term_id?: string
+          definition_hash?: string
+          approved_by?: string
+          approval_reference?: string
+          approved_at?: string
+          expires_at?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_notice_approvals_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_notice_approvals_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_public_notice_routes: {
+        Row: {
+          route_key: string
+          term_id: string
+          notice_version_id: string
+          approved_by: string
+          approval_reference: string
+          contact_verified_at: string
+          approved_at: string
+          expires_at: string
+          revoked_at: string | null
+        }
+        Insert: {
+          route_key: string
+          term_id: string
+          notice_version_id: string
+          approved_by: string
+          approval_reference: string
+          contact_verified_at: string
+          approved_at?: string
+          expires_at: string
+          revoked_at?: string | null
+        }
+        Update: {
+          route_key?: string
+          term_id?: string
+          notice_version_id?: string
+          approved_by?: string
+          approval_reference?: string
+          contact_verified_at?: string
+          approved_at?: string
+          expires_at?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_public_notice_routes_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_public_notice_routes_notice_version_id_fkey"
+            columns: ["notice_version_id"]
+            isOneToOne: false
+            referencedRelation: "presentation_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_public_notice_routes_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_request_counters: {
+        Row: {
+          term_id: string
+          subject_id: string
+          last_no: number
+        }
+        Insert: {
+          term_id: string
+          subject_id: string
+          last_no: number
+        }
+        Update: {
+          term_id?: string
+          subject_id?: string
+          last_no?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_request_counters_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_request_reviews: {
+        Row: {
+          id: string
+          request_id: string
+          version: number
+          state: string
+          reply: string
+          reviewer_id: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          request_id: string
+          version: number
+          state: string
+          reply: string
+          reviewer_id: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          request_id?: string
+          version?: number
+          state?: string
+          reply?: string
+          reviewer_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_request_reviews_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "privacy_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_requests: {
+        Row: {
+          id: string
+          term_id: string
+          subject_id: string
+          sequence_no: number
+          reference: string | null
+          kind: string
+          message: string
+          state: string
+          version: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          term_id: string
+          subject_id: string
+          sequence_no: number
+          reference?: never
+          kind: string
+          message: string
+          state?: string
+          version?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          term_id?: string
+          subject_id?: string
+          sequence_no?: number
+          reference?: never
+          kind?: string
+          message?: string
+          state?: string
+          version?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_requests_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_sensitive_categories: {
+        Row: {
+          term_id: string
+          category: string
+          owner_membership_id: string
+          basis_reference: string
+          retention_reference: string
+          retention_definition: Json
+          max_emergency_minutes: number | null
+          approved_by: string
+          approved_at: string
+          expires_at: string
+          revoked_at: string | null
+        }
+        Insert: {
+          term_id: string
+          category: string
+          owner_membership_id: string
+          basis_reference: string
+          retention_reference: string
+          retention_definition: Json
+          max_emergency_minutes?: number | null
+          approved_by: string
+          approved_at?: string
+          expires_at: string
+          revoked_at?: string | null
+        }
+        Update: {
+          term_id?: string
+          category?: string
+          owner_membership_id?: string
+          basis_reference?: string
+          retention_reference?: string
+          retention_definition?: Json
+          max_emergency_minutes?: number | null
+          approved_by?: string
+          approved_at?: string
+          expires_at?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_sensitive_categories_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_sensitive_categories_owner_membership_id_fkey"
+            columns: ["owner_membership_id"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_sensitive_categories_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
             referencedColumns: ["id"]
           },
         ]
@@ -4918,6 +5828,102 @@ export type Database = {
           },
         ]
       }
+      request_form_migrations: {
+        Row: {
+          id: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          actor_id: string
+          kind: string
+          source_form_version_id: string
+          target_form_version_id: string
+          workflow_version_id: string
+          reverses_id: string | null
+          expected_work_version: number
+          before_payload: Json
+          before_snapshots: Json
+          before_requested_on: string | null
+          before_title: string
+          transition_txid: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          organization_id: string
+          term_id: string
+          request_id: string
+          actor_id: string
+          kind: string
+          source_form_version_id: string
+          target_form_version_id: string
+          workflow_version_id: string
+          reverses_id?: string | null
+          expected_work_version: number
+          before_payload: Json
+          before_snapshots: Json
+          before_requested_on?: string | null
+          before_title: string
+          transition_txid?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          organization_id?: string
+          term_id?: string
+          request_id?: string
+          actor_id?: string
+          kind?: string
+          source_form_version_id?: string
+          target_form_version_id?: string
+          workflow_version_id?: string
+          reverses_id?: string | null
+          expected_work_version?: number
+          before_payload?: Json
+          before_snapshots?: Json
+          before_requested_on?: string | null
+          before_title?: string
+          transition_txid?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "request_form_migrations_organization_id_term_id_request_id_fkey"
+            columns: ["organization_id","term_id","request_id"]
+            isOneToOne: false
+            referencedRelation: "requests"
+            referencedColumns: ["organization_id","term_id","work_item_id"]
+          },
+          {
+            foreignKeyName: "request_form_migrations_reverses_id_fkey"
+            columns: ["reverses_id"]
+            isOneToOne: true
+            referencedRelation: "request_form_migrations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "request_form_migrations_source_form_version_id_fkey"
+            columns: ["source_form_version_id"]
+            isOneToOne: false
+            referencedRelation: "form_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "request_form_migrations_target_form_version_id_fkey"
+            columns: ["target_form_version_id"]
+            isOneToOne: false
+            referencedRelation: "form_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "request_form_migrations_workflow_version_id_fkey"
+            columns: ["workflow_version_id"]
+            isOneToOne: false
+            referencedRelation: "workflow_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       request_revisions: {
         Row: {
           id: string
@@ -5543,6 +6549,69 @@ export type Database = {
           },
         ]
       }
+      restricted_access_events: {
+        Row: {
+          id: string
+          endpoint: string
+          actor_id: string | null
+          term_id: string | null
+          object_id: string | null
+          authority_assignments: string[]
+          outcome: string
+          correlation_id: string
+          occurred_at: string
+        }
+        Insert: {
+          id?: string
+          endpoint: string
+          actor_id?: string | null
+          term_id?: string | null
+          object_id?: string | null
+          authority_assignments?: string[]
+          outcome: string
+          correlation_id?: string
+          occurred_at?: string
+        }
+        Update: {
+          id?: string
+          endpoint?: string
+          actor_id?: string | null
+          term_id?: string | null
+          object_id?: string | null
+          authority_assignments?: string[]
+          outcome?: string
+          correlation_id?: string
+          occurred_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "restricted_access_events_endpoint_fkey"
+            columns: ["endpoint"]
+            isOneToOne: false
+            referencedRelation: "restricted_read_endpoints"
+            referencedColumns: ["endpoint"]
+          },
+        ]
+      }
+      restricted_read_endpoints: {
+        Row: {
+          endpoint: string
+          argument_types: string
+          registered_at: string
+        }
+        Insert: {
+          endpoint: string
+          argument_types: string
+          registered_at?: string
+        }
+        Update: {
+          endpoint?: string
+          argument_types?: string
+          registered_at?: string
+        }
+        Relationships: [
+        ]
+      }
       restricted_request_payloads: {
         Row: {
           revision_id: string
@@ -5572,6 +6641,51 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "request_revisions"
             referencedColumns: ["organization_id","term_id","request_id","id"]
+          },
+        ]
+      }
+      retention_policy_approvals: {
+        Row: {
+          term_id: string
+          definition_hash: string
+          approved_by: string
+          approval_reference: string
+          approved_at: string
+          expires_at: string
+          revoked_at: string | null
+        }
+        Insert: {
+          term_id: string
+          definition_hash: string
+          approved_by: string
+          approval_reference: string
+          approved_at?: string
+          expires_at: string
+          revoked_at?: string | null
+        }
+        Update: {
+          term_id?: string
+          definition_hash?: string
+          approved_by?: string
+          approval_reference?: string
+          approved_at?: string
+          expires_at?: string
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "retention_policy_approvals_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "term_memberships"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "retention_policy_approvals_term_id_fkey"
+            columns: ["term_id"]
+            isOneToOne: false
+            referencedRelation: "terms"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -6941,6 +8055,56 @@ export type Database = {
         }
         Returns: Json | null
       }
+      accept_turnover: {
+        Args: {
+          p_context_term: string
+          p_transfer_id: string
+          p_run_id: string
+          p_reference: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      accept_turnover_custody: {
+        Args: {
+          p_context_term: string
+          p_custody_id: string
+          p_run_id: string
+          p_reference: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      acknowledge_announcement: {
+        Args: {
+          p_term_id: string
+          p_announcement_id: string
+          p_material_revision_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      acknowledge_privacy_notice: {
+        Args: {
+          p_term_id: string
+          p_notice_version_id: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      act_archived_custody: {
+        Args: {
+          p_context_term: string
+          p_custody_id: string
+          p_expected_version: number
+          p_action: string
+          p_values: Json
+          p_reference: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       activate_finance_review: {
         Args: {
           p_work_item_id: string
@@ -6998,6 +8162,77 @@ export type Database = {
         }
         Returns: Json | null
       }
+      append_evaluation_note: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+          p_expected_version: number
+          p_body: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      append_learning_note: {
+        Args: {
+          p_term_id: string
+          p_checkin_id: string
+          p_expected_version: number
+          p_key: string
+          p_body?: string | null
+          p_next_action?: string | null
+        }
+        Returns: Json | null
+      }
+      apply_request_form_migration: {
+        Args: {
+          p_work_item_id: string
+          p_expected_version: number
+          p_target_form_version_id: string
+          p_values: Json
+          p_review_hash: string
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      approve_mentorship: {
+        Args: {
+          p_term_id: string
+          p_mentee_id: string
+          p_mentor_id: string
+          p_starts_at: string
+          p_ends_at: string
+          p_approval_reference: string
+          p_key: string
+          p_previous_id?: string | null
+          p_expected_version?: number | null
+        }
+        Returns: Json | null
+      }
+      approve_privacy_fulfillment: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
+          p_expected_version: number
+          p_review_hash: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      assign_evaluation_participant: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+          p_expected_version: number
+          p_member_id: string
+          p_kind: string
+          p_starts_at: string
+          p_ends_at: string
+          p_key: string
+          p_authority_id?: string | null
+        }
+        Returns: Json | null
+      }
       assign_task: {
         Args: {
           p_work_item_id: string
@@ -7024,11 +8259,57 @@ export type Database = {
         }
         Returns: Json | null
       }
+      authorize_site_logo_download: {
+        Args: {
+          p_term_id: string
+          p_asset_id: string
+          p_approval_id: string
+        }
+        Returns: Json | null
+      }
       begin_request_revision: {
         Args: {
           p_work_item_id: string
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      calendar_sync_credential: {
+        Args: {
+          p_term_id: string
+          p_subject_id: string
+          p_action: string
+          p_guard?: string | null
+          p_sealed?: string | null
+        }
+        Returns: Json | null
+      }
+      calendar_sync_job: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_event_id?: string | null
+          p_lease?: string | null
+          p_generation?: string | null
+          p_version?: number | null
+          p_outcome?: string | null
+          p_etag?: string | null
+        }
+        Returns: Json | null
+      }
+      calendar_sync_queue: {
+        Args: {
+          p_term_id: string
+          p_event_id: string
+          p_version: number
+        }
+        Returns: Json | null
+      }
+      calendar_sync_status: {
+        Args: {
+          p_term_id: string
+          p_event_id?: string | null
         }
         Returns: Json | null
       }
@@ -7057,6 +8338,16 @@ export type Database = {
         }
         Returns: boolean | null
       }
+      cancel_booking: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+          p_expected_version: number
+          p_reason: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       cancel_request: {
         Args: {
           p_work_item_id: string
@@ -7083,12 +8374,48 @@ export type Database = {
         }
         Returns: Json | null
       }
+      commit_roster_import: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
+          p_review_hash: string
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       commit_task_import: {
         Args: {
           p_draft_id: string
           p_expected_version: number
           p_review_hash: string
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      complete_turnover: {
+        Args: {
+          p_case_id: string
+          p_run_id: string
+          p_expected_version: number
+          p_reference: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      confirm_booking: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+          p_expected_version: number
+          p_room_id: string
+          p_starts_at: string
+          p_ends_at: string
+          p_policy_version: number
+          p_evidence_manifest_id?: string | null
+          p_official_reference?: string | null
+          p_reason?: string | null
+          p_key?: string | null
         }
         Returns: Json | null
       }
@@ -7101,6 +8428,31 @@ export type Database = {
         }
         Returns: Json | null
       }
+      create_evaluation_case: {
+        Args: {
+          p_term_id: string
+          p_round_id: string
+          p_subject_id: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      create_feedback_round: {
+        Args: {
+          p_term_id: string
+          p_unit_id: string
+          p_authority_id: string
+          p_label: string
+          p_purpose: string
+          p_template: Json
+          p_opens_at: string
+          p_closes_at: string
+          p_release_after: string
+          p_appeal_until: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       create_guest_invitation: {
         Args: {
           p_term_id: string
@@ -7109,6 +8461,26 @@ export type Database = {
           p_expires_at?: string | null
           p_replaces_id?: string | null
           p_expected_version?: number | null
+        }
+        Returns: Json | null
+      }
+      create_legal_hold: {
+        Args: {
+          p_term_id: string
+          p_category: string
+          p_object_id: string
+          p_reason: string
+          p_review_at: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      create_privacy_request: {
+        Args: {
+          p_term_id: string
+          p_kind: string
+          p_message: string
+          p_request_id: string
         }
         Returns: Json | null
       }
@@ -7198,6 +8570,75 @@ export type Database = {
         }
         Returns: Json | null
       }
+      drive_copy_job: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_asset_id: string
+          p_destination_id: string
+          p_subject_id: string
+          p_file_id?: string | null
+          p_verified?: boolean | null
+        }
+        Returns: Json | null
+      }
+      drive_oauth_scope: {
+        Args: {
+          p_term_id: string
+          p_work_item_id?: string | null
+        }
+        Returns: string | null
+      }
+      drive_oauth_store: {
+        Args: {
+          p_membership_id: string
+          p_subject_id: string
+          p_action: string
+          p_guard?: string | null
+          p_sealed?: string | null
+        }
+        Returns: Json | null
+      }
+      drive_rendition_stage: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_version?: number | null
+          p_reserve_key?: string | null
+          p_finish_key?: string | null
+        }
+        Returns: Json | null
+      }
+      email_digest_dispatch: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_sender: string
+          p_domain_id: string
+          p_id?: string | null
+          p_lease?: string | null
+          p_outcome?: string | null
+          p_provider_id?: string | null
+          p_delay?: number | null
+        }
+        Returns: Json | null
+      }
+      email_digest_status: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      end_evaluation_assignment: {
+        Args: {
+          p_term_id: string
+          p_assignment_id: string
+          p_expected_version: number
+          p_conflicted: boolean
+          p_key: string
+        }
+        Returns: Json | null
+      }
       enqueue_notification_reminders: {
         Args: {
           p_limit?: number | null
@@ -7217,12 +8658,73 @@ export type Database = {
         }
         Returns: Json | null
       }
+      export_evaluation_record: {
+        Args: {
+          p_term_id: string
+          p_grant_id: string
+        }
+        Returns: Json | null
+      }
+      export_learning_checkin: {
+        Args: {
+          p_term_id: string
+          p_checkin_id: string
+          p_expected_version: number
+        }
+        Returns: Json | null
+      }
+      export_learning_record: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      export_operational_work: {
+        Args: {
+          p_term_id: string
+          p_kind: string
+        }
+        Returns: Json | null
+      }
+      export_privacy_response: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
+        }
+        Returns: Json | null
+      }
       finalize_upload: {
         Args: {
           p_work_item_id: string
           p_asset_ids: string[]
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      freeze_term: {
+        Args: {
+          p_case_id: string
+          p_expected_version: number
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      get_public_privacy_notice: {
+        Args: {
+          p_route?: string | null
+        }
+        Returns: Json | null
+      }
+      grant_evaluation_export: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+          p_expected_version: number
+          p_member_id: string
+          p_expires_at: string
+          p_purpose_reference: string
+          p_key: string
         }
         Returns: Json | null
       }
@@ -7260,6 +8762,17 @@ export type Database = {
           p_capability: string
         }
         Returns: boolean | null
+      }
+      hold_booking: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+          p_expected_version: number
+          p_minutes: number
+          p_reason: string
+          p_key: string
+        }
+        Returns: Json | null
       }
       list_deliverables: {
         Args: {
@@ -7335,6 +8848,21 @@ export type Database = {
         }
         Returns: Json | null
       }
+      offer_room_alternative: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+          p_expected_version: number
+          p_expected_offer_version: number
+          p_policy_version: number
+          p_room_id: string
+          p_starts_at: string
+          p_ends_at: string
+          p_reason: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       owns_active_member: {
         Args: {
           p_member_id: string
@@ -7346,6 +8874,43 @@ export type Database = {
         Args: {
           p_term_id: string
           p_values: Json
+        }
+        Returns: Json | null
+      }
+      prepare_evaluation_release: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+          p_expected_version: number
+          p_subject_id: string
+          p_summary: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      prepare_privacy_fulfillment: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
+          p_expected_version: number
+          p_request_id: string
+          p_correction_field?: string | null
+          p_correction_value?: string | null
+        }
+        Returns: Json | null
+      }
+      prepare_request_form_migration: {
+        Args: {
+          p_work_item_id: string
+          p_expected_version: number
+        }
+        Returns: Json | null
+      }
+      prepare_turnover: {
+        Args: {
+          p_term_id: string
+          p_approval_id: string
+          p_key: string
         }
         Returns: Json | null
       }
@@ -7361,6 +8926,24 @@ export type Database = {
         Args: {
           p_draft_id: string
           p_requester_id?: string | null
+        }
+        Returns: Json | null
+      }
+      preview_form_configuration: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
+          p_requester_id: string
+          p_values: Json
+          p_has_evidence: boolean
+        }
+        Returns: Json | null
+      }
+      preview_notification_recipients: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
+          p_after?: string | null
         }
         Returns: Json | null
       }
@@ -7383,6 +8966,20 @@ export type Database = {
           p_term_id: string
           p_kind: string
           p_values: Json
+        }
+        Returns: Json | null
+      }
+      preview_request_form_migration: {
+        Args: {
+          p_work_item_id: string
+          p_expected_version: number
+        }
+        Returns: Json | null
+      }
+      preview_roster_import: {
+        Args: {
+          p_draft_id: string
+          p_expected_version: number
         }
         Returns: Json | null
       }
@@ -7421,6 +9018,20 @@ export type Database = {
         }
         Returns: Json | null
       }
+      propose_turnover_custody: {
+        Args: {
+          p_case_id: string
+          p_expected_version: number
+          p_recipient: string
+          p_category: string
+          p_work_ids: string[]
+          p_authority: string
+          p_expires_at: string
+          p_reference: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       prune_usage_events: {
         Args: {
           p_term_id: string
@@ -7453,6 +9064,23 @@ export type Database = {
           p_reason: string
           p_request_id: string
           p_requester_id?: string | null
+        }
+        Returns: Json | null
+      }
+      publish_evaluation_release: {
+        Args: {
+          p_term_id: string
+          p_draft_id: string
+          p_expected_version: number
+          p_subject_id: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
+      publish_evaluation_report: {
+        Args: {
+          p_term_id: string
+          p_key: string
         }
         Returns: Json | null
       }
@@ -7491,6 +9119,59 @@ export type Database = {
         Returns: Json | null
       }
       read_access_admin: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_announcement: {
+        Args: {
+          p_term_id: string
+          p_announcement_id: string
+        }
+        Returns: Json | null
+      }
+      read_announcement_publishing_options: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_announcements: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_archived_custody: {
+        Args: {
+          p_context_term: string
+          p_custody_id: string
+        }
+        Returns: Json | null
+      }
+      read_archived_work: {
+        Args: {
+          p_term_id: string
+          p_work_id?: string | null
+        }
+        Returns: Json | null
+      }
+      read_archived_work_page: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_backup_health: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_booking_rooms: {
         Args: {
           p_term_id: string
         }
@@ -7588,6 +9269,75 @@ export type Database = {
           display_name: string
         }[]
       }
+      read_disposition_review: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_drive_copy: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_asset_id: string
+          p_destination_id?: string | null
+        }
+        Returns: Json | null
+      }
+      read_emergency_finance: {
+        Args: {
+          p_term_id: string
+          p_emergency_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_exports: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_help: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_record: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_report: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_setup: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_summary: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+        }
+        Returns: Json | null
+      }
+      read_evaluation_workspace: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       read_files: {
         Args: {
           p_work_item_id: string
@@ -7637,13 +9387,61 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_guest_work: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       read_handoff: {
         Args: {
           p_handoff_id: string
         }
         Returns: Json | null
       }
+      read_inventory_entry: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_inventory_evidence: {
+        Args: {
+          p_term_id: string
+          p_loan_id: string
+        }
+        Returns: Json | null
+      }
+      read_inventory_workspace: {
+        Args: {
+          p_term_id: string
+          p_loan_id?: string | null
+          p_item_page?: number | null
+          p_loan_page?: number | null
+          p_item_query?: string | null
+        }
+        Returns: Json | null
+      }
       read_layout_targets: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_learning_entry: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: boolean | null
+      }
+      read_learning_workspace: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_mentoring_assignments: {
         Args: {
           p_term_id: string
         }
@@ -7655,9 +9453,29 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_my_privacy: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_my_site_presentation: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_notification_failures: {
         Args: {
           p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_notification_groups: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
         }
         Returns: Json | null
       }
@@ -7706,6 +9524,41 @@ export type Database = {
           p_target_kind: string
           p_target_id: string
           p_before?: number | null
+        }
+        Returns: Json | null
+      }
+      read_privacy_emergency: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_privacy_fulfillment: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
+        }
+        Returns: Json | null
+      }
+      read_privacy_inbox: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_privacy_request: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
+        }
+        Returns: Json | null
+      }
+      read_privacy_response: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
         }
         Returns: Json | null
       }
@@ -7781,6 +9634,36 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_retention_review: {
+        Args: {
+          p_term_id: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
+      read_room_booking: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      read_room_booking_workspace: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+          p_starts_at?: string | null
+          p_ends_at?: string | null
+        }
+        Returns: Json | null
+      }
+      read_roster_import: {
+        Args: {
+          p_term_id: string
+          p_draft_id?: string | null
+        }
+        Returns: Json | null
+      }
       read_search_term_context: {
         Args: {
           p_term_id: string
@@ -7788,6 +9671,12 @@ export type Database = {
         Returns: Json | null
       }
       read_search_terms: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
+      read_site_logo_choices: {
         Args: {
           p_term_id: string
         }
@@ -7827,6 +9716,19 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_turnover: {
+        Args: {
+          p_term_id: string
+          p_case_id?: string | null
+        }
+        Returns: Json | null
+      }
+      read_turnover_setup: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       read_work_parent: {
         Args: {
           p_work_item_id: string
@@ -7836,6 +9738,17 @@ export type Database = {
       read_work_schedule: {
         Args: {
           p_work_item_id: string
+        }
+        Returns: Json | null
+      }
+      reassign_inventory_custodian: {
+        Args: {
+          p_term_id: string
+          p_item_id: string
+          p_expected_version: number
+          p_custodian_id: string
+          p_reason: string
+          p_key: string
         }
         Returns: Json | null
       }
@@ -7874,6 +9787,20 @@ export type Database = {
         }
         Returns: Json | null
       }
+      record_inventory_movement: {
+        Args: {
+          p_term_id: string
+          p_loan_id: string
+          p_expected_version: number
+          p_action: string
+          p_quantity: number
+          p_key: string
+          p_condition?: string | null
+          p_note?: string | null
+          p_evidence_manifest_id?: string | null
+        }
+        Returns: Json | null
+      }
       record_work_view: {
         Args: {
           p_work_item_id: string
@@ -7886,9 +9813,32 @@ export type Database = {
         }
         Returns: Json | null
       }
+      register_inventory_item: {
+        Args: {
+          p_term_id: string
+          p_label: string
+          p_location: string
+          p_kind: string
+          p_opening_quantity: number
+          p_custodian_id: string
+          p_condition: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       release_finance_budget: {
         Args: {
           p_authorization_id: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      release_legal_hold: {
+        Args: {
+          p_term_id: string
+          p_hold_id: string
           p_reason: string
           p_expected_version: number
           p_request_id: string
@@ -7918,11 +9868,63 @@ export type Database = {
         }
         Returns: Json | null
       }
+      request_booking: {
+        Args: {
+          p_term_id: string
+          p_request_id: string
+          p_expected_version: number
+          p_room_id: string
+          p_starts_at: string
+          p_ends_at: string
+          p_purpose: string
+          p_attendees: number
+          p_accessible: boolean
+          p_equipment: string[]
+          p_reason: string
+          p_key: string
+        }
+        Returns: Json | null
+      }
       request_form_options: {
         Args: {
           p_term_id: string
           p_type_id: string
           p_work_item_id?: string | null
+        }
+        Returns: Json | null
+      }
+      request_privacy_emergency: {
+        Args: {
+          p_term_id: string
+          p_work_item_id: string
+          p_finance_revision_id: string
+          p_minutes: number
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      reserve_inventory: {
+        Args: {
+          p_term_id: string
+          p_item_id: string
+          p_expected_version: number
+          p_quantity: number
+          p_starts_on: string
+          p_due_on: string
+          p_key: string
+          p_related_work_id?: string | null
+        }
+        Returns: Json | null
+      }
+      reserve_notification_window: {
+        Args: {
+          p_term_id: string
+          p_rule_version_id: string
+          p_from: string
+          p_to: string
+          p_after?: string | null
+          p_limit?: number | null
         }
         Returns: Json | null
       }
@@ -7956,6 +9958,16 @@ export type Database = {
           p_term_id: string
           p_kind: string
           p_reference: string
+        }
+        Returns: Json | null
+      }
+      respond_mentorship: {
+        Args: {
+          p_term_id: string
+          p_mentorship_id: string
+          p_expected_version: number
+          p_accept: boolean
+          p_key: string
         }
         Returns: Json | null
       }
@@ -7993,6 +10005,44 @@ export type Database = {
         }
         Returns: Json | null
       }
+      review_privacy_emergency: {
+        Args: {
+          p_term_id: string
+          p_emergency_id: string
+          p_action: string
+          p_reason: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      review_privacy_request: {
+        Args: {
+          p_term_id: string
+          p_privacy_request_id: string
+          p_state: string
+          p_reply: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      review_request_form_migration: {
+        Args: {
+          p_work_item_id: string
+          p_expected_version: number
+          p_target_form_version_id: string
+          p_values: Json
+        }
+        Returns: Json | null
+      }
+      review_request_form_migration_undo: {
+        Args: {
+          p_work_item_id: string
+          p_expected_version: number
+        }
+        Returns: Json | null
+      }
       revise_comment: {
         Args: {
           p_comment_id: string
@@ -8014,6 +10064,14 @@ export type Database = {
           p_title: string
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      revoke_evaluation_export: {
+        Args: {
+          p_term_id: string
+          p_grant_id: string
+          p_key: string
         }
         Returns: Json | null
       }
@@ -8039,6 +10097,14 @@ export type Database = {
           p_grant_id: string
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      run_archive: {
+        Args: {
+          p_case_id: string
+          p_expected_version: number
+          p_key: string
         }
         Returns: Json | null
       }
@@ -8071,6 +10137,33 @@ export type Database = {
           p_values: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      save_learning_checkin: {
+        Args: {
+          p_term_id: string
+          p_mentorship_id: string
+          p_expected_version: number
+          p_action: string
+          p_key: string
+          p_checkin_id?: string | null
+          p_starts_at?: string | null
+          p_ends_at?: string | null
+          p_title?: string | null
+        }
+        Returns: Json | null
+      }
+      save_learning_goal: {
+        Args: {
+          p_term_id: string
+          p_expected_version: number
+          p_title: string
+          p_category: string
+          p_progress: number
+          p_key: string
+          p_goal_id?: string | null
+          p_target?: string | null
         }
         Returns: Json | null
       }
@@ -8131,6 +10224,19 @@ export type Database = {
         }
         Returns: Json | null
       }
+      save_roster_import: {
+        Args: {
+          p_term_id: string
+          p_list_name: string
+          p_joined_at: string
+          p_ends_at: string
+          p_input: Json
+          p_draft_id: string
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       save_task_import: {
         Args: {
           p_term_id: string
@@ -8165,12 +10271,39 @@ export type Database = {
         }
         Returns: Json | null
       }
+      search_announcements: {
+        Args: {
+          p_term_id: string
+          p_query: string
+          p_page?: number | null
+        }
+        Returns: Json | null
+      }
       search_workspace: {
         Args: {
           p_term_id: string
           p_query: string
           p_filters?: Json | null
           p_cursor?: Json | null
+        }
+        Returns: Json | null
+      }
+      set_email_digest: {
+        Args: {
+          p_term_id: string
+          p_enabled: boolean
+          p_expected_version: number
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
+      set_notification_group_read: {
+        Args: {
+          p_notification_id: string
+          p_read: boolean
+          p_expected_version: number
+          p_request_id: string
+          p_expected_snapshot: string
         }
         Returns: Json | null
       }
@@ -8212,6 +10345,26 @@ export type Database = {
         }
         Returns: Json | null
       }
+      share_learning_goal: {
+        Args: {
+          p_term_id: string
+          p_goal_id: string
+          p_expected_version: number
+          p_key: string
+          p_mentorship_id?: string | null
+        }
+        Returns: Json | null
+      }
+      start_inventory_finance: {
+        Args: {
+          p_term_id: string
+          p_item_id: string
+          p_expected_version: number
+          p_key: string
+          p_incident_id?: string | null
+        }
+        Returns: Json | null
+      }
       submit_deliverable: {
         Args: {
           p_work_item_id: string
@@ -8221,6 +10374,17 @@ export type Database = {
           p_criteria_revision: number
           p_fingerprint: string
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      submit_evaluation: {
+        Args: {
+          p_term_id: string
+          p_case_id: string
+          p_expected_revision: number
+          p_action: string
+          p_key: string
+          p_answers?: Json | null
         }
         Returns: Json | null
       }
@@ -8291,6 +10455,42 @@ export type Database = {
         }
         Returns: Json | null
       }
+      telegram_delivery: {
+        Args: {
+          p_action: string
+          p_id?: string | null
+          p_lease?: string | null
+          p_outcome?: string | null
+          p_delay?: number | null
+        }
+        Returns: Json | null
+      }
+      telegram_link: {
+        Args: {
+          p_term_id: string
+          p_action: string
+          p_request_id: string
+          p_hash?: string | null
+        }
+        Returns: Json | null
+      }
+      telegram_stage: {
+        Args: {
+          p_action: string
+          p_chat_hash: string
+          p_start_hash?: string | null
+          p_confirm_hash?: string | null
+          p_sealed_chat?: string | null
+          p_provider_seconds?: number | null
+        }
+        Returns: boolean | null
+      }
+      telegram_status: {
+        Args: {
+          p_term_id: string
+        }
+        Returns: Json | null
+      }
       transition_deliverable: {
         Args: {
           p_work_item_id: string
@@ -8338,6 +10538,17 @@ export type Database = {
         }
         Returns: Json | null
       }
+      undo_request_form_migration: {
+        Args: {
+          p_work_item_id: string
+          p_expected_version: number
+          p_migration_id: string
+          p_review_hash: string
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json | null
+      }
       update_deliverable: {
         Args: {
           p_work_item_id: string
@@ -8362,6 +10573,16 @@ export type Database = {
           p_data: Json
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      update_turnover: {
+        Args: {
+          p_case_id: string
+          p_expected_version: number
+          p_action: string
+          p_values: Json
+          p_key: string
         }
         Returns: Json | null
       }
@@ -8405,6 +10626,15 @@ export type Database = {
           p_reason: string
           p_expected_version: number
           p_request_id: string
+        }
+        Returns: Json | null
+      }
+      verify_turnover_archive: {
+        Args: {
+          p_case_id: string
+          p_run_id: string
+          p_expected_version: number
+          p_key: string
         }
         Returns: Json | null
       }

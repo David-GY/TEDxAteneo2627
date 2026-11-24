@@ -5,10 +5,13 @@ export const authOrigins = ['http://127.0.0.1:5173', 'http://127.0.0.1:4173'] as
 const hasControl = (value: string) => Array.from(value).some((char) => char.charCodeAt(0) <= 32 || char.charCodeAt(0) === 127)
 export const isDeliverablePath = (path: string) => /^\/deliverables\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(path)
 export const isTaskPath = (path: string) => /^\/tasks\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(path)
+export const isAnnouncementPath=(path:string)=>/^\/announcements(?:\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/i.test(path)
+export const isPrivacyPath=(path:string)=>/^\/privacy(?:\/requests\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/i.test(path)
 export const isHandoffPath=(path:string)=>/^\/working-together\/handoffs(?:\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$/i.test(path)
 export const isAgreementPath = (path: string) => /^\/working-together\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(path)
-export function callbackUrl(origin: string): string | null {
-  return authOrigins.some((allowed) => allowed === origin) ? `${origin}/auth/callback` : null
+export function callbackUrl(origin: string, configuredOrigin?: string): string | null {
+  const allowed = configuredOrigin ? origin === configuredOrigin : authOrigins.some(value => value === origin)
+  return allowed ? `${origin}/auth/callback` : null
 }
 
 export function safeReturnPath(value: string | null): string {
@@ -18,7 +21,8 @@ export function safeReturnPath(value: string | null): string {
   const path = value.split(/[?#]/, 1)[0]
   const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
   const requestParts=path.split('/'),requestPath=requestParts.length===4&&requestParts[1]==='requests'&&uuid.test(requestParts[2])&&uuid.test(requestParts[3])
-  if(path==='/search'||path==='/reports'||path==='/people'||path==='/resources'||isTaskPath(path)||isDeliverablePath(path)||requestPath){
+  const inventoryPath=path==='/inventory'||requestParts.length===3&&requestParts[1]==='inventory'&&uuid.test(requestParts[2])
+  if(path==='/search'||path==='/reports'||path==='/people'||path==='/resources'||path==='/mentoring'||isTaskPath(path)||isDeliverablePath(path)||isAnnouncementPath(path)||isPrivacyPath(path)||requestPath||inventoryPath){
     const input=new URLSearchParams(value.split('?')[1]?.split('#')[0]),kept=new URLSearchParams()
     const focus=path==='/resources'?'resource':path==='/people'?'contact':null
     if(focus&&input.getAll(focus).length===1&&uuid.test(input.get(focus)!))kept.set(focus,input.get(focus)!)

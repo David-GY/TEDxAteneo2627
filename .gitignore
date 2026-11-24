@@ -12,6 +12,8 @@ test-results/
 .supabase/
 supabase/.temp/
 backups/
+*.tedxbackup
+*.tedxbackup.partial
 *.pem
 *.key
 __pycache__/

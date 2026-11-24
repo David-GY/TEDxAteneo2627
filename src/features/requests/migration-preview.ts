@@ -1,0 +1,9 @@
+export type MigrationComparison={requestId:string;version:number;sourceFormVersionId:string;sourceVersion:number;targetFormVersionId:string;targetVersion:number;readOnly:true;changed:boolean;changes:{fromLabel:string|null;toLabel:string|null;action:'added'|'kept'|'manual'|'removed';hasSavedAnswer:boolean}[];issues:{label:string;code:string}[];issuesTruncated:boolean}
+const uuid=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)
+const positive=(v:unknown)=>Number.isSafeInteger(v)&&(v as number)>0
+const label=(v:unknown)=>typeof v==='string'&&v.length>0&&v.length<=200
+export function checkMigrationComparison(data:unknown,id:string,version:number):MigrationComparison{
+ const v=data as MigrationComparison
+ if(!v||typeof v!=='object'||Object.keys(v).some(k=>!['requestId','version','sourceFormVersionId','sourceVersion','targetFormVersionId','targetVersion','readOnly','changed','changes','issues','issuesTruncated'].includes(k))||JSON.stringify(v).length>100000||v.requestId!==id||v.version!==version||!uuid(v.requestId)||!uuid(v.sourceFormVersionId)||!uuid(v.targetFormVersionId)||!positive(v.version)||!positive(v.sourceVersion)||!positive(v.targetVersion)||v.readOnly!==true||typeof v.changed!=='boolean'||v.changed!==(v.sourceFormVersionId!==v.targetFormVersionId)||typeof v.issuesTruncated!=='boolean'||!Array.isArray(v.changes)||v.changes.length>100||!v.changes.every(c=>c&&typeof c==='object'&&(c.fromLabel===null||label(c.fromLabel))&&(c.toLabel===null||label(c.toLabel))&&['added','kept','manual','removed'].includes(c.action)&&typeof c.hasSavedAnswer==='boolean')||!Array.isArray(v.issues)||v.issues.length>100||!v.issues.every(i=>i&&label(i.label)&&['required','type','range','choice','ineligible','hidden','protected','unknown','quota','schema'].includes(i.code)))throw Error('Comparison unavailable. Refresh this draft and try again.')
+ return v
+}

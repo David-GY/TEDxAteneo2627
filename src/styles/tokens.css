@@ -22,3 +22,14 @@
   --control-min-size: 44px;
   --mobile-nav-height: 76px;
 }
+
+/* Closed P39 interface accent; approved identity/logo tokens remain separate. */
+.site-theme--ink {
+  --color-accent: #252624;
+  --color-focus: #252624;
+}
+.site-guidance { margin-block-start: var(--space-5); }
+.site-guidance summary { min-height: var(--control-min-size); padding: var(--space-3); cursor: pointer; }
+.site-guidance-block, .site-guidance-card { margin-block: var(--space-4); overflow-wrap: anywhere; }
+.site-guidance h2 { font-size: 1.125rem; }
+.site-guidance h2 a { display: inline-flex; align-items: center; min-height: var(--control-min-size); }

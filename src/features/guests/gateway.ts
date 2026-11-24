@@ -5,7 +5,9 @@ export type GuestInvitation = {
   revokedAt: string | null; version: number; scopeMode: 'awaiting_record_attachment' | 'explicit_records'; sharedRecordCount?: number
 }
 export type InvitationLink = { id: string; token: string | null; reused: boolean }
+export type GuestWork = {items:{id:string;title:string;kind:'task'|'deliverable'}[];hasMore:boolean}
 export interface GuestGateway {
+  listShared?(termId:string,page:number):Promise<GuestWork>
   list(termId: string): Promise<GuestInvitation[]>
   create(termId: string, email: string, requestId: string, expiresAt?: string, replaces?: GuestInvitation): Promise<InvitationLink>
   revoke(invitation: GuestInvitation, requestId: string): Promise<void>
@@ -19,6 +21,15 @@ export function createGuestGateway(ready: ReturnType<typeof createSupabaseClient
     return value
   }
   return {
+    async listShared(termId,page) {
+      const {data,error}=await (await client()).rpc('read_guest_work',{p_term_id:termId,p_page:page})
+      const list=data as GuestWork|null
+      const id=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i
+      if(error||!list||!Array.isArray(list.items)||list.items.length>20||typeof list.hasMore!=='boolean'
+        ||!list.items.every(item=>item&&id.test(item.id)&&typeof item.title==='string'&&item.title.length>0&&item.title.length<=500
+          &&['task','deliverable'].includes(item.kind)))throw Error('Shared work is unavailable')
+      return list
+    },
     async list(termId) {
       try {
         const {data,error} = await (await client()).rpc('list_guest_invitations',{p_term_id:termId})

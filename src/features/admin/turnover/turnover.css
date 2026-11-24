@@ -1,0 +1,11 @@
+.turnover { display: grid; gap: 1rem; min-width: 0; }
+.turnover-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.turnover-list > li { border: 1px solid var(--border, #c7c5c1); border-radius: .5rem; padding: 1rem; overflow-wrap: anywhere; }
+.turnover-list h2 { font-size: 1.25rem; margin: 0; }
+.turnover-list h2 a { display: flex; align-items: center; min-height: 44px; }
+.turnover .record-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.turnover fieldset { min-width: 0; }
+.turnover summary { min-height: 44px; padding-block: .65rem; cursor: pointer; }
+.turnover-check { display: flex; gap: .75rem; align-items: center; min-height: 44px; padding-block: .4rem; }
+.turnover-check input { flex: none; width: 1.25rem; height: 1.25rem; }
+.turnover section > section { border-top: 1px solid var(--border, #c7c5c1); padding-block: 1rem; }

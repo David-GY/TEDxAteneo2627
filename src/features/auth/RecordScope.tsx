@@ -30,17 +30,18 @@ export function RecordScope({id,read,children,denied,onView}:{id:string;read:()=
  const latest=useRef(read);latest.current=read
  const {observe,epoch}=useRecordAuthority(id)
  const [state,setState]=useState<'checking'|'allowed'|'denied'|'error'>('checking')
+ const [opened,setOpened]=useState(false)
  const [reload,setReload]=useState(0)
  useEffect(()=>{
   let live=true,sequence=0
   async function check(){
    const attempt=++sequence;setState('checking')
-   try{const signature=await latest.current();if(live&&attempt===sequence){observe(signature);setState(signature===null?'denied':'allowed')}}
+   try{const signature=await latest.current();if(live&&attempt===sequence){observe(signature);setOpened(signature!==null);setState(signature===null?'denied':'allowed')}}
    catch{if(live&&attempt===sequence)setState('error')}
   }
   const refresh=()=>{if(document.visibilityState!=='hidden')void check()}
   void check();window.addEventListener('focus',refresh);const timer=setInterval(refresh,30000)
   return()=>{live=false;clearInterval(timer);window.removeEventListener('focus',refresh)}
  },[id,observe,reload])
- return <><WorkView allowed={state==='allowed'} record={onView}/>{state==='checking'?<p role="status">Checking current record access. Your edits stay here while actions are paused.</p>:null}{state==='denied'?<>{denied}<p role="alert">This record is unavailable to your current account. Its private drafts have been cleared.</p></>:null}{state==='error'?<p role="alert">Record access could not be checked. Your inputs are kept; reconnect and check again.</p>:null}{state==='error'||state==='denied'?<button className="button button--secondary" onClick={()=>setReload(n=>n+1)}>Check record access again</button>:null}{state!=='denied'?<div key={epoch} inert={state!=='allowed'} hidden={state==='error'}>{children}</div>:null}</>
+ return <><WorkView allowed={state==='allowed'} record={onView}/>{state==='checking'?<p role="status">Checking current record access. Your edits stay here while actions are paused.</p>:null}{state==='denied'?<>{denied}<p role="alert">This record is unavailable to your current account. Its private drafts have been cleared.</p></>:null}{state==='error'?<p role="alert">Record access could not be checked. Your inputs are kept; reconnect and check again.</p>:null}{state==='error'||state==='denied'?<button className="button button--secondary" onClick={()=>setReload(n=>n+1)}>Check record access again</button>:null}{opened?<div key={epoch} inert={state!=='allowed'} hidden={state==='error'}>{children}</div>:null}</>
 }

@@ -1,15 +1,17 @@
 import type {NavigationItem} from '../../../app/navigation'
 
-const editable=['overview','deliverables','tasks','working','requests','calendar','resources','people']
+export const siteNavigationIds=['overview','deliverables','tasks','working','requests','calendar','resources','people']
+const editable=siteNavigationIds
 const destinations=['/','/deliverables','/tasks','/working-together','/requests','/calendar','/resources','/people']
 export type SiteBlock={id:string;kind:'text'|'link'|'card';title:string;body:string;href?:string}
-export type SitePresentation={schemaVersion:1;labels:Record<string,string>;order:string[];accent:'#b82320'|'#252624';blocks:SiteBlock[]}
+export type SitePresentation={schemaVersion:1|2;labels:Record<string,string>;order:string[];accent:'#b82320'|'#252624';blocks:SiteBlock[];logo?:{assetId:string;approvalId:string}|null}
 const object=(x:unknown):x is Record<string,unknown>=>!!x&&typeof x==='object'&&!Array.isArray(x)&&(Object.getPrototypeOf(x)===Object.prototype||Object.getPrototypeOf(x)===null)
 const closed=(x:Record<string,unknown>,keys:string[])=>Object.keys(x).every(k=>keys.includes(k))
 const text=(x:unknown,max:number)=>typeof x==='string'&&x.trim().length>0&&Array.from(x).length<=max&&Array.from(x).every(ch=>ch.charCodeAt(0)>=32&&ch.charCodeAt(0)!==127&&ch!=='<'&&ch!=='>')
 // Presentation only. The publication adapter must repeat these constraints on the server.
 // No licensed identity, permission, route or executable styling fields exist in this schema.
 export function validSitePresentation(x:unknown):x is SitePresentation{
+ if(object(x)&&x.schemaVersion===2){const l=x.logo,uuid=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v);if(l!==null&&(!object(l)||!closed(l,['assetId','approvalId'])||!uuid(l.assetId)||!uuid(l.approvalId)))return false;const rest:Record<string,unknown>={...x,schemaVersion:1};delete rest.logo;return validSitePresentation(rest)&&new TextEncoder().encode(JSON.stringify(x)).length<=50000}
  if(!object(x)||!closed(x,['schemaVersion','labels','order','accent','blocks'])||x.schemaVersion!==1||!['#b82320','#252624'].includes(String(x.accent))||!object(x.labels)||!Object.entries(x.labels).every(([k,v])=>editable.includes(k)&&text(v,80))||!Array.isArray(x.order)||x.order.length>editable.length||!x.order.every(k=>typeof k==='string'&&editable.includes(k))||new Set(x.order).size!==x.order.length||!Array.isArray(x.blocks)||x.blocks.length>12)return false
  const ids=new Set<string>()
  for(const b of x.blocks){if(!object(b)||!closed(b,['id','kind','title','body','href'])||typeof b.id!=='string'||!/^[a-z][a-z0-9_]{0,59}$/.test(b.id)||ids.has(b.id)||!['text','link','card'].includes(String(b.kind))||!text(b.title,200)||!text(b.body,2000))return false

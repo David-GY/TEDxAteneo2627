@@ -35,6 +35,7 @@ export function mapCommandError(error: unknown): CommandError {
   const value = error && typeof error === 'object' ? error as { code?: unknown; message?: unknown } : {}
   const code = typeof value.code === 'string' ? value.code : ''
   if(code==='55000'&&value.message==='work_reference_backfill_pending')return{kind:'dependency_blocked',message:'Work references are being prepared for this term. Your inputs are kept. Ask the workspace maintainer to finish setup, then try again.',retryable:false}
+  if(code==='55000'&&value.message==='command_room_booking_open')return{kind:'dependency_blocked',message:'Close the room booking before cancelling this request. Ask Logistics to release a hold or an official reservation.',retryable:false}
   let kind: CommandErrorKind = 'unexpected'
   if (value.message === 'command_idempotency_conflict') kind = 'idempotency_conflict'
   else if (value.message === 'command_missing_approver') kind = 'missing_approver'

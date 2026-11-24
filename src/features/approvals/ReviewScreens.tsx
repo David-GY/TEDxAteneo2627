@@ -9,6 +9,8 @@ import {RequestPayload,requestDate} from '../requests/Payload'
 import type {ApprovalsApi} from './api'
 import type {InboxApi,InboxLane,InboxResult,TriageView} from './inbox-api'
 import {useReviewMemory,type ReviewCommand} from './Memory'
+import type {RoomBookingApi} from '../rooms/api'
+import {RoomBookingPanel} from '../rooms/BookingPanel'
 import '../requests/requests.css'
 const identity=(c:WorkspaceContext)=>c.termId+('memberId'in c?c.memberId:c.guestAccessId)
 export function ReviewInbox({api}:{api:InboxApi}){
@@ -24,11 +26,11 @@ export function ReviewInbox({api}:{api:InboxApi}){
  <nav className="auth-actions" aria-label="Inbox pages"><button className="button button--secondary" disabled={page===1} onClick={()=>setParams({view,page:String(page-1)})}>Previous page</button><span>Page {page}</span><button className="button button--secondary" disabled={page*20>=current.result.total} onClick={()=>setParams({view,page:String(page+1)})}>Next page</button></nav></>}
  </>
 }
-export function ReviewPage({api,inbox,files}:{api:ApprovalsApi;inbox:InboxApi;files?:FilesApi}){
+export function ReviewPage({api,inbox,files,roomBookings}:{api:ApprovalsApi;inbox:InboxApi;files?:FilesApi;roomBookings?:RoomBookingApi}){
  const c=useRouteLoaderData('workspace')as WorkspaceContext,{reviewTermId='',reviewId=''}=useParams()
- return <ReviewBody key={identity(c)+reviewTermId+reviewId} term={reviewTermId} id={reviewId} api={api} inbox={inbox} files={files}/>
+ return <ReviewBody key={identity(c)+reviewTermId+reviewId} term={reviewTermId} id={reviewId} api={api} inbox={inbox} files={files} roomBookings={'memberId'in c&&c.termId===reviewTermId?roomBookings:undefined}/>
 }
-function ReviewBody({term,id,api,inbox,files}:{term:string;id:string;api:ApprovalsApi;inbox:InboxApi;files?:FilesApi}){
+function ReviewBody({term,id,api,inbox,files,roomBookings}:{term:string;id:string;api:ApprovalsApi;inbox:InboxApi;files?:FilesApi;roomBookings?:RoomBookingApi}){
  const[r,setRecord]=useState<TriageView|null>(null),[loading,setLoading]=useState(true),[error,setError]=useState(false),[reload,setReload]=useState(0),[localError,setLocalError]=useState(''),[reviewed,setReviewed]=useState(false),[downloading,setDownloading]=useState(false),m=useReviewMemory(term+id,api,inbox)
  const refresh=()=>{setRecord(null);setLoading(true);setReload(n=>n+1);setReviewed(false)}
  useEffect(()=>{let live=true;void inbox.read(term,id).then(value=>{if(live){setRecord(value);setError(false);setLoading(false)}}).catch(()=>{if(live){setRecord(null);setError(true);setLoading(false)}});return()=>{live=false}},[inbox,term,id,reload])
@@ -46,6 +48,7 @@ function ReviewBody({term,id,api,inbox,files}:{term:string;id:string;api:Approva
  async function download(asset:string){if(!files||!r?.package||downloading)return;setDownloading(true);setLocalError('');try{const blob=await files.download(r.package.downloadContext,asset),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=r.package.files.find(f=>f.id===asset)?.name??'review-evidence';a.click();setTimeout(()=>URL.revokeObjectURL(url),0)}catch{setLocalError('Evidence download denied or unavailable. Refresh current authority and retry.')}finally{setDownloading(false)}}
  return <div className="request-detail"><PageHeading title="Request review" description="Act only on the current assigned revision. General service approval is separate from FIN authorization, MCD release and external official decisions."/><p><Link to="/reviews">Department inbox</Link></p><button className="button button--secondary" disabled={m.busy} onClick={refresh}>Refresh review (keep inputs)</button>
  {m.error||localError?<p role="alert">{m.error||localError}</p>:null}{m.pending?<Panel title="Result not yet confirmed"><p>Inputs are locked. Recover the same payload and request key; no decision is assumed.</p><button className="button" disabled={m.busy} onClick={()=>void m.run().then(()=>refresh())}>Retry same review command</button></Panel>:null}
+ {roomBookings?<RoomBookingPanel api={roomBookings} term={term} request={id} files={files} refreshToken={reload}/>:null}
  {loading?<LoadingState title="Checking current review authority"/>:error?<ErrorState title="Review unavailable" description="Check current assignment and connection, then refresh. Safe inputs remain in memory for this account."/>:!r?<EmptyState title="Review cannot be shown" description="Current assignment, term or scoped triage authority is unavailable. Retained links do not grant access."/>:<>
  <Panel title={r.trackingId+' · '+r.typeLabel}><p>{r.state.replaceAll('_',' ')} · {r.serviceLabel} · {r.stageLabel} · Revision {r.revision} · {r.reviewMode} reviewers</p><p>Original requested: {requestDate(r.originalRequestedOn)} · Current requested: {requestDate(r.requestedOn)} · Accepted: {r.acceptedOn?requestDate(r.acceptedOn):'Not agreed'}</p>{r.effectivePaused?<p role="status">Review paused: {(r.effectivePauseReason??'assignment required').replaceAll('_',' ')}</p>:null}<ul>{r.assignments.map(a=><li key={a.id}>{a.name}{a.isMe?' · You':''} · {a.current?'Current authority':'Authority lost'} · Expires {requestDate(a.expiresAt)}</li>)}</ul></Panel>
  {r.package?<Panel title={'Submitted package · '+r.package.title}><RequestPayload form={r.package.form} values={r.package.values} snapshots={r.package.snapshots} centavos={r.package.requestedCentavos}/><p className="record-text">Immutable manifest SHA-256: {r.package.manifestHash}</p><ul>{r.package.files.map(f=><li key={f.id}>{f.name} · {f.size} bytes <button className="button button--secondary" disabled={!files||downloading} onClick={()=>void download(f.id)}>Download evidence · {f.name}</button></li>)}</ul></Panel>:<p>Private submitted content is available only to the requester or current assigned reviewer. Triage authority alone provides no package access.</p>}

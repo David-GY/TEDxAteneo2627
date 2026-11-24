@@ -1,0 +1,5 @@
+.saved-rule-settings { margin-block: var(--space-5); }
+.saved-rule-settings fieldset { min-width: 0; }
+.saved-rule-settings input:not([type='checkbox']),.saved-rule-settings select { width: 100%; max-width: 100%; min-height: var(--control-min-size); }
+.saved-rule-settings input[type='checkbox'] { width: var(--control-min-size); height: var(--control-min-size); }
+.saved-rule-settings summary { min-height: var(--control-min-size); padding-block: var(--space-3); cursor: pointer; }

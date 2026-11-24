@@ -6,3 +6,11 @@
 .configuration-check{display:flex!important;align-items:center;gap:12px;min-height:44px;overflow-wrap:anywhere}
 .configuration-controls select,.configuration-stage select{min-height:44px;width:100%;max-width:100%}
 .configuration-stages .auth-actions{margin:16px 0}
+.form-structure{display:grid;gap:24px;min-width:0}
+.form-structure-section,.form-structure-question{border-top:1px solid var(--color-line);padding-top:20px;min-width:0;overflow-wrap:anywhere}
+.form-structure fieldset{min-width:0;margin:0 0 20px;padding:12px}
+.form-structure input:not([type='checkbox']),.form-structure select{max-width:100%;width:100%;min-height:44px}
+.form-structure-limits{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.form-structure summary{min-height:44px;padding:10px 0;cursor:pointer}
+.repeatable-questions>fieldset{border:0;border-top:1px solid var(--color-line);padding:16px 0 0}
+.repeatable-questions>fieldset>fieldset{border:0;padding:0}

@@ -1,0 +1,3 @@
+export function LogoReviewUse({disabled,apply}:{disabled:boolean;apply:(fields:Record<string,string>)=>void}){
+ return <div><button className="button button--secondary" disabled={disabled} onClick={()=>apply({intendedUse:'core_workspace_logo',channel:'Core workspace (members and invited guests)',identity:'TEDx Ateneo de Manila U'})}>Set workspace logo review use</button><p>For an approved identity image shown to current members and invited guests. This sets the proposed identity, channel and use only. Supply the licensed final PNG/JPEG, credits and rights information for independent MCD review; it does not upload, submit, approve or waive FIN requirements.</p></div>
+}

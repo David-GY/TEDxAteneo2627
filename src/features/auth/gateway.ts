@@ -1,4 +1,11 @@
+import {createTurnoverApi,type TurnoverApi} from '../admin/turnover/api'
+import {createPrivacyApi,type PrivacyApi} from '../admin/privacy/api'
+import {createOperationalExport,type OperationalExport} from '../exports/operational'
+import {createAnnouncementsApi,type AnnouncementsApi} from '../announcements/api'
+import {createSiteWordingApi,type SiteWordingApi} from '../admin/site/wording-api'
+import {createPublishedSiteApi,type PublishedSiteApi} from '../admin/site/published'
 import {createTaskImportsApi,type TaskImportsApi} from '../imports/task-import-api'
+import {createRosterImportsApi,type RosterImportsApi} from '../imports/roster-import-api'
 import {createProcessApi,type ProcessApi} from '../admin/process/api'
 import {createSearchApi,type SearchApi} from '../search/api'
 import {createReportsApi,type ReportsApi} from '../reports/api'
@@ -8,7 +15,14 @@ import {createAccessApi,type AccessApi} from '../admin/access/api'
 import {createOrganizationApi,type OrganizationApi} from '../admin/organization/api'
 import {createResourcesApi,type ResourcesApi} from '../resources/api'
 import {createCalendarApi,type CalendarApi} from '../calendar/api'
+import {createRoomBookingApi,type RoomBookingApi} from '../rooms/api'
+import {createInventoryApi,type InventoryApi} from '../inventory/api'
+import {createGrowthApi,type GrowthApi} from '../growth/api'
+import {createEvaluationsApi,type EvaluationsApi} from '../evaluations/api'
+import {createCalendarSyncApi} from '../integrations/calendar/api'
 import {createNotificationsApi,type NotificationsApi} from '../notifications/api'
+import {createTelegramApi} from '../integrations/telegram/api'
+import {createEmailDigestApi} from '../integrations/email/api'
 import {createReadinessApi,type ReadinessApi} from '../deliverables/readiness-api'
 import {createPublicityApi,type PublicityApi} from '../publicity/api'
 import {createLedgerApi,type LedgerApi} from '../finance/ledger-api'
@@ -25,6 +39,7 @@ import {createDependenciesApi,type DependenciesApi} from '../tasks/dependenciesA
 import {createSynergiesApi,type SynergiesApi} from '../synergies/api'
 import {createOverviewApi,type OverviewApi} from '../overview/api'
 import {createFilesApi,type FilesApi} from '../files/api'
+import {createDriveApi} from '../integrations/drive/api'
 import {createCommentsApi,type CommentsApi} from '../comments/api'
 import type { ClientEnvironment } from '../../lib/env'
 import { createSupabaseClient } from '../../lib/supabase'
@@ -50,7 +65,14 @@ export type WorkspaceContext = MemberContext | GuestContext
 export const isGuest = (value: WorkspaceContext): value is GuestContext => 'audience' in value && value.audience === 'guest'
 export type AuthResult = WorkspaceContext | { state: 'unavailable' | 'signed_out' | 'denied' | 'error' }
 export interface AuthGateway {
+  turnover?: TurnoverApi
+  privacy?: PrivacyApi
+  exportOperationalWork?: OperationalExport
+  announcements?: AnnouncementsApi
+  siteWording?: SiteWordingApi
+  site?: PublishedSiteApi
   taskImports?: TaskImportsApi
+  rosterImports?: RosterImportsApi
   reports?: ReportsApi
   search?: SearchApi
   layouts?: LayoutAdminApi
@@ -60,6 +82,10 @@ export interface AuthGateway {
   organization?: OrganizationApi
   resources?: ResourcesApi
   calendar?: CalendarApi
+  roomBookings?: RoomBookingApi
+  inventory?: InventoryApi
+  growth?: GrowthApi
+  evaluations?: EvaluationsApi
   notifications?: NotificationsApi
   readiness?: ReadinessApi
   publicity?: PublicityApi
@@ -109,18 +135,33 @@ export function consumeReturnPath(): string {
 }
 
 export function createAuthGateway(environment: ClientEnvironment, origin: string): AuthGateway {
-  const redirectTo = callbackUrl(origin)
+  const redirectTo = callbackUrl(origin, environment.state === 'configured' ? environment.appOrigin : undefined)
   const clientReady = redirectTo ? createSupabaseClient(environment).catch(() => null) : Promise.resolve(null)
+  const privacy = createPrivacyApi(clientReady)
   let exchangeCode: string | undefined
   let exchangePromise: Promise<void> | undefined
   return {
+    privacy,
+    turnover: createTurnoverApi(clientReady),
+    announcements: createAnnouncementsApi(clientReady),
+    site: createPublishedSiteApi(clientReady),
+    siteWording: createSiteWordingApi(clientReady),
     process: createProcessApi(clientReady),
     configuration: createConfigurationApi(clientReady),
     access: createAccessApi(clientReady),
     organization: createOrganizationApi(clientReady),
     resources: createResourcesApi(clientReady),
-    calendar: createCalendarApi(clientReady),
-    notifications: createNotificationsApi(clientReady),
+    calendar: createCalendarApi(clientReady,environment.state==='configured'&&environment.calendarSync&&environment.appOrigin===origin
+      ?createCalendarSyncApi(clientReady,environment.appOrigin):undefined),
+    roomBookings: createRoomBookingApi(clientReady),
+    inventory: createInventoryApi(clientReady),
+    growth: createGrowthApi(clientReady),
+    evaluations: createEvaluationsApi(clientReady),
+    notifications: createNotificationsApi(clientReady,
+      environment.state==='configured'&&environment.telegramBot&&environment.appOrigin===origin
+        ?createTelegramApi(clientReady,environment.appOrigin,environment.telegramBot):undefined,
+      environment.state==='configured'&&environment.emailDigest&&environment.appOrigin===origin
+        ?createEmailDigestApi(clientReady,environment.appOrigin):undefined),
     readiness: createReadinessApi(clientReady),
     publicity: createPublicityApi(clientReady),
     ledger: createLedgerApi(clientReady),
@@ -138,9 +179,12 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     layouts: createLayoutAdminApi(clientReady),
     search: createSearchApi(clientReady),
     reports: createReportsApi(clientReady),
+    exportOperationalWork: createOperationalExport(clientReady),
     taskImports: createTaskImportsApi(clientReady),
+    rosterImports: createRosterImportsApi(clientReady),
     overview: createOverviewApi(clientReady),
-    files: createFilesApi(clientReady),
+    files: createFilesApi(clientReady,environment.state==='configured'&&environment.drivePicker&&environment.appOrigin===origin
+      ?createDriveApi(clientReady,environment.appOrigin,environment.driveEvidence):undefined),
     comments: createCommentsApi(clientReady),
     tasks: createTasksApi(clientReady),
     deliverables: createDeliverablesApi(clientReady),
@@ -174,6 +218,9 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     async beginGoogle(returnTo) {
       const client = await clientReady
       if (!client || !redirectTo) throw new Error('Sign-in is not configured for this address.')
+      let approvedNotice=false
+      try { approvedNotice=!!(await privacy.publicNotice?.()) } catch { /* Missing/current approval must fail closed. */ }
+      if(!approvedNotice)throw new Error('An approved public privacy notice and verified contact are required before starting sign-in. Open Privacy notice and contact for the current status.')
       try { sessionStorage.setItem(returnStorageKey, safeReturnPath(returnTo)) } catch { /* Safe fallback is the overview. */ }
       try { const { error } = await client.auth.signInWithOAuth({ provider: 'google', options: {
         redirectTo, scopes: 'openid email profile', queryParams: { prompt: 'select_account' },
@@ -197,8 +244,16 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     async signOut() {
       const client = await clientReady
       if (!client) return
-      try { const { error } = await client.auth.signOut({ scope: 'local' }); if (error) throw error }
+      try {
+        const { error } = await client.auth.signOut({ scope: 'local' })
+        if (error) {
+          const remaining = await client.auth.getSession()
+          if (remaining.error || remaining.data.session) throw error
+        }
+      }
       catch { throw new Error('Sign-out could not be confirmed. Please try again.') }
+      exchangeCode = undefined
+      exchangePromise = undefined
       try { sessionStorage.removeItem(returnStorageKey) } catch { /* No application data is cached. */ }
     },
     onChange(listener) {

@@ -1,0 +1,9 @@
+.announcement-editor fieldset { min-width: 0; margin-block: var(--space-4); }
+.announcement-editor input:not([type='checkbox']),.announcement-editor select,.announcement-editor textarea,.announcement-reader input { width: 100%; max-width: 100%; min-height: var(--control-min-size); }
+.announcement-editor input[type='checkbox'] { width: var(--control-min-size); height: var(--control-min-size); flex-shrink: 0; }
+.announcement-editor label { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; margin-block: var(--space-3); }
+.announcement-editor summary { min-height: var(--control-min-size); padding-block: var(--space-3); cursor: pointer; }
+.announcement-editor,.announcement-reader { overflow-wrap: anywhere; }
+.announcement-body { white-space: pre-wrap; max-width: 75ch; }
+.announcement-reader article { border-block-end: 1px solid var(--color-line); padding-block: var(--space-4); }
+.announcement-reader a,.announcement-editor > a,.announcement-highlights a { display: inline-flex; align-items: center; min-height: var(--control-min-size); min-width: var(--control-min-size); }

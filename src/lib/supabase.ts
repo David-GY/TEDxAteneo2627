@@ -6,5 +6,6 @@ export async function createSupabaseClient(environment: ClientEnvironment) {
   const { createClient } = await import('@supabase/supabase-js')
   return createClient<Database>(environment.supabaseUrl, environment.supabasePublishableKey, {
     auth: { flowType: 'pkce', detectSessionInUrl: false, persistSession: true, autoRefreshToken: true },
+    global: { fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }) },
   })
 }

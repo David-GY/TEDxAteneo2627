@@ -36,7 +36,7 @@ export function GuestContactEditor({ api, termId }: { api: GuestContactGateway; 
     } catch (cause) { setError(cause instanceof Error ? cause.message : 'The save could not be confirmed. Please retry.') }
     finally { setBusy(false) }
   }
-  return <Panel title="Your contacts">
+  return <Panel title="Your contacts" id="guest-contacts">
     <p>Your guest access includes your own contact details and any contacts explicitly shared with your invitation.</p>
     <p><Link to="/shared">Shared with me</Link> · <Link to="/resources">Resources & Start Here</Link></p>
     {error ? <p role="alert">{error}</p> : null}{notice ? <p role="status">{notice}</p> : null}

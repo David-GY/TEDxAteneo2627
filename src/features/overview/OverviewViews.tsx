@@ -1,4 +1,5 @@
 import {Link} from 'react-router'
+import type {ReactNode} from 'react'
 import {Panel} from '../../components/Page'
 import {EmptyState} from '../../components/FeedbackState'
 import {WorkReference} from '../work-references/WorkReference'
@@ -18,8 +19,15 @@ export function OverviewLane({items,lane,illustrative=false}:{items:OverviewRow[
  {i.source==='review'||i.source==='request'?<p>Requested: {dateLabel(null,i.requestedOn??null)} · Accepted: {i.dueOn?dateLabel(null,i.dueOn):'Not agreed'}{i.overdue?' · Accepted date overdue':''} · {i.state.replaceAll('_',' ')}</p>:<p>Due: {dateLabel(i.dueAt,i.dueOn)} · {i.overdue?'Overdue':i.dueOn||i.dueAt?'Due date recorded':'No target recorded'} · {i.state.replaceAll('_',' ')}</p>}
  </li>)}</ul>}</Panel>
 }
-export function WorkHelp({guest}:{guest:boolean}){
- return <nav aria-label="Work and help" className="overview-help"><Link className="button button--secondary" to="/tasks">My tasks</Link><Link className="button button--secondary" to="/resources">Resources & Start Here</Link>{guest?<Link className="button button--secondary" to="/shared">Shared with me</Link>:<Link className="button button--secondary" to="/people">Find a permitted contact</Link>}</nav>
+export function WorkHelp({guest,canSearch=false,children}:{guest:boolean;canSearch?:boolean;children?:ReactNode}){
+ return <nav aria-label="Work and help" className="overview-help">
+  <Link className="button button--secondary" to="/tasks">My tasks</Link>
+  {canSearch&&!guest?<Link className="button button--secondary" to="/search">Find work</Link>:null}
+  {!guest?<Link className="button button--secondary" to="/requests">Find a request service</Link>:null}
+  {children}
+  <Link className="button button--secondary" to="/resources">Resources & Start Here</Link>
+  {guest?<Link className="button button--secondary" to="/shared">Shared with me</Link>:<Link className="button button--secondary" to="/people">Find a permitted contact</Link>}
+ </nav>
 }
 export function SecondaryViews({layout,items,illustrative=false}:{layout:Layout;items:OverviewRow[];illustrative?:boolean}){
  return <section aria-label="Follow-up and planning"><h2>Follow-up and planning</h2><p>Optional views use the same permitted overview rows or open an independently authorized workspace. Counts cover this overview only, not the full workspace.</p><div className="overview-secondary">

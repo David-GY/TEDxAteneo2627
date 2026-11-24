@@ -1,0 +1,10 @@
+.privacy-page,.privacy-editor { overflow-wrap: anywhere; }
+.privacy-page a,.privacy-editor > a { display: inline-flex; align-items: center; min-height: var(--control-min-size); min-width: var(--control-min-size); }
+.privacy-page input:not([type='checkbox']),.privacy-page select,.privacy-page textarea,.privacy-editor input:not([type='checkbox']),.privacy-editor select,.privacy-editor textarea { width: 100%; max-width: 100%; min-height: var(--control-min-size); }
+.privacy-page label,.privacy-editor label { display: block; margin-block: var(--space-3); }
+.privacy-page summary,.privacy-editor summary { min-height: var(--control-min-size); padding-block: var(--space-3); cursor: pointer; }
+.privacy-page dt { font-weight: 600; margin-block-start: var(--space-3); }
+.privacy-page dd { margin-inline-start: 0; max-width: 75ch; }
+.privacy-text { white-space: pre-wrap; max-width: 75ch; }
+.privacy-editor fieldset { min-width: 0; }
+.privacy-editor input[type='checkbox'] { width: var(--control-min-size); height: var(--control-min-size); }

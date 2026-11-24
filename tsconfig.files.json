@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["supabase/functions/files", "supabase/functions/dispatch-notifications"]
+  "include": ["supabase/functions/files", "supabase/functions/dispatch-notifications", "supabase/functions/google-oauth", "supabase/functions/drive-export", "supabase/functions/calendar-sync", "supabase/functions/notification-adapters", "supabase/functions/telegram-webhook", "supabase/functions/dispatch-telegram", "supabase/functions/email-adapter"]
 }

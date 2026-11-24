@@ -1,4 +1,5 @@
 .handoff-actions { display: grid; gap: var(--space-4); border: 0; padding: 0; margin: 0; min-width: 0; }
-.handoff-actions .editor-check { min-height: var(--control-min-size); }
+.handoff-actions .editor-check { display: flex; align-items: center; gap: var(--space-3); min-height: var(--control-min-size); }
+.handoff-actions .editor-check input { flex: none; inline-size: 20px; block-size: 20px; accent-color: var(--color-accent); }
 [aria-label="Prepare handoff package"] { margin-top: var(--space-6); }
 [aria-label="Handoff response"] { margin-block: var(--space-5); }

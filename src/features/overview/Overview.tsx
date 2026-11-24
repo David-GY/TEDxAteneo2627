@@ -1,5 +1,7 @@
+import {TurnoverLinks} from '../admin/turnover/TurnoverPage'
+import type {TurnoverApi} from '../admin/turnover/api'
 import {useCallback,useEffect,useState} from 'react'
-import {Link,useRouteLoaderData} from 'react-router'
+import {Link,useNavigate,useRouteLoaderData} from 'react-router'
 import {PageHeading} from '../../components/Page'
 import {LoadingState,ErrorState} from '../../components/FeedbackState'
 import {isGuest,type WorkspaceContext} from '../auth/gateway'
@@ -11,13 +13,25 @@ import {LayoutPreview} from './LayoutPreview'
 import {AccountLayouts} from './AccountLayouts'
 import {OverviewLane,SecondaryViews,WorkHelp} from './OverviewViews'
 import './overview.css'
+import {AnnouncementHighlights} from '../announcements/Reader'
+import type {AnnouncementsApi} from '../announcements/api'
+import {TaskEditor} from '../tasks/TaskEditor'
+import type {TasksApi} from '../tasks/api'
+import type {InventoryApi} from '../inventory/api'
+import {InventoryOverviewActions} from '../inventory/InventoryPage'
+import type {GrowthApi} from '../growth/api'
+import {GrowthLink} from '../growth/GrowthPage'
+import {EvaluationsLink} from '../evaluations/EvaluationsPage'
+import type {EvaluationsApi} from '../evaluations/api'
 
-export function Overview({api}:{api:OverviewApi}){
+export function Overview({api,announcements,canSearch=false,tasks,inventory,growth,evaluations,turnover}:{api:OverviewApi;announcements?:AnnouncementsApi;canSearch?:boolean;tasks?:TasksApi;inventory?:InventoryApi;growth?:GrowthApi;evaluations?:EvaluationsApi;turnover?:TurnoverApi}){
  const context=useRouteLoaderData('workspace')as WorkspaceContext,subject=isGuest(context)?'guest:'+context.guestAccessId:'member:'+context.termMembershipId
- return <OverviewBody key={context.organizationId+context.termId+subject} api={api} context={context} subject={subject}/>
+ return <OverviewBody key={context.organizationId+context.termId+subject} api={api} announcements={announcements} context={context} subject={subject} canSearch={canSearch} tasks={tasks} inventory={inventory} growth={growth} evaluations={evaluations} turnover={turnover}/>
 }
-function OverviewBody({api,context,subject}:{api:OverviewApi;context:WorkspaceContext;subject:string}){
+function OverviewBody({api,announcements,context,subject,canSearch,tasks,inventory,growth,evaluations,turnover}:{api:OverviewApi;announcements?:AnnouncementsApi;context:WorkspaceContext;subject:string;canSearch:boolean;tasks?:TasksApi;inventory?:InventoryApi;growth?:GrowthApi;evaluations?:EvaluationsApi;turnover?:TurnoverApi}){
  const termId=context.termId,guest=isGuest(context),audience=guest?'guest':'member',storageKey=viewStorageKey(context.organizationId,termId,subject)
+ const navigate=useNavigate()
+ const [addingTask,setAddingTask]=useState(false)
  const[result,setResult]=useState<OverviewResult|null>(null),[error,setError]=useState(false),[reload,setReload]=useState(0)
  const[viewLocked,setViewLocked]=useState(false)
  const[view,setView]=useState(()=>{try{
@@ -42,7 +56,18 @@ function OverviewBody({api,context,subject}:{api:OverviewApi;context:WorkspaceCo
  <p>Refreshed {dateLabel(result.refreshedAt,null)}. Dates and overdue cutoff use Manila time.{result.hasMore?' Showing the first 50 permitted records; open Department inbox, My tasks or Core deliverables for more.':''}</p>
  <OverviewLane items={result.items} lane="actionable"/>
  </>}
- <WorkHelp guest={guest}/>
+ <WorkHelp guest={guest} canSearch={canSearch}>
+   {!guest&&inventory?<InventoryOverviewActions api={inventory} term={termId}/>:null}
+   {!guest&&growth?<GrowthLink api={growth} term={termId}/>:null}
+   {!guest&&turnover?<TurnoverLinks api={turnover} term={termId}/>:null}
+   {!guest&&evaluations?<EvaluationsLink api={evaluations} term={termId}/>:null}
+ </WorkHelp>
+ {!guest&&tasks?.execute?<details className="panel" onToggle={event=>{if(event.currentTarget.open)setAddingTask(true)}}>
+  <summary>Add a personal task</summary>
+  {addingTask?<TaskEditor personal termId={termId} api={tasks} onSaved={id=>void navigate('/tasks/'+id)}/>:null}
+ </details>:null}
+ <p><Link className="button button--secondary" to="/privacy">Privacy and help</Link></p>
+ <AnnouncementHighlights api={announcements} term={termId} refresh={reload}/>
  {!guest&&context.capabilities?.some(c=>['admin.configure','committee.manage'].includes(c))?<p><Link to="/admin/layouts">Publish a role or committee layout</Link></p>:null}
  {view.repaired?<p role="alert">{view.message}</p>:null}
  <LayoutControls disabled={viewLocked} layout={view.layout} audience={audience} message={view.repaired?'Use Restore default view to replace the unsupported saved setting.':view.message} onChange={changeLayout} onReset={()=>changeLayout(defaultLayout(audience))}/>

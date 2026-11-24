@@ -40,7 +40,7 @@ export function TaskImportPanel({api,term,input,enabled,onLoad,onDenied,onLockCh
   void execute({run:async()=>{const result=await api.commit(term,id,version,hash,key);setReceipt(result);setDraft({...result,stamp});setReview(null);setMessage('Task import committed. Its issued references are preserved for retries.')}})
  }
  return <Panel title="3. Save and review ordinary task imports">
-  <p>Private server drafts and a whole-file commit support up to 50 task records and 200,000 bytes of mapped input. Each commit creates every valid row or changes nothing. Roster imports and record exports are not connected.</p>
+  <p>Private server drafts and a whole-file commit support up to 50 task records and 200,000 bytes of mapped input. Each commit creates every valid row or changes nothing. Record exports are not connected.</p>
   <p>Reuse the same committee, list name and case-sensitive source keys across retries and later files. A blank person on a new task means you; a blank date/person on an existing task preserves it. Only title/date changes on To do tasks without completion evidence are supported. Assignment and timed-deadline changes belong on the task page.</p>
   <label>Import committee<select aria-label="Import committee" disabled={locked||!!draft} value={unit} onChange={e=>{setUnit(e.target.value);setReview(null);setConfirmed(false)}}><option value="">Choose a permitted committee</option>{units.map(u=><option key={u.id} value={u.id}>{u.name}</option>)}</select></label>
   <label>List name (reuse for retries)<input maxLength={80} value={list} disabled={locked||!!draft} onChange={e=>{setList(e.target.value);setReview(null);setConfirmed(false)}}/></label>

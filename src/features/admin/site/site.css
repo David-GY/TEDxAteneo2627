@@ -1,0 +1,8 @@
+.site-wording-mode { margin-bottom: var(--space-4); }
+.site-wording-mode fieldset { display: grid; gap: var(--space-4); min-width: 0; border: 0; margin: var(--space-4) 0; padding: 0; }
+.site-wording-mode legend { font-weight: 700; margin-bottom: var(--space-3); }
+.site-wording-mode input { max-width: 100%; width: 100%; min-height: var(--control-min-size); }
+.site-wording-mode select { max-width: 100%; width: 100%; min-height: var(--control-min-size); }
+.site-wording-mode input[type='checkbox'] { width: var(--control-min-size); height: var(--control-min-size); }
+.site-wording-mode summary { min-height: var(--control-min-size); padding-block: var(--space-3); cursor: pointer; }
+.site-approved-logo { display: block; max-width: 100%; width: auto; height: auto; max-height: 120px; object-fit: contain; }

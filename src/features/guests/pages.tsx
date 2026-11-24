@@ -2,8 +2,51 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useLoaderData, useNavigate, useRouteLoaderData } from 'react-router'
 import { PageHeading, Panel } from '../../components/Page'
 import { TextField } from '../../components/TextField'
-import type { AuthGateway, AuthResult, WorkspaceContext } from '../auth/gateway'
-import { invitationUrl, readInvitationFragment, type GuestGateway, type GuestInvitation } from './gateway'
+import { isGuest,type AuthGateway,type AuthResult,type WorkspaceContext } from '../auth/gateway'
+import { invitationUrl, readInvitationFragment, type GuestGateway, type GuestInvitation, type GuestWork } from './gateway'
+
+export function SharedWork({api}:{api?:GuestGateway}) {
+  const context=useRouteLoaderData('workspace') as WorkspaceContext|undefined
+  return context&&isGuest(context)&&api?.listShared
+    ?<SharedWorkList key={context.termId+':'+context.guestAccessId} api={api} term={context.termId}/>:null
+}
+
+function SharedWorkList({api,term}:{api:GuestGateway;term:string}) {
+  const [page,setPage]=useState(1)
+  const [revision,setRevision]=useState(0)
+  const [loaded,setLoaded]=useState<{key:string;work:GuestWork|null}|null>(null)
+  const key=term+':'+page+':'+revision
+  useEffect(()=>{
+    if(!api.listShared)return
+    let active=true
+    void api.listShared(term,page).then(work=>{if(active)setLoaded({key,work})})
+      .catch(()=>{if(active)setLoaded({key,work:null})})
+    return()=>{active=false}
+  },[api,key,page,term])
+  useEffect(()=>{
+    const check=()=>{if(document.visibilityState!=='hidden')setRevision(value=>value+1)}
+    window.addEventListener('focus',check)
+    document.addEventListener('visibilitychange',check)
+    return()=>{
+      window.removeEventListener('focus',check)
+      document.removeEventListener('visibilitychange',check)
+    }
+  },[])
+  const current=loaded?.key===key?loaded:null
+  return <Panel title="Shared work">
+    {!current?<p role="status">Checking your shared work…</p>:current.work?<>{current.work.items.length?
+      <ul className="guest-list">{current.work.items.map(item=><li key={item.id}>
+        <Link className="button button--secondary" to={(item.kind==='task'?'/tasks/':'/deliverables/')+item.id}>{item.title}</Link>
+      </li>)}</ul>:<p>Your sponsor has not shared any current tasks or deliverables on this page.</p>}
+      {page>1||current.work.hasMore?<div className="auth-actions">
+        {page>1?<button className="button button--secondary" type="button" onClick={()=>setPage(page-1)}>Previous shared work</button>:null}
+        {current.work.hasMore?<button className="button button--secondary" type="button" onClick={()=>setPage(page+1)}>Next shared work</button>:null}
+      </div>:null}
+    </>:<><p role="alert">Shared work could not be checked. Ask your sponsor if you expected access.</p>
+      <button className="button button--secondary" type="button" onClick={()=>setRevision(value=>value+1)}>Check shared work again</button>
+    </>}
+  </Panel>
+}
 
 export function SponsorPage({api}:{api:GuestGateway}) {
   const context=useRouteLoaderData('workspace') as WorkspaceContext
@@ -55,6 +98,7 @@ export function SponsorPage({api}:{api:GuestGateway}) {
     {notice?<p role="status">{notice}</p>:null}
     {link?<Panel title="Copy this invitation now"><div className="guest-link-copy"><p>The link remains only in this page’s memory.</p><button className="button" onClick={()=>void navigator.clipboard.writeText(link).then(()=>setNotice('Invitation link copied.')).catch(()=>setError('Clipboard access failed. Use the selectable invitation link below.'))}>Copy invitation link</button><TextField id="invite-link" label="Invitation link" value={link} readOnly onFocus={event=>event.target.select()} /><button className="button button--secondary" onClick={()=>setLink('')}>Hide invitation link</button></div></Panel>:null}
     <Panel title="Your invitations">
+      <p>Check whether a guest has accepted, or when their access ends.</p>
       {loading?<p role="status">Loading invitations…</p>:items.length===0?<p>No invitations are available.</p>:<ul className="guest-list">{items.map(item=><li key={item.id}>
         <h3>{item.email}</h3><p>{item.revokedAt?'Revoked':Date.parse(item.expiresAt)<=Date.now()?'Expired':item.redeemedAt?'Redeemed':'Awaiting redemption'} · Ends {new Date(item.expiresAt).toLocaleString('en-PH',{timeZone:'Asia/Manila'})} (Manila)</p>
         <p className="muted">{item.scopeMode === 'explicit_records' ? `${item.sharedRecordCount === undefined ? 'Explicitly shared' : item.sharedRecordCount + ' explicitly shared'} work records; no full directory access.` : 'Zero shared records; no directory access.'}</p>
@@ -70,28 +114,39 @@ export function RedeemPage({gateway}:{gateway:AuthGateway}) {
   const [token]=useState(()=>readInvitationFragment(window.location.hash))
   const [busy,setBusy]=useState(false)
   const [error,setError]=useState('')
+  const [otherShared,setOtherShared]=useState(()=>auth.state==='authorized'&&isGuest(auth))
   const navigate=useNavigate()
   useEffect(()=>{window.history.replaceState(window.history.state,'','/guest/redeem')},[])
   async function redeem() {
     if(!token||!gateway.guests)return
     setBusy(true);setError('')
     try {await gateway.guests.redeem(token);await navigate('/shared',{replace:true})}
-    catch {setError('This invitation could not be redeemed. Check the Google account, expiry and whether it has already been used. Ask your sponsor for a new link if needed.');setBusy(false)}
+    catch {
+      setError('This invitation could not be accepted. Check that you used the Google account your sponsor invited. If the link has expired or was already used, ask your sponsor to check your access or send a fresh link.')
+      const current=await gateway.readContext().catch(()=>null)
+      setOtherShared(current?.state==='authorized'&&isGuest(current))
+      setBusy(false)
+    }
   }
   async function signIn() {
     setBusy(true);setError('')
     try {await gateway.signOut();await gateway.beginGoogle('/guest/redeem')}
-    catch {setError('Google sign-in could not start. Check workspace setup and try again.');setBusy(false)}
+    catch {setError('Google sign-in could not start. Try again, or ask your sponsor for help if it stays unavailable.');setBusy(false)}
   }
   return <main className="standalone-page auth-page">
     <h1>Accept your guest invitation</h1>
-    <p>Use the exact Google email your sponsor invited. External Google accounts are welcome.</p>
-    <Panel title="What this invitation shares"><p>Zero records for now. Record sharing is not connected yet. You receive no member directory or organization-wide access. The invitation expires within 14 days.</p></Panel>
-    <p>First sign in with Google, then reopen the original invitation link to finish. The private link is kept only in memory and is cleared during sign-in.</p>
-    {auth.state==='unavailable'?<p role="status">Guest sign-in needs Supabase and Google setup for this address. Ask the workspace maintainer to finish setup.</p>:null}
-    <button className="button button--secondary" disabled={busy||auth.state==='unavailable'} onClick={()=>void signIn()}>Sign in or switch Google account</button>
-    {token?<button className="button" disabled={busy||!gateway.guests||auth.state==='unavailable'||auth.state==='signed_out'} onClick={()=>void redeem()}>Accept invitation with signed-in account</button>:<p>Reopen the original invitation link after signing in. If it is missing or expired, ask your sponsor for a new link.</p>}
+    <p>Use the Google account your sponsor invited. It can be an account outside the school.</p>
+    <Panel title="What guest access covers"><p>You can open only the work your sponsor has shared with you and only until your invitation expires.</p></Panel>
+    <p>After signing in, reopen the original invitation link and accept it here. Ask your sponsor for a fresh link if you no longer have it.</p>
+    {auth.state==='unavailable'?<p role="status">Google sign-in is unavailable right now. Ask your sponsor for help.</p>:null}
     {error?<p role="alert">{error}</p>:null}
+    <div className="auth-actions">
+      {token?<button className="button" disabled={busy||!gateway.guests||['unavailable','signed_out','error'].includes(auth.state)}
+        onClick={()=>void redeem()}>Accept invitation with signed-in account</button>:null}
+      <button className="button button--secondary" disabled={busy||auth.state==='unavailable'} onClick={()=>void signIn()}>Sign in or switch Google account</button>
+      {otherShared?<Link className="button button--secondary" to="/shared">Open work already shared with you</Link>:null}
+    </div>
+    <p>Email sign-in is currently unavailable. If you cannot use the invited Google account, ask your sponsor for help.</p>
     <Link className="button button--secondary" to="/login">Return to sign-in</Link>
   </main>
 }

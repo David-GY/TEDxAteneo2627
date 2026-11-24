@@ -1,4 +1,4 @@
-import {recordAuthority,useRecordAuthority} from '../auth/draftScope'
+import {recordAuthority,useRecordAuthority,forgetRecordDrafts} from '../auth/draftScope'
 import {useEffect,useState} from 'react'
 import {Link,Navigate,useNavigate,useParams,useRouteLoaderData,useSearchParams} from 'react-router'
 import {PageHeading,Panel} from '../../components/Page'
@@ -14,7 +14,11 @@ import type {FilesApi} from '../files/api'
 import {Files} from '../files/Files'
 import type {RequestsApi,RequestView,RequestList,RequestReceipt} from './api'
 import {useRequestMemory} from './Memory'
+import {MigrationPreview} from './MigrationPreview'
+import {MigrationTools} from './MigrationTools'
 import {RequestPayload,requestDate} from './Payload'
+import type {RoomBookingApi} from '../rooms/api'
+import {RoomBookingPanel} from '../rooms/BookingPanel'
 import './requests.css'
 const subject=(c:WorkspaceContext)=>'memberId'in c?c.memberId:c.guestAccessId
 const number=(v:string|null)=>v&&/^[1-9][0-9]{0,3}$/.test(v)?Number(v):1
@@ -40,7 +44,7 @@ export function MyRequestsPage({api}:{api:RequestsApi}){
  {!current.result.items.length?<EmptyState title="No requests on this page" description="Start a private draft from the service catalog."/>:<ul className="guest-list">{current.result.items.map(r=><li key={r.id}><h2><Link to={'/requests/'+r.termId+'/'+r.id}>{r.trackingId??'Private draft'} · {r.title}</Link></h2><p>{r.typeLabel} · {r.state.replaceAll('_',' ')} · Submitted revision {r.revision}</p><p>Requested date: {requestDate(r.requestedOn)} · Accepted date: {r.acceptedOn?requestDate(r.acceptedOn):'Not agreed'}</p></li>)}</ul>}
  <nav className="auth-actions" aria-label="My requests pages"><button className="button button--secondary" disabled={page===1} onClick={()=>setParams({page:String(page-1)})}>Previous page</button><span>Page {page}</span><button className="button button--secondary" disabled={page*20>=current.result.total} onClick={()=>setParams({page:String(page+1)})}>Next page</button></nav></>}</>
 }
-export function RequestDetailPage({api,forms,files}:{api:RequestsApi;forms:FormsApi;files?:FilesApi}){
+export function RequestDetailPage({api,forms,files,roomBookings}:{api:RequestsApi;forms:FormsApi;files?:FilesApi;roomBookings?:RoomBookingApi}){
  const c=useRouteLoaderData('workspace')as WorkspaceContext,{requestTermId='',requestId=''}=useParams(),[params,setParams]=useSearchParams(),page=number(params.get('history')),revision=params.has('revision')?number(params.get('revision')):undefined,[reload,setReload]=useState(0),key=subject(c)+c.termId+requestTermId+requestId+page+revision+reload;
  const {observe,epoch:scopeEpoch}=useRecordAuthority(requestId);
  const[state,setState]=useState<{key:string;record:RequestView|null;options:FormOptions|null;error:boolean}|null>(null);
@@ -48,12 +52,13 @@ export function RequestDetailPage({api,forms,files}:{api:RequestsApi;forms:Forms
  if(current?.record?.governedKind==='mcd')return <Navigate replace to={'/publicity/'+requestTermId+'/'+requestId}/>;
  if(current?.record?.governedKind==='fin')return <Navigate replace to={'/finance/'+requestTermId+'/'+requestId}/>;
  return <><PageHeading title="Request tracking" description="A submitted package records what you asked for; it does not authorize costs, publicity or an official external process."/><p><Link to="/requests/mine">My requests</Link> · <Link to="/requests">Service catalog</Link><Link to={"/reviews/"+requestTermId+"/"+requestId}> Review and shared triage history</Link></p><button className="button button--secondary" onClick={()=>setReload(n=>n+1)}>Refresh request (keep inputs)</button>
+ {roomBookings&&'memberId'in c&&c.termId===requestTermId?<RoomBookingPanel key={subject(c)+requestTermId+requestId} api={roomBookings} term={requestTermId} request={requestId} refreshToken={reload}/>:null}
  {!current?<LoadingState/>:current.error?<ErrorState title="Request unavailable" description="Check current access or connection, then refresh. Safe inputs remain in memory for this account."/>:!current.record?<EmptyState title="Request cannot be shown" description="This term, request or revision is unavailable to your current account."/>:<RequestBody key={subject(c)+c.termId+current.record.id+current.record.version+page+revision+scopeEpoch} r={current.record} api={api} options={current.options} files={files} refresh={()=>setReload(n=>n+1)} selectRevision={n=>setParams(p=>{p.set('revision',String(n));return p})} historyPage={n=>setParams(p=>{p.set('history',String(n));return p})}/>}
  </>
 }
 function RequestBody({r,api,options,files,refresh,selectRevision,historyPage}:{r:RequestView;api:RequestsApi;options:FormOptions|null;files?:FilesApi;refresh:()=>void;selectRevision:(n:number)=>void;historyPage:(n:number)=>void}){
  const m=useRequestMemory(api,r.id,{title:r.title,requestedOn:r.draft?.requestedOn??'',reason:'',confirmCancel:''}),formDrafts=useFormDrafts(),draftKey='request:'+r.id+':'+r.formVersionId,[metadataError,setMetadataError]=useState<'title'|'date'|''>(''),[downloadError,setDownloadError]=useState(''),[downloadBusy,setDownloadBusy]=useState(false);
- function confirmed(receipt:RequestReceipt){if(receipt.state!=='draft'&&receipt.state!=='revision_draft')formDrafts?.delete(draftKey);refresh()}
+ function confirmed(receipt:RequestReceipt){if(receipt.formChanged)forgetRecordDrafts(r.id);else if(receipt.state!=='draft'&&receipt.state!=='revision_draft')formDrafts?.delete(draftKey);refresh()}
  async function retry(){const receipt=await m.run();if(receipt)confirmed(receipt)}
  async function action(kind:'begin'|'cancel'){const receipt=await m.run({kind,id:r.id,version:r.version,reason:m.fields.reason});if(receipt)confirmed(receipt)}
  async function download(id:string){if(!files||downloadBusy)return;setDownloadBusy(true);setDownloadError('');try{const blob=await files.download(r.id,id),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=r.selected?.files.find(f=>f.id===id)?.name??'submitted-file';a.click();setTimeout(()=>URL.revokeObjectURL(url),0)}catch{setDownloadError('This submitted file could not be downloaded. Check current access and retry.')}finally{setDownloadBusy(false)}}
@@ -67,6 +72,7 @@ function RequestBody({r,api,options,files,refresh,selectRevision,historyPage}:{r
  {!r.canSubmit?<p>Submission is disabled until the receiving service and authority configuration are confirmed. Your draft can still be saved.</p>:null}
  <p>After uploading and finalizing, refresh this request to update eligible file choices.</p>
  </Panel></div>:r.draft&&!r.selected?<Panel title="Saved draft · read only"><p>Requested date: {requestDate(r.draft.requestedOn)}</p><RequestPayload form={r.form} values={r.draft.values} snapshots={r.draft.snapshots} centavos={r.draft.requestedCentavos}/></Panel>:null}
+ {r.canEdit&&r.state==='draft'&&r.revision===0&&api.previewMigration?<MigrationPreview read={api.previewMigration} id={r.id} version={r.version} locked={m.locked}>{api.prepareMigration&&api.reviewMigration&&api.reviewMigrationUndo&&options?<MigrationTools api={api} id={r.id} version={r.version} options={options} locked={m.locked} reason={m.fields.migrationReason??''} changeReason={value=>m.change({...m.fields,migrationReason:value})} send={async command=>{const receipt=await m.run(command);if(receipt)confirmed(receipt)}}/>:null}</MigrationPreview>:null}
  {r.canEdit&&files?<Files api={files} workId={r.id}/>:null}
  {r.selected?<Panel title={'Submitted revision '+r.selected.revision}><div className="form-field"><label htmlFor="request-revision">Submitted package history</label><select id="request-revision" value={r.selected.revision} onChange={e=>selectRevision(Number(e.target.value))}>{r.revisionHeaders.map(h=><option key={h.revision} value={h.revision}>Revision {h.revision} · {h.title}</option>)}</select></div><h3>{r.selected.title}</h3><p>Requested date: {requestDate(r.selected.requestedOn)} · Submitted: {requestDate(r.selected.submittedAt)}</p><RequestPayload form={r.form} values={r.selected.values} snapshots={r.selected.snapshots} centavos={r.selected.requestedCentavos}/><details><summary>Submitted file verification</summary><p className="record-text">SHA-256: <code>{r.selected.manifestHash}</code></p></details>{downloadError?<p role="alert">{downloadError}</p>:null}<ul>{r.selected.files.map(f=><li key={f.id}><p>{f.name} · {f.size} bytes</p><button className="button button--secondary" disabled={!files||downloadBusy} onClick={()=>void download(f.id)}>Download submitted file · {f.name}</button></li>)}</ul></Panel>:null}
  <div data-edit-form><Panel title="Request actions"><div className="request-actions">{r.canRevise?<button className="button button--secondary" disabled={m.locked} onClick={()=>void action('begin')}>Start revision draft</button>:null}{r.canCancel?<><TextField id="request-cancel-reason" label="Cancellation reason" value={m.fields.reason} maxLength={2000} disabled={m.locked} onChange={e=>m.change({...m.fields,reason:e.target.value})}/><label><input type="checkbox" checked={m.fields.confirmCancel==='yes'} disabled={m.locked} onChange={e=>m.change({...m.fields,confirmCancel:e.target.checked?'yes':''})}/>Cancel this request. Saved content and tracking IDs stay in history; unsaved edits are not saved.</label><button className="button button--secondary" disabled={m.locked||!m.fields.reason.trim()||m.fields.confirmCancel!=='yes'} onClick={()=>void action('cancel')}>Cancel request</button></>:<p>No further requester action is available.</p>}</div></Panel></div>

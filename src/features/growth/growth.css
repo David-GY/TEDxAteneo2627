@@ -1,0 +1,15 @@
+.growth { min-width: 0; }
+.growth .panel { margin-block: var(--space-4); min-width: 0; }
+.growth .button { min-height: 44px; min-width: 44px; max-width: 100%; white-space: normal; }
+.growth .growth-list { display: grid; gap: var(--space-3); list-style: none; margin: var(--space-3) 0; padding: 0; }
+.growth-list > li { border-top: 1px solid var(--color-line); padding-top: var(--space-3); min-width: 0; overflow-wrap: anywhere; }
+.growth-list h3, .growth-list p { margin-block: 8px; }
+.growth-inline { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin-block: var(--space-3); }
+.growth-inline .form-field { min-width: 0; max-width: 20rem; }
+.growth-editor form, .growth-editor fieldset { display: grid; gap: 12px; min-width: 0; }
+.growth-editor form { max-width: 38rem; justify-items: start; }
+.growth-editor form > fieldset { padding: 0; border: 0; margin: 0; justify-self: stretch; }
+.growth :is(input, textarea, select) { min-width: 0; max-width: 100%; }
+.growth-editor :is(select, textarea) { min-height: 44px; padding: 8px; color: var(--color-ink); background: var(--color-surface);
+  border: 1px solid var(--color-muted); border-radius: var(--radius-control); }
+.growth-editor textarea { width: 100%; }

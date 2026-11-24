@@ -8,11 +8,14 @@ import { filterSearch, parseFilters, type DeliverablesApi, type DeliverableList 
 import { DeliverableFacts } from './DeliverableFacts'
 import { DeliverableEditor } from './DeliverableEditor'
 import type { DeliverableCommands } from './commands'
-export function DeliverablesRoute({ api, commands }: { api: DeliverablesApi; commands?: DeliverableCommands }) {
+import { WorkCsvDownload } from '../exports/WorkCsvDownload'
+import type { OperationalExport } from '../exports/operational'
+export function DeliverablesRoute({ api, commands, exportCsv }: { api: DeliverablesApi; commands?: DeliverableCommands; exportCsv?: OperationalExport }) {
   const context = useRouteLoaderData('workspace') as WorkspaceContext
-  return <DeliverablesPage key={context.termId} api={api} commands={commands} termId={context.termId} />
+  return <DeliverablesPage key={context.termId} api={api} commands={commands} termId={context.termId}
+    exportControl={<WorkCsvDownload api={exportCsv} context={context} kind="deliverable"/>} />
 }
-export function DeliverablesPage({ api, commands, termId }: { api: DeliverablesApi; commands?: DeliverableCommands; termId: string }) {
+export function DeliverablesPage({ api, commands, termId, exportControl }: { api: DeliverablesApi; commands?: DeliverableCommands; termId: string; exportControl?: React.ReactNode }) {
   const navigate=useNavigate()
   const [params,setParams] = useSearchParams(); const location = useLocation()
   const search = filterSearch(parseFilters(params.toString())); const filters = parseFilters(search)
@@ -31,6 +34,7 @@ export function DeliverablesPage({ api, commands, termId }: { api: DeliverablesA
     <PageHeading title="Core deliverables" description="Find shared event outputs, accountable owners and the next action." />
     <p className="muted">Readiness follows current scope, required reviews and independent acceptance; task completion is separate. Dates use Manila time; date-only deadlines end at 23:59.</p>
     <div className="auth-actions"><Link className="button button--secondary" to="/working-together/timeline">Committee timeline</Link><button className="button button--secondary" onClick={()=>setReload(reload+1)}>Reload deliverables</button><Link className="button button--secondary" to="/people">Find a process contact</Link></div>
+    {exportControl}
     {commands?<DeliverableEditor api={commands} termId={termId} onSaved={id=>void navigate('/deliverables/'+id)}/>:null}
     {!loaded ? <LoadingState title="Loading deliverables" /> : state.error ? <ErrorState title="Deliverables unavailable" description="Check access or connection, then reload. No cached records are shown." action={<button className="button" onClick={()=>setReload(reload+1)}>Try again</button>} /> : data ? <>
       <Panel title="Filter deliverables">
