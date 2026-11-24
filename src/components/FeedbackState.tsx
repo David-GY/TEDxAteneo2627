@@ -13,5 +13,15 @@ export function ErrorState({ title, description, action }: FeedbackProps) {
 }
 
 export function LoadingState({ title = 'Opening workspace page' }: { title?: string }) {
-  return <div className="feedback-state" role="status" aria-live="polite"><p>{title}</p><p className="muted">Please wait while this page opens.</p></div>
+  return (
+    <div className="feedback-state" role="status" aria-live="polite">
+      <p>{title}</p>
+      <p className="muted">Please wait while this page opens.</p>
+      <div className="skeleton-lines" aria-hidden="true">
+        <div className="skeleton-line skeleton-line--short" />
+        <div className="skeleton-line skeleton-line--mid" />
+        <div className="skeleton-line" />
+      </div>
+    </div>
+  )
 }
