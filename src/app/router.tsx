@@ -6,7 +6,6 @@ import {RetentionPage} from '../features/admin/privacy/RetentionPage'
 import {DispositionPage} from '../features/admin/privacy/DispositionPage'
 import {BackupHealthPage} from '../features/admin/health/BackupHealthPage'
 import {EmergencyPage} from '../features/admin/privacy/EmergencyPage'
-import {PublicNoticePage} from '../features/admin/privacy/PublicNotice'
 import {Announcements,AnnouncementDetail,ContextAnnouncements} from '../features/announcements/Reader'
 import {AnnouncementPublisher} from '../features/announcements/Publisher'
 import {ProcessPage,CurrentPhase} from '../features/admin/process/ProcessPage'
@@ -188,7 +187,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
       ] },
       { path: '*', element: <main className="standalone-page"><NotFoundPage /></main> },
     ] },
-    {path:'/privacy-notice/:noticeRoute?',element:<PublicNoticePage api={gateway.privacy}/>,errorElement:<RouteErrorPage/>},
+    {path:'/privacy-notice/:noticeRoute?',loader:()=>redirect('/login')},
   ]
 }
 

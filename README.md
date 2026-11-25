@@ -31,4 +31,6 @@ The static frontend is generated in `dist/`. For an approved Pages environment, 
 
 ## Deployment status
 
-This is a locally verified candidate. Uploading source to GitHub does not authorize live deployment. The existing operational release hold remains in effect pending approved production accounts and configuration, hosted provider verification, representative human acceptance, and recovery/custody approval.
+The hosted app is at https://tedxateneodashboard.vercel.app. Sign-in uses Google and requires a current approved roster entry. Google OAuth must be configured in the connected Supabase project before accounts can sign in.
+
+There is no privacy-notice step or publication prerequisite in the sign-in flow. Old `/privacy-notice` links redirect to sign-in. Account verification, exact callback origins, roster checks and database access policies still apply.

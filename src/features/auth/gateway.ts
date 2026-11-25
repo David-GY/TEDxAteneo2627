@@ -218,9 +218,6 @@ export function createAuthGateway(environment: ClientEnvironment, origin: string
     async beginGoogle(returnTo) {
       const client = await clientReady
       if (!client || !redirectTo) throw new Error('Sign-in is not configured for this address.')
-      let approvedNotice=false
-      try { approvedNotice=!!(await privacy.publicNotice?.()) } catch { /* Missing/current approval must fail closed. */ }
-      if(!approvedNotice)throw new Error('An approved public privacy notice and verified contact are required before starting sign-in. Open Privacy notice and contact for the current status.')
       try { sessionStorage.setItem(returnStorageKey, safeReturnPath(returnTo)) } catch { /* Safe fallback is the overview. */ }
       try { const { error } = await client.auth.signInWithOAuth({ provider: 'google', options: {
         redirectTo, scopes: 'openid email profile', queryParams: { prompt: 'select_account' },

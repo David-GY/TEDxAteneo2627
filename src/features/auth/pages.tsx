@@ -1,5 +1,4 @@
 import {SiteLogo} from '../admin/site/SiteLogo'
-import {PublicNoticePanel} from '../admin/privacy/PublicNotice'
 import {SiteEditMode} from '../admin/site/SiteEditMode'
 import {usePublishedSite} from '../admin/site/usePublishedSite'
 import {CurrentRecordScope} from './RecordScope'
@@ -111,7 +110,6 @@ export function LoginPage({ gateway }: { gateway: AuthGateway }) {
   return <main className="standalone-page auth-page">
     <p className="muted">TEDx Ateneo de Manila U · Core workspace</p>
     <h1>Sign in to your workspace</h1>
-    <PublicNoticePanel api={gateway.privacy} compact/>
     {new URLSearchParams(safeReturnPath(new URLSearchParams(location.search).get('returnTo')).split('?')[1]).has('term')?<p>The selected term could not be opened. You can <Link to="/search">return to current workspace search</Link> or retry sign-in for the selected term below.</p>:null}
     {guestEntry?<p>Use the Google account your guest sponsor invited. If your access has expired, ask your sponsor for a fresh link.</p>:
       <p>Use your approved <strong>student.ateneo.edu</strong> Google account. A school email alone does not grant access.</p>}
