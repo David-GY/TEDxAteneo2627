@@ -9486,6 +9486,22 @@ export type Database = {
         }
         Returns: Json | null
       }
+      read_tedx_positions: { Args: { p_term_id: string }; Returns: Json }
+      save_tedx_seat: {
+        Args: {
+          p_term_id: string
+          p_seat_id: string | null
+          p_expected_version: number | null
+          p_membership_id: string
+          p_role_id: string
+          p_from: string | null
+          p_to: string | null
+          p_remove: boolean
+          p_reason: string
+          p_request_id: string
+        }
+        Returns: Json
+      }
       read_organization: {
         Args: {
           p_term_id: string

@@ -40,6 +40,7 @@ import { readClientEnvironment, type ClientEnvironment } from '../lib/env'
 import { PageHeading, Panel } from '../components/Page'
 import { EmptyState, ErrorState } from '../components/FeedbackState'
 import { AppShell } from './AppShell'
+import { MemberPreview, canPreviewAsMember, isMemberPreviewPath, memberPreviewPath } from './MemberPreview'
 import { TaskDetail } from '../features/tasks/TaskDetail'
 import { TasksPage } from '../features/tasks/TasksPage'
 import { navigationItems } from './navigation'
@@ -123,6 +124,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         if (result.state === 'authorized') {
           const path=new URL(request.url).pathname
           if(isGuest(result) && !isDeliverablePath(path) && !isTaskPath(path) && !isAnnouncementPath(path) && !isPrivacyPath(path) && !navigationItems.some(item=>item.href===path && item.audiences.includes('guest')))return redirect('/shared')
+          if (isMemberPreviewPath(path) && !canPreviewAsMember(result)) return redirect('/')
           if(path==='/guests' && !result.capabilities.includes('roles.manage'))return redirect(isGuest(result)?'/shared':'/')
           return result
         }
@@ -137,6 +139,7 @@ export function createAppRoutes(environment: ClientEnvironment, gateway: AuthGat
         return redirect(`/login?reason=${result.state === 'denied' ? 'denied' : 'check'}&returnTo=${encodeURIComponent(safeReturnPath(url.pathname+url.search))}`)
       // Timeline filter RPCs recheck scope themselves. Explicit focus/expiry checks still revalidate.
       }, shouldRevalidate: ({currentUrl,nextUrl}) => !(currentUrl.pathname==='/working-together/timeline'&&nextUrl.pathname===currentUrl.pathname&&currentUrl.search!==nextUrl.search), children: [
+      {path:memberPreviewPath.slice(1)+'/*',element:<MemberPreview/>},
       { index: true, element: gateway.overview?<><CurrentPhase api={gateway.process}/><Overview api={gateway.overview} announcements={gateway.announcements} canSearch={!!gateway.search} tasks={gateway.tasks} inventory={gateway.inventory} growth={gateway.growth} evaluations={gateway.evaluations} turnover={gateway.turnover}/></>:<><PageHeading title="Overview"/><EmptyState title="Overview unavailable" description="The workspace connection is unavailable."/></> },
       ...(gateway.turnover?[{path:'archive/:archivedWorkId?',element:<ArchivePage api={gateway.turnover}/>},{path:'handover/:turnoverCaseId?',element:<TurnoverPage api={gateway.turnover}/>}]:[]),
       ...(gateway.evaluations?[{path:'prism/:evaluationId?/:view?',element:<EvaluationsPage api={gateway.evaluations}/>}]:[]),

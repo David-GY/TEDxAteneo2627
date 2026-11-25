@@ -17,6 +17,7 @@ import { ProfileEditor } from '../account/ProfileEditor'
 import { GuestContactEditor } from '../account/GuestContactEditor'
 import { LoadingState } from '../../components/FeedbackState'
 import { AppShell } from '../../app/AppShell'
+import { canPreviewAsMember, isMemberPreviewPath, memberPreviewPath } from '../../app/MemberPreview'
 import { InstallWorkspace } from '../../app/InstallWorkspace'
 import { DriveConnection } from '../integrations/drive/DriveSource'
 import type { NavigationCapability } from '../../app/navigation'
@@ -82,14 +83,17 @@ export function AuthRevalidator({ gateway }: { gateway: AuthGateway }) {
 export function ProtectedShell({notifications,gateway}:{notifications?:NotificationsApi;gateway?:AuthGateway}) {
   const member = useLoaderData() as WorkspaceContext
   const[siteEpoch,setSiteEpoch]=useState(0)
+  const { pathname } = useLocation()
+  const memberPreview = isMemberPreviewPath(pathname)
   const { revalidate,state } = useRevalidator()
   const siteScope=JSON.stringify([member.organizationId,member.termId,isGuest(member)?'guest:'+member.guestAccessId:'core:'+member.memberId,[...member.capabilities].sort()])
-  const site=usePublishedSite(gateway?.site,member.termId,siteScope,state,member,siteEpoch)
+  const site=usePublishedSite(memberPreview ? undefined : gateway?.site,member.termId,siteScope,state,member,siteEpoch)
   useEffect(() => {
     const timer = window.setTimeout(() => void revalidate(), Math.min(2_147_483_647, Math.max(0, Date.parse(member.expiresAt) - Date.now())))
     return () => clearTimeout(timer)
   }, [member.expiresAt, revalidate])
-  return <NotificationCenter api={notifications} term={member.termId} identity={'memberId'in member?member.memberId:member.guestAccessId}><AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} sitePresentation={site.presentation} siteUnavailable={site.unavailable} siteLogo={gateway?.site&&site.presentation?.logo?<SiteLogo api={gateway.site} term={member.termId} scope={siteScope} asset={site.presentation.logo.assetId} approval={site.presentation.logo.approvalId}/>:undefined} siteEditor={gateway?.siteWording?<SiteEditMode api={gateway.siteWording} context={member} onPublished={()=>setSiteEpoch(n=>n+1)}/>:undefined} content={gateway?<CurrentRecordScope gateway={gateway}><Outlet /></CurrentRecordScope>:undefined} /></NotificationCenter>
+  if (memberPreview) return <Outlet />
+  return <NotificationCenter api={notifications} term={member.termId} identity={'memberId'in member?member.memberId:member.guestAccessId}><AppShell context={{ audience: isGuest(member) ? 'guest' : 'core', capabilities: member.capabilities as NavigationCapability[] }} identity={{ displayName: member.displayName }} preview={false} headerAction={canPreviewAsMember(member)?<Link className="button button--secondary" to={memberPreviewPath}>View as member</Link>:undefined} sitePresentation={site.presentation} siteUnavailable={site.unavailable} siteLogo={gateway?.site&&site.presentation?.logo?<SiteLogo api={gateway.site} term={member.termId} scope={siteScope} asset={site.presentation.logo.assetId} approval={site.presentation.logo.approvalId}/>:undefined} siteEditor={gateway?.siteWording?<SiteEditMode api={gateway.siteWording} context={member} onPublished={()=>setSiteEpoch(n=>n+1)}/>:undefined} content={gateway?<CurrentRecordScope gateway={gateway}><Outlet /></CurrentRecordScope>:undefined} /></NotificationCenter>
 }
 
 export function LoginPage({ gateway }: { gateway: AuthGateway }) {

@@ -14,6 +14,8 @@ type AppShellProps = {
   siteEditor?: ReactNode
   siteLogo?: ReactNode
   siteUnavailable?: boolean
+  memberPreviewPath?: string
+  headerAction?: ReactNode
 }
 
 const groupLabels: Record<'workspace' | 'role' | 'account', string> = {
@@ -35,7 +37,7 @@ function PageLink({ item, compact = false }: { item: NavigationItem; compact?: b
   return <NavLink className="nav-link" to={item.href} end={item.href === '/'}>{label}</NavLink>
 }
 
-export function AppShell({ context = setupNavigation, identity, content, preview = true,sitePresentation,siteUnavailable = false,siteEditor,siteLogo }: AppShellProps) {
+export function AppShell({ context = setupNavigation, identity, content, preview = true,sitePresentation,siteUnavailable = false,siteEditor,siteLogo,memberPreviewPath,headerAction }: AppShellProps) {
   const location = useLocation()
   const navigation = useNavigation()
   const [moreOpen, setMoreOpen] = useState(false)
@@ -45,9 +47,11 @@ export function AppShell({ context = setupNavigation, identity, content, preview
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const morePanelRef = useRef<HTMLElement>(null)
   const previousPath = useRef(location.pathname)
+  const destination = (href: string) => memberPreviewPath ? memberPreviewPath + (href === '/' ? '' : href) : href
   const visible = getVisibleNavigation(context)
   const presentation=validSitePresentation(sitePresentation)?sitePresentation:undefined
-  const items = presentation?applyNavigationPresentation(visible,presentation):visible
+  const items = (presentation ? applyNavigationPresentation(visible,presentation) : visible)
+    .map(item => memberPreviewPath ? { ...item, href: destination(item.href) } : item)
   const blocks= presentation?.blocks.filter(b=>b.kind==='text'||visible.some(item=>item.href===b.href))??[]
   const showGuidance=['/','/shared','/resources'].includes(location.pathname)
   const mobile = getMobilePrimaryNavigation(context)
@@ -88,11 +92,12 @@ export function AppShell({ context = setupNavigation, identity, content, preview
     <div className={presentation?.accent==='#252624'?'site-theme--ink':'site-theme--default'}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       {preview ? <div className="preview-notice">Development shell preview <span>Destinations require sign-in</span></div> : null}
+      {memberPreviewPath && <div className="preview-notice" role="status">Member view <span>Read-only preview with sample data</span></div>}
       <div className="workspace-shell">
         <aside className="sidebar" aria-label="Workspace sidebar">
           <div className="workspace-identity">
             {siteLogo}
-            <Link to="/" className="text-identity"><span className="brand-tedx">TEDx</span> Ateneo de Manila U</Link>
+            <Link to={destination('/')} className="text-identity"><span className="brand-tedx">TEDx</span> Ateneo de Manila U</Link>
             <p>Core workspace</p>
             <small>{presentation?.logo?'Protected text identity; approved image shown when currently verified':'Text identity; approved logo pending'}</small>
           </div>
@@ -117,7 +122,8 @@ export function AppShell({ context = setupNavigation, identity, content, preview
               <button className="button button--secondary" type="button" aria-pressed={theme === 'dark'} onClick={() => setTheme((currentTheme) => currentTheme === 'dark' ? 'light' : 'dark')}>
                 {theme === 'dark' ? 'Light theme' : 'Dark theme'}
               </button>
-              <NotificationBadge/><Link className="button button--secondary" to="/account">Account</Link>
+              {headerAction}
+              {!memberPreviewPath && <NotificationBadge/>}<Link className="button button--secondary" to={destination('/account')}>Account</Link>
             </div>
           </header>
           <main className="workspace-main" id="main-content" tabIndex={-1} ref={mainRef} aria-busy={navigation.state !== 'idle'}>
