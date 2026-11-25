@@ -24,8 +24,9 @@ export default defineConfig(({ command, mode }) => {
   const environment = readClientEnvironment(input)
   // Client-side rejection is too late: VITE_ values can already be in the bundle.
   if (command === 'build') {
-    if (Object.keys(values).some(key => !Object.hasOwn(input,key))) {
-      throw new Error('Unexpected VITE_ setting. Only documented public settings are allowed in a build.')
+    const unexpectedSettings = Object.keys(values).filter(key => !Object.hasOwn(input,key))
+    if (unexpectedSettings.length) {
+      throw new Error(`Unexpected VITE_ setting names: ${unexpectedSettings.sort().join(', ')}. Only documented public settings are allowed in a build.`)
     }
     if (hasSettings && environment.state !== 'configured') {
       throw new Error('Invalid public configuration. Supply the documented origins and publishable key, or leave the settings blank.')
