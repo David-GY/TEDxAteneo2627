@@ -5,6 +5,10 @@ import { loadEnv } from 'vite'
 import { defineConfig } from 'vite'
 import { readClientEnvironment } from './src/lib/env.ts'
 
+// Vercel injects this even when system env exposure is disabled. Keep its
+// observability metadata out of the browser bundle and the app configuration.
+delete process.env.VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG
+
 export default defineConfig(({ command, mode }) => {
   const values = loadEnv(mode, process.cwd(), 'VITE_')
   const input = {
